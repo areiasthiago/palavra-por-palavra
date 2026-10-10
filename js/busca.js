@@ -34,6 +34,20 @@ export function flexoes(palavra) {
   return [...formas];
 }
 
+// Variante aceita no banco de termos: só flexão da mesma palavra (singular/plural, masculino/feminino),
+// palavra por palavra nas expressões. Derivada ("familiares" de "família") pode ter outro sentido e fica de fora.
+export function formasPermitidas(termo, variante) {
+  const genero = (p) => {
+    const formas = new Set(flexoes(p));
+    if (/o$/.test(p)) ['a', 'os', 'as'].forEach((f) => formas.add(p.slice(0, -1) + f));
+    if (/or$/.test(p)) ['ora', 'oras', 'ores'].forEach((f) => formas.add(p.slice(0, -2) + f));
+    return formas;
+  };
+  const a = minusculo(termo).split(' ');
+  const b = minusculo(variante).split(' ');
+  return a.length === b.length && a.every((p, i) => genero(p).has(b[i]));
+}
+
 // O que vai ser contado para uma busca. Termos do banco usam as variantes declaradas;
 // qualquer outra palavra conta singular e plural; expressões contam só a sequência exata.
 export function familia(consulta, termos = []) {

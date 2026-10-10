@@ -1,6 +1,6 @@
 import { test } from 'node:test';
 import assert from 'node:assert/strict';
-import { palavras, flexoes, familia, ocorrencias, porDezMil, preparar, contar, trecho } from '../js/busca.js';
+import { palavras, flexoes, formasPermitidas, familia, ocorrencias, porDezMil, preparar, contar, trecho } from '../js/busca.js';
 
 const conta = (texto, consulta, termos = []) => ocorrencias(palavras(texto), familia(consulta, termos)).length;
 
@@ -33,12 +33,20 @@ test('expressão conta só a sequência exata', () => {
 
 test('termo do banco usa as variantes declaradas e as siglas', () => {
   const termos = [
-    { termo: 'educação', variantes: ['educacional'] },
+    { termo: 'médico', variantes: ['médicos', 'médica', 'médicas'] },
     { termo: 'Estados Unidos', variantes: [], siglas: ['EUA'] },
   ];
-  assert.equal(conta('Educação e ensino educacional.', 'educacional', termos), 2);
+  assert.equal(conta('Um médico e duas médicas.', 'médicas', termos), 2);
   assert.equal(conta('Acordo com os EUA e os Estados Unidos.', 'estados unidos', termos), 2);
-  assert.equal(familia('educacional', termos).rotulo, 'educação');
+  assert.equal(familia('medica', termos).rotulo, 'médico');
+});
+
+test('banco aceita só flexões, nunca palavra derivada', () => {
+  assert.ok(formasPermitidas('família', 'famílias'));
+  assert.ok(formasPermitidas('médico', 'médicas'));
+  assert.ok(formasPermitidas('produtor rural', 'produtores rurais'));
+  assert.ok(!formasPermitidas('família', 'familiares'));
+  assert.ok(!formasPermitidas('corrupção', 'corrupto'));
 });
 
 test('frequência a cada 10 mil palavras', () => {

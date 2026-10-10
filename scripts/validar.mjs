@@ -2,7 +2,7 @@
 // entrevistas, palavras de disputa no texto do site e cores sem associação com os candidatos.
 // Uso: node scripts/validar.mjs
 import { readFileSync, existsSync } from 'node:fs';
-import { preparar, familia, contar, semAcento } from '../js/busca.js';
+import { preparar, familia, contar, semAcento, formasPermitidas } from '../js/busca.js';
 
 const raiz = new URL('..', import.meta.url);
 const ler = (caminho) => readFileSync(new URL(caminho, raiz), 'utf8');
@@ -33,10 +33,9 @@ const formaDe = new Map();
 for (const t of termos) {
   const onde = `[${t.termo}]`;
   if (!idsGrupo.has(t.grupo)) erros.push(`${onde} grupo inexistente (${t.grupo})`);
-  // Família é morfológica, não semântica: toda variante começa com as 4 primeiras letras do termo.
-  const raizTermo = semAcento(t.termo).slice(0, 4);
+  // Só flexões da própria palavra (singular/plural, masculino/feminino). Derivada vira termo próprio.
   for (const v of t.variantes) {
-    if (!semAcento(v).startsWith(raizTermo)) erros.push(`${onde} variante "${v}" não é da mesma família (vire termo próprio ou sigla)`);
+    if (!formasPermitidas(t.termo, v)) erros.push(`${onde} "${v}" não é flexão de "${t.termo}" (se importa, vire termo próprio)`);
   }
   for (const f of [t.termo, ...t.variantes, ...(t.siglas ?? [])]) {
     const chave = semAcento(f);

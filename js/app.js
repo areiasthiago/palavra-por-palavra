@@ -1,6 +1,6 @@
-import { preparar, familia, contar, trecho } from './busca.js?v=0.1';
-import * as medir from './contagem.js?v=0.1';
-import { compartilhar } from './compartilhar.js?v=0.1';
+import { preparar, familia, contar, trecho } from './busca.js?v=0.2';
+import * as medir from './contagem.js?v=0.2';
+import { compartilhar } from './compartilhar.js?v=0.2';
 
 const ORDEM = 'palavra:ordem';
 const POR_VEZ = 5; // trechos mostrados de cada vez
@@ -208,7 +208,7 @@ function rota({ historico = false } = {}) {
 async function iniciar() {
   try {
     const [textos, termos] = await Promise.all(
-      ['data/textos.json?v=0.1', 'data/termos.json?v=0.1'].map((u) => fetch(u).then((r) => { if (!r.ok) throw new Error(u); return r.json(); })),
+      ['data/textos.json?v=0.2', 'data/termos.json?v=0.2'].map((u) => fetch(u).then((r) => { if (!r.ok) throw new Error(u); return r.json(); })),
     );
     dados = { textos, termos: termos.termos, grupos: termos.grupos, acervos: preparar(textos) };
   } catch {
