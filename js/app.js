@@ -1,6 +1,6 @@
-import { preparar, familia, familiaDoGrupo, contar, trecho, semAcento } from './busca.js?v=2.1';
-import * as medir from './contagem.js?v=2.1';
-import { compartilhar } from './compartilhar.js?v=2.1';
+import { preparar, familia, familiaDoGrupo, contar, trecho, semAcento } from './busca.js?v=2.3';
+import * as medir from './contagem.js?v=2.3';
+import { compartilhar } from './compartilhar.js?v=2.3';
 
 const ORDEM = 'palavra:ordem';
 const POR_VEZ = 5; // trechos mostrados de cada vez
@@ -242,13 +242,13 @@ function quadro(fam, res, grupo, { resAssunto, modo: modoInicial, aoTrocar, comp
   const palavrasDoAssunto = grupo ? dados.termos.filter((t) => t.grupo === grupo.id) : [];
   let aberto = null;
   const colunas = ordem.map((c) => {
-    const foto = el('img', { src: `img/${c}-serio.webp?v=2.1`, alt: '', width: '96', height: '96' });
+    const foto = el('img', { src: `img/${c}-serio.webp?v=2.3`, alt: '', width: '96', height: '96' });
     const rotulo = el('span', { class: 'ver-resumo' }, el('span', {}, 'Ver resumo'));
     // Retrato embaixo das contagens; com resumo, retrato e botão formam um único botão.
     const cabeca = temResumo
       ? el('button', { class: 'rosto', type: 'button', 'aria-pressed': 'false', 'aria-controls': painel.id, 'aria-label': `Ver resumo do plano de ${nome(c)}` }, foto, rotulo)
       : el('div', { class: 'rosto estatico' }, foto);
-    if (temResumo) new Image().src = `img/${c}-alegre.webp?v=2.1`; // sem piscar na troca
+    if (temResumo) new Image().src = `img/${c}-alegre.webp?v=2.3`; // sem piscar na troca
     return {
       c, cabeca, foto, rotulo,
       coluna: el('div', { class: 'coluna' }),
@@ -261,7 +261,7 @@ function quadro(fam, res, grupo, { resAssunto, modo: modoInicial, aoTrocar, comp
         for (const col of colunas) {
           const ativo = col.c === aberto;
           col.cabeca.setAttribute('aria-pressed', String(ativo));
-          col.foto.src = `img/${col.c}-${ativo ? 'alegre' : 'serio'}.webp?v=2.1`;
+          col.foto.src = `img/${col.c}-${ativo ? 'alegre' : 'serio'}.webp?v=2.3`;
           col.rotulo.lastChild.textContent = ativo ? 'Fechar' : 'Ver resumo';
         }
         painel.hidden = !aberto;
@@ -273,8 +273,9 @@ function quadro(fam, res, grupo, { resAssunto, modo: modoInicial, aoTrocar, comp
   // mesmo tema com vocabulário diferente ("casa" de um, "moradia" do outro).
   const titulo = el('h2', {});
   const vazio = el('p', { class: 'vazio' });
-  const explicacao = el('p', { class: 'legenda', hidden: true },
-    `Somando as ${palavrasDoAssunto.length} palavras do assunto: ${palavrasDoAssunto.map((t) => t.termo).join(', ')}. Nada conta duas vezes.`);
+  // Quais palavras formam o assunto, sempre visível perto do lembrete.
+  const lista = palavrasDoAssunto.map((t) => t.termo).join(', ');
+  const explicacao = el('p', { class: 'legenda' });
   const mostrar = (m) => {
     const r = m === 'assunto' ? resAssunto : res;
     titulo.textContent = m === 'assunto' ? `Quanto cada um falou de ${grupo.nome.toLowerCase()}` : 'Quantas vezes cada um usou';
@@ -282,12 +283,15 @@ function quadro(fam, res, grupo, { resAssunto, modo: modoInicial, aoTrocar, comp
     vazio.textContent = m === 'assunto'
       ? 'Nenhum dos dois usou as palavras deste assunto no plano de governo nem nas entrevistas.'
       : `Nenhum dos dois usou “${fam.rotulo}” no plano de governo nem nas entrevistas.`;
-    explicacao.hidden = m !== 'assunto';
+    explicacao.textContent = m === 'assunto'
+      ? `Somando as ${palavrasDoAssunto.length} palavras do assunto: ${lista}. Nada conta duas vezes.`
+      : `Palavras do assunto ${grupo?.nome.toLowerCase()}: ${lista}. Ligue a chave para somar todas.`;
+    explicacao.hidden = !grupo;
     colunas.forEach((col) => col.coluna.replaceChildren(el('h3', { class: 'nome' }, nome(col.c)), ...contas(r, col.c)));
   };
   const chave = resAssunto && el('button', { class: 'chave', type: 'button', role: 'switch', 'aria-checked': String(modoInicial === 'assunto') },
     el('span', { class: 'trilho', 'aria-hidden': 'true' }, el('span', { class: 'bolinha' })),
-    el('span', {}, `Contar o assunto todo: ${grupo.nome.toLowerCase()}`));
+    el('span', {}, `Contar o assunto todo: ${grupo.nome.toLowerCase()} (${palavrasDoAssunto.length} palavras)`));
   chave?.addEventListener('click', () => {
     const ligada = chave.getAttribute('aria-checked') !== 'true';
     chave.setAttribute('aria-checked', String(ligada));
@@ -303,13 +307,13 @@ function quadro(fam, res, grupo, { resAssunto, modo: modoInicial, aoTrocar, comp
       el('span', {}, el('i', { class: 'amostra plano', 'aria-hidden': 'true' }), 'Plano de governo'),
       el('span', {}, el('i', { class: 'amostra falas', 'aria-hidden': 'true' }), 'Entrevistas')),
     vazio,
-    explicacao,
     el('div', { class: 'colunas' }, colunas.map((col) => col.coluna)),
     botaoCompartilhar,
     // Retratos numa linha própria, logo abaixo da chamada para o resumo.
     temResumo && el('p', { class: 'dica' }, iconeIA(), el('span', {}, 'Veja também um resumo, feito por IA, do que cada plano propõe sobre ', el('strong', {}, grupo.nome.toLowerCase()), '.')),
     el('div', { class: 'colunas rostos' }, colunas.map((col) => col.cabeca)),
     temResumo && painel,
+    grupo && explicacao,
     aviso(),
   );
 }
@@ -437,7 +441,7 @@ function rota({ historico = false } = {}) {
 async function iniciar() {
   try {
     const [textos, termos, resumos] = await Promise.all(
-      ['data/textos.json?v=2.1', 'data/termos.json?v=2.1', 'data/resumos.json?v=2.1'].map((u) => fetch(u).then((r) => { if (!r.ok) throw new Error(u); return r.json(); })),
+      ['data/textos.json?v=2.3', 'data/termos.json?v=2.3', 'data/resumos.json?v=2.3'].map((u) => fetch(u).then((r) => { if (!r.ok) throw new Error(u); return r.json(); })),
     );
     dados = { textos, termos: termos.termos, grupos: termos.grupos, resumos, acervos: preparar(textos) };
   } catch {
