@@ -1,6 +1,6 @@
-import { preparar, familia, familiaDoGrupo, contar, trecho, semAcento } from './busca.js?v=2.5';
-import * as medir from './contagem.js?v=2.5';
-import { compartilhar } from './compartilhar.js?v=2.5';
+import { preparar, familia, familiaDoGrupo, contar, trecho, semAcento } from './busca.js?v=2.6';
+import * as medir from './contagem.js?v=2.6';
+import { compartilhar } from './compartilhar.js?v=2.6';
 
 const ORDEM = 'palavra:ordem';
 const POR_VEZ = 5; // trechos mostrados de cada vez
@@ -67,22 +67,35 @@ function campoDeBusca(valor = '') {
   };
   const marcar = (i) => {
     ativa = i;
-    [...lista.children].forEach((li, k) => li.setAttribute('aria-selected', String(k === i)));
-    if (i >= 0) entrada.setAttribute('aria-activedescendant', lista.children[i].id);
+    const itens = lista.querySelectorAll('[role="option"]');
+    itens.forEach((li, k) => li.setAttribute('aria-selected', String(k === i)));
+    if (i >= 0) { entrada.setAttribute('aria-activedescendant', itens[i].id); itens[i].scrollIntoView({ block: 'nearest' }); }
     else entrada.removeAttribute('aria-activedescendant');
   };
-  const escolher = (opcao) => { fechar(); buscar(opcao.valor, 'sugestao'); };
+  const escolher = (opcao) => {
+    fechar();
+    if (opcao.tipo === 'assunto') buscarAssunto(opcao.grupo, 'sugestao');
+    else buscar(opcao.valor, 'sugestao');
+  };
   const atualizar = () => {
     const { itens, semNada } = sugerir(entrada.value);
     erro.hidden = !semNada;
     erro.textContent = semNada ? `“${entrada.value.trim()}” não está na nossa lista. Tente outra palavra ou escolha um assunto.` : '';
     entrada.setAttribute('aria-invalid', String(semNada));
     opcoes = itens;
-    lista.replaceChildren(...itens.map((o, k) => el('li', {
-      id: `sugestao-${k}`, role: 'option', 'aria-selected': 'false',
+    // Duas seções: palavras e assuntos. Os títulos das seções não são opções.
+    const opcao = (o, k) => el('li', {
+      id: `sugestao-${k}`, role: 'option', 'aria-selected': 'false', class: `opcao-${o.tipo}`,
       onmousedown: (e) => e.preventDefault(), // não tira o foco do campo antes do clique
       onclick: () => escolher(o),
-    }, el('span', {}, o.valor), el('small', {}, o.detalhe))));
+    }, el('span', {}, o.valor), el('small', {}, o.detalhe));
+    const titulo = (texto) => el('li', { class: 'secao', role: 'presentation' }, texto);
+    const palavras = itens.filter((o) => o.tipo === 'palavra');
+    const assuntos = itens.filter((o) => o.tipo === 'assunto');
+    lista.replaceChildren(
+      ...(palavras.length ? [titulo('Palavras'), ...palavras.map((o) => opcao(o, itens.indexOf(o)))] : []),
+      ...(assuntos.length ? [titulo('Assuntos'), ...assuntos.map((o) => opcao(o, itens.indexOf(o)))] : []),
+    );
     if (itens.length) { lista.hidden = false; entrada.setAttribute('aria-expanded', 'true'); marcar(-1); } else fechar();
   };
 
@@ -101,9 +114,9 @@ function campoDeBusca(valor = '') {
     onsubmit: (e) => {
       e.preventDefault();
       if (!entrada.value.trim()) return;
-      const { itens, exata } = sugerir(entrada.value);
-      // Só busca palavra da lista: a exata, ou a única sugestão. Senão, pede para escolher.
-      const termo = exata?.termo ?? (itens.length === 1 ? itens[0].valor : null);
+      const { itens, palavras, exata } = sugerir(entrada.value);
+      // Só busca palavra da lista: a exata, ou a única palavra sugerida. Senão, pede para escolher.
+      const termo = exata?.termo ?? (palavras.length === 1 ? palavras[0].valor : null);
       if (!termo) {
         atualizar();
         if (itens.length) { erro.hidden = false; erro.textContent = 'Escolha uma das palavras sugeridas.'; }
@@ -127,9 +140,18 @@ function sugerir(texto) {
     .filter((t) => formas(t).some((v) => v.startsWith(q)))
     .sort((a, b) => a.termo.length - b.termo.length);
   const exata = dados.termos.find((t) => formas(t).includes(q)) ?? null;
+  // Assuntos: os das palavras achadas e os que têm alguma palavra no nome começando assim.
+  const nomeCombina = (g) => semAcento(g.nome).split(/\s+/).some((w) => w.startsWith(q));
+  const grupos = [...new Set([...achados.map((t) => t.grupo), ...dados.grupos.filter(nomeCombina).map((g) => g.id)])];
+  const palavras = achados.slice(0, 6).map((t) => ({ tipo: 'palavra', valor: t.termo, detalhe: grupoDe(t).nome }));
+  const assuntos = grupos.slice(0, 3).map((id) => {
+    const g = dados.grupos.find((x) => x.id === id);
+    return { tipo: 'assunto', grupo: id, valor: g.nome, detalhe: `${dados.termos.filter((t) => t.grupo === id).length} palavras` };
+  });
   return {
-    itens: achados.slice(0, 8).map((t) => ({ valor: t.termo, detalhe: grupoDe(t).nome })),
-    semNada: q.replace(/ /g, '').length >= 3 && !achados.length,
+    itens: [...palavras, ...assuntos],
+    palavras,
+    semNada: q.replace(/ /g, '').length >= 3 && !palavras.length && !assuntos.length,
     exata,
   };
 }
@@ -244,13 +266,13 @@ function quadro(fam, res, grupo, { resAssunto, modo: modoInicial, aoTrocar, comp
   const palavrasDoAssunto = grupo ? dados.termos.filter((t) => t.grupo === grupo.id) : [];
   let aberto = null;
   const colunas = ordem.map((c) => {
-    const foto = el('img', { src: `img/${c}-serio.webp?v=2.5`, alt: '', width: '96', height: '96' });
+    const foto = el('img', { src: `img/${c}-serio.webp?v=2.6`, alt: '', width: '96', height: '96' });
     const rotulo = el('span', { class: 'ver-resumo' }, el('span', {}, 'Ver resumo'));
     // Retrato embaixo das contagens; com resumo, retrato e botão formam um único botão.
     const cabeca = temResumo
       ? el('button', { class: 'rosto', type: 'button', 'aria-pressed': 'false', 'aria-controls': painel.id, 'aria-label': `Ver resumo do plano de ${nome(c)}` }, foto, rotulo)
       : el('div', { class: 'rosto estatico' }, foto);
-    if (temResumo) new Image().src = `img/${c}-alegre.webp?v=2.5`; // sem piscar na troca
+    if (temResumo) new Image().src = `img/${c}-alegre.webp?v=2.6`; // sem piscar na troca
     return {
       c, cabeca, foto, rotulo,
       coluna: el('div', { class: 'coluna' }),
@@ -263,7 +285,7 @@ function quadro(fam, res, grupo, { resAssunto, modo: modoInicial, aoTrocar, comp
         for (const col of colunas) {
           const ativo = col.c === aberto;
           col.cabeca.setAttribute('aria-pressed', String(ativo));
-          col.foto.src = `img/${col.c}-${ativo ? 'alegre' : 'serio'}.webp?v=2.5`;
+          col.foto.src = `img/${col.c}-${ativo ? 'alegre' : 'serio'}.webp?v=2.6`;
           col.rotulo.lastChild.textContent = ativo ? 'Fechar' : 'Ver resumo';
         }
         painel.hidden = !aberto;
@@ -443,7 +465,7 @@ function rota({ historico = false } = {}) {
 async function iniciar() {
   try {
     const [textos, termos, resumos] = await Promise.all(
-      ['data/textos.json?v=2.5', 'data/termos.json?v=2.5', 'data/resumos.json?v=2.5'].map((u) => fetch(u).then((r) => { if (!r.ok) throw new Error(u); return r.json(); })),
+      ['data/textos.json?v=2.6', 'data/termos.json?v=2.6', 'data/resumos.json?v=2.6'].map((u) => fetch(u).then((r) => { if (!r.ok) throw new Error(u); return r.json(); })),
     );
     dados = { textos, termos: termos.termos, grupos: termos.grupos, resumos, acervos: preparar(textos) };
   } catch {
