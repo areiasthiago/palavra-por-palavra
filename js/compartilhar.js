@@ -1,4 +1,4 @@
-import { SITE } from './config.js?v=2.4';
+import { SITE } from './config.js?v=2.5';
 
 // Imagem de story (9:16) no estilo do site. Leva sempre os dois candidatos, o número,
 // a frequência e o aviso: a imagem não pode virar "placar" fora de contexto.

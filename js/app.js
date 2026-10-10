@@ -1,6 +1,6 @@
-import { preparar, familia, familiaDoGrupo, contar, trecho, semAcento } from './busca.js?v=2.4';
-import * as medir from './contagem.js?v=2.4';
-import { compartilhar } from './compartilhar.js?v=2.4';
+import { preparar, familia, familiaDoGrupo, contar, trecho, semAcento } from './busca.js?v=2.5';
+import * as medir from './contagem.js?v=2.5';
+import { compartilhar } from './compartilhar.js?v=2.5';
 
 const ORDEM = 'palavra:ordem';
 const POR_VEZ = 5; // trechos mostrados de cada vez
@@ -149,8 +149,10 @@ function inicio() {
     el('div', { class: 'bloco' },
       el('h2', { class: 'subtitulo' }, 'Ou escolha por assunto'),
       el('div', { class: 'assuntos' }, dados.grupos.map((g) => el('details', { class: 'assunto' },
-        el('summary', {}, g.nome),
-        el('button', { class: 'botao discreto ir-assunto', type: 'button', onclick: () => buscarAssunto(g.id, 'assunto') }, `Ver ${g.nome.toLowerCase()}: todas as palavras`),
+        // Aberto, o título ganha à direita a pílula que leva ao assunto todo (chave ligada).
+        el('summary', {}, el('span', {}, g.nome),
+          el('button', { class: 'pilula-assunto', type: 'button', 'aria-label': `${g.nome}: todas as palavras`,
+            onclick: (e) => { e.preventDefault(); e.stopPropagation(); buscarAssunto(g.id, 'assunto'); } }, 'todas as palavras')),
         el('div', { class: 'chips' }, dados.termos.filter((t) => t.grupo === g.id).map((t) => chip(t, 'assunto'))))))),
     aviso(),
   ));
@@ -242,13 +244,13 @@ function quadro(fam, res, grupo, { resAssunto, modo: modoInicial, aoTrocar, comp
   const palavrasDoAssunto = grupo ? dados.termos.filter((t) => t.grupo === grupo.id) : [];
   let aberto = null;
   const colunas = ordem.map((c) => {
-    const foto = el('img', { src: `img/${c}-serio.webp?v=2.4`, alt: '', width: '96', height: '96' });
+    const foto = el('img', { src: `img/${c}-serio.webp?v=2.5`, alt: '', width: '96', height: '96' });
     const rotulo = el('span', { class: 'ver-resumo' }, el('span', {}, 'Ver resumo'));
     // Retrato embaixo das contagens; com resumo, retrato e botão formam um único botão.
     const cabeca = temResumo
       ? el('button', { class: 'rosto', type: 'button', 'aria-pressed': 'false', 'aria-controls': painel.id, 'aria-label': `Ver resumo do plano de ${nome(c)}` }, foto, rotulo)
       : el('div', { class: 'rosto estatico' }, foto);
-    if (temResumo) new Image().src = `img/${c}-alegre.webp?v=2.4`; // sem piscar na troca
+    if (temResumo) new Image().src = `img/${c}-alegre.webp?v=2.5`; // sem piscar na troca
     return {
       c, cabeca, foto, rotulo,
       coluna: el('div', { class: 'coluna' }),
@@ -261,7 +263,7 @@ function quadro(fam, res, grupo, { resAssunto, modo: modoInicial, aoTrocar, comp
         for (const col of colunas) {
           const ativo = col.c === aberto;
           col.cabeca.setAttribute('aria-pressed', String(ativo));
-          col.foto.src = `img/${col.c}-${ativo ? 'alegre' : 'serio'}.webp?v=2.4`;
+          col.foto.src = `img/${col.c}-${ativo ? 'alegre' : 'serio'}.webp?v=2.5`;
           col.rotulo.lastChild.textContent = ativo ? 'Fechar' : 'Ver resumo';
         }
         painel.hidden = !aberto;
@@ -441,7 +443,7 @@ function rota({ historico = false } = {}) {
 async function iniciar() {
   try {
     const [textos, termos, resumos] = await Promise.all(
-      ['data/textos.json?v=2.4', 'data/termos.json?v=2.4', 'data/resumos.json?v=2.4'].map((u) => fetch(u).then((r) => { if (!r.ok) throw new Error(u); return r.json(); })),
+      ['data/textos.json?v=2.5', 'data/termos.json?v=2.5', 'data/resumos.json?v=2.5'].map((u) => fetch(u).then((r) => { if (!r.ok) throw new Error(u); return r.json(); })),
     );
     dados = { textos, termos: termos.termos, grupos: termos.grupos, resumos, acervos: preparar(textos) };
   } catch {
