@@ -1,5 +1,5 @@
 {
-  "aviso": "Resumo feito por inteligência artificial a partir do plano de governo e revisado por uma pessoa.",
+  "aviso": "Resumo feito por inteligência artificial a partir do plano de governo e revisado por um humano.",
   "regras": "Mesma estrutura para os dois: uma frase sobre como o plano vê o assunto e 3 propostas. Linguagem simples, sem citar o adversário nem repetir críticas. A 'citacao' não aparece na tela: serve só para o validador conferir que a página indicada trata daquilo.",
   "grupos": {
     "seguranca": {
