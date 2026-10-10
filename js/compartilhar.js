@@ -1,4 +1,4 @@
-import { SITE } from './config.js?v=1.1';
+import { SITE } from './config.js?v=1.2';
 
 // Imagem de story (9:16) no estilo do site. Leva sempre os dois candidatos, o número,
 // a frequência e o aviso: a imagem não pode virar "placar" fora de contexto.
@@ -45,6 +45,17 @@ function textoAjustado(ctx, texto, x, y, peso, tamanho, largura) {
     ctx.font = fonte(peso, t);
   }
   ctx.fillText(texto, x, y);
+}
+
+// Quebra o texto em linhas que caibam na largura, com a fonte já definida no contexto.
+function quebrar(ctx, texto, largura) {
+  const linhas = [''];
+  for (const palavra of texto.split(' ')) {
+    const tentativa = linhas.at(-1) ? `${linhas.at(-1)} ${palavra}` : palavra;
+    if (ctx.measureText(tentativa).width > largura && linhas.at(-1)) linhas.push(palavra);
+    else linhas[linhas.length - 1] = tentativa;
+  }
+  return linhas;
 }
 
 // Um acervo: nome, barra de frequência (mesma cor para os dois) e os números.
@@ -122,19 +133,19 @@ export async function gerarImagem({ palavra, lados }) {
   secao(ctx, 'No plano de governo', lados, 'plano', 680);
   secao(ctx, 'Nas entrevistas', lados, 'falas', 1090);
 
-  // Aviso
-  bloco(ctx, 50, 1490, L - 100, 150, 36, COR.roxoClaro);
+  // Aviso, o mesmo lembrete da tela
+  ctx.font = fonte(700, 36);
+  const linhas = quebrar(ctx, 'Falar mais de um assunto não quer dizer ter proposta melhor. Confira os planos de governo e o contexto das falas.', L - 180);
+  bloco(ctx, 50, 1480, L - 100, 52 + linhas.length * 48, 36, COR.roxoClaro);
   ctx.textAlign = 'center';
   ctx.fillStyle = COR.tinta;
-  ctx.font = fonte(700, 38);
-  ctx.fillText('Falar mais de um assunto não quer', L / 2, 1553);
-  ctx.fillText('dizer ter proposta melhor.', L / 2, 1605);
+  linhas.forEach((linha, i) => ctx.fillText(linha, L / 2, 1540 + i * 48));
 
   // Chamada
-  ctx.font = fonte(800, 52);
-  ctx.fillText('Busque a sua palavra:', L / 2, 1730);
+  ctx.font = fonte(800, 50);
+  ctx.fillText('Busque a sua palavra:', L / 2, 1775);
   ctx.fillStyle = COR.tinta;
-  textoAjustado(ctx, SITE, L / 2, 1794, 700, 40, L - 120);
+  textoAjustado(ctx, SITE, L / 2, 1834, 700, 38, L - 120);
 
   return new Promise((ok) => canvas.toBlob(ok, 'image/png'));
 }

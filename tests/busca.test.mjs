@@ -1,6 +1,6 @@
 import { test } from 'node:test';
 import assert from 'node:assert/strict';
-import { palavras, flexoes, formasPermitidas, familia, ocorrencias, porDezMil, preparar, contar, trecho } from '../js/busca.js';
+import { palavras, flexoes, formasPermitidas, familia, familiaDoGrupo, ocorrencias, porDezMil, preparar, contar, trecho } from '../js/busca.js';
 
 const conta = (texto, consulta, termos = []) => ocorrencias(palavras(texto), familia(consulta, termos)).length;
 
@@ -47,6 +47,16 @@ test('termo do banco usa as variantes declaradas e as siglas', () => {
 test('expressão excluída do termo não conta', () => {
   const termos = [{ termo: 'casa', variantes: ['casas'], excluir: ['em casa', 'de casa', 'santas casas'] }];
   assert.equal(conta('Comprar a casa própria. Ficar em casa. Sair de casa. As santas casas. Duas casas novas.', 'casa', termos), 2);
+});
+
+test('soma do assunto junta as palavras do grupo sem contar nada duas vezes', () => {
+  const termos = [
+    { termo: 'casa', grupo: 'm', variantes: ['casas'], excluir: ['em casa'] },
+    { termo: 'Minha Casa Minha Vida', grupo: 'm', variantes: [], siglas: ['MCMV'] },
+    { termo: 'moradia', grupo: 'm', variantes: [] },
+  ];
+  const lista = palavras('A casa própria. O Minha Casa Minha Vida e o MCMV. Moradia digna. Fiquei em casa.');
+  assert.equal(ocorrencias(lista, familiaDoGrupo('m', termos)).length, 4);
 });
 
 test('banco aceita só flexões, nunca palavra derivada', () => {

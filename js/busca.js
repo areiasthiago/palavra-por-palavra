@@ -70,18 +70,30 @@ export function familia(consulta, termos = []) {
 }
 
 // Posições onde alguma das sequências aparece. Devolve o índice da 1ª palavra e o tamanho.
+// A expressão mais longa vence e nada conta duas vezes: "Minha Casa Minha Vida" é uma ocorrência, não três.
 function sequencias(lista, formas, exato) {
-  const alvos = formas.map((f) => palavras(f).map((p) => (exato ? p.forma : p.dobrada)));
+  const alvos = formas.map((f) => palavras(f).map((p) => (exato ? p.forma : p.dobrada))).sort((a, b) => b.length - a.length);
   const achados = [];
   for (let i = 0; i < lista.length; i += 1) {
-    for (const alvo of alvos) {
-      if (alvo.every((a, k) => (exato ? lista[i + k]?.forma : lista[i + k]?.dobrada) === a)) {
-        achados.push({ i, n: alvo.length });
-        break;
-      }
+    const alvo = alvos.find((x) => x.every((a, k) => (exato ? lista[i + k]?.forma : lista[i + k]?.dobrada) === a));
+    if (alvo) {
+      achados.push({ i, n: alvo.length });
+      i += alvo.length - 1;
     }
   }
   return achados;
+}
+
+// Família do assunto inteiro: todas as palavras do grupo somadas, para comparar quem fala do tema
+// com vocabulário diferente ("casa própria" de um, "moradia" e "MCMV" do outro).
+export function familiaDoGrupo(grupo, termos) {
+  const doGrupo = termos.filter((t) => t.grupo === grupo);
+  return {
+    rotulo: grupo,
+    formas: doGrupo.flatMap((t) => [t.termo, ...t.variantes, ...(t.siglas ?? [])]),
+    exato: true,
+    excluir: doGrupo.flatMap((t) => t.excluir ?? []),
+  };
 }
 
 // Encontra as ocorrências de uma família numa lista de palavras. Ocorrência que cai dentro de uma

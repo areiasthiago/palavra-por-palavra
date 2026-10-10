@@ -88,7 +88,7 @@
     { "termo": "casa própria", "grupo": "moradia", "variantes": [] },
     { "termo": "habitação", "grupo": "moradia", "variantes": [] },
     { "termo": "aluguel", "grupo": "moradia", "variantes": [ "aluguéis" ] },
-    { "termo": "Minha Casa Minha Vida", "grupo": "moradia", "variantes": [] },
+    { "termo": "Minha Casa Minha Vida", "grupo": "moradia", "variantes": [], "siglas": [ "MCMV" ] },
     { "termo": "Casa Verde e Amarela", "grupo": "moradia", "variantes": [] },
     { "termo": "saneamento", "grupo": "moradia", "variantes": [] },
     { "termo": "periferia", "grupo": "moradia", "variantes": [ "periferias" ] },
