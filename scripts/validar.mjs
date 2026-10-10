@@ -104,6 +104,36 @@ for (const arquivo of ['index.html', 'sobre.html', 'js/app.js', 'js/compartilhar
   if (achado) erros.push(`${arquivo}: linguagem de disputa ("${achado[0]}")`);
 }
 
+// ---------- Resumos feitos por IA ----------
+// Mesma estrutura para os dois, tamanhos parecidos, cada frase ancorada numa página do plano
+// (a citação não aparece na tela; só prova que a página trata daquilo), sem citar o adversário.
+const normalizar = (s) => s.normalize('NFKC').toLowerCase().replace(/[^\p{L}\p{N}]/gu, '');
+const paginasPlano = Object.fromEntries(candidatos.map((c) => [c, ler(`data/fontes/${c}.txt`).split('\f').map(normalizar)]));
+const { grupos: resumos } = JSON.parse(ler('data/resumos.json'));
+const NOMES = /(?<!\p{L})(Lula|Bolsonaro|Flávio|PT|PL|PSB|governo anterior|atual governo|atual gestão|esquerda|direita)(?!\p{L})/u;
+const tamanho = (r) => [r.visao, ...r.propostas].reduce((s, x) => s + x.texto.length, 0);
+for (const g of grupos) {
+  const porCandidato = resumos[g.id];
+  if (!porCandidato) { erros.push(`[resumo ${g.id}] falta o resumo do grupo`); continue; }
+  for (const c of candidatos) {
+    const r = porCandidato[c];
+    const onde = `[resumo ${g.id} ${c}]`;
+    if (!r?.visao || r.propostas?.length !== 3) { erros.push(`${onde} precisa de visão e exatamente 3 propostas`); continue; }
+    for (const [i, item] of [r.visao, ...r.propostas].entries()) {
+      const qual = i ? `proposta ${i}` : 'visão';
+      if (item.texto.length > 130) erros.push(`${onde} ${qual} longa demais (${item.texto.length} caracteres; máx. 130)`);
+      const nome = item.texto.match(NOMES) ?? item.texto.match(DISPUTA);
+      if (nome) erros.push(`${onde} ${qual} cita "${nome[0]}"`);
+      const alvo = normalizar(item.citacao ?? '');
+      const pagina = paginasPlano[c][item.pagina - 1] ?? '';
+      const comSeguinte = pagina + (paginasPlano[c][item.pagina] ?? '');
+      if (alvo.length < 10 || !pagina.includes(alvo.slice(0, 10)) || !comSeguinte.includes(alvo)) erros.push(`${onde} ${qual}: trecho não encontrado na pág. ${item.pagina}`);
+    }
+  }
+  const [a, b] = candidatos.map((c) => (porCandidato[c] ? tamanho(porCandidato[c]) : 0));
+  if (a && b && Math.max(a, b) / Math.min(a, b) > 1.35) erros.push(`[resumo ${g.id}] tamanhos desiguais (${candidatos[0]} ${a} x ${candidatos[1]} ${b})`);
+}
+
 // ---------- Cores: só grafite e roxo ----------
 // Toda cor com saturação visível precisa estar na faixa do roxo (matiz 245 a 290).
 function matiz(hex) {

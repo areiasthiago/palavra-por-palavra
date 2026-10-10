@@ -1,6 +1,6 @@
-import { preparar, familia, contar, trecho } from './busca.js?v=0.2';
-import * as medir from './contagem.js?v=0.2';
-import { compartilhar } from './compartilhar.js?v=0.2';
+import { preparar, familia, contar, trecho } from './busca.js?v=0.3';
+import * as medir from './contagem.js?v=0.3';
+import { compartilhar } from './compartilhar.js?v=0.3';
 
 const ORDEM = 'palavra:ordem';
 const POR_VEZ = 5; // trechos mostrados de cada vez
@@ -108,7 +108,7 @@ function buscar(consulta, origem, { historico = true } = {}) {
     total === 0
       ? el('p', { class: 'vazio' }, `Nenhum dos dois usou “${fam.rotulo}” no plano de governo nem nas entrevistas. Tente outra palavra, ou uma parecida.`)
       : Object.entries(dados.acervos).map(([id, acervo]) => comparativo(id, acervo, res[id], fam)),
-    aviso(),
+    grupo && ordem.every((c) => dados.resumos.grupos[grupo.id]?.[c]) ? comoCadaUmVe(grupo) : aviso(),
     total > 0 && el('div', { class: 'par' },
       el('button', { class: 'botao principal', type: 'button', onclick: (e) => enviarImagem(e.currentTarget, fam, res) }, 'Compartilhar'),
       el('button', { class: 'botao discreto', type: 'button', onclick: () => { const i = app.querySelector('.busca input'); i.value = ''; i.focus(); } }, 'Buscar outra palavra')),
@@ -140,6 +140,49 @@ function comparativo(id, acervo, porCandidato, fam) {
     el('p', { class: 'legenda' }, 'A barra compara a frequência (a cada 10 mil palavras), porque os textos têm tamanhos diferentes.'),
     ordem.map((c) => trechos(id, c, porCandidato[c], fam)),
   );
+}
+
+// Resumo por IA do que cada plano propõe sobre o assunto. Ninguém começa aberto: a pessoa escolhe
+// de quem quer ler tocando no retrato, que fica sorridente enquanto o resumo está aberto.
+function comoCadaUmVe(grupo) {
+  const painel = el('div', { class: 'painel', id: `resumo-${grupo.id}`, hidden: true });
+  let aberto = null;
+  const retratos = ordem.map((c) => {
+    const foto = el('img', { src: `img/${c}-serio.webp?v=0.3`, alt: '', width: '120', height: '120' });
+    const botao = el('button', { class: 'rosto', type: 'button', 'aria-pressed': 'false', 'aria-controls': painel.id },
+      foto, el('span', {}, nome(c)));
+    new Image().src = `img/${c}-alegre.webp?v=0.3`; // sem piscar na troca
+    botao.addEventListener('click', () => {
+      aberto = aberto === c ? null : c;
+      for (const r of retratos) {
+        const ativo = r.c === aberto;
+        r.botao.setAttribute('aria-pressed', String(ativo));
+        r.foto.src = `img/${r.c}-${ativo ? 'alegre' : 'serio'}.webp?v=0.3`;
+      }
+      painel.hidden = !aberto;
+      if (aberto) { painel.replaceChildren(...resumo(grupo, aberto)); medir.viuResumo(`${grupo.id}:${aberto}`); }
+    });
+    return { c, botao, foto };
+  });
+  return el('section', { class: 'pensa' },
+    el('h2', {}, `O que cada um propõe sobre ${grupo.nome.toLowerCase()}`),
+    el('p', { class: 'aviso-fixo' }, el('strong', {}, 'Lembre: '), 'falar mais de um assunto não quer dizer ter proposta melhor. Toque num candidato para ver um resumo do que o plano dele propõe.'),
+    el('div', { class: 'rostos' }, retratos.map((r) => r.botao)),
+    painel);
+}
+
+function resumo(grupo, c) {
+  const r = dados.resumos.grupos[grupo.id][c];
+  const plano = dados.textos.candidatos[c].plano;
+  const pagina = (n) => el('a', { href: `${plano}#page=${n}`, target: '_blank', rel: 'noopener', onclick: medir.abriuFonte }, `pág. ${n}`);
+  return [
+    el('span', { class: 'selo-ia' }, 'Resumo feito por IA'),
+    el('h3', {}, nome(c)),
+    el('p', { class: 'visao' }, r.visao.texto, ' ', pagina(r.visao.pagina)),
+    el('ul', { class: 'propostas' }, r.propostas.map((p) => el('li', {}, p.texto, ' ', pagina(p.pagina)))),
+    el('p', { class: 'nota-ia' }, dados.resumos.aviso, ' ',
+      el('a', { href: plano, target: '_blank', rel: 'noopener', onclick: medir.abriuFonte }, `Ler o plano completo de ${nome(c)}`), '.'),
+  ];
 }
 
 function eventosDoAcervo(acervo) {
@@ -207,10 +250,10 @@ function rota({ historico = false } = {}) {
 
 async function iniciar() {
   try {
-    const [textos, termos] = await Promise.all(
-      ['data/textos.json?v=0.2', 'data/termos.json?v=0.2'].map((u) => fetch(u).then((r) => { if (!r.ok) throw new Error(u); return r.json(); })),
+    const [textos, termos, resumos] = await Promise.all(
+      ['data/textos.json?v=0.3', 'data/termos.json?v=0.3', 'data/resumos.json?v=0.3'].map((u) => fetch(u).then((r) => { if (!r.ok) throw new Error(u); return r.json(); })),
     );
-    dados = { textos, termos: termos.termos, grupos: termos.grupos, acervos: preparar(textos) };
+    dados = { textos, termos: termos.termos, grupos: termos.grupos, resumos, acervos: preparar(textos) };
   } catch {
     medir.erroCarga();
     app.replaceChildren(el('section', { class: 'tela' }, el('h1', {}, 'Não deu para carregar'), el('p', {}, 'Confira sua conexão e recarregue a página.')));

@@ -1,0 +1,204 @@
+{
+  "aviso": "Resumo feito por inteligência artificial a partir do plano de governo e revisado por uma pessoa. Toque na página para conferir no plano.",
+  "regras": "Mesma estrutura para os dois: uma frase sobre como o plano vê o assunto e 3 propostas. Linguagem simples, sem citar o adversário nem repetir críticas. A 'citacao' não aparece na tela: serve só para o validador conferir que a página indicada trata daquilo.",
+  "grupos": {
+    "seguranca": {
+      "flavio": {
+        "visao": { "texto": "Trata a segurança como prioridade número um e defende punição mais dura para quem comete crime.", "pagina": 13, "citacao": "Segurança não é um tema entre outros: é a condição para todos os demais" },
+        "propostas": [
+          { "texto": "Classificar facções como PCC e CV como organizações narcoterroristas e bloquear o dinheiro delas.", "pagina": 13, "citacao": "facções serão declaradas como organizações narcoterroristas" },
+          { "texto": "Construir 5 presídios de segurança máxima e criar meio milhão de vagas em presídios em 4 anos.", "pagina": 14, "citacao": "O Brasil terá 5 novos presídios de segurança máxima" },
+          { "texto": "Reduzir a maioridade penal de 18 para 16 anos.", "pagina": 13, "citacao": "redução da maioridade penal de 18 para 16 anos" }
+        ]
+      },
+      "lula": {
+        "visao": { "texto": "Trata a segurança como direito de todos e quer juntar União, estados e cidades contra o crime organizado.", "pagina": 26, "citacao": "A segurança é um direito de toda brasileira e de todo brasileiro" },
+        "propostas": [
+          { "texto": "Criar o Ministério da Segurança Pública, depois de aprovar a mudança na Constituição sobre o tema.", "pagina": 30, "citacao": "criaremos o Ministério da Segurança Pública" },
+          { "texto": "Cortar o dinheiro de facções e milícias e investir R$ 10 bilhões junto com estados e cidades.", "pagina": 27, "citacao": "asfixia financeira do crime organizado e das milícias" },
+          { "texto": "Ampliar o uso de câmeras no uniforme dos policiais e o policiamento perto da comunidade.", "pagina": 30, "citacao": "programas no modelo de policiamento de proximidade" }
+        ]
+      }
+    },
+    "saude": {
+      "flavio": {
+        "visao": { "texto": "Quer que o brasileiro consiga chegar ao médico e cuide da saúde antes de ficar doente.", "pagina": 37, "citacao": "que cuide da saúde antes de adoecer" },
+        "propostas": [
+          { "texto": "Criar um prontuário eletrônico único, ligado ao CPF, com todo o histórico de saúde da pessoa.", "pagina": 26, "citacao": "Vamos implantar o prontuário eletrônico único, vinculado ao CPF" },
+          { "texto": "Usar exames e aparelhos de clínicas particulares nos horários vagos para atender pelo SUS.", "pagina": 37, "citacao": "contratar serviços e exames na rede privada nos horários ociosos" },
+          { "texto": "Corrigir a tabela que o SUS paga a hospitais, santas casas e clínicas.", "pagina": 37, "citacao": "correção efetiva da tabela SUS" }
+        ]
+      },
+      "lula": {
+        "visao": { "texto": "Defende o SUS público e para todos e quer diminuir a espera por especialistas e exames.", "pagina": 40, "citacao": "Nosso compromisso com o fortalecimento do SUS público e universal é inalienável" },
+        "propostas": [
+          { "texto": "Ampliar o Agora Tem Especialistas, com mutirões, carretas e atendimento em terceiro turno.", "pagina": 37, "citacao": "A expansão do terceiro turno nos serviços de saúde" },
+          { "texto": "Manter o Farmácia Popular 100% de graça e incluir exames, como os de pressão alta e diabetes.", "pagina": 36, "citacao": "O programa será mantido, 100% gratuito" },
+          { "texto": "Criar uma fila única digital, organizada pela gravidade de cada caso.", "pagina": 38, "citacao": "fila única digital e ordenada pelo risco clínico" }
+        ]
+      }
+    },
+    "corrupcao": {
+      "flavio": {
+        "visao": { "texto": "Diz que o jeito de evitar a corrupção é organizar o Estado e tirar a política das estatais.", "pagina": 70, "citacao": "É assim que se combate a corrupção de forma duradoura: organizando o Estado para preveni-la" },
+        "propostas": [
+          { "texto": "Escolher diretores de estatais por competência, como fazem as empresas privadas.", "pagina": 70, "citacao": "recrutamento com regras de mercado" },
+          { "texto": "Proteger os fundos de pensão das estatais de indicação política.", "pagina": 70, "citacao": "Vamos blindar os fundos de pensão das estatais da indicação política" },
+          { "texto": "Lançar um novo pacote contra fraudes no INSS e nos descontos da aposentadoria.", "pagina": 72, "citacao": "Reeditaremos um pacote antifraude na Previdência" }
+        ]
+      },
+      "lula": {
+        "visao": { "texto": "Quer prevenir, investigar e punir a corrupção, com mais transparência e participação da população.", "pagina": 18, "citacao": "fortalecendo a prevenção, a investigação e a responsabilização de corruptos e corruptores" },
+        "propostas": [
+          { "texto": "Punir corruptos e corruptores, inclusive os mais ricos e poderosos.", "pagina": 18, "citacao": "inclusive os do andar de cima" },
+          { "texto": "Transformar o Portal da Transparência numa plataforma com inteligência artificial.", "pagina": 18, "citacao": "O Portal da Transparência receberá investimentos" },
+          { "texto": "Debater com a sociedade as emendas parlamentares e o orçamento secreto.", "pagina": 16, "citacao": "É preciso que o tema das emendas parlamentares seja debatido com a sociedade" }
+        ]
+      }
+    },
+    "bolso": {
+      "flavio": {
+        "visao": { "texto": "Diz que a vida ficou cara por causa do gasto do governo e quer baixar impostos e juros.", "pagina": 29, "citacao": "Quando o governo gasta mais do que arrecada, a conta não desaparece" },
+        "propostas": [
+          { "texto": "Rever a reforma tributária para baixar o imposto sobre o que a família compra.", "pagina": 30, "citacao": "reduzir o IVA" },
+          { "texto": "Diminuir o custo de contratar com carteira assinada, sem tirar direitos.", "pagina": 43, "citacao": "Vamos reduzir gradualmente o custo do trabalho, sem retirar direitos" },
+          { "texto": "Criar um contrato mais barato para jovens de 18 a 24 anos no primeiro emprego.", "pagina": 44, "citacao": "trabalho para os 18 a 24 anos em busca do primeiro emprego" }
+        ]
+      },
+      "lula": {
+        "visao": { "texto": "Defende aumento do salário mínimo acima da inflação, menos horas de trabalho e juros menores.", "pagina": 74, "citacao": "valorização do salário mínimo como meio estratégico de distribuição de renda" },
+        "propostas": [
+          { "texto": "Dar aumento ao salário mínimo acima da inflação todo ano.", "pagina": 74, "citacao": "dará continuidade à política de valorização do salário mínimo" },
+          { "texto": "Acabar com a escala 6x1 e reduzir a jornada para 40 horas, sem cortar salário.", "pagina": 75, "citacao": "assegurar o fim da escala 6x1" },
+          { "texto": "Criar condições para os juros caírem, com a inflação sob controle.", "pagina": 49, "citacao": "vamos criar as condições para uma redução sustentada das taxas de juros" }
+        ]
+      }
+    },
+    "educacao": {
+      "flavio": {
+        "visao": { "texto": "Quer uma escola cobrada pelo que o aluno aprende, sem doutrinação política.", "pagina": 35, "citacao": "Escola é lugar de aprender a pensar, não de aprender o que pensar" },
+        "propostas": [
+          { "texto": "Alfabetizar pelo método fônico, que liga cada som à sua letra.", "pagina": 35, "citacao": "Vamos priorizar o método fônico" },
+          { "texto": "Ampliar as escolas cívico-militares.", "pagina": 35, "citacao": "Vamos ampliar as Escolas Cívico-Militares" },
+          { "texto": "Dar um voucher para a família pôr o filho em outra escola quando faltar vaga na rede pública.", "pagina": 36, "citacao": "a família receberá um voucher educacional" }
+        ]
+      },
+      "lula": {
+        "visao": { "texto": "Trata a educação como o principal caminho para mudar de vida e diminuir a desigualdade.", "pagina": 30, "citacao": "A educação constitui o principal instrumento de transformação social" },
+        "propostas": [
+          { "texto": "Dar prioridade total à escola em tempo integral.", "pagina": 31, "citacao": "O fomento à expansão da educação em tempo integral terá absoluta prioridade" },
+          { "texto": "Manter o Pé-de-Meia, para o jovem pobre não largar o ensino médio por falta de dinheiro.", "pagina": 32, "citacao": "Vamos dar continuidade e fortalecer o Pé-de-Meia" },
+          { "texto": "Abrir mais 111 institutos federais de ensino técnico.", "pagina": 33, "citacao": "Serão mais 111 IFs" }
+        ]
+      }
+    },
+    "fome": {
+      "flavio": {
+        "visao": { "texto": "Quer manter os programas sociais, mas como ponto de partida para a pessoa conquistar a própria renda.", "pagina": 42, "citacao": "Para nós, o programa social é ponto de partida" },
+        "propostas": [
+          { "texto": "Manter os programas sociais que existem hoje, combatendo fraudes.", "pagina": 42, "citacao": "vamos manter os programas sociais existentes" },
+          { "texto": "Dar prioridade a quem recebe benefício em vagas de primeiro emprego e cursos.", "pagina": 43, "citacao": "o beneficiário de programa social terá prioridade" },
+          { "texto": "Garantir a volta ao benefício, sem fila, para quem arrumar emprego e depois ficar sem ele.", "pagina": 43, "citacao": "garantiremos o retorno imediato e sem fila ao benefício" }
+        ]
+      },
+      "lula": {
+        "visao": { "texto": "Diz que o país saiu do Mapa da Fome e quer seguir garantindo renda e comida no prato.", "pagina": 58, "citacao": "O Brasil saiu do Mapa da Fome" },
+        "propostas": [
+          { "texto": "Manter, melhorar e ampliar os programas de proteção social para quem mais precisa.", "pagina": 18, "citacao": "devemos manter, aperfeiçoar e ampliar as políticas de proteção social" },
+          { "texto": "Comprar mais comida da agricultura familiar para escolas e famílias pobres.", "pagina": 59, "citacao": "A ampliação do PAA será mantida" },
+          { "texto": "Apoiar restaurantes populares e cozinhas solidárias.", "pagina": 26, "citacao": "as cozinhas solidárias e os restaurantes populares" }
+        ]
+      }
+    },
+    "direitos": {
+      "flavio": {
+        "visao": { "texto": "Quer um governo digital, que resolva a vida do cidadão sem fila e sem papelada.", "pagina": 24, "citacao": "o Estado passa a ser um só para quem procura por ele" },
+        "propostas": [
+          { "texto": "Pôr na internet todos os serviços federais possíveis, sem pedir papel que o governo já tem.", "pagina": 25, "citacao": "Vamos digitalizar 100% dos serviços públicos do Governo Federal" },
+          { "texto": "Acabar com a fila do INSS com tecnologia e gestão profissional.", "pagina": 26, "citacao": "Vamos investir em tecnologia e digitalizar os processos do INSS" },
+          { "texto": "Trazer de volta o Casa Verde e Amarela, com meta de 2,5 milhões de moradias.", "pagina": 47, "citacao": "Vamos retomar o Casa Verde e Amarela" }
+        ]
+      },
+      "lula": {
+        "visao": { "texto": "Quer garantir a todos o acesso a saúde, educação, renda e outros direitos básicos.", "pagina": 26, "citacao": "universalização do acesso à educação, à saúde, à renda e aos demais direitos fundamentais" },
+        "propostas": [
+          { "texto": "Levar todos os serviços públicos para a internet, com qualidade.", "pagina": 17, "citacao": "Vamos continuar investindo na universalização dos serviços públicos digitais de qualidade" },
+          { "texto": "Diminuir a espera no INSS e avisar o trabalhador quando ele tiver direito a se aposentar.", "pagina": 77, "citacao": "o trabalhador recebia uma carta, em casa, avisando de seus direitos" },
+          { "texto": "Manter e ampliar o Minha Casa Minha Vida para todas as faixas de renda.", "pagina": 45, "citacao": "O MCMV será mantido e ampliado no próximo mandato" }
+        ]
+      }
+    },
+    "desenvolvimento": {
+      "flavio": {
+        "visao": { "texto": "Quer dobrar o crescimento com investimento privado e regras estáveis, sem o Estado no papel de empresário.", "pagina": 49, "citacao": "O papel do Estado aqui não é ser o empresário" },
+        "propostas": [
+          { "texto": "Fazer o país crescer 4% ao ano na próxima década.", "pagina": 49, "citacao": "alcançar um crescimento sustentado de 4% ao ano" },
+          { "texto": "Investir R$ 900 bilhões em 4 anos em estradas, ferrovias, portos e aeroportos, com empresas privadas.", "pagina": 51, "citacao": "Vamos investir R$ 900 bilhões em quatro anos" },
+          { "texto": "Voltar com o programa de privatizações, avaliando cada caso.", "pagina": 70, "citacao": "retomar o Programa Nacional de Desestatização com critério" }
+        ]
+      },
+      "lula": {
+        "visao": { "texto": "Quer o Estado puxando o investimento e uma indústria mais forte, moderna e verde.", "pagina": 48, "citacao": "Ao investir em infraestrutura, indústria e crédito produtivo, o Estado induz o aumento da produtividade" },
+        "propostas": [
+          { "texto": "Fortalecer a Nova Indústria Brasil, com foco em inovação, inteligência artificial e minerais.", "pagina": 50, "citacao": "aprimorar e fortalecer a neoindustrialização" },
+          { "texto": "Fazer uma nova edição do Novo PAC, com obras públicas e concessões.", "pagina": 53, "citacao": "A nova edição do Novo PAC manterá a articulação" },
+          { "texto": "Dar preferência a empresas brasileiras nas compras do governo.", "pagina": 51, "citacao": "margens de preferência com estímulos para empresas brasileiras" }
+        ]
+      }
+    },
+    "campo": {
+      "flavio": {
+        "visao": { "texto": "Quer segurança para quem produz no campo e diz que preservar a natureza tem que compensar para quem preserva.", "pagina": 58, "citacao": "Preservar tem que compensar para quem preserva" },
+        "propostas": [
+          { "texto": "Zerar o desmatamento ilegal até 2029.", "pagina": 58, "citacao": "zerar o desmatamento ilegal até 2029" },
+          { "texto": "Acelerar a entrega de títulos de terra ao pequeno produtor rural.", "pagina": 54, "citacao": "promover ampla regularização e titulação do pequeno proprietário rural" },
+          { "texto": "Pagar quem conserva a mata nativa e recupera áreas degradadas.", "pagina": 57, "citacao": "ampliando o pagamento por serviços ambientais" }
+        ]
+      },
+      "lula": {
+        "visao": { "texto": "Quer juntar produção e proteção do meio ambiente, com apoio forte à agricultura familiar.", "pagina": 52, "citacao": "provando que desenvolvimento produtivo e responsabilidade ambiental caminham juntos" },
+        "propostas": [
+          { "texto": "Chegar ao desmatamento líquido zero até 2030.", "pagina": 70, "citacao": "alcançar o desmatamento líquido zero até 2030" },
+          { "texto": "Ampliar o Plano Safra da Agricultura Familiar, com juros adequados a quem produz comida.", "pagina": 59, "citacao": "Vamos continuar expandindo o Plano Safra da Agricultura Familiar" },
+          { "texto": "Seguir com a reforma agrária, assentando as famílias acampadas.", "pagina": 60, "citacao": "assentando as famílias acampadas" }
+        ]
+      }
+    },
+    "valores": {
+      "flavio": {
+        "visao": { "texto": "Põe a família no centro e defende a vida desde a concepção, a propriedade e a liberdade religiosa.", "pagina": 9, "citacao": "à vida desde a concepção, à propriedade privada" },
+        "propostas": [
+          { "texto": "Criar a Central da Mulher, com proteção, saúde, emprego e crédito num lugar só.", "pagina": 17, "citacao": "A Central da Mulher será um espaço físico" },
+          { "texto": "Ampliar creches e dar voucher-creche onde faltar vaga pública.", "pagina": 21, "citacao": "a família receberá um voucher-creche" },
+          { "texto": "Proibir o uso de dinheiro de programa social em apostas online.", "pagina": 33, "citacao": "Vamos proibir o uso dos recursos dos programas sociais para apostas" }
+        ]
+      },
+      "lula": {
+        "visao": { "texto": "Quer combater todo tipo de discriminação e proteger mulheres, crianças, idosos e pessoas com deficiência.", "pagina": 26, "citacao": "combata todas as formas de discriminação" },
+        "propostas": [
+          { "texto": "Terminar 30 Casas da Mulher Brasileira e ampliar a rede de proteção às mulheres.", "pagina": 21, "citacao": "concluiremos as 30 Casas da Mulher Brasileira" },
+          { "texto": "Atender em casa os idosos que têm dificuldade de sair.", "pagina": 22, "citacao": "atendimento domiciliar, de ‘porta em porta’" },
+          { "texto": "Proteger crianças na internet, com regras para telas e jogos online.", "pagina": 24, "citacao": "regulamentação do uso de telas por faixa etária" }
+        ]
+      }
+    },
+    "mundo": {
+      "flavio": {
+        "visao": { "texto": "Quer uma diplomacia prática, voltada a abrir mercados, sem escolher parceiro por ideologia.", "pagina": 62, "citacao": "uma diplomacia guiada pelo profissionalismo e pelo pragmatismo, não pela ideologia" },
+        "propostas": [
+          { "texto": "Negociar com todos os países, da China aos Estados Unidos.", "pagina": 62, "citacao": "Negociaremos com todos os que interessam ao Brasil" },
+          { "texto": "Voltar a buscar a entrada do Brasil na OCDE, grupo de países com regras econômicas em comum.", "pagina": 63, "citacao": "retomar o cronograma interrompido de adesão à OCDE" },
+          { "texto": "Buscar acordos contra barreiras de Estados Unidos, China e Europa aos produtos brasileiros.", "pagina": 54, "citacao": "buscar soluções diplomáticas eficazes contra sanções" }
+        ]
+      },
+      "lula": {
+        "visao": { "texto": "Quer um Brasil que decide os próprios rumos, sem se submeter a outros países.", "pagina": 77, "citacao": "o Brasil deve reafirmar sua soberania" },
+        "propostas": [
+          { "texto": "Fortalecer o Mercosul como a principal união entre os países da América do Sul.", "pagina": 80, "citacao": "Consolidaremos o Mercosul como principal plataforma de integração" },
+          { "texto": "Fortalecer a indústria de defesa e as Forças Armadas para proteger o território.", "pagina": 78, "citacao": "fortaleceremos a Base Industrial e Tecnológica de Defesa" },
+          { "texto": "Abrir novos mercados e responder a ataques comerciais com base nas regras internacionais.", "pagina": 80, "citacao": "Investiremos em novos acordos comerciais e na abertura de novos mercados" }
+        ]
+      }
+    }
+  }
+}

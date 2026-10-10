@@ -277,6 +277,46 @@ mark { background: var(--marca-texto); color: inherit; border-radius: 3px; paddi
 .mais { width: 100%; min-height: 44px; margin: 10px 0 6px; padding: 8px; border-color: var(--traco); }
 .mais[hidden] { display: none; }
 
+/* Resumo por IA: o retrato escolhido fica sorridente */
+.pensa { display: flex; flex-direction: column; gap: 12px; }
+.pensa h2 { font-size: 1.35rem; }
+.rostos { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; }
+.rosto {
+  appearance: none;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 8px;
+  padding: 12px 8px;
+  border: 2.5px solid var(--traco);
+  border-radius: var(--raio);
+  background: var(--papel);
+  color: var(--tinta);
+  font: 800 1rem var(--titulo);
+  cursor: pointer;
+  transition: transform 0.15s, box-shadow 0.15s, background-color 0.2s;
+}
+.rosto img { width: min(100%, 120px); height: auto; border: 2.5px solid var(--traco); border-radius: 50%; background: #fff; }
+.rosto:hover { background: var(--principal-claro); }
+.rosto[aria-pressed="true"] { background: var(--realce-claro); box-shadow: 5px 5px 0 var(--sombra); transform: translate(-2px, -2px); }
+.painel {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  padding: 16px 14px;
+  border: 2.5px solid var(--traco);
+  border-radius: var(--raio);
+  background: var(--papel);
+  animation: entra 0.25s ease-out both;
+}
+.painel[hidden] { display: none; }
+.painel h3 { margin: 0; }
+.selo-ia { align-self: flex-start; padding: 3px 10px; border: 2px solid var(--traco); border-radius: 999px; background: var(--realce); color: var(--realce-tinta); font: 800 0.75rem var(--titulo); letter-spacing: 0.04em; text-transform: uppercase; }
+.visao { font-weight: 600; }
+.propostas { margin: 0; padding-left: 20px; display: grid; gap: 8px; }
+.visao a, .propostas a { font-size: 0.85rem; white-space: nowrap; }
+.nota-ia { color: var(--suave); font-size: 0.85rem; }
+
 @media (prefers-reduced-motion: reduce) {
   *, *::before, *::after { animation: none !important; transition: none !important; }
 }

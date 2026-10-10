@@ -1,4 +1,4 @@
-import { CONTAGEM, ENVIAR_CONTAGEM } from './config.js?v=0.2';
+import { CONTAGEM, ENVIAR_CONTAGEM } from './config.js?v=0.3';
 
 // Medição anônima: só totais por dia. Nada de nome, identificador, IP guardado ou cookie.
 // Cada aparelho conta no máximo uma vez por evento (e por palavra, por dia), controlado aqui no aparelho.
@@ -85,6 +85,7 @@ export function buscou({ termo, publico, origem, grupo }) {
 }
 
 export const viuTrechos = (termo) => umaVez(`trechos:${hoje()}:${termo}`, { evento: 'viu_trechos', termo });
+export const viuResumo = (qual) => umaVez(`resumo:${hoje()}:${qual}`, { evento: 'viu_resumo', termo: qual });
 export const abriuFonte = () => umaVez(`fonte:${hoje()}`, { evento: 'abriu_fonte' });
 export const compartilhou = (tipo) => umaVez(`compartilhou:${hoje()}:${tipo}`, { evento: 'compartilhou', termo: tipo });
 export const foiTesteCego = () => umaVez('foi_teste_cego', { evento: 'foi_teste_cego' });
