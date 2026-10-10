@@ -1,6 +1,6 @@
-import { preparar, familia, contar, trecho } from './busca.js?v=1.0';
-import * as medir from './contagem.js?v=1.0';
-import { compartilhar } from './compartilhar.js?v=1.0';
+import { preparar, familia, contar, trecho } from './busca.js?v=1.1';
+import * as medir from './contagem.js?v=1.1';
+import { compartilhar } from './compartilhar.js?v=1.1';
 
 const ORDEM = 'palavra:ordem';
 const POR_VEZ = 5; // trechos mostrados de cada vez
@@ -78,7 +78,7 @@ function inicio() {
   ));
 }
 
-const aviso = () => el('p', { class: 'aviso-fixo' }, el('strong', {}, 'Lembre: '), 'falar mais de um assunto não quer dizer ter proposta melhor.');
+const aviso = () => el('p', { class: 'aviso-fixo' }, el('strong', {}, 'Lembre: '), 'falar mais de um assunto não quer dizer ter proposta melhor. Confira os planos de governo e o contexto das falas.');
 
 // ---------- Resultado ----------
 
@@ -129,13 +129,13 @@ function quadro(fam, res, grupo, total) {
   const maior = Object.fromEntries(Object.keys(dados.acervos).map((id) => [id, Math.max(...ordem.map((c) => res[id][c].taxa)) || 1]));
   let aberto = null;
   const colunas = ordem.map((c) => {
-    const foto = el('img', { src: `img/${c}-serio.webp?v=1.0`, alt: '', width: '96', height: '96' });
+    const foto = el('img', { src: `img/${c}-serio.webp?v=1.1`, alt: '', width: '96', height: '96' });
     const rotulo = el('span', { class: 'ver-resumo' }, el('span', {}, 'Ver resumo'));
     // Retrato embaixo das contagens; com resumo, retrato e botão formam um único botão.
     const cabeca = temResumo
       ? el('button', { class: 'rosto', type: 'button', 'aria-pressed': 'false', 'aria-controls': painel.id, 'aria-label': `Ver resumo do plano de ${nome(c)}` }, foto, rotulo)
       : el('div', { class: 'rosto estatico' }, foto);
-    if (temResumo) new Image().src = `img/${c}-alegre.webp?v=1.0`; // sem piscar na troca
+    if (temResumo) new Image().src = `img/${c}-alegre.webp?v=1.1`; // sem piscar na troca
     const contas = Object.keys(dados.acervos).map((id) => {
       const r = res[id][c];
       return el('div', { class: `conta ${id}` },
@@ -153,7 +153,7 @@ function quadro(fam, res, grupo, total) {
         for (const col of colunas) {
           const ativo = col.c === aberto;
           col.cabeca.setAttribute('aria-pressed', String(ativo));
-          col.foto.src = `img/${col.c}-${ativo ? 'alegre' : 'serio'}.webp?v=1.0`;
+          col.foto.src = `img/${col.c}-${ativo ? 'alegre' : 'serio'}.webp?v=1.1`;
           col.rotulo.lastChild.textContent = ativo ? 'Fechar' : 'Ver resumo';
         }
         painel.hidden = !aberto;
@@ -279,7 +279,7 @@ function rota({ historico = false } = {}) {
 async function iniciar() {
   try {
     const [textos, termos, resumos] = await Promise.all(
-      ['data/textos.json?v=1.0', 'data/termos.json?v=1.0', 'data/resumos.json?v=1.0'].map((u) => fetch(u).then((r) => { if (!r.ok) throw new Error(u); return r.json(); })),
+      ['data/textos.json?v=1.1', 'data/termos.json?v=1.1', 'data/resumos.json?v=1.1'].map((u) => fetch(u).then((r) => { if (!r.ok) throw new Error(u); return r.json(); })),
     );
     dados = { textos, termos: termos.termos, grupos: termos.grupos, resumos, acervos: preparar(textos) };
   } catch {
