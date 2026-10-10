@@ -1,7 +1,8 @@
-import { SITE } from './config.js?v=2.6';
+import { SITE } from './config.js?v=2.7';
 
-// Imagem de story (9:16) no estilo do site. Leva sempre os dois candidatos, o número,
-// a frequência e o aviso: a imagem não pode virar "placar" fora de contexto.
+// Imagem de story (9:16) com a cara da tela de resultado: um cartão com uma coluna por candidato
+// (retrato, nome, plano com barra cheia, entrevistas com barra listrada), na mesma ordem da tela.
+// Leva sempre os dois, o número, a frequência e o lembrete: a imagem não pode virar "placar".
 const L = 1080;
 const A = 1920;
 const COR = {
@@ -15,10 +16,21 @@ const COR = {
   trilha: '#e6e4ea',
 };
 const TRACO = 6;
+const LEMBRETE = 'Falar mais de um assunto não quer dizer ter proposta melhor. Confira os planos de governo e o contexto das falas.';
 
-const fonte = (peso, tamanho) => `${peso} ${tamanho}px "Bricolage Grotesque", system-ui, -apple-system, "Segoe UI", Roboto, sans-serif`;
+const fonte = (peso, tamanho, familia = '"Bricolage Grotesque"') => `${peso} ${tamanho}px ${familia}, system-ui, -apple-system, "Segoe UI", Roboto, sans-serif`;
+const texto = (peso, tamanho) => fonte(peso, tamanho, 'system-ui');
 const numero = (n, casas = 0) => n.toLocaleString('pt-BR', { minimumFractionDigits: casas, maximumFractionDigits: casas });
 const vezes = (n) => (n === 1 ? '1 vez' : `${numero(n)} vezes`);
+
+function carregar(src) {
+  return new Promise((ok, erro) => {
+    const img = new Image();
+    img.onload = () => ok(img);
+    img.onerror = erro;
+    img.src = src;
+  });
+}
 
 function bloco(ctx, x, y, w, h, raio, cor, sombra = 0) {
   if (sombra) {
@@ -37,20 +49,20 @@ function bloco(ctx, x, y, w, h, raio, cor, sombra = 0) {
 }
 
 // Escreve o texto no maior tamanho que couber na largura.
-function textoAjustado(ctx, texto, x, y, peso, tamanho, largura) {
+function textoAjustado(ctx, conteudo, x, y, peso, tamanho, largura, fam = fonte) {
   let t = tamanho;
-  ctx.font = fonte(peso, t);
-  while (ctx.measureText(texto).width > largura && t > 16) {
+  ctx.font = fam(peso, t);
+  while (ctx.measureText(conteudo).width > largura && t > 16) {
     t -= 2;
-    ctx.font = fonte(peso, t);
+    ctx.font = fam(peso, t);
   }
-  ctx.fillText(texto, x, y);
+  ctx.fillText(conteudo, x, y);
 }
 
 // Quebra o texto em linhas que caibam na largura, com a fonte já definida no contexto.
-function quebrar(ctx, texto, largura) {
+function quebrar(ctx, conteudo, largura) {
   const linhas = [''];
-  for (const palavra of texto.split(' ')) {
+  for (const palavra of conteudo.split(' ')) {
     const tentativa = linhas.at(-1) ? `${linhas.at(-1)} ${palavra}` : palavra;
     if (ctx.measureText(tentativa).width > largura && linhas.at(-1)) linhas.push(palavra);
     else linhas[linhas.length - 1] = tentativa;
@@ -58,45 +70,76 @@ function quebrar(ctx, texto, largura) {
   return linhas;
 }
 
-// Um acervo: nome, barra de frequência (mesma cor para os dois) e os números.
-function secao(ctx, titulo, lados, chave, y) {
-  ctx.textAlign = 'left';
-  ctx.fillStyle = COR.tinta;
-  ctx.font = fonte(800, 48);
-  ctx.fillText(titulo, 90, y);
-  const maior = Math.max(...lados.map((l) => l[chave].taxa)) || 1;
-  lados.forEach((lado, i) => {
-    const yl = y + 80 + i * 165;
-    ctx.fillStyle = COR.tinta;
-    ctx.textAlign = 'left';
-    textoAjustado(ctx, lado.nome, 90, yl, 700, 40, 420);
-    ctx.textAlign = 'right';
-    ctx.font = fonte(800, 40);
-    ctx.fillText(vezes(lado[chave].vezes), L - 90, yl);
-    bloco(ctx, 90, yl + 22, L - 180, 40, 20, COR.trilha);
-    const w = ((L - 180) * lado[chave].taxa) / maior;
-    if (w > 0) {
-      ctx.save();
-      ctx.beginPath();
-      ctx.roundRect(90, yl + 22, L - 180, 40, 20);
-      ctx.clip();
-      ctx.fillStyle = COR.roxo;
-      ctx.fillRect(90, yl + 22, w, 40);
-      ctx.restore();
-      ctx.beginPath();
-      ctx.roundRect(90, yl + 22, L - 180, 40, 20);
-      ctx.stroke();
+// Barra como na tela: trilha clara, preenchimento roxo (cheio no plano, listrado nas entrevistas).
+function barra(ctx, x, y, w, h, fracao, listrada) {
+  bloco(ctx, x, y, w, h, h / 2, COR.trilha);
+  const cheio = Math.max(0, Math.min(1, fracao)) * w;
+  if (cheio > 0) {
+    ctx.save();
+    ctx.beginPath();
+    ctx.roundRect(x, y, w, h, h / 2);
+    ctx.clip();
+    ctx.beginPath();
+    ctx.rect(x, y, cheio, h);
+    ctx.clip();
+    ctx.fillStyle = listrada ? COR.roxoClaro : COR.roxo;
+    ctx.fillRect(x, y, cheio, h);
+    if (listrada) {
+      ctx.strokeStyle = COR.roxo;
+      ctx.lineWidth = 9;
+      for (let i = -h; i < cheio + h; i += 18) {
+        ctx.beginPath();
+        ctx.moveTo(x + i, y + h);
+        ctx.lineTo(x + i + h, y);
+        ctx.stroke();
+      }
     }
-    ctx.textAlign = 'left';
-    ctx.fillStyle = COR.suave;
-    ctx.font = fonte(400, 30);
-    ctx.fillText(`${numero(lado[chave].taxa, 1)} a cada 10 mil palavras`, 90, yl + 100);
-  });
+    ctx.restore();
+    ctx.strokeStyle = COR.tinta;
+    ctx.lineWidth = TRACO;
+    ctx.beginPath();
+    ctx.roundRect(x, y, w, h, h / 2);
+    ctx.stroke();
+  }
 }
 
-// palavra: o termo buscado. lados: [{ nome, plano: {vezes, taxa}, falas: {vezes, taxa} }] na ordem da tela.
+function retrato(ctx, img, cx, cy, raio) {
+  ctx.save();
+  ctx.beginPath();
+  ctx.arc(cx, cy, raio, 0, Math.PI * 2);
+  ctx.fillStyle = COR.papel;
+  ctx.fill();
+  ctx.clip();
+  ctx.drawImage(img, cx - raio, cy - raio, raio * 2, raio * 2);
+  ctx.restore();
+  ctx.beginPath();
+  ctx.arc(cx, cy, raio, 0, Math.PI * 2);
+  ctx.lineWidth = TRACO;
+  ctx.strokeStyle = COR.tinta;
+  ctx.stroke();
+}
+
+// Uma linha de contagem (plano ou entrevistas) dentro da coluna.
+function conta(ctx, x, y, w, rotulo, r, maior, listrada) {
+  ctx.textAlign = 'left';
+  ctx.fillStyle = COR.suave;
+  ctx.font = texto(700, 27);
+  ctx.fillText(rotulo, x, y);
+  ctx.fillStyle = COR.tinta;
+  ctx.font = fonte(800, 58);
+  ctx.fillText(vezes(r.vezes), x, y + 64);
+  barra(ctx, x, y + 88, w, 40, r.taxa / maior, listrada);
+  ctx.fillStyle = COR.suave;
+  ctx.font = texto(400, 27);
+  ctx.fillText(`${numero(r.taxa, 1)} a cada 10 mil palavras`, x, y + 172);
+}
+
+// palavra: o termo (ou o assunto, sem aspas). lados: [{ nome, imagem, plano, falas }] na ordem da tela.
 export async function gerarImagem({ palavra, aspas = true, lados }) {
-  await document.fonts?.load(fonte(800, 100)).catch(() => {});
+  const [imagens] = await Promise.all([
+    Promise.all(lados.map((l) => carregar(l.imagem))),
+    document.fonts?.load(fonte(800, 100)).catch(() => {}),
+  ]);
   const canvas = document.createElement('canvas');
   canvas.width = L;
   canvas.height = A;
@@ -107,45 +150,78 @@ export async function gerarImagem({ palavra, aspas = true, lados }) {
 
   // Selo
   ctx.textAlign = 'center';
-  ctx.font = fonte(800, 34);
+  ctx.font = fonte(800, 32);
   const selo = 'PALAVRA POR PALAVRA · ELEIÇÕES 2026';
-  const larguraSelo = ctx.measureText(selo).width + 72;
-  bloco(ctx, (L - larguraSelo) / 2, 200, larguraSelo, 76, 38, COR.roxo);
+  const larguraSelo = ctx.measureText(selo).width + 70;
+  bloco(ctx, (L - larguraSelo) / 2, 120, larguraSelo, 72, 36, COR.roxo);
   ctx.fillStyle = '#ffffff';
-  ctx.fillText(selo, L / 2, 250);
+  ctx.fillText(selo, L / 2, 168);
 
-  // Palavra, com marca-texto
+  // Pergunta e palavra, com marca-texto
   ctx.fillStyle = COR.tinta;
   ctx.font = fonte(700, 46);
-  ctx.fillText(aspas ? 'Quantas vezes cada um usou' : 'Quanto cada um falou de', L / 2, 380);
-  ctx.font = fonte(800, 110);
-  let t = 110;
-  const texto = aspas ? `“${palavra}”` : palavra;
-  while (ctx.measureText(texto).width > L - 140 && t > 40) { t -= 4; ctx.font = fonte(800, t); }
-  const largura = ctx.measureText(texto).width;
+  ctx.fillText(aspas ? 'Quantas vezes cada um usou' : 'Quanto cada um falou de', L / 2, 290);
+  const titulo = aspas ? `“${palavra}”` : palavra;
+  let t = 104;
+  ctx.font = fonte(800, t);
+  while (ctx.measureText(titulo).width > L - 140 && t > 40) { t -= 4; ctx.font = fonte(800, t); }
+  const largura = ctx.measureText(titulo).width;
   ctx.fillStyle = COR.marcaTexto;
-  ctx.fillRect((L - largura) / 2 - 12, 470, largura + 24, t * 0.42);
+  ctx.fillRect((L - largura) / 2 - 12, 395 - t * 0.42, largura + 24, t * 0.42);
   ctx.fillStyle = COR.tinta;
-  ctx.fillText(texto, L / 2, 510);
+  ctx.fillText(titulo, L / 2, 395);
 
-  // Os dois acervos num cartão
-  bloco(ctx, 50, 590, L - 100, 865, 44, COR.papel);
-  secao(ctx, 'No plano de governo', lados, 'plano', 680);
-  secao(ctx, 'Nas entrevistas', lados, 'falas', 1090);
+  // Cartão com as duas colunas
+  const topo = 470;
+  bloco(ctx, 50, topo, L - 100, 960, 44, COR.papel, 14);
+  // Legenda das barras
+  const legenda = [['Plano de governo', false], ['Entrevistas', true]];
+  ctx.font = texto(400, 28);
+  let lx = 100;
+  for (const [nomeLegenda, listrada] of legenda) {
+    barra(ctx, lx, topo + 48, 56, 26, 1, listrada);
+    ctx.fillStyle = COR.suave;
+    ctx.textAlign = 'left';
+    ctx.fillText(nomeLegenda, lx + 72, topo + 71);
+    lx += 72 + ctx.measureText(nomeLegenda).width + 48;
+  }
+  const maior = {
+    plano: Math.max(...lados.map((l) => l.plano.taxa)) || 1,
+    falas: Math.max(...lados.map((l) => l.falas.taxa)) || 1,
+  };
+  const largCol = 400;
+  lados.forEach((lado, i) => {
+    const x = i === 0 ? 100 : 580;
+    retrato(ctx, imagens[i], x + largCol / 2, topo + 225, 100);
+    ctx.fillStyle = COR.tinta;
+    ctx.textAlign = 'left';
+    textoAjustado(ctx, lado.nome, x, topo + 395, 800, 44, largCol);
+    conta(ctx, x, topo + 470, largCol, 'NO PLANO', lado.plano, maior.plano, false);
+    conta(ctx, x, topo + 700, largCol, 'NAS ENTREVISTAS', lado.falas, maior.falas, true);
+  });
 
-  // Aviso, o mesmo lembrete da tela
-  ctx.font = fonte(700, 36);
-  const linhas = quebrar(ctx, 'Falar mais de um assunto não quer dizer ter proposta melhor. Confira os planos de governo e o contexto das falas.', L - 180);
-  bloco(ctx, 50, 1480, L - 100, 52 + linhas.length * 48, 36, COR.roxoClaro);
-  ctx.textAlign = 'center';
+  // Lembrete, o mesmo da tela
+  ctx.font = texto(400, 33);
+  const linhas = quebrar(ctx, LEMBRETE, L - 200);
+  const topoLembrete = topo + 1000;
+  const alturaLembrete = 50 + linhas.length * 46;
+  bloco(ctx, 50, topoLembrete, L - 100, alturaLembrete, 28, COR.roxoClaro);
+  ctx.fillStyle = COR.roxo;
+  ctx.fillRect(50 + TRACO / 2, topoLembrete + TRACO / 2, 12, alturaLembrete - TRACO);
   ctx.fillStyle = COR.tinta;
-  linhas.forEach((linha, i) => ctx.fillText(linha, L / 2, 1540 + i * 48));
+  ctx.textAlign = 'left';
+  linhas.forEach((linha, i) => {
+    ctx.font = i === 0 ? texto(400, 33) : texto(400, 33);
+    ctx.fillText(linha, 100, topoLembrete + 62 + i * 46);
+  });
 
   // Chamada
-  ctx.font = fonte(800, 50);
-  ctx.fillText('Busque a sua palavra:', L / 2, 1775);
+  ctx.textAlign = 'center';
   ctx.fillStyle = COR.tinta;
-  textoAjustado(ctx, SITE, L / 2, 1834, 700, 38, L - 120);
+  const chamadaY = topoLembrete + alturaLembrete + 105;
+  ctx.font = fonte(800, 50);
+  ctx.fillText(aspas ? 'Busque a sua palavra:' : 'Veja o seu assunto:', L / 2, chamadaY);
+  textoAjustado(ctx, SITE, L / 2, chamadaY + 62, 700, 38, L - 120);
 
   return new Promise((ok) => canvas.toBlob(ok, 'image/png'));
 }
@@ -155,17 +231,17 @@ export async function compartilhar(dados) {
   const blob = await gerarImagem(dados);
   const arquivo = new File([blob], 'palavra-por-palavra.png', { type: 'image/png' });
   const url = `https://${SITE}/${dados.link}&o=c`;
-  const texto = dados.aspas
+  const mensagem = dados.aspas
     ? `Quantas vezes cada candidato usou “${dados.palavra}” no plano de governo e em entrevistas? Busque a sua palavra: ${url}`
     : `Quanto cada candidato falou de ${dados.palavra.toLowerCase()} no plano de governo e em entrevistas? Veja: ${url}`;
 
   try {
     if (navigator.canShare?.({ files: [arquivo] })) {
-      await navigator.share({ files: [arquivo], text: texto });
+      await navigator.share({ files: [arquivo], text: mensagem });
       return 'imagem';
     }
     if (navigator.share) {
-      await navigator.share({ text: texto });
+      await navigator.share({ text: mensagem });
       return 'link';
     }
   } catch (e) {
