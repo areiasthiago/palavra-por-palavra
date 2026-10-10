@@ -1,6 +1,6 @@
-import { preparar, familia, familiaDoGrupo, contar, trecho } from './busca.js?v=1.4';
-import * as medir from './contagem.js?v=1.4';
-import { compartilhar } from './compartilhar.js?v=1.4';
+import { preparar, familia, familiaDoGrupo, contar, trecho } from './busca.js?v=1.5';
+import * as medir from './contagem.js?v=1.5';
+import { compartilhar } from './compartilhar.js?v=1.5';
 
 const ORDEM = 'palavra:ordem';
 const POR_VEZ = 5; // trechos mostrados de cada vez
@@ -131,13 +131,13 @@ function quadro(fam, res, grupo, total) {
   const palavrasDoAssunto = grupo ? dados.termos.filter((t) => t.grupo === grupo.id).length : 0;
   let aberto = null;
   const colunas = ordem.map((c) => {
-    const foto = el('img', { src: `img/${c}-serio.webp?v=1.4`, alt: '', width: '96', height: '96' });
+    const foto = el('img', { src: `img/${c}-serio.webp?v=1.5`, alt: '', width: '96', height: '96' });
     const rotulo = el('span', { class: 'ver-resumo' }, el('span', {}, 'Ver resumo'));
     // Retrato embaixo das contagens; com resumo, retrato e botão formam um único botão.
     const cabeca = temResumo
       ? el('button', { class: 'rosto', type: 'button', 'aria-pressed': 'false', 'aria-controls': painel.id, 'aria-label': `Ver resumo do plano de ${nome(c)}` }, foto, rotulo)
       : el('div', { class: 'rosto estatico' }, foto);
-    if (temResumo) new Image().src = `img/${c}-alegre.webp?v=1.4`; // sem piscar na troca
+    if (temResumo) new Image().src = `img/${c}-alegre.webp?v=1.5`; // sem piscar na troca
     return {
       c, cabeca, foto, rotulo,
       coluna: el('div', { class: 'coluna' }, el('h3', { class: 'nome' }, nome(c)), contas(res, c)),
@@ -151,7 +151,7 @@ function quadro(fam, res, grupo, total) {
         for (const col of colunas) {
           const ativo = col.c === aberto;
           col.cabeca.setAttribute('aria-pressed', String(ativo));
-          col.foto.src = `img/${col.c}-${ativo ? 'alegre' : 'serio'}.webp?v=1.4`;
+          col.foto.src = `img/${col.c}-${ativo ? 'alegre' : 'serio'}.webp?v=1.5`;
           col.rotulo.lastChild.textContent = ativo ? 'Fechar' : 'Ver resumo';
         }
         painel.hidden = !aberto;
@@ -294,7 +294,7 @@ function rota({ historico = false } = {}) {
 async function iniciar() {
   try {
     const [textos, termos, resumos] = await Promise.all(
-      ['data/textos.json?v=1.4', 'data/termos.json?v=1.4', 'data/resumos.json?v=1.4'].map((u) => fetch(u).then((r) => { if (!r.ok) throw new Error(u); return r.json(); })),
+      ['data/textos.json?v=1.5', 'data/termos.json?v=1.5', 'data/resumos.json?v=1.5'].map((u) => fetch(u).then((r) => { if (!r.ok) throw new Error(u); return r.json(); })),
     );
     dados = { textos, termos: termos.termos, grupos: termos.grupos, resumos, acervos: preparar(textos) };
   } catch {
