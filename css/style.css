@@ -258,14 +258,23 @@ main { flex: 1; width: 100%; max-width: 760px; margin: 0 auto; padding: 8px 16px
   box-shadow: 5px 5px 0 var(--sombra);
 }
 .comparativo h2 { font-size: 1.35rem; }
-.linhas { list-style: none; margin: 4px 0 0; padding: 0; display: grid; gap: 14px; }
-.linha { display: grid; grid-template-columns: 1fr auto; grid-template-areas: "quem valor" "trilha trilha"; gap: 6px 12px; align-items: end; }
-.quem { grid-area: quem; font-family: var(--titulo); font-weight: 800; font-size: 1.05rem; }
-.valor { grid-area: valor; display: flex; flex-direction: column; align-items: flex-end; text-align: right; line-height: 1.2; }
-.valor strong { font-family: var(--titulo); font-size: 1.25rem; font-variant-numeric: tabular-nums; }
-.valor small { color: var(--suave); font-size: 0.8rem; }
-.trilha { grid-area: trilha; display: block; height: 18px; border: 2.5px solid var(--traco); border-radius: 999px; background: var(--principal-claro); overflow: hidden; }
+.trilha { display: block; height: 18px; border: 2.5px solid var(--traco); border-radius: 999px; background: var(--principal-claro); overflow: hidden; }
 .preenche { display: block; height: 100%; background: var(--realce); border-radius: 0 4px 4px 0; transition: width 0.4s ease-out; }
+/* Mesma cor para os dois candidatos; entrevistas em listras para não confundir com o plano */
+.preenche.falas, .amostra.falas { background: repeating-linear-gradient(135deg, var(--realce) 0 4px, var(--realce-claro) 4px 8px); }
+.legenda-barras { display: flex; flex-wrap: wrap; gap: 6px 16px; color: var(--suave); font-size: 0.88rem; }
+.legenda-barras span { display: inline-flex; align-items: center; gap: 6px; }
+.amostra { display: inline-block; width: 26px; height: 12px; border: 2px solid var(--traco); border-radius: 999px; background: var(--realce); }
+.colunas { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; }
+.coluna { display: flex; flex-direction: column; gap: 12px; min-width: 0; }
+.conta { display: grid; gap: 3px; }
+.conta .rotulo { color: var(--suave); font-size: 0.8rem; font-weight: 700; text-transform: uppercase; letter-spacing: 0.03em; }
+.conta strong { font-family: var(--titulo); font-size: 1.3rem; line-height: 1.1; font-variant-numeric: tabular-nums; }
+.conta small { color: var(--suave); font-size: 0.78rem; line-height: 1.25; }
+.dica { display: flex; gap: 8px; align-items: flex-start; font-weight: 600; font-size: 0.95rem; }
+.dica svg { width: 18px; height: 18px; flex: none; margin-top: 3px; color: var(--realce); }
+.onde-usou { display: flex; flex-direction: column; gap: 4px; }
+.onde-nada { color: var(--suave); padding: 10px 0; border-top: 2px solid var(--linha); }
 
 .onde { border-top: 2px solid var(--linha); }
 .onde summary { display: flex; align-items: center; min-height: 46px; color: var(--link); font-weight: 700; cursor: pointer; }
@@ -277,10 +286,7 @@ mark { background: var(--marca-texto); color: inherit; border-radius: 3px; paddi
 .mais { width: 100%; min-height: 44px; margin: 10px 0 6px; padding: 8px; border-color: var(--traco); }
 .mais[hidden] { display: none; }
 
-/* Resumo por IA: o retrato escolhido fica sorridente */
-.pensa { display: flex; flex-direction: column; gap: 12px; }
-.pensa h2 { font-size: 1.35rem; }
-.rostos { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; }
+/* Colunas por candidato; o retrato abre o resumo da IA e fica sorridente */
 .rosto {
   appearance: none;
   display: flex;
@@ -296,8 +302,10 @@ mark { background: var(--marca-texto); color: inherit; border-radius: 3px; paddi
   cursor: pointer;
   transition: transform 0.15s, box-shadow 0.15s, background-color 0.2s;
 }
-.rosto img { width: min(100%, 120px); height: auto; border: 2.5px solid var(--traco); border-radius: 50%; background: #fff; }
+.rosto img { width: min(100%, 96px); height: auto; border: 2.5px solid var(--traco); border-radius: 50%; background: #fff; }
 .rosto:hover { background: var(--principal-claro); }
+.rosto.estatico { cursor: default; }
+.rosto.estatico:hover { background: var(--papel); }
 .rosto[aria-pressed="true"] { background: var(--realce-claro); box-shadow: 5px 5px 0 var(--sombra); transform: translate(-2px, -2px); }
 .painel {
   display: flex;

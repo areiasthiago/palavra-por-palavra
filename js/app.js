@@ -1,6 +1,6 @@
-import { preparar, familia, contar, trecho } from './busca.js?v=0.4';
-import * as medir from './contagem.js?v=0.4';
-import { compartilhar } from './compartilhar.js?v=0.4';
+import { preparar, familia, contar, trecho } from './busca.js?v=0.5';
+import * as medir from './contagem.js?v=0.5';
+import { compartilhar } from './compartilhar.js?v=0.5';
 
 const ORDEM = 'palavra:ordem';
 const POR_VEZ = 5; // trechos mostrados de cada vez
@@ -78,7 +78,7 @@ function inicio() {
   ));
 }
 
-const aviso = () => el('p', { class: 'aviso-fixo' }, el('strong', {}, 'Lembre: '), 'falar mais de um assunto não quer dizer ter proposta melhor. Veja os trechos para saber como cada um usou a palavra.');
+const aviso = () => el('p', { class: 'aviso-fixo' }, el('strong', {}, 'Lembre: '), 'falar mais de um assunto não quer dizer ter proposta melhor.');
 
 // ---------- Resultado ----------
 
@@ -105,10 +105,8 @@ function buscar(consulta, origem, { historico = true } = {}) {
     el('h1', { tabindex: '-1' }, `“${fam.rotulo}”`),
     el('p', { class: 'contamos' }, fam.formas.length > 1 ? `Contamos: ${fam.formas.join(', ')}.` : 'Contamos só a palavra inteira.',
       grupo ? ` Assunto: ${grupo.nome}.` : ''),
-    total === 0
-      ? el('p', { class: 'vazio' }, `Nenhum dos dois usou “${fam.rotulo}” no plano de governo nem nas entrevistas. Tente outra palavra, ou uma parecida.`)
-      : Object.entries(dados.acervos).map(([id, acervo]) => comparativo(id, acervo, res[id], fam)),
-    grupo && ordem.every((c) => dados.resumos.grupos[grupo.id]?.[c]) ? comoCadaUmVe(grupo) : aviso(),
+    quadro(fam, res, grupo, total),
+    total > 0 && ondeUsou(fam, res),
     total > 0 && el('div', { class: 'par' },
       el('button', { class: 'botao principal', type: 'button', onclick: (e) => enviarImagem(e.currentTarget, fam, res) }, 'Compartilhar'),
       el('button', { class: 'botao discreto', type: 'button', onclick: () => { const i = app.querySelector('.busca input'); i.value = ''; i.focus(); } }, 'Buscar outra palavra')),
@@ -121,54 +119,62 @@ function buscar(consulta, origem, { historico = true } = {}) {
   tela.querySelector('h1').focus({ preventScroll: true });
 }
 
-// Um acervo (plano ou entrevistas): uma linha por candidato, com o número e a frequência.
-// Os dois na mesma cor: quem é quem está escrito, não pintado.
-function comparativo(id, acervo, porCandidato, fam) {
-  const maior = Math.max(...ordem.map((c) => porCandidato[c].taxa)) || 1;
-  const titulo = id === 'plano' ? 'No plano de governo' : 'Nas entrevistas';
-  const tamanhos = ordem.map((c) => `${nome(c)}: ${mil(acervo.total[c])} palavras`).join(' · ');
+// Caixa única da contagem: uma coluna por candidato, com plano e entrevistas em linhas próprias.
+// Os dois na mesma cor (quem é quem está escrito, não pintado); plano e entrevistas se distinguem
+// pelo desenho da barra, com rótulo em cada linha. O retrato abre o resumo da IA na mesma caixa.
+function quadro(fam, res, grupo, total) {
+  const temResumo = grupo && ordem.every((c) => dados.resumos.grupos[grupo.id]?.[c]);
+  const painel = el('div', { class: 'painel', id: 'resumo-ia', hidden: true });
+  const maior = Object.fromEntries(Object.keys(dados.acervos).map((id) => [id, Math.max(...ordem.map((c) => res[id][c].taxa)) || 1]));
+  let aberto = null;
+  const colunas = ordem.map((c) => {
+    const foto = el('img', { src: `img/${c}-serio.webp?v=0.5`, alt: '', width: '96', height: '96' });
+    const cabeca = temResumo
+      ? el('button', { class: 'rosto', type: 'button', 'aria-pressed': 'false', 'aria-controls': painel.id, 'aria-label': `Ver resumo do plano de ${nome(c)}` }, foto, el('span', {}, nome(c)))
+      : el('div', { class: 'rosto estatico' }, foto, el('span', {}, nome(c)));
+    if (temResumo) new Image().src = `img/${c}-alegre.webp?v=0.5`; // sem piscar na troca
+    const contas = Object.keys(dados.acervos).map((id) => {
+      const r = res[id][c];
+      return el('div', { class: `conta ${id}` },
+        el('span', { class: 'rotulo' }, id === 'plano' ? 'No plano' : 'Nas entrevistas'),
+        el('strong', {}, vezes(r.vezes)),
+        el('span', { class: 'trilha', 'aria-hidden': 'true' }, el('span', { class: `preenche ${id}`, style: `width:${(r.taxa / maior[id]) * 100}%` })),
+        el('small', {}, `${numero(r.taxa, 1)} a cada 10 mil palavras`));
+    });
+    return { c, cabeca, foto, coluna: el('div', { class: 'coluna' }, cabeca, contas) };
+  });
+  if (temResumo) {
+    for (const { c, cabeca } of colunas) {
+      cabeca.addEventListener('click', () => {
+        aberto = aberto === c ? null : c;
+        for (const col of colunas) {
+          const ativo = col.c === aberto;
+          col.cabeca.setAttribute('aria-pressed', String(ativo));
+          col.foto.src = `img/${col.c}-${ativo ? 'alegre' : 'serio'}.webp?v=0.5`;
+        }
+        painel.hidden = !aberto;
+        if (aberto) { painel.replaceChildren(...resumo(grupo, aberto)); medir.viuResumo(`${grupo.id}:${aberto}`); }
+      });
+    }
+  }
   return el('section', { class: 'comparativo' },
-    el('h2', {}, titulo),
-    el('p', { class: 'tamanho' }, id === 'falas' ? `${eventosDoAcervo(acervo)}. ${tamanhos}.` : `${tamanhos}.`),
-    el('ul', { class: 'linhas' }, ordem.map((c) => {
-      const r = porCandidato[c];
-      return el('li', { class: 'linha' },
-        el('span', { class: 'quem' }, nome(c)),
-        el('span', { class: 'trilha', 'aria-hidden': 'true' }, el('span', { class: 'preenche', style: `width:${(r.taxa / maior) * 100}%` })),
-        el('span', { class: 'valor' }, el('strong', {}, vezes(r.vezes)), el('small', {}, `${numero(r.taxa, 1)} a cada 10 mil palavras`)));
-    })),
-    el('p', { class: 'legenda' }, 'A barra compara a frequência (a cada 10 mil palavras), porque os textos têm tamanhos diferentes.'),
-    ordem.map((c) => trechos(id, c, porCandidato[c], fam)),
+    el('h2', {}, 'Quantas vezes cada um usou'),
+    el('p', { class: 'legenda-barras' },
+      el('span', {}, el('i', { class: 'amostra plano', 'aria-hidden': 'true' }), 'Plano de governo'),
+      el('span', {}, el('i', { class: 'amostra falas', 'aria-hidden': 'true' }), 'Entrevistas')),
+    total === 0 && el('p', { class: 'vazio' }, `Nenhum dos dois usou “${fam.rotulo}” no plano de governo nem nas entrevistas.`),
+    el('div', { class: 'colunas' }, colunas.map((col) => col.coluna)),
+    temResumo && el('p', { class: 'dica' }, iconeIA(), `Toque no retrato para ver um resumo do que cada plano propõe sobre ${grupo.nome.toLowerCase()}.`),
+    temResumo && painel,
+    el('p', { class: 'legenda' }, 'A barra compara a frequência (a cada 10 mil palavras), porque os textos têm tamanhos diferentes. ', tamanhos()),
+    aviso(),
   );
 }
 
-// Resumo por IA do que cada plano propõe sobre o assunto. Ninguém começa aberto: a pessoa escolhe
-// de quem quer ler tocando no retrato, que fica sorridente enquanto o resumo está aberto.
-function comoCadaUmVe(grupo) {
-  const painel = el('div', { class: 'painel', id: `resumo-${grupo.id}`, hidden: true });
-  let aberto = null;
-  const retratos = ordem.map((c) => {
-    const foto = el('img', { src: `img/${c}-serio.webp?v=0.4`, alt: '', width: '120', height: '120' });
-    const botao = el('button', { class: 'rosto', type: 'button', 'aria-pressed': 'false', 'aria-controls': painel.id },
-      foto, el('span', {}, nome(c)));
-    new Image().src = `img/${c}-alegre.webp?v=0.4`; // sem piscar na troca
-    botao.addEventListener('click', () => {
-      aberto = aberto === c ? null : c;
-      for (const r of retratos) {
-        const ativo = r.c === aberto;
-        r.botao.setAttribute('aria-pressed', String(ativo));
-        r.foto.src = `img/${r.c}-${ativo ? 'alegre' : 'serio'}.webp?v=0.4`;
-      }
-      painel.hidden = !aberto;
-      if (aberto) { painel.replaceChildren(...resumo(grupo, aberto)); medir.viuResumo(`${grupo.id}:${aberto}`); }
-    });
-    return { c, botao, foto };
-  });
-  return el('section', { class: 'pensa' },
-    el('h2', {}, `O que cada um propõe sobre ${grupo.nome.toLowerCase()}`),
-    el('p', { class: 'aviso-fixo' }, el('strong', {}, 'Lembre: '), 'falar mais de um assunto não quer dizer ter proposta melhor. Toque num candidato para ver um resumo do que o plano dele propõe.'),
-    el('div', { class: 'rostos' }, retratos.map((r) => r.botao)),
-    painel);
+function tamanhos() {
+  const { plano, falas } = dados.acervos;
+  const lista = (a) => ordem.map((c) => `${nome(c)} ${mil(a.total[c])}`).join(', ');
+  return `Tamanho dos textos, em palavras: no plano, ${lista(plano)}; nas entrevistas (${eventosDoAcervo(falas)}), ${lista(falas)}.`;
 }
 
 // Brilho de quatro pontas, o símbolo mais comum de conteúdo feito por IA.
@@ -199,31 +205,38 @@ function eventosDoAcervo(acervo) {
   return `${pares.join('; ')}, de ${dataCurta(acervo.eventos[0].data)} a ${dataCurta(acervo.eventos.at(-1).data)}`;
 }
 
-// Lista de trechos onde a palavra aparece, aberta sob demanda e mostrada aos poucos.
-function trechos(id, c, r, fam) {
-  if (!r.vezes) return null;
+// Abaixo da caixa: onde cada um usou a palavra, plano e entrevistas juntos, cada trecho com a fonte.
+function ondeUsou(fam, res) {
+  return el('section', { class: 'onde-usou' },
+    el('h2', { class: 'subtitulo' }, 'Onde cada um usou a palavra'),
+    ordem.map((c) => trechos(c, Object.keys(dados.acervos).flatMap((id) => res[id][c].achados.map((a) => ({ id, ...a }))), fam)));
+}
+
+// Lista de trechos, aberta sob demanda e mostrada aos poucos.
+function trechos(c, achados, fam) {
+  if (!achados.length) return el('p', { class: 'onde-nada' }, `${nome(c)} não usou essa palavra.`);
   const lista = el('ol', { class: 'trechos' });
   const mais = el('button', { class: 'botao discreto mais', type: 'button' }, 'Mostrar mais');
   let mostrados = 0;
   const mostrarMais = () => {
-    for (const achado of r.achados.slice(mostrados, mostrados + POR_VEZ)) lista.append(itemDeTrecho(id, c, achado));
-    mostrados = Math.min(r.achados.length, mostrados + POR_VEZ);
-    mais.hidden = mostrados >= r.achados.length;
+    for (const achado of achados.slice(mostrados, mostrados + POR_VEZ)) lista.append(itemDeTrecho(c, achado));
+    mostrados = Math.min(achados.length, mostrados + POR_VEZ);
+    mais.hidden = mostrados >= achados.length;
   };
   mais.addEventListener('click', mostrarMais);
   const caixa = el('details', { class: 'onde' },
-    el('summary', {}, `Ver onde ${nome(c)} usou (${vezes(r.vezes)})`), lista, mais);
+    el('summary', {}, `Ver onde ${nome(c)} usou (${vezes(achados.length)})`), lista, mais);
   caixa.addEventListener('toggle', () => {
     if (caixa.open && !mostrados) { mostrarMais(); medir.viuTrechos(fam.rotulo.toLowerCase()); }
   });
   return caixa;
 }
 
-function itemDeTrecho(id, c, { pedaco, i, n }) {
+function itemDeTrecho(c, { id, pedaco, i, n }) {
   const t = trecho(pedaco.texto, pedaco.lista, { i, n });
   const fonte = id === 'plano'
     ? el('a', { href: `${dados.textos.candidatos[c].plano}#page=${pedaco.pagina}`, target: '_blank', rel: 'noopener', onclick: medir.abriuFonte }, `Plano, pág. ${pedaco.pagina}`)
-    : el('a', { href: pedaco.url, target: '_blank', rel: 'noopener', onclick: medir.abriuFonte }, `${pedaco.evento}, ${dataCurta(pedaco.data)}`);
+    : el('a', { href: pedaco.url, target: '_blank', rel: 'noopener', onclick: medir.abriuFonte }, `Entrevista: ${pedaco.evento}, ${dataCurta(pedaco.data)}`);
   return el('li', {}, el('p', {}, t.antes, el('mark', {}, t.achado), t.depois), fonte);
 }
 
@@ -260,7 +273,7 @@ function rota({ historico = false } = {}) {
 async function iniciar() {
   try {
     const [textos, termos, resumos] = await Promise.all(
-      ['data/textos.json?v=0.4', 'data/termos.json?v=0.4', 'data/resumos.json?v=0.4'].map((u) => fetch(u).then((r) => { if (!r.ok) throw new Error(u); return r.json(); })),
+      ['data/textos.json?v=0.5', 'data/termos.json?v=0.5', 'data/resumos.json?v=0.5'].map((u) => fetch(u).then((r) => { if (!r.ok) throw new Error(u); return r.json(); })),
     );
     dados = { textos, termos: termos.termos, grupos: termos.grupos, resumos, acervos: preparar(textos) };
   } catch {
