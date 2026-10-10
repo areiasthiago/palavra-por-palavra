@@ -272,7 +272,9 @@ main { flex: 1; width: 100%; max-width: 760px; margin: 0 auto; padding: 8px 16px
 .conta .rotulo { color: var(--suave); font-size: 0.8rem; font-weight: 700; text-transform: uppercase; letter-spacing: 0.03em; }
 .conta strong { font-family: var(--titulo); font-size: 1.3rem; line-height: 1.1; font-variant-numeric: tabular-nums; }
 .conta small { color: var(--suave); font-size: 0.78rem; line-height: 1.25; }
-.dica { color: var(--suave); font-size: 0.9rem; }
+.dica { display: flex; gap: 8px; align-items: flex-start; font-size: 0.95rem; }
+.dica svg { width: 18px; height: 18px; flex: none; margin-top: 3px; color: var(--realce); }
+.dica strong { font-weight: 800; }
 .coluna .nome { margin: 0; font-size: 1.1rem; line-height: 1.15; }
 .ver-resumo {
   display: inline-flex;
@@ -289,7 +291,6 @@ main { flex: 1; width: 100%; max-width: 760px; margin: 0 auto; padding: 8px 16px
   box-shadow: 3px 3px 0 var(--sombra);
   font: 800 0.95rem var(--titulo);
 }
-.ver-resumo svg { width: 16px; height: 16px; flex: none; }
 .rosto[aria-pressed="true"] .ver-resumo { background: var(--papel); color: var(--tinta); box-shadow: none; }
 .onde-usou { display: flex; flex-direction: column; gap: 4px; }
 .onde-nada { color: var(--suave); padding: 10px 0; border-top: 2px solid var(--linha); }

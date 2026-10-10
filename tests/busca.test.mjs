@@ -15,6 +15,9 @@ test('singular e plural contam juntos', () => {
   assert.equal(conta('Nível nacional, metas nacionais.', 'nacional'), 2);
   assert.equal(conta('Um trabalhador, dois trabalhadores.', 'trabalhador'), 2);
   assert.ok(flexoes('jovem').includes('jovens'));
+  assert.ok(flexoes('aluguel').includes('aluguéis'));
+  assert.ok(flexoes('nível').includes('níveis'));
+  assert.ok(flexoes('papéis').includes('papel'));
 });
 
 test('sem acento vale qualquer grafia; com acento, só aquela', () => {
@@ -39,6 +42,11 @@ test('termo do banco usa as variantes declaradas e as siglas', () => {
   assert.equal(conta('Um médico e duas médicas.', 'médicas', termos), 2);
   assert.equal(conta('Acordo com os EUA e os Estados Unidos.', 'estados unidos', termos), 2);
   assert.equal(familia('medica', termos).rotulo, 'médico');
+});
+
+test('expressão excluída do termo não conta', () => {
+  const termos = [{ termo: 'casa', variantes: ['casas'], excluir: ['em casa', 'de casa', 'santas casas'] }];
+  assert.equal(conta('Comprar a casa própria. Ficar em casa. Sair de casa. As santas casas. Duas casas novas.', 'casa', termos), 2);
 });
 
 test('banco aceita só flexões, nunca palavra derivada', () => {

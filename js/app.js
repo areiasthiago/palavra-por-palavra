@@ -1,6 +1,6 @@
-import { preparar, familia, contar, trecho } from './busca.js?v=0.8';
-import * as medir from './contagem.js?v=0.8';
-import { compartilhar } from './compartilhar.js?v=0.8';
+import { preparar, familia, contar, trecho } from './busca.js?v=0.9';
+import * as medir from './contagem.js?v=0.9';
+import { compartilhar } from './compartilhar.js?v=0.9';
 
 const ORDEM = 'palavra:ordem';
 const POR_VEZ = 5; // trechos mostrados de cada vez
@@ -104,6 +104,7 @@ function buscar(consulta, origem, { historico = true } = {}) {
     campoDeBusca(fam.rotulo),
     el('h1', { tabindex: '-1' }, `“${fam.rotulo}”`),
     el('p', { class: 'contamos' }, fam.formas.length > 1 ? `Contamos: ${fam.formas.join(', ')}.` : 'Contamos só a palavra inteira.',
+      fam.excluir.length ? ` Não contamos expressões em que a palavra não fala do assunto: ${fam.excluir.join(', ')}.` : '',
       grupo ? ` Assunto: ${grupo.nome}.` : ''),
     quadro(fam, res, grupo, total),
     total > 0 && ondeUsou(fam, res),
@@ -128,13 +129,13 @@ function quadro(fam, res, grupo, total) {
   const maior = Object.fromEntries(Object.keys(dados.acervos).map((id) => [id, Math.max(...ordem.map((c) => res[id][c].taxa)) || 1]));
   let aberto = null;
   const colunas = ordem.map((c) => {
-    const foto = el('img', { src: `img/${c}-serio.webp?v=0.8`, alt: '', width: '96', height: '96' });
-    const rotulo = el('span', { class: 'ver-resumo' }, iconeIA(), el('span', {}, 'Ver resumo'));
+    const foto = el('img', { src: `img/${c}-serio.webp?v=0.9`, alt: '', width: '96', height: '96' });
+    const rotulo = el('span', { class: 'ver-resumo' }, el('span', {}, 'Ver resumo'));
     // Retrato embaixo das contagens; com resumo, retrato e botão formam um único botão.
     const cabeca = temResumo
       ? el('button', { class: 'rosto', type: 'button', 'aria-pressed': 'false', 'aria-controls': painel.id, 'aria-label': `Ver resumo do plano de ${nome(c)}` }, foto, rotulo)
       : el('div', { class: 'rosto estatico' }, foto);
-    if (temResumo) new Image().src = `img/${c}-alegre.webp?v=0.8`; // sem piscar na troca
+    if (temResumo) new Image().src = `img/${c}-alegre.webp?v=0.9`; // sem piscar na troca
     const contas = Object.keys(dados.acervos).map((id) => {
       const r = res[id][c];
       return el('div', { class: `conta ${id}` },
@@ -143,7 +144,7 @@ function quadro(fam, res, grupo, total) {
         el('span', { class: 'trilha', 'aria-hidden': 'true' }, el('span', { class: `preenche ${id}`, style: `width:${(r.taxa / maior[id]) * 100}%` })),
         el('small', {}, `${numero(r.taxa, 1)} a cada 10 mil palavras`));
     });
-    return { c, cabeca, foto, rotulo, coluna: el('div', { class: 'coluna' }, el('h3', { class: 'nome' }, nome(c)), contas, cabeca) };
+    return { c, cabeca, foto, rotulo, coluna: el('div', { class: 'coluna' }, el('h3', { class: 'nome' }, nome(c)), contas) };
   });
   if (temResumo) {
     for (const { c, cabeca } of colunas) {
@@ -152,7 +153,7 @@ function quadro(fam, res, grupo, total) {
         for (const col of colunas) {
           const ativo = col.c === aberto;
           col.cabeca.setAttribute('aria-pressed', String(ativo));
-          col.foto.src = `img/${col.c}-${ativo ? 'alegre' : 'serio'}.webp?v=0.8`;
+          col.foto.src = `img/${col.c}-${ativo ? 'alegre' : 'serio'}.webp?v=0.9`;
           col.rotulo.lastChild.textContent = ativo ? 'Fechar' : 'Ver resumo';
         }
         painel.hidden = !aberto;
@@ -167,7 +168,9 @@ function quadro(fam, res, grupo, total) {
       el('span', {}, el('i', { class: 'amostra falas', 'aria-hidden': 'true' }), 'Entrevistas')),
     total === 0 && el('p', { class: 'vazio' }, `Nenhum dos dois usou “${fam.rotulo}” no plano de governo nem nas entrevistas.`),
     el('div', { class: 'colunas' }, colunas.map((col) => col.coluna)),
-    temResumo && el('p', { class: 'dica' }, `Veja também um resumo, feito por IA, do que cada plano propõe sobre ${grupo.nome.toLowerCase()}.`),
+    // Retratos numa linha própria, logo abaixo da chamada para o resumo.
+    temResumo && el('p', { class: 'dica' }, iconeIA(), el('span', {}, 'Veja também um resumo, feito por IA, do que cada plano propõe sobre ', el('strong', {}, grupo.nome.toLowerCase()), '.')),
+    el('div', { class: 'colunas rostos' }, colunas.map((col) => col.cabeca)),
     temResumo && painel,
     el('p', { class: 'legenda' }, 'A barra compara a frequência (a cada 10 mil palavras), porque os textos têm tamanhos diferentes. ', tamanhos()),
     aviso(),
@@ -276,7 +279,7 @@ function rota({ historico = false } = {}) {
 async function iniciar() {
   try {
     const [textos, termos, resumos] = await Promise.all(
-      ['data/textos.json?v=0.8', 'data/termos.json?v=0.8', 'data/resumos.json?v=0.8'].map((u) => fetch(u).then((r) => { if (!r.ok) throw new Error(u); return r.json(); })),
+      ['data/textos.json?v=0.9', 'data/termos.json?v=0.9', 'data/resumos.json?v=0.9'].map((u) => fetch(u).then((r) => { if (!r.ok) throw new Error(u); return r.json(); })),
     );
     dados = { textos, termos: termos.termos, grupos: termos.grupos, resumos, acervos: preparar(textos) };
   } catch {

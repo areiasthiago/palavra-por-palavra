@@ -12,6 +12,7 @@
     { "id": "educacao", "nome": "Educação e cultura", "peso": 9 },
     { "id": "fome", "nome": "Fome e pobreza", "peso": 2 },
     { "id": "direitos", "nome": "Direitos e serviço público", "peso": 2 },
+    { "id": "moradia", "nome": "Casa e moradia", "peso": 2 },
     { "id": "desenvolvimento", "nome": "Desenvolvimento e indústria", "peso": 2 },
     { "id": "campo", "nome": "Campo e meio ambiente", "peso": 2 },
     { "id": "valores", "nome": "Família e valores", "peso": 2 },
@@ -79,10 +80,20 @@
     { "termo": "acesso", "grupo": "direitos", "variantes": [ "acessos" ], "video": true },
     { "termo": "popular", "grupo": "direitos", "variantes": [ "populares" ], "video": true },
     { "termo": "público", "grupo": "direitos", "variantes": [ "públicos", "pública", "públicas" ], "video": true },
-    { "termo": "moradia", "grupo": "direitos", "variantes": [ "moradias" ] },
     { "termo": "aposentadoria", "grupo": "direitos", "variantes": [ "aposentadorias" ] },
     { "termo": "previdência", "grupo": "direitos", "variantes": [] },
     { "termo": "aposentado", "grupo": "direitos", "variantes": [ "aposentados", "aposentada", "aposentadas" ] },
+    { "termo": "casa", "grupo": "moradia", "variantes": [ "casas" ], "destaque": true, "excluir": [ "em casa", "para casa", "pra casa", "de casa", "da sua casa", "à sua casa", "da própria casa", "sustentar a casa", "santas casas", "casa de apostas", "casa da mulher brasileira", "casas da mulher brasileira", "casas de gestantes" ] },
+    { "termo": "moradia", "grupo": "moradia", "variantes": [ "moradias" ] },
+    { "termo": "casa própria", "grupo": "moradia", "variantes": [] },
+    { "termo": "habitação", "grupo": "moradia", "variantes": [] },
+    { "termo": "aluguel", "grupo": "moradia", "variantes": [ "aluguéis" ] },
+    { "termo": "Minha Casa Minha Vida", "grupo": "moradia", "variantes": [] },
+    { "termo": "Casa Verde e Amarela", "grupo": "moradia", "variantes": [] },
+    { "termo": "saneamento", "grupo": "moradia", "variantes": [] },
+    { "termo": "periferia", "grupo": "moradia", "variantes": [ "periferias" ] },
+    { "termo": "favela", "grupo": "moradia", "variantes": [ "favelas" ] },
+    { "termo": "regularização fundiária", "grupo": "moradia", "variantes": [] },
     { "termo": "desenvolvimento", "grupo": "desenvolvimento", "variantes": [], "video": true, "destaque": true },
     { "termo": "indústria", "grupo": "desenvolvimento", "variantes": [ "indústrias" ], "video": true },
     { "termo": "pesquisa", "grupo": "desenvolvimento", "variantes": [ "pesquisas" ], "video": true },
@@ -122,5 +133,6 @@
     { "termo": "tarifa", "grupo": "mundo", "variantes": [ "tarifas" ] }
   ],
   "regra_destaque": "Cada grupo tem um único termo em destaque: a palavra que dá nome ao grupo. A lista inicial de mais buscados é formada por esses destaques, na ordem do peso.",
-  "regra_variantes": "Cada termo conta só as próprias flexões: singular e plural, masculino e feminino. Palavra derivada (familiares, corrupto, educacional) tem outro sentido possível e, quando importa, vira termo próprio."
+  "regra_variantes": "Cada termo conta só as próprias flexões: singular e plural, masculino e feminino. Palavra derivada (familiares, corrupto, educacional) tem outro sentido possível e, quando importa, vira termo próprio.",
+  "regra_excluir": "Um termo pode listar expressões em que a palavra não fala do assunto (ex.: \"em casa\", \"santas casas\"). Elas não contam para nenhum dos dois candidatos e aparecem na tela."
 }

@@ -29,8 +29,14 @@ export function flexoes(palavra) {
   if (/[rz]es$/.test(p)) formas.add(p.slice(0, -2));
   if (/m$/.test(p)) formas.add(p.replace(/m$/, 'ns'));
   if (/ns$/.test(p)) formas.add(p.replace(/ns$/, 'm'));
-  if (/[aeo]l$/.test(p)) formas.add(p.replace(/l$/, 'is'));
+  // -al → -ais; -el/-ol oxítonas ganham acento (papel → papéis, anzol → anzóis); com acento antes, não (nível → níveis).
+  const tonica = /[áéíóúâêô]/.test(p.slice(0, -2));
+  if (/al$/.test(p) || (tonica && /[eo]l$/.test(p))) formas.add(p.replace(/l$/, 'is'));
+  else if (/el$/.test(p)) formas.add(p.replace(/el$/, 'éis'));
+  else if (/ol$/.test(p)) formas.add(p.replace(/ol$/, 'óis'));
   if (/[aeo]is$/.test(p)) formas.add(p.replace(/is$/, 'l'));
+  if (/éis$/.test(p)) formas.add(p.replace(/éis$/, 'el'));
+  if (/óis$/.test(p)) formas.add(p.replace(/óis$/, 'ol'));
   return [...formas];
 }
 
@@ -55,27 +61,35 @@ export function familia(consulta, termos = []) {
   if (!alvo) return null;
   const todas = (t) => [t.termo, ...t.variantes, ...(t.siglas ?? [])];
   const curado = termos.find((t) => todas(t).some((v) => semAcento(v) === alvo));
-  if (curado) return { rotulo: curado.termo, termo: curado, formas: todas(curado), exato: true };
+  if (curado) return { rotulo: curado.termo, termo: curado, formas: todas(curado), exato: true, excluir: curado.excluir ?? [] };
   const partes = [...consulta.matchAll(LETRA)].map((m) => m[0]);
   if (!partes.length) return null;
   const formas = partes.length === 1 ? flexoes(partes[0]) : [partes.join(' ')];
   // Quem digita com acento quer aquela grafia ("país" não é "pais"); sem acento, vale qualquer uma.
-  return { rotulo: partes.join(' '), termo: null, formas, exato: temAcento(consulta) };
+  return { rotulo: partes.join(' '), termo: null, formas, exato: temAcento(consulta), excluir: [] };
 }
 
-// Encontra as ocorrências de uma família numa lista de palavras. Devolve o índice da 1ª palavra e o tamanho.
-export function ocorrencias(lista, fam) {
-  const alvos = fam.formas.map((f) => palavras(f).map((p) => (fam.exato ? p.forma : p.dobrada)));
+// Posições onde alguma das sequências aparece. Devolve o índice da 1ª palavra e o tamanho.
+function sequencias(lista, formas, exato) {
+  const alvos = formas.map((f) => palavras(f).map((p) => (exato ? p.forma : p.dobrada)));
   const achados = [];
   for (let i = 0; i < lista.length; i += 1) {
     for (const alvo of alvos) {
-      if (alvo.every((a, k) => (fam.exato ? lista[i + k]?.forma : lista[i + k]?.dobrada) === a)) {
+      if (alvo.every((a, k) => (exato ? lista[i + k]?.forma : lista[i + k]?.dobrada) === a)) {
         achados.push({ i, n: alvo.length });
         break;
       }
     }
   }
   return achados;
+}
+
+// Encontra as ocorrências de uma família numa lista de palavras. Ocorrência que cai dentro de uma
+// expressão excluída do termo ("em casa", "santas casas") não conta: ali a palavra não fala do assunto.
+export function ocorrencias(lista, fam) {
+  const fora = new Set();
+  for (const { i, n } of sequencias(lista, fam.excluir ?? [], false)) for (let k = i; k < i + n; k += 1) fora.add(k);
+  return sequencias(lista, fam.formas, fam.exato).filter(({ i, n }) => ![...Array(n).keys()].some((k) => fora.has(i + k)));
 }
 
 // Taxa justa para comparar textos de tamanhos diferentes.
