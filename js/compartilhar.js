@@ -1,4 +1,4 @@
-import { SITE } from './config.js?v=2.7';
+import { SITE } from './config.js?v=2.8';
 
 // Imagem de story (9:16) com a cara da tela de resultado: um cartão com uma coluna por candidato
 // (retrato, nome, plano com barra cheia, entrevistas com barra listrada), na mesma ordem da tela.

@@ -1,4 +1,4 @@
-import { CONTAGEM, ENVIAR_CONTAGEM } from './config.js?v=2.7';
+import { CONTAGEM, ENVIAR_CONTAGEM } from './config.js?v=2.8';
 
 // Medição anônima: só totais por dia. Nada de nome, identificador, IP guardado ou cookie.
 // Cada aparelho conta no máximo uma vez por evento (e por palavra, por dia), controlado aqui no aparelho.
