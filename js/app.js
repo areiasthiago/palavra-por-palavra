@@ -1,6 +1,6 @@
-import { preparar, familia, familiaDoGrupo, contar, trecho, semAcento } from './busca.js?v=1.6';
-import * as medir from './contagem.js?v=1.6';
-import { compartilhar } from './compartilhar.js?v=1.6';
+import { preparar, familia, familiaDoGrupo, contar, trecho, semAcento } from './busca.js?v=1.7';
+import * as medir from './contagem.js?v=1.7';
+import { compartilhar } from './compartilhar.js?v=1.7';
 
 const ORDEM = 'palavra:ordem';
 const POR_VEZ = 5; // trechos mostrados de cada vez
@@ -46,9 +46,8 @@ const chip = (termo, origem) => el('button', { class: 'chip', type: 'button', on
 
 // ---------- Topo fixo da página: chamada e campo de busca ----------
 
-// Campo de busca com sugestões: primeiro as palavras da nossa lista (com o assunto), depois as
-// palavras que aparecem nos textos, das mais usadas para as menos. Com 3 letras ou mais sem nenhuma
-// palavra que comece assim, avisa na hora e não busca.
+// Campo de busca com sugestões da nossa lista de palavras (com o assunto de cada uma). A busca só
+// aceita palavras da lista; com 3 letras ou mais sem nada que comece assim, avisa na hora.
 function campoDeBusca(valor = '') {
   const lista = el('ul', { class: 'sugestoes', id: 'sugestoes', role: 'listbox', hidden: true });
   const erro = el('p', { class: 'erro-busca', role: 'alert', hidden: true });
@@ -76,7 +75,7 @@ function campoDeBusca(valor = '') {
   const atualizar = () => {
     const { itens, semNada } = sugerir(entrada.value);
     erro.hidden = !semNada;
-    erro.textContent = semNada ? `Nenhum dos dois usou palavra que comece com “${entrada.value.trim()}”. Tente outra.` : '';
+    erro.textContent = semNada ? `“${entrada.value.trim()}” não está na nossa lista. Tente outra palavra ou escolha um assunto.` : '';
     entrada.setAttribute('aria-invalid', String(semNada));
     opcoes = itens;
     lista.replaceChildren(...itens.map((o, k) => el('li', {
@@ -102,55 +101,37 @@ function campoDeBusca(valor = '') {
     onsubmit: (e) => {
       e.preventDefault();
       if (!entrada.value.trim()) return;
-      if (sugerir(entrada.value).semNada) { atualizar(); entrada.focus(); return; }
+      const { itens, exata } = sugerir(entrada.value);
+      // Só busca palavra da lista: a exata, ou a única sugestão. Senão, pede para escolher.
+      const termo = exata?.termo ?? (itens.length === 1 ? itens[0].valor : null);
+      if (!termo) {
+        atualizar();
+        if (itens.length) { erro.hidden = false; erro.textContent = 'Escolha uma das palavras sugeridas.'; }
+        entrada.focus();
+        return;
+      }
       fechar();
-      buscar(entrada.value, 'digitou');
+      buscar(termo, 'digitou');
     },
   }, el('div', { class: 'campo' }, entrada, lista), el('button', { class: 'botao principal', type: 'submit' }, 'Contar'));
   return el('div', { class: 'busca-caixa' }, form, erro);
 }
 
-// Até 8 sugestões para o que foi digitado. semNada: 3 letras ou mais e nenhuma palavra começa assim.
+// Sugestões só da nossa lista de palavras. semNada: 3 letras ou mais e nenhuma palavra da lista
+// começa assim. exata: o termo da lista que corresponde ao que foi digitado, se houver.
 function sugerir(texto) {
   const q = semAcento(texto.trim().replace(/\s+/g, ' '));
-  if (!q) return { itens: [], semNada: false };
-  const curados = dados.termos
-    .filter((t) => [t.termo, ...t.variantes].some((v) => semAcento(v).startsWith(q)))
-    .sort((a, b) => a.termo.length - b.termo.length)
-    .slice(0, 5)
-    .map((t) => ({ valor: t.termo, detalhe: grupoDe(t).nome }));
-  const jaTem = new Set(dados.termos.flatMap((t) => [t.termo, ...t.variantes].map(semAcento)));
-  const partes = q.split(' ');
-  let doTexto = [];
-  if (partes.length === 1) {
-    doTexto = [...dados.vocabulario.entries()]
-      .filter(([chave]) => chave.startsWith(q) && !jaTem.has(chave))
-      .sort((a, b) => b[1].n - a[1].n)
-      .slice(0, 8 - curados.length)
-      .map(([, v]) => ({ valor: v.forma, detalhe: v.n === 1 ? '1 vez nos textos' : `${numero(v.n)} vezes nos textos` }));
-  }
-  // Expressão: vale se as palavras completas existem e a última começa como alguma palavra dos textos.
-  const existe = partes.length === 1
-    ? doTexto.length > 0 || [...dados.vocabulario.keys()].some((k) => k.startsWith(q))
-    : partes.slice(0, -1).every((x) => dados.vocabulario.has(x)) && [...dados.vocabulario.keys()].some((k) => k.startsWith(partes.at(-1)));
-  return { itens: [...curados, ...doTexto], semNada: q.replace(/ /g, '').length >= 3 && !curados.length && !existe };
-}
-
-// Palavras dos textos (sem acento como chave), com a grafia mais comum e quantas vezes aparecem.
-function montarVocabulario(acervos) {
-  const contagem = new Map();
-  for (const acervo of Object.values(acervos)) {
-    for (const p of acervo.pedacos) {
-      for (const w of p.lista) {
-        if (w.dobrada.length < 2 || !/^\p{L}+$/u.test(w.dobrada)) continue;
-        const item = contagem.get(w.dobrada) ?? { n: 0, formas: new Map() };
-        item.n += 1;
-        item.formas.set(w.forma, (item.formas.get(w.forma) ?? 0) + 1);
-        contagem.set(w.dobrada, item);
-      }
-    }
-  }
-  return new Map([...contagem].map(([k, v]) => [k, { n: v.n, forma: [...v.formas].sort((a, b) => b[1] - a[1])[0][0] }]));
+  if (!q) return { itens: [], semNada: false, exata: null };
+  const formas = (t) => [t.termo, ...t.variantes, ...(t.siglas ?? [])].map(semAcento);
+  const achados = dados.termos
+    .filter((t) => formas(t).some((v) => v.startsWith(q)))
+    .sort((a, b) => a.termo.length - b.termo.length);
+  const exata = dados.termos.find((t) => formas(t).includes(q)) ?? null;
+  return {
+    itens: achados.slice(0, 8).map((t) => ({ valor: t.termo, detalhe: grupoDe(t).nome })),
+    semNada: q.replace(/ /g, '').length >= 3 && !achados.length,
+    exata,
+  };
 }
 
 function inicio() {
@@ -261,13 +242,13 @@ function quadro(fam, res, grupo, { resAssunto, modo: modoInicial, aoTrocar }) {
   const palavrasDoAssunto = grupo ? dados.termos.filter((t) => t.grupo === grupo.id) : [];
   let aberto = null;
   const colunas = ordem.map((c) => {
-    const foto = el('img', { src: `img/${c}-serio.webp?v=1.6`, alt: '', width: '96', height: '96' });
+    const foto = el('img', { src: `img/${c}-serio.webp?v=1.7`, alt: '', width: '96', height: '96' });
     const rotulo = el('span', { class: 'ver-resumo' }, el('span', {}, 'Ver resumo'));
     // Retrato embaixo das contagens; com resumo, retrato e botão formam um único botão.
     const cabeca = temResumo
       ? el('button', { class: 'rosto', type: 'button', 'aria-pressed': 'false', 'aria-controls': painel.id, 'aria-label': `Ver resumo do plano de ${nome(c)}` }, foto, rotulo)
       : el('div', { class: 'rosto estatico' }, foto);
-    if (temResumo) new Image().src = `img/${c}-alegre.webp?v=1.6`; // sem piscar na troca
+    if (temResumo) new Image().src = `img/${c}-alegre.webp?v=1.7`; // sem piscar na troca
     return {
       c, cabeca, foto, rotulo,
       coluna: el('div', { class: 'coluna' }),
@@ -280,7 +261,7 @@ function quadro(fam, res, grupo, { resAssunto, modo: modoInicial, aoTrocar }) {
         for (const col of colunas) {
           const ativo = col.c === aberto;
           col.cabeca.setAttribute('aria-pressed', String(ativo));
-          col.foto.src = `img/${col.c}-${ativo ? 'alegre' : 'serio'}.webp?v=1.6`;
+          col.foto.src = `img/${col.c}-${ativo ? 'alegre' : 'serio'}.webp?v=1.7`;
           col.rotulo.lastChild.textContent = ativo ? 'Fechar' : 'Ver resumo';
         }
         painel.hidden = !aberto;
@@ -451,10 +432,9 @@ function rota({ historico = false } = {}) {
 async function iniciar() {
   try {
     const [textos, termos, resumos] = await Promise.all(
-      ['data/textos.json?v=1.6', 'data/termos.json?v=1.6', 'data/resumos.json?v=1.6'].map((u) => fetch(u).then((r) => { if (!r.ok) throw new Error(u); return r.json(); })),
+      ['data/textos.json?v=1.7', 'data/termos.json?v=1.7', 'data/resumos.json?v=1.7'].map((u) => fetch(u).then((r) => { if (!r.ok) throw new Error(u); return r.json(); })),
     );
     dados = { textos, termos: termos.termos, grupos: termos.grupos, resumos, acervos: preparar(textos) };
-    dados.vocabulario = montarVocabulario(dados.acervos);
   } catch {
     medir.erroCarga();
     app.replaceChildren(el('section', { class: 'tela' }, el('h1', {}, 'Não deu para carregar'), el('p', {}, 'Confira sua conexão e recarregue a página.')));
