@@ -317,6 +317,7 @@ main { flex: 1; width: 100%; max-width: 760px; margin: 0 auto; padding: 8px 16px
 .busca input[aria-invalid="true"] { border-style: dashed; }
 
 .rodape .metodo { max-width: 728px; margin: 0 auto 10px; font-size: 0.82rem; line-height: 1.45; text-align: left; }
+.comparativo .compartilhar { width: 100%; }
 .onde-usou { display: flex; flex-direction: column; gap: 4px; }
 .onde-nada { color: var(--suave); padding: 10px 0; border-top: 2px solid var(--linha); }
 
