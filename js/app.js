@@ -1,6 +1,6 @@
-import { preparar, familia, familiaDoGrupo, contar, trecho } from './busca.js?v=1.5';
-import * as medir from './contagem.js?v=1.5';
-import { compartilhar } from './compartilhar.js?v=1.5';
+import { preparar, familia, familiaDoGrupo, contar, trecho, semAcento } from './busca.js?v=1.6';
+import * as medir from './contagem.js?v=1.6';
+import { compartilhar } from './compartilhar.js?v=1.6';
 
 const ORDEM = 'palavra:ordem';
 const POR_VEZ = 5; // trechos mostrados de cada vez
@@ -46,15 +46,111 @@ const chip = (termo, origem) => el('button', { class: 'chip', type: 'button', on
 
 // ---------- Topo fixo da página: chamada e campo de busca ----------
 
+// Campo de busca com sugestões: primeiro as palavras da nossa lista (com o assunto), depois as
+// palavras que aparecem nos textos, das mais usadas para as menos. Com 3 letras ou mais sem nenhuma
+// palavra que comece assim, avisa na hora e não busca.
 function campoDeBusca(valor = '') {
+  const lista = el('ul', { class: 'sugestoes', id: 'sugestoes', role: 'listbox', hidden: true });
+  const erro = el('p', { class: 'erro-busca', role: 'alert', hidden: true });
   const entrada = el('input', {
     type: 'search', name: 'p', value: valor, placeholder: 'Ex.: saúde, emprego, família', autocomplete: 'off',
     enterkeyhint: 'search', 'aria-label': 'Palavra para contar', maxlength: '40',
+    role: 'combobox', 'aria-autocomplete': 'list', 'aria-expanded': 'false', 'aria-controls': lista.id,
   });
-  return el('form', {
+  let opcoes = [];
+  let ativa = -1;
+
+  const fechar = () => {
+    lista.hidden = true;
+    entrada.setAttribute('aria-expanded', 'false');
+    entrada.removeAttribute('aria-activedescendant');
+    ativa = -1;
+  };
+  const marcar = (i) => {
+    ativa = i;
+    [...lista.children].forEach((li, k) => li.setAttribute('aria-selected', String(k === i)));
+    if (i >= 0) entrada.setAttribute('aria-activedescendant', lista.children[i].id);
+    else entrada.removeAttribute('aria-activedescendant');
+  };
+  const escolher = (opcao) => { fechar(); buscar(opcao.valor, 'sugestao'); };
+  const atualizar = () => {
+    const { itens, semNada } = sugerir(entrada.value);
+    erro.hidden = !semNada;
+    erro.textContent = semNada ? `Nenhum dos dois usou palavra que comece com “${entrada.value.trim()}”. Tente outra.` : '';
+    entrada.setAttribute('aria-invalid', String(semNada));
+    opcoes = itens;
+    lista.replaceChildren(...itens.map((o, k) => el('li', {
+      id: `sugestao-${k}`, role: 'option', 'aria-selected': 'false',
+      onmousedown: (e) => e.preventDefault(), // não tira o foco do campo antes do clique
+      onclick: () => escolher(o),
+    }, el('span', {}, o.valor), el('small', {}, o.detalhe))));
+    if (itens.length) { lista.hidden = false; entrada.setAttribute('aria-expanded', 'true'); marcar(-1); } else fechar();
+  };
+
+  entrada.addEventListener('input', atualizar);
+  entrada.addEventListener('blur', fechar);
+  entrada.addEventListener('keydown', (e) => {
+    if (lista.hidden) return;
+    if (e.key === 'ArrowDown') { e.preventDefault(); marcar((ativa + 1) % opcoes.length); }
+    else if (e.key === 'ArrowUp') { e.preventDefault(); marcar((ativa - 1 + opcoes.length) % opcoes.length); }
+    else if (e.key === 'Escape') fechar();
+    else if (e.key === 'Enter' && ativa >= 0) { e.preventDefault(); escolher(opcoes[ativa]); }
+  });
+
+  const form = el('form', {
     class: 'busca', role: 'search',
-    onsubmit: (e) => { e.preventDefault(); if (entrada.value.trim()) buscar(entrada.value, 'digitou'); },
-  }, entrada, el('button', { class: 'botao principal', type: 'submit' }, 'Contar'));
+    onsubmit: (e) => {
+      e.preventDefault();
+      if (!entrada.value.trim()) return;
+      if (sugerir(entrada.value).semNada) { atualizar(); entrada.focus(); return; }
+      fechar();
+      buscar(entrada.value, 'digitou');
+    },
+  }, el('div', { class: 'campo' }, entrada, lista), el('button', { class: 'botao principal', type: 'submit' }, 'Contar'));
+  return el('div', { class: 'busca-caixa' }, form, erro);
+}
+
+// Até 8 sugestões para o que foi digitado. semNada: 3 letras ou mais e nenhuma palavra começa assim.
+function sugerir(texto) {
+  const q = semAcento(texto.trim().replace(/\s+/g, ' '));
+  if (!q) return { itens: [], semNada: false };
+  const curados = dados.termos
+    .filter((t) => [t.termo, ...t.variantes].some((v) => semAcento(v).startsWith(q)))
+    .sort((a, b) => a.termo.length - b.termo.length)
+    .slice(0, 5)
+    .map((t) => ({ valor: t.termo, detalhe: grupoDe(t).nome }));
+  const jaTem = new Set(dados.termos.flatMap((t) => [t.termo, ...t.variantes].map(semAcento)));
+  const partes = q.split(' ');
+  let doTexto = [];
+  if (partes.length === 1) {
+    doTexto = [...dados.vocabulario.entries()]
+      .filter(([chave]) => chave.startsWith(q) && !jaTem.has(chave))
+      .sort((a, b) => b[1].n - a[1].n)
+      .slice(0, 8 - curados.length)
+      .map(([, v]) => ({ valor: v.forma, detalhe: v.n === 1 ? '1 vez nos textos' : `${numero(v.n)} vezes nos textos` }));
+  }
+  // Expressão: vale se as palavras completas existem e a última começa como alguma palavra dos textos.
+  const existe = partes.length === 1
+    ? doTexto.length > 0 || [...dados.vocabulario.keys()].some((k) => k.startsWith(q))
+    : partes.slice(0, -1).every((x) => dados.vocabulario.has(x)) && [...dados.vocabulario.keys()].some((k) => k.startsWith(partes.at(-1)));
+  return { itens: [...curados, ...doTexto], semNada: q.replace(/ /g, '').length >= 3 && !curados.length && !existe };
+}
+
+// Palavras dos textos (sem acento como chave), com a grafia mais comum e quantas vezes aparecem.
+function montarVocabulario(acervos) {
+  const contagem = new Map();
+  for (const acervo of Object.values(acervos)) {
+    for (const p of acervo.pedacos) {
+      for (const w of p.lista) {
+        if (w.dobrada.length < 2 || !/^\p{L}+$/u.test(w.dobrada)) continue;
+        const item = contagem.get(w.dobrada) ?? { n: 0, formas: new Map() };
+        item.n += 1;
+        item.formas.set(w.forma, (item.formas.get(w.forma) ?? 0) + 1);
+        contagem.set(w.dobrada, item);
+      }
+    }
+  }
+  return new Map([...contagem].map(([k, v]) => [k, { n: v.n, forma: [...v.formas].sort((a, b) => b[1] - a[1])[0][0] }]));
 }
 
 function inicio() {
@@ -73,6 +169,7 @@ function inicio() {
       el('h2', { class: 'subtitulo' }, 'Ou escolha por assunto'),
       el('div', { class: 'assuntos' }, dados.grupos.map((g) => el('details', { class: 'assunto' },
         el('summary', {}, g.nome),
+        el('button', { class: 'botao discreto ir-assunto', type: 'button', onclick: () => buscarAssunto(g.id, 'assunto') }, `Ver ${g.nome.toLowerCase()}: todas as palavras`),
         el('div', { class: 'chips' }, dados.termos.filter((t) => t.grupo === g.id).map((t) => chip(t, 'assunto'))))))),
     aviso(),
   ));
@@ -82,34 +179,64 @@ const aviso = () => el('p', { class: 'aviso-fixo' }, el('strong', {}, 'Lembre: '
 
 // ---------- Resultado ----------
 
-function buscar(consulta, origem, { historico = true } = {}) {
+// Abre o assunto pelo seu destaque, com a chave "assunto todo" já ligada.
+function buscarAssunto(id, origem, opcoes = {}) {
+  const destaque = dados.termos.find((t) => t.grupo === id && t.destaque);
+  if (destaque) buscar(destaque.termo, origem, { ...opcoes, modo: 'assunto' });
+}
+
+function buscar(consulta, origem, { historico = true, modo: modoInicial = 'palavra' } = {}) {
   const fam = familia(consulta, dados.termos);
   if (!fam) return;
   const res = contar(dados.acervos, fam, ordem);
-  const total = Object.values(res).reduce((s, porCandidato) => s + ordem.reduce((t, c) => t + porCandidato[c].vezes, 0), 0);
+  const total = somar(res);
   const grupo = grupoDe(fam.termo);
   medir.buscou({ termo: fam.rotulo.toLowerCase(), publico: Boolean(fam.termo) || total > 0, origem, grupo: grupo?.id });
 
-  if (historico) {
+  // O link guarda a escolha: ?p=palavra ou ?a=assunto (chave ligada).
+  const naUrl = (m) => {
     const url = new URL(location.href);
-    url.searchParams.set('p', fam.rotulo);
-    url.searchParams.delete('o');
-    history.pushState({ p: fam.rotulo }, '', url);
-  }
-  document.title = `“${fam.rotulo}” · Palavra por Palavra`;
+    url.search = '';
+    if (m === 'assunto') url.searchParams.set('a', grupo.id);
+    else url.searchParams.set('p', fam.rotulo);
+    return url;
+  };
+  if (historico) history.pushState({}, '', naUrl(grupo ? modoInicial : 'palavra'));
 
   const vizinhos = fam.termo ? dados.termos.filter((t) => t.grupo === fam.termo.grupo && t !== fam.termo) : [];
+  // A chave troca entre a palavra e o assunto todo: contagens, trechos, link e imagem seguem a escolha.
+  const famAssunto = grupo ? { ...familiaDoGrupo(grupo.id, dados.termos), rotulo: grupo.nome } : null;
+  const resAssunto = famAssunto ? contar(dados.acervos, famAssunto, ordem) : null;
+  let modo = grupo ? modoInicial : 'palavra';
+  const onde = el('div', { class: 'onde-slot' });
+  const desenharOnde = () => {
+    const [f, r] = modo === 'assunto' ? [famAssunto, resAssunto] : [fam, res];
+    onde.replaceChildren(...(somar(r) > 0 ? [ondeUsou(f, r, modo === 'assunto')] : []));
+  };
+  // Título e "o que contamos" acompanham a chave.
+  const h1 = el('h1', { tabindex: '-1' });
+  const contamos = el('p', { class: 'contamos' }, fam.formas.length > 1 ? `Contamos: ${fam.formas.join(', ')}.` : 'Contamos só a palavra inteira.',
+    fam.excluir.length ? ` Não contamos expressões em que a palavra não fala do assunto: ${fam.excluir.join(', ')}.` : '',
+    grupo ? ` Assunto: ${grupo.nome}.` : '');
+  const cabecalho = () => {
+    h1.textContent = modo === 'assunto' ? grupo.nome : `“${fam.rotulo}”`;
+    contamos.hidden = modo === 'assunto';
+    document.title = `${modo === 'assunto' ? grupo.nome : `“${fam.rotulo}”`} · Palavra por Palavra`;
+  };
+  desenharOnde();
+  cabecalho();
   const tela = el('section', { class: 'tela resultado' },
     el('button', { class: 'botao voltar', type: 'button', onclick: () => voltarAoInicio() }, '← Todas as palavras'),
     campoDeBusca(fam.rotulo),
-    el('h1', { tabindex: '-1' }, `“${fam.rotulo}”`),
-    el('p', { class: 'contamos' }, fam.formas.length > 1 ? `Contamos: ${fam.formas.join(', ')}.` : 'Contamos só a palavra inteira.',
-      fam.excluir.length ? ` Não contamos expressões em que a palavra não fala do assunto: ${fam.excluir.join(', ')}.` : '',
-      grupo ? ` Assunto: ${grupo.nome}.` : ''),
-    quadro(fam, res, grupo, total),
-    total > 0 && ondeUsou(fam, res),
-    total > 0 && el('div', { class: 'par' },
-      el('button', { class: 'botao principal', type: 'button', onclick: (e) => enviarImagem(e.currentTarget, fam, res) }, 'Compartilhar'),
+    h1,
+    contamos,
+    quadro(fam, res, grupo, {
+      resAssunto, modo,
+      aoTrocar: (m) => { modo = m; desenharOnde(); cabecalho(); history.replaceState({}, '', naUrl(m)); },
+    }),
+    onde,
+    (total > 0 || (resAssunto && somar(resAssunto) > 0)) && el('div', { class: 'par' },
+      el('button', { class: 'botao principal', type: 'button', onclick: (e) => enviarImagem(e.currentTarget, modo === 'assunto' ? { rotulo: grupo.nome, aspas: false, res: resAssunto } : { rotulo: fam.rotulo, aspas: true, res }) }, 'Compartilhar'),
       el('button', { class: 'botao discreto', type: 'button', onclick: () => { const i = app.querySelector('.busca input'); i.value = ''; i.focus(); } }, 'Buscar outra palavra')),
     vizinhos.length > 0 && el('div', { class: 'bloco' },
       el('h2', { class: 'subtitulo' }, `Mais palavras sobre ${grupo.nome.toLowerCase()}`),
@@ -123,25 +250,27 @@ function buscar(consulta, origem, { historico = true } = {}) {
 // Caixa única da contagem: uma coluna por candidato, com plano e entrevistas em linhas próprias.
 // Os dois na mesma cor (quem é quem está escrito, não pintado); plano e entrevistas se distinguem
 // pelo desenho da barra, com rótulo em cada linha. O retrato abre o resumo da IA na mesma caixa.
-function quadro(fam, res, grupo, total) {
+// Total de ocorrências dos dois candidatos em todos os acervos.
+function somar(res) {
+  return Object.values(res).reduce((s, porCandidato) => s + ordem.reduce((t, c) => t + porCandidato[c].vezes, 0), 0);
+}
+
+function quadro(fam, res, grupo, { resAssunto, modo: modoInicial, aoTrocar }) {
   const temResumo = grupo && ordem.every((c) => dados.resumos.grupos[grupo.id]?.[c]);
   const painel = el('div', { class: 'painel', id: 'resumo-ia', hidden: true });
-  // Soma de todas as palavras do assunto: compara quem fala do tema com vocabulário diferente.
-  const resAssunto = grupo ? contar(dados.acervos, familiaDoGrupo(grupo.id, dados.termos), ordem) : null;
-  const palavrasDoAssunto = grupo ? dados.termos.filter((t) => t.grupo === grupo.id).length : 0;
+  const palavrasDoAssunto = grupo ? dados.termos.filter((t) => t.grupo === grupo.id) : [];
   let aberto = null;
   const colunas = ordem.map((c) => {
-    const foto = el('img', { src: `img/${c}-serio.webp?v=1.5`, alt: '', width: '96', height: '96' });
+    const foto = el('img', { src: `img/${c}-serio.webp?v=1.6`, alt: '', width: '96', height: '96' });
     const rotulo = el('span', { class: 'ver-resumo' }, el('span', {}, 'Ver resumo'));
     // Retrato embaixo das contagens; com resumo, retrato e botão formam um único botão.
     const cabeca = temResumo
       ? el('button', { class: 'rosto', type: 'button', 'aria-pressed': 'false', 'aria-controls': painel.id, 'aria-label': `Ver resumo do plano de ${nome(c)}` }, foto, rotulo)
       : el('div', { class: 'rosto estatico' }, foto);
-    if (temResumo) new Image().src = `img/${c}-alegre.webp?v=1.5`; // sem piscar na troca
+    if (temResumo) new Image().src = `img/${c}-alegre.webp?v=1.6`; // sem piscar na troca
     return {
       c, cabeca, foto, rotulo,
-      coluna: el('div', { class: 'coluna' }, el('h3', { class: 'nome' }, nome(c)), contas(res, c)),
-      assunto: resAssunto && el('div', { class: 'coluna' }, el('h3', { class: 'nome' }, nome(c)), contas(resAssunto, c)),
+      coluna: el('div', { class: 'coluna' }),
     };
   });
   if (temResumo) {
@@ -151,7 +280,7 @@ function quadro(fam, res, grupo, total) {
         for (const col of colunas) {
           const ativo = col.c === aberto;
           col.cabeca.setAttribute('aria-pressed', String(ativo));
-          col.foto.src = `img/${col.c}-${ativo ? 'alegre' : 'serio'}.webp?v=1.5`;
+          col.foto.src = `img/${col.c}-${ativo ? 'alegre' : 'serio'}.webp?v=1.6`;
           col.rotulo.lastChild.textContent = ativo ? 'Fechar' : 'Ver resumo';
         }
         painel.hidden = !aberto;
@@ -159,23 +288,47 @@ function quadro(fam, res, grupo, total) {
       });
     }
   }
+  // Chave "palavra / assunto todo": a soma de todas as palavras do assunto compara quem fala do
+  // mesmo tema com vocabulário diferente ("casa" de um, "moradia" do outro).
+  const titulo = el('h2', {});
+  const vazio = el('p', { class: 'vazio' });
+  const explicacao = el('p', { class: 'legenda', hidden: true },
+    `Somando as ${palavrasDoAssunto.length} palavras do assunto: ${palavrasDoAssunto.map((t) => t.termo).join(', ')}. Nada conta duas vezes.`);
+  const mostrar = (m) => {
+    const r = m === 'assunto' ? resAssunto : res;
+    titulo.textContent = m === 'assunto' ? `Quanto cada um falou de ${grupo.nome.toLowerCase()}` : 'Quantas vezes cada um usou';
+    vazio.hidden = somar(r) > 0;
+    vazio.textContent = m === 'assunto'
+      ? 'Nenhum dos dois usou as palavras deste assunto no plano de governo nem nas entrevistas.'
+      : `Nenhum dos dois usou “${fam.rotulo}” no plano de governo nem nas entrevistas.`;
+    explicacao.hidden = m !== 'assunto';
+    colunas.forEach((col) => col.coluna.replaceChildren(el('h3', { class: 'nome' }, nome(col.c)), ...contas(r, col.c)));
+  };
+  const chave = resAssunto && el('button', { class: 'chave', type: 'button', role: 'switch', 'aria-checked': String(modoInicial === 'assunto') },
+    el('span', { class: 'trilho', 'aria-hidden': 'true' }, el('span', { class: 'bolinha' })),
+    el('span', {}, `Contar o assunto todo: ${grupo.nome.toLowerCase()}`));
+  chave?.addEventListener('click', () => {
+    const ligada = chave.getAttribute('aria-checked') !== 'true';
+    chave.setAttribute('aria-checked', String(ligada));
+    mostrar(ligada ? 'assunto' : 'palavra');
+    aoTrocar(ligada ? 'assunto' : 'palavra');
+    if (ligada) medir.ligouAssunto(grupo.id);
+  });
+  mostrar(resAssunto ? modoInicial : 'palavra');
   return el('section', { class: 'comparativo' },
-    el('h2', {}, 'Quantas vezes cada um usou'),
+    titulo,
+    chave,
     el('p', { class: 'legenda-barras' },
       el('span', {}, el('i', { class: 'amostra plano', 'aria-hidden': 'true' }), 'Plano de governo'),
       el('span', {}, el('i', { class: 'amostra falas', 'aria-hidden': 'true' }), 'Entrevistas')),
-    total === 0 && el('p', { class: 'vazio' }, `Nenhum dos dois usou “${fam.rotulo}” no plano de governo nem nas entrevistas.`),
+    vazio,
+    explicacao,
     el('div', { class: 'colunas' }, colunas.map((col) => col.coluna)),
-    resAssunto && el('div', { class: 'assunto-todo' },
-      el('h3', {}, `O assunto todo: ${grupo.nome.toLowerCase()}`),
-      el('p', { class: 'legenda' }, `Somando as ${palavrasDoAssunto} palavras do assunto. Cada um fala do mesmo tema com palavras diferentes; a soma ajuda a comparar.`),
-      el('div', { class: 'colunas' }, colunas.map((col) => col.assunto))),
     // Retratos numa linha própria, logo abaixo da chamada para o resumo.
     temResumo && el('p', { class: 'dica' }, iconeIA(), el('span', {}, 'Veja também um resumo, feito por IA, do que cada plano propõe sobre ', el('strong', {}, grupo.nome.toLowerCase()), '.')),
     el('div', { class: 'colunas rostos' }, colunas.map((col) => col.cabeca)),
     temResumo && painel,
     aviso(),
-    el('p', { class: 'legenda' }, 'A barra compara a frequência (a cada 10 mil palavras), porque os textos têm tamanhos diferentes. ', tamanhos()),
   );
 }
 
@@ -227,15 +380,15 @@ function eventosDoAcervo(acervo) {
 }
 
 // Abaixo da caixa: onde cada um usou a palavra, plano e entrevistas juntos, cada trecho com a fonte.
-function ondeUsou(fam, res) {
+function ondeUsou(fam, res, assunto = false) {
   return el('section', { class: 'onde-usou' },
-    el('h2', { class: 'subtitulo' }, 'Onde cada um usou a palavra'),
-    ordem.map((c) => trechos(c, Object.keys(dados.acervos).flatMap((id) => res[id][c].achados.map((a) => ({ id, ...a }))), fam)));
+    el('h2', { class: 'subtitulo' }, assunto ? `Onde cada um falou de ${fam.rotulo.toLowerCase()}` : 'Onde cada um usou a palavra'),
+    ordem.map((c) => trechos(c, Object.keys(dados.acervos).flatMap((id) => res[id][c].achados.map((a) => ({ id, ...a }))), fam, assunto)));
 }
 
 // Lista de trechos, aberta sob demanda e mostrada aos poucos.
-function trechos(c, achados, fam) {
-  if (!achados.length) return el('p', { class: 'onde-nada' }, `${nome(c)} não usou essa palavra.`);
+function trechos(c, achados, fam, assunto) {
+  if (!achados.length) return el('p', { class: 'onde-nada' }, `${nome(c)} não usou ${assunto ? 'essas palavras' : 'essa palavra'}.`);
   const lista = el('ol', { class: 'trechos' });
   const mais = el('button', { class: 'botao discreto mais', type: 'button' }, 'Mostrar mais');
   let mostrados = 0;
@@ -261,11 +414,13 @@ function itemDeTrecho(c, { id, pedaco, i, n }) {
   return el('li', {}, el('p', {}, t.antes, el('mark', {}, t.achado), t.depois), fonte);
 }
 
-async function enviarImagem(botao, fam, res) {
+async function enviarImagem(botao, { rotulo, aspas, res }) {
   botao.disabled = true;
   try {
     const tipo = await compartilhar({
-      palavra: fam.rotulo,
+      palavra: rotulo,
+      aspas,
+      link: aspas ? `?p=${encodeURIComponent(rotulo)}` : `?a=${encodeURIComponent(dados.grupos.find((g) => g.nome === rotulo).id)}`,
       lados: ordem.map((c) => ({
         nome: nome(c),
         plano: res.plano[c],
@@ -286,23 +441,29 @@ function voltarAoInicio({ historico = true } = {}) {
 }
 
 function rota({ historico = false } = {}) {
-  const p = new URLSearchParams(location.search).get('p');
-  if (p) buscar(p, 'link', { historico });
+  const params = new URLSearchParams(location.search);
+  const assunto = params.get('a');
+  if (assunto && dados.grupos.some((g) => g.id === assunto)) buscarAssunto(assunto, 'link', { historico });
+  else if (params.get('p')) buscar(params.get('p'), 'link', { historico });
   else voltarAoInicio({ historico });
 }
 
 async function iniciar() {
   try {
     const [textos, termos, resumos] = await Promise.all(
-      ['data/textos.json?v=1.5', 'data/termos.json?v=1.5', 'data/resumos.json?v=1.5'].map((u) => fetch(u).then((r) => { if (!r.ok) throw new Error(u); return r.json(); })),
+      ['data/textos.json?v=1.6', 'data/termos.json?v=1.6', 'data/resumos.json?v=1.6'].map((u) => fetch(u).then((r) => { if (!r.ok) throw new Error(u); return r.json(); })),
     );
     dados = { textos, termos: termos.termos, grupos: termos.grupos, resumos, acervos: preparar(textos) };
+    dados.vocabulario = montarVocabulario(dados.acervos);
   } catch {
     medir.erroCarga();
     app.replaceChildren(el('section', { class: 'tela' }, el('h1', {}, 'Não deu para carregar'), el('p', {}, 'Confira sua conexão e recarregue a página.')));
     return;
   }
   ordem = sortearOrdem();
+  // Nota de método no rodapé, em todas as telas.
+  document.querySelector('.rodape')?.prepend(el('p', { class: 'metodo' },
+    'A barra compara a frequência (a cada 10 mil palavras), porque os textos têm tamanhos diferentes. ', tamanhos()));
   medir.abriu();
   rota();
   addEventListener('popstate', () => rota());

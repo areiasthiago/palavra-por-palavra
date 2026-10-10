@@ -14,16 +14,16 @@
       document.documentElement.dataset.theme = tema;
     })();
   </script>
-  <link rel="icon" href="img/icone.svg?v=1.5" type="image/svg+xml">
+  <link rel="icon" href="img/icone.svg?v=1.6" type="image/svg+xml">
   <link rel="preload" href="fonts/bricolage-grotesque.woff2" as="font" type="font/woff2" crossorigin>
-  <link rel="stylesheet" href="css/style.css?v=1.5">
+  <link rel="stylesheet" href="css/style.css?v=1.6">
 </head>
 <body>
   <header class="topo">
     <a class="marca" href="./">
-      <img src="img/icone.svg?v=1.5" width="30" height="30" alt="">
+      <img src="img/icone.svg?v=1.6" width="30" height="30" alt="">
       Palavra por Palavra
-      <span class="versao">v1.5</span>
+      <span class="versao">v1.6</span>
     </a>
     <button class="tema" type="button" aria-label="Mudar para o tema escuro">
       <svg class="sol" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.200" stroke-linecap="round" aria-hidden="true"><circle cx="12" cy="12" r="4.200"/><path d="M12 2.500v2.200M12 19.300v2.200M2.500 12h2.200M19.300 12h2.200M5.300 5.300l1.600 1.600M17.100 17.100l1.600 1.600M5.300 18.700l1.600-1.600M17.100 6.900l1.600-1.600"/></svg>
@@ -48,7 +48,7 @@
       <li><strong>Singular e plural contam juntos.</strong> “Escola” conta “escolas”. Nas palavras da nossa lista, masculino e feminino também: “médico” conta “médica”. A tela sempre mostra o que foi contado.</li>
       <li><strong>Palavras derivadas contam separado.</strong> “Família” não conta “familiares”, e “corrupção” não conta “corrupto”: a palavra derivada pode ter outro sentido. Quando importa, ela tem busca própria. Também nunca juntamos sinônimos, como “fome” e “miséria”.</li>
       <li><strong>Expressões que não falam do assunto não contam.</strong> Em “casa”, por exemplo, contamos casa própria, financiamento da casa e programas de moradia, mas não “em casa”, “de casa”, “para casa”, “santas casas” (hospitais) nem “casa de apostas”. A lista vale igual para os dois candidatos e aparece na tela junto com a contagem.</li>
-      <li><strong>O assunto todo.</strong> Cada candidato fala do mesmo tema com palavras diferentes: um diz mais “casa”, o outro mais “moradia”. Por isso, quando a palavra faz parte de um assunto da lista, mostramos também a soma de todas as palavras daquele assunto. Nessa soma, nada conta duas vezes.</li>
+      <li><strong>O assunto todo.</strong> Cada candidato fala do mesmo tema com palavras diferentes: um diz mais “casa”, o outro mais “moradia”. Por isso, quando a palavra faz parte de um assunto da lista, uma chave troca a contagem da palavra pela soma de todas as palavras daquele assunto. Nessa soma, nada conta duas vezes.</li>
       <li><strong>Nomes de programas não entram na lista.</strong> Palavras como “casa” contam mesmo dentro do nome de um programa, mas o nome do programa não vira um termo à parte.</li>
       <li><strong>Siglas contam junto.</strong> “EUA” conta como “Estados Unidos”.</li>
       <li><strong>Acento.</strong> Se você digitar sem acento, vale qualquer grafia. Se digitar com acento, contamos só aquela grafia, porque “país” e “pais” são palavras diferentes.</li>
@@ -90,6 +90,6 @@
     <p>Projeto independente de Thiago Areias, o mesmo do <a href="https://testecego.online/?o=pp">Teste Cego</a>, sem vínculo com candidatos, partidos ou campanhas, sem financiamento e sem impulsionamento pago. O código e os dados são abertos no <a href="https://github.com/areiasthiago/palavra-por-palavra">GitHub</a>; correções são bem-vindas por lá.</p>
   </main>
   <footer class="rodape"><a href="./">Voltar para a busca</a></footer>
-  <script type="module" src="js/tema.js?v=1.5"></script>
+  <script type="module" src="js/tema.js?v=1.6"></script>
 </body>
 </html>

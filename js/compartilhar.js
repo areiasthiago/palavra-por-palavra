@@ -1,4 +1,4 @@
-import { SITE } from './config.js?v=1.5';
+import { SITE } from './config.js?v=1.6';
 
 // Imagem de story (9:16) no estilo do site. Leva sempre os dois candidatos, o número,
 // a frequência e o aviso: a imagem não pode virar "placar" fora de contexto.
@@ -95,7 +95,7 @@ function secao(ctx, titulo, lados, chave, y) {
 }
 
 // palavra: o termo buscado. lados: [{ nome, plano: {vezes, taxa}, falas: {vezes, taxa} }] na ordem da tela.
-export async function gerarImagem({ palavra, lados }) {
+export async function gerarImagem({ palavra, aspas = true, lados }) {
   await document.fonts?.load(fonte(800, 100)).catch(() => {});
   const canvas = document.createElement('canvas');
   canvas.width = L;
@@ -117,10 +117,10 @@ export async function gerarImagem({ palavra, lados }) {
   // Palavra, com marca-texto
   ctx.fillStyle = COR.tinta;
   ctx.font = fonte(700, 46);
-  ctx.fillText('Quantas vezes cada um usou', L / 2, 380);
+  ctx.fillText(aspas ? 'Quantas vezes cada um usou' : 'Quanto cada um falou de', L / 2, 380);
   ctx.font = fonte(800, 110);
   let t = 110;
-  const texto = `“${palavra}”`;
+  const texto = aspas ? `“${palavra}”` : palavra;
   while (ctx.measureText(texto).width > L - 140 && t > 40) { t -= 4; ctx.font = fonte(800, t); }
   const largura = ctx.measureText(texto).width;
   ctx.fillStyle = COR.marcaTexto;
@@ -154,8 +154,10 @@ export async function gerarImagem({ palavra, lados }) {
 export async function compartilhar(dados) {
   const blob = await gerarImagem(dados);
   const arquivo = new File([blob], 'palavra-por-palavra.png', { type: 'image/png' });
-  const url = `https://${SITE}/?p=${encodeURIComponent(dados.palavra)}&o=c`;
-  const texto = `Quantas vezes cada candidato usou “${dados.palavra}” no plano de governo e em entrevistas? Busque a sua palavra: ${url}`;
+  const url = `https://${SITE}/${dados.link}&o=c`;
+  const texto = dados.aspas
+    ? `Quantas vezes cada candidato usou “${dados.palavra}” no plano de governo e em entrevistas? Busque a sua palavra: ${url}`
+    : `Quanto cada candidato falou de ${dados.palavra.toLowerCase()} no plano de governo e em entrevistas? Veja: ${url}`;
 
   try {
     if (navigator.canShare?.({ files: [arquivo] })) {
