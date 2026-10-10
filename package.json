@@ -1,0 +1,10 @@
+{
+  "name": "palavra-por-palavra",
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "test": "node --test tests/*.test.mjs",
+    "validar": "node scripts/validar.mjs",
+    "montar": "node scripts/montar.mjs"
+  }
+}

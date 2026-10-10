@@ -1,0 +1,26 @@
+{
+  "protocolo": "Só entram eventos em que os dois candidatos falaram no mesmo formato (mesmo veículo, mesma duração prevista). Cada par tem um evento de cada candidato. Conta-se apenas a fala do candidato, nunca a pergunta.",
+  "inicio": "2026-08-16",
+  "eventos": [
+    {
+      "arquivo": "2026-08-27-globo-jn-lula.txt",
+      "par": "sabatina-jn-1turno",
+      "candidato": "lula",
+      "rotulo": "Lula:",
+      "evento": "Sabatina no Jornal Nacional (TV Globo)",
+      "data": "2026-08-27",
+      "veiculo": "Poder360 (íntegra)",
+      "url": "https://www.poder360.com.br/poder-eleicoes-2026/leia-a-integra-das-perguntas-da-globo-e-as-respostas-de-lula/"
+    },
+    {
+      "arquivo": "2026-08-28-globo-jn-flavio.txt",
+      "par": "sabatina-jn-1turno",
+      "candidato": "flavio",
+      "rotulo": "Flávio Bolsonaro:",
+      "evento": "Sabatina no Jornal Nacional (TV Globo)",
+      "data": "2026-08-28",
+      "veiculo": "Poder360 (íntegra)",
+      "url": "https://www.poder360.com.br/poder-eleicoes-2026/leia-a-integra-das-perguntas-da-globo-e-as-respostas-de-flavio/"
+    }
+  ]
+}

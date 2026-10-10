@@ -1,0 +1,111 @@
+// Núcleo da contagem: o mesmo código roda no site, nos scripts e nos testes.
+// Regra principal: conta palavra inteira, nunca pedaço ("cultura" não conta "agricultura").
+
+const LETRA = /[\p{L}\p{N}]+/gu;
+
+export const minusculo = (s) => s.normalize('NFC').toLowerCase();
+export const semAcento = (s) => minusculo(s).normalize('NFD').replace(/\p{M}/gu, '');
+const temAcento = (s) => semAcento(s) !== minusculo(s);
+
+// Quebra um texto em palavras, guardando onde cada uma começa e termina (para os trechos).
+export function palavras(texto) {
+  const lista = [];
+  for (const m of texto.matchAll(LETRA)) {
+    lista.push({ forma: minusculo(m[0]), dobrada: semAcento(m[0]), inicio: m.index, fim: m.index + m[0].length });
+  }
+  return lista;
+}
+
+// Singular e plural da mesma palavra, pelas regras comuns do português.
+// Não junta palavras diferentes: "crime" conta "crimes", mas não "criminoso".
+export function flexoes(palavra) {
+  const p = minusculo(palavra);
+  const formas = new Set([p]);
+  if (/ão$/.test(p)) ['ões', 'ães', 'ãos'].forEach((f) => formas.add(p.replace(/ão$/, f)));
+  else if (/ões$|ães$|ãos$/.test(p)) formas.add(p.replace(/(ões|ães|ãos)$/, 'ão'));
+  else if (/[aeiouáéíóúâêô]$/.test(p)) formas.add(`${p}s`);
+  else if (/[aeiouáéíóúâêô]s$/.test(p) && p.length > 3) formas.add(p.slice(0, -1));
+  if (/[rz]$/.test(p)) formas.add(`${p}es`);
+  if (/[rz]es$/.test(p)) formas.add(p.slice(0, -2));
+  if (/m$/.test(p)) formas.add(p.replace(/m$/, 'ns'));
+  if (/ns$/.test(p)) formas.add(p.replace(/ns$/, 'm'));
+  if (/[aeo]l$/.test(p)) formas.add(p.replace(/l$/, 'is'));
+  if (/[aeo]is$/.test(p)) formas.add(p.replace(/is$/, 'l'));
+  return [...formas];
+}
+
+// O que vai ser contado para uma busca. Termos do banco usam as variantes declaradas;
+// qualquer outra palavra conta singular e plural; expressões contam só a sequência exata.
+export function familia(consulta, termos = []) {
+  const alvo = semAcento(consulta.trim().replace(/\s+/g, ' '));
+  if (!alvo) return null;
+  const todas = (t) => [t.termo, ...t.variantes, ...(t.siglas ?? [])];
+  const curado = termos.find((t) => todas(t).some((v) => semAcento(v) === alvo));
+  if (curado) return { rotulo: curado.termo, termo: curado, formas: todas(curado), exato: true };
+  const partes = [...consulta.matchAll(LETRA)].map((m) => m[0]);
+  if (!partes.length) return null;
+  const formas = partes.length === 1 ? flexoes(partes[0]) : [partes.join(' ')];
+  // Quem digita com acento quer aquela grafia ("país" não é "pais"); sem acento, vale qualquer uma.
+  return { rotulo: partes.join(' '), termo: null, formas, exato: temAcento(consulta) };
+}
+
+// Encontra as ocorrências de uma família numa lista de palavras. Devolve o índice da 1ª palavra e o tamanho.
+export function ocorrencias(lista, fam) {
+  const alvos = fam.formas.map((f) => palavras(f).map((p) => (fam.exato ? p.forma : p.dobrada)));
+  const achados = [];
+  for (let i = 0; i < lista.length; i += 1) {
+    for (const alvo of alvos) {
+      if (alvo.every((a, k) => (fam.exato ? lista[i + k]?.forma : lista[i + k]?.dobrada) === a)) {
+        achados.push({ i, n: alvo.length });
+        break;
+      }
+    }
+  }
+  return achados;
+}
+
+// Taxa justa para comparar textos de tamanhos diferentes.
+export const porDezMil = (vezes, total) => (total ? (vezes / total) * 10000 : 0);
+
+// Trecho em volta da ocorrência: algumas palavras antes e depois, com a parte achada marcada.
+export function trecho(texto, lista, { i, n }, folga = 14) {
+  const ini = lista[Math.max(0, i - folga)].inicio;
+  const fim = lista[Math.min(lista.length - 1, i + n - 1 + folga)].fim;
+  const a = lista[i].inicio;
+  const b = lista[i + n - 1].fim;
+  const limpo = (s) => s.replace(/\s+/g, ' ');
+  return {
+    antes: (ini > 0 ? '…' : '') + limpo(texto.slice(ini, a)),
+    achado: limpo(texto.slice(a, b)),
+    depois: limpo(texto.slice(b, fim)) + (fim < texto.length ? '…' : ''),
+  };
+}
+
+// Prepara os acervos uma vez só: cada pedaço de texto já quebrado em palavras, com o total por candidato.
+export function preparar(textos) {
+  const acervos = {};
+  for (const [id, acervo] of Object.entries(textos.acervos)) {
+    const pedacos = acervo.pedacos.map((p) => ({ ...p, lista: palavras(p.texto) }));
+    const total = {};
+    for (const p of pedacos) total[p.candidato] = (total[p.candidato] ?? 0) + p.lista.length;
+    acervos[id] = { ...acervo, pedacos, total };
+  }
+  return acervos;
+}
+
+// Resultado de uma busca: por acervo e por candidato, quantas vezes, a taxa e onde.
+export function contar(acervos, fam, candidatos) {
+  const resultado = {};
+  for (const [id, acervo] of Object.entries(acervos)) {
+    resultado[id] = {};
+    for (const c of candidatos) {
+      const achados = [];
+      for (const p of acervo.pedacos) {
+        if (p.candidato !== c) continue;
+        for (const o of ocorrencias(p.lista, fam)) achados.push({ pedaco: p, ...o });
+      }
+      resultado[id][c] = { vezes: achados.length, taxa: porDezMil(achados.length, acervo.total[c]), total: acervo.total[c] ?? 0, achados };
+    }
+  }
+  return resultado;
+}
