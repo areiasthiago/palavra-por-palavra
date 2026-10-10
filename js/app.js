@@ -1,6 +1,6 @@
-import { preparar, familia, contar, trecho } from './busca.js?v=0.3';
-import * as medir from './contagem.js?v=0.3';
-import { compartilhar } from './compartilhar.js?v=0.3';
+import { preparar, familia, contar, trecho } from './busca.js?v=0.4';
+import * as medir from './contagem.js?v=0.4';
+import { compartilhar } from './compartilhar.js?v=0.4';
 
 const ORDEM = 'palavra:ordem';
 const POR_VEZ = 5; // trechos mostrados de cada vez
@@ -148,16 +148,16 @@ function comoCadaUmVe(grupo) {
   const painel = el('div', { class: 'painel', id: `resumo-${grupo.id}`, hidden: true });
   let aberto = null;
   const retratos = ordem.map((c) => {
-    const foto = el('img', { src: `img/${c}-serio.webp?v=0.3`, alt: '', width: '120', height: '120' });
+    const foto = el('img', { src: `img/${c}-serio.webp?v=0.4`, alt: '', width: '120', height: '120' });
     const botao = el('button', { class: 'rosto', type: 'button', 'aria-pressed': 'false', 'aria-controls': painel.id },
       foto, el('span', {}, nome(c)));
-    new Image().src = `img/${c}-alegre.webp?v=0.3`; // sem piscar na troca
+    new Image().src = `img/${c}-alegre.webp?v=0.4`; // sem piscar na troca
     botao.addEventListener('click', () => {
       aberto = aberto === c ? null : c;
       for (const r of retratos) {
         const ativo = r.c === aberto;
         r.botao.setAttribute('aria-pressed', String(ativo));
-        r.foto.src = `img/${r.c}-${ativo ? 'alegre' : 'serio'}.webp?v=0.3`;
+        r.foto.src = `img/${r.c}-${ativo ? 'alegre' : 'serio'}.webp?v=0.4`;
       }
       painel.hidden = !aberto;
       if (aberto) { painel.replaceChildren(...resumo(grupo, aberto)); medir.viuResumo(`${grupo.id}:${aberto}`); }
@@ -171,12 +171,21 @@ function comoCadaUmVe(grupo) {
     painel);
 }
 
+// Brilho de quatro pontas, o símbolo mais comum de conteúdo feito por IA.
+function iconeIA() {
+  const svg = document.createElementNS('http://www.w3.org/2000/svg', 'svg');
+  svg.setAttribute('viewBox', '0 0 24 24');
+  svg.setAttribute('aria-hidden', 'true');
+  svg.innerHTML = '<path fill="currentColor" d="M10 2.5c.5 4.300 2.200 6 6.500 6.500-4.300.5-6 2.200-6.500 6.500-.5-4.300-2.200-6-6.500-6.500 4.300-.5 6-2.200 6.500-6.500z"/><path fill="currentColor" d="M18 13c.3 2.300 1.200 3.200 3.500 3.500-2.300.3-3.200 1.200-3.500 3.500-.3-2.300-1.200-3.200-3.500-3.500 2.300-.3 3.200-1.200 3.500-3.500z"/>';
+  return svg;
+}
+
 function resumo(grupo, c) {
   const r = dados.resumos.grupos[grupo.id][c];
   const plano = dados.textos.candidatos[c].plano;
   const pagina = (n) => el('a', { href: `${plano}#page=${n}`, target: '_blank', rel: 'noopener', onclick: medir.abriuFonte }, `pág. ${n}`);
   return [
-    el('span', { class: 'selo-ia' }, 'Resumo feito por IA'),
+    el('span', { class: 'selo-ia' }, iconeIA(), 'Resumo feito por IA'),
     el('h3', {}, nome(c)),
     el('p', { class: 'visao' }, r.visao.texto, ' ', pagina(r.visao.pagina)),
     el('ul', { class: 'propostas' }, r.propostas.map((p) => el('li', {}, p.texto, ' ', pagina(p.pagina)))),
@@ -251,7 +260,7 @@ function rota({ historico = false } = {}) {
 async function iniciar() {
   try {
     const [textos, termos, resumos] = await Promise.all(
-      ['data/textos.json?v=0.3', 'data/termos.json?v=0.3', 'data/resumos.json?v=0.3'].map((u) => fetch(u).then((r) => { if (!r.ok) throw new Error(u); return r.json(); })),
+      ['data/textos.json?v=0.4', 'data/termos.json?v=0.4', 'data/resumos.json?v=0.4'].map((u) => fetch(u).then((r) => { if (!r.ok) throw new Error(u); return r.json(); })),
     );
     dados = { textos, termos: termos.termos, grupos: termos.grupos, resumos, acervos: preparar(textos) };
   } catch {

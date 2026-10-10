@@ -311,7 +311,8 @@ mark { background: var(--marca-texto); color: inherit; border-radius: 3px; paddi
 }
 .painel[hidden] { display: none; }
 .painel h3 { margin: 0; }
-.selo-ia { align-self: flex-start; padding: 3px 10px; border: 2px solid var(--traco); border-radius: 999px; background: var(--realce); color: var(--realce-tinta); font: 800 0.75rem var(--titulo); letter-spacing: 0.04em; text-transform: uppercase; }
+.selo-ia { display: inline-flex; align-items: center; gap: 6px; align-self: flex-start; padding: 3px 10px; border: 2px solid var(--traco); border-radius: 999px; background: var(--realce); color: var(--realce-tinta); font: 800 0.75rem var(--titulo); letter-spacing: 0.04em; text-transform: uppercase; }
+.selo-ia svg { width: 16px; height: 16px; flex: none; }
 .visao { font-weight: 600; }
 .propostas { margin: 0; padding-left: 20px; display: grid; gap: 8px; }
 .visao a, .propostas a { font-size: 0.85rem; white-space: nowrap; }
