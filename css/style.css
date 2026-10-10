@@ -268,7 +268,11 @@ main { flex: 1; width: 100%; max-width: 760px; margin: 0 auto; padding: 8px 16px
 .legenda-barras span { display: inline-flex; align-items: center; gap: 6px; }
 .amostra { display: inline-block; width: 26px; height: 12px; border: 2px solid var(--traco); border-radius: 999px; background: var(--realce); }
 .colunas { display: grid; grid-template-columns: 1fr 1fr; gap: 18px; }
-.coluna { display: flex; flex-direction: column; gap: 20px; min-width: 0; }
+/* As duas colunas dividem as mesmas linhas (nome, plano, entrevistas): se um texto quebra numa coluna,
+   a outra acompanha e as barras ficam alinhadas. */
+.colunas:not(.rostos) { grid-template-rows: auto auto auto; row-gap: 20px; }
+.coluna { display: grid; grid-template-rows: subgrid; grid-row: span 3; align-content: start; min-width: 0; }
+.conta { align-self: start; }
 .conta { display: grid; gap: 6px; }
 .conta .rotulo { color: var(--suave); font-size: 0.8rem; font-weight: 700; text-transform: uppercase; letter-spacing: 0.03em; }
 .conta strong { font-family: var(--titulo); font-size: 1.3rem; line-height: 1.1; font-variant-numeric: tabular-nums; }
