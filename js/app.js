@@ -1,6 +1,6 @@
-import { preparar, familia, familiaDoGrupo, contar, trecho, semAcento } from './busca.js?v=2.9';
-import * as medir from './contagem.js?v=2.9';
-import { compartilhar } from './compartilhar.js?v=2.9';
+import { preparar, familia, familiaDoGrupo, contar, trecho, semAcento } from './busca.js?v=3.0';
+import * as medir from './contagem.js?v=3.0';
+import { compartilhar } from './compartilhar.js?v=3.0';
 
 const ORDEM = 'palavra:ordem';
 const POR_VEZ = 5; // trechos mostrados de cada vez
@@ -266,13 +266,13 @@ function quadro(fam, res, grupo, { resAssunto, modo: modoInicial, aoTrocar, comp
   const palavrasDoAssunto = grupo ? dados.termos.filter((t) => t.grupo === grupo.id) : [];
   let aberto = null;
   const colunas = ordem.map((c) => {
-    const foto = el('img', { src: `img/${c}-serio.webp?v=2.9`, alt: '', width: '96', height: '96' });
+    const foto = el('img', { src: `img/${c}-serio.webp?v=3.0`, alt: '', width: '96', height: '96' });
     const rotulo = el('span', { class: 'ver-resumo' }, el('span', {}, 'Ver resumo'));
     // Retrato embaixo das contagens; com resumo, retrato e botão formam um único botão.
     const cabeca = temResumo
       ? el('button', { class: 'rosto', type: 'button', 'aria-pressed': 'false', 'aria-controls': painel.id, 'aria-label': `Ver resumo do plano de ${nome(c)}` }, foto, rotulo)
       : el('div', { class: 'rosto estatico' }, foto);
-    if (temResumo) new Image().src = `img/${c}-alegre.webp?v=2.9`; // sem piscar na troca
+    if (temResumo) new Image().src = `img/${c}-alegre.webp?v=3.0`; // sem piscar na troca
     return {
       c, cabeca, foto, rotulo,
       coluna: el('div', { class: 'coluna' }),
@@ -285,7 +285,7 @@ function quadro(fam, res, grupo, { resAssunto, modo: modoInicial, aoTrocar, comp
         for (const col of colunas) {
           const ativo = col.c === aberto;
           col.cabeca.setAttribute('aria-pressed', String(ativo));
-          col.foto.src = `img/${col.c}-${ativo ? 'alegre' : 'serio'}.webp?v=2.9`;
+          col.foto.src = `img/${col.c}-${ativo ? 'alegre' : 'serio'}.webp?v=3.0`;
           col.rotulo.lastChild.textContent = ativo ? 'Fechar' : 'Ver resumo';
         }
         painel.hidden = !aberto;
@@ -302,7 +302,7 @@ function quadro(fam, res, grupo, { resAssunto, modo: modoInicial, aoTrocar, comp
   const explicacao = el('p', { class: 'legenda' });
   const mostrar = (m) => {
     const r = m === 'assunto' ? resAssunto : res;
-    titulo.textContent = m === 'assunto' ? `Quanto cada um falou de ${grupo.nome.toLowerCase()}` : 'Quantas vezes cada um usou';
+    titulo.textContent = m === 'assunto' ? `Quanto cada um falou sobre ${grupo.nome.toLowerCase()}` : 'Quantas vezes cada um usou';
     vazio.hidden = somar(r) > 0;
     vazio.textContent = m === 'assunto'
       ? 'Nenhum dos dois usou as palavras deste assunto no plano de governo nem nas entrevistas.'
@@ -392,7 +392,7 @@ function eventosDoAcervo(acervo) {
 // Abaixo da caixa: onde cada um usou a palavra, plano e entrevistas juntos, cada trecho com a fonte.
 function ondeUsou(fam, res, assunto = false) {
   return el('section', { class: 'onde-usou' },
-    el('h2', { class: 'subtitulo' }, assunto ? `Onde cada um falou de ${fam.rotulo.toLowerCase()}` : 'Onde cada um usou a palavra'),
+    el('h2', { class: 'subtitulo' }, assunto ? `Onde cada um falou sobre ${fam.rotulo.toLowerCase()}` : 'Onde cada um usou a palavra'),
     ordem.map((c) => trechos(c, Object.keys(dados.acervos).flatMap((id) => res[id][c].achados.map((a) => ({ id, ...a }))), fam, assunto)));
 }
 
@@ -433,7 +433,7 @@ async function enviarImagem(botao, { rotulo, aspas, res }) {
       link: aspas ? `?p=${encodeURIComponent(rotulo)}` : `?a=${encodeURIComponent(dados.grupos.find((g) => g.nome === rotulo).id)}`,
       lados: ordem.map((c) => ({
         nome: nome(c),
-        imagem: `img/${c}-neutro.webp?v=2.9`,
+        imagem: `img/${c}-neutro.webp?v=3.0`,
         plano: res.plano[c],
         falas: res.falas[c],
       })),
@@ -466,7 +466,7 @@ function rota({ historico = false } = {}) {
 async function iniciar() {
   try {
     const [textos, termos, resumos] = await Promise.all(
-      ['data/textos.json?v=2.9', 'data/termos.json?v=2.9', 'data/resumos.json?v=2.9'].map((u) => fetch(u).then((r) => { if (!r.ok) throw new Error(u); return r.json(); })),
+      ['data/textos.json?v=3.0', 'data/termos.json?v=3.0', 'data/resumos.json?v=3.0'].map((u) => fetch(u).then((r) => { if (!r.ok) throw new Error(u); return r.json(); })),
     );
     dados = { textos, termos: termos.termos, grupos: termos.grupos, resumos, acervos: preparar(textos) };
   } catch {

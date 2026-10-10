@@ -1,4 +1,4 @@
-import { SITE } from './config.js?v=2.9';
+import { SITE } from './config.js?v=3.0';
 
 // Imagem 4:5 (aparece inteira no WhatsApp e no feed) com a cara da tela de resultado: um cartão com uma coluna por candidato
 // (retrato, nome, plano com barra cheia, entrevistas com barra listrada), na mesma ordem da tela.
@@ -174,7 +174,7 @@ export async function gerarImagem({ palavra, aspas = true, lados }) {
   // Pergunta e palavra, com marca-texto
   ctx.fillStyle = COR.tinta;
   ctx.font = fonte(700, 42);
-  ctx.fillText(aspas ? 'Quantas vezes cada um usou' : 'Quanto cada um falou de', L / 2, 188);
+  ctx.fillText(aspas ? 'Quantas vezes cada um usou' : 'Quanto cada um falou sobre', L / 2, 188);
   const titulo = aspas ? `“${palavra}”` : palavra;
   let t = 96;
   ctx.font = fonte(800, t);
@@ -242,7 +242,7 @@ export async function compartilhar(dados) {
   const url = `https://${SITE}/${dados.link}&o=c`;
   const mensagem = dados.aspas
     ? `Quantas vezes cada candidato usou “${dados.palavra}” no plano de governo e em entrevistas? Busque a sua palavra: ${url}`
-    : `Quanto cada candidato falou de ${dados.palavra.toLowerCase()} no plano de governo e em entrevistas? Veja: ${url}`;
+    : `Quanto cada candidato falou sobre ${dados.palavra.toLowerCase()} no plano de governo e em entrevistas? Veja: ${url}`;
 
   try {
     if (navigator.canShare?.({ files: [arquivo] })) {
