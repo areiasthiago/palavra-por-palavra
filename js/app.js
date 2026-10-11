@@ -164,6 +164,12 @@ function inicio() {
   const destaques = dados.termos.filter((t) => t.destaque)
     .sort((a, b) => grupoDe(b).peso - grupoDe(a).peso);
   const nomes = ordem.map(nome);
+  // Começa com os destaques das pesquisas; se o contador responder, troca pela lista viva.
+  const quentes = el('div', { class: 'chips' }, destaques.map((t) => chip(t, 'quentes')));
+  medir.quentes().then((lista) => {
+    const vivos = (lista ?? []).map((termo) => dados.termos.find((t) => t.termo === termo)).filter(Boolean);
+    if (vivos.length) quentes.replaceChildren(...vivos.map((t) => chip(t, 'quentes')));
+  });
   app.replaceChildren(el('section', { class: 'tela inicio' },
     el('span', { class: 'selo' }, 'Eleições 2026 · 2º turno'),
     el('h1', {}, 'Quanto cada um ', el('span', { class: 'destaque' }, 'fala do que importa'), ' pra você?'),
@@ -171,7 +177,7 @@ function inicio() {
     campoDeBusca(),
     el('div', { class: 'bloco' },
       el('h2', { class: 'subtitulo' }, 'Mais buscados aqui'),
-      el('div', { class: 'chips' }, destaques.map((t) => chip(t, 'quentes')))),
+      quentes),
     el('div', { class: 'bloco' },
       el('h2', { class: 'subtitulo' }, 'Ou escolha por assunto'),
       el('div', { class: 'assuntos' }, dados.grupos.map((g) => el('details', { class: 'assunto' },

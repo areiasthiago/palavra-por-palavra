@@ -1,0 +1,33 @@
+# Contador anônimo do Palavra por Palavra (Cloudflare Worker + D1).
+# Publicar: npx wrangler deploy (produção) | npx wrangler deploy --env teste
+name = "palavra-contagem"
+main = "src/index.js"
+compatibility_date = "2026-09-01"
+workers_dev = true
+
+# Sem registro de pedidos: o contador não guarda nem mostra IP, endereço ou horário de ninguém.
+[observability]
+enabled = false
+
+[vars]
+ORIGENS = "https://areiasthiago.github.io"
+
+[[d1_databases]]
+binding = "DB"
+database_name = "palavra-contagem"
+database_id = "58c20261-adf3-4880-bc08-20d371678d42"
+
+[env.teste]
+name = "palavra-contagem-teste"
+workers_dev = true
+
+[env.teste.observability]
+enabled = false
+
+[env.teste.vars]
+ORIGENS = "https://areiasthiago.github.io,http://127.0.0.1:8765"
+
+[[env.teste.d1_databases]]
+binding = "DB"
+database_name = "palavra-contagem-teste"
+database_id = "7cf238ee-2bf0-4e74-9ec9-890c66e8b564"

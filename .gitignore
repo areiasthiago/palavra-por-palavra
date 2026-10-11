@@ -7,3 +7,5 @@ supabase/.temp/
 CLAUDE.md
 # Íntegras brutas dos jornais: ficam só na máquina; no repositório vão só as falas dos candidatos (data/textos.json)
 data/falas/*.txt
+# Cache e credenciais locais do Wrangler (Cloudflare): nunca vão para o repositório
+.wrangler/

@@ -91,4 +91,15 @@ export const ligouAssunto = (grupo) => umaVez(`assunto:${hoje()}:${grupo}`, { ev
 export const abriuFonte = () => umaVez(`fonte:${hoje()}`, { evento: 'abriu_fonte' });
 export const compartilhou = (tipo) => umaVez(`compartilhou:${hoje()}:${tipo}`, { evento: 'compartilhou', termo: tipo });
 export const foiTesteCego = () => umaVez('foi_teste_cego', { evento: 'foi_teste_cego' });
+// Lista de mais buscados vinda do contador (pesquisa + buscas dos últimos 7 dias). null se falhar.
+export async function quentes() {
+  if (!ENVIAR_CONTAGEM || !CONTAGEM.url) return null;
+  try {
+    const resposta = await fetch(`${CONTAGEM.url}/quentes`, { credentials: 'omit', referrerPolicy: 'no-referrer' });
+    return resposta.ok ? (await resposta.json()).termos : null;
+  } catch {
+    return null;
+  }
+}
+
 export const erroCarga = () => enviar({ evento: 'erro_carga' });
