@@ -1,5 +1,5 @@
-import { SITE } from './config.js?v=5.0';
-import { vezes, frequencia, maiorTaxa, LEMBRETE, PERGUNTA } from './formato.js?v=5.0';
+import { SITE } from './config.js?v=5.1';
+import { vezes, frequencia, maiorTaxa, LEMBRETE, PERGUNTA } from './formato.js?v=5.1';
 
 // Imagem de story (9:16) com a cara da tela de resultado: um cartão com uma coluna por candidato
 // (retrato, nome, número, barra e frequência no plano), na mesma ordem da tela.

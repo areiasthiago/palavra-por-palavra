@@ -1,7 +1,7 @@
-import { preparar, familia, familiaDoGrupo, formasDoTermo, contar, trecho, semAcento } from './busca.js?v=5.0';
-import * as medir from './contagem.js?v=5.0';
-import { compartilhar } from './compartilhar.js?v=5.0';
-import { numero, vezes, frequencia, maiorTaxa, LEMBRETE, PERGUNTA } from './formato.js?v=5.0';
+import { preparar, familia, familiaDoGrupo, formasDoTermo, contar, trecho, semAcento } from './busca.js?v=5.1';
+import * as medir from './contagem.js?v=5.1';
+import { compartilhar } from './compartilhar.js?v=5.1';
+import { numero, vezes, frequencia, maiorTaxa, LEMBRETE, PERGUNTA } from './formato.js?v=5.1';
 
 const ORDEM = 'palavra:ordem';
 const POR_VEZ = 5; // trechos mostrados de cada vez
@@ -349,6 +349,7 @@ function buscar(consulta, origem, { historico = true, modo = 'palavra' } = {}) {
     campoDeBusca(fam.rotulo),
     h1,
     contamos,
+    blocoResumo(grupo),
     antes,
     quadro(grupo, visoes, vista, (nova) => { vista = nova; desenhar(); history.replaceState({}, '', naUrl()); }),
     onde,
@@ -372,37 +373,43 @@ const convite = () => el('a', { class: 'convite', href: 'https://testecego.onlin
   el('span', {}, 'Compare propostas dos dois candidatos sem saber de quem é cada uma. No fim, veja com quem você concorda mais.'),
   el('span', { class: 'convite-acao' }, 'Fazer o teste →'));
 
-// Caixa única da contagem: uma coluna por candidato, com o número, a barra e a frequência no plano.
-// Os dois na mesma cor (quem é quem está escrito, não pintado). O retrato abre o resumo da IA na mesma caixa.
-function quadro(grupo, visoes, inicial, aoTrocar) {
-  const temResumo = ordem.every((c) => dados.resumos.grupos[grupo.id]?.[c]);
+// Resumo da IA do assunto, no topo da página: os retratos abrem o resumo de cada um na mesma caixa.
+function blocoResumo(grupo) {
+  if (!ordem.every((c) => dados.resumos.grupos[grupo.id]?.[c])) return null;
   const painel = el('div', { class: 'painel', id: 'resumo-ia', hidden: true });
-  const palavrasDoAssunto = termosDoGrupo(grupo.id);
-  const listaDoAssunto = palavrasDoAssunto.map((t) => t.termo).join(', ');
-  let vista = inicial;
   let aberto = null;
-
   const colunas = ordem.map((c) => {
-    const foto = el('img', { src: `img/${c}-serio.webp?v=5.0`, alt: '', width: '96', height: '96' });
+    const foto = el('img', { src: `img/${c}-serio.webp?v=5.1`, alt: '', width: '96', height: '96' });
     const rotulo = el('span', { class: 'ver-resumo' }, 'Ver resumo');
-    // Retrato embaixo das contagens; com resumo, retrato e botão formam um único botão.
-    const cabeca = temResumo
-      ? el('button', { class: 'rosto', type: 'button', 'aria-pressed': 'false', 'aria-controls': painel.id, 'aria-label': `Ver resumo do plano de ${nome(c)}`, onclick: () => abrirResumo(c) }, foto, rotulo)
-      : el('div', { class: 'rosto' }, foto);
-    if (temResumo) new Image().src = `img/${c}-alegre.webp?v=5.0`; // sem piscar na troca
-    return { c, cabeca, foto, rotulo, coluna: el('div', { class: 'coluna' }) };
+    // Retrato e rótulo formam um único botão.
+    const cabeca = el('button', { class: 'rosto', type: 'button', 'aria-pressed': 'false', 'aria-controls': painel.id, 'aria-label': `Ver resumo do plano de ${nome(c)}`, onclick: () => abrirResumo(c) }, foto, rotulo);
+    new Image().src = `img/${c}-alegre.webp?v=5.1`; // sem piscar na troca
+    return { c, cabeca, foto, rotulo };
   });
   function abrirResumo(c) {
     aberto = aberto === c ? null : c;
     for (const col of colunas) {
       const ativo = col.c === aberto;
       col.cabeca.setAttribute('aria-pressed', String(ativo));
-      col.foto.src = `img/${col.c}-${ativo ? 'alegre' : 'serio'}.webp?v=5.0`;
+      col.foto.src = `img/${col.c}-${ativo ? 'alegre' : 'serio'}.webp?v=5.1`;
       col.rotulo.textContent = ativo ? 'Fechar' : 'Ver resumo';
     }
     painel.hidden = !aberto;
     if (aberto) { painel.replaceChildren(...resumo(grupo, aberto)); medir.viuResumo(`${grupo.id}:${aberto}`); }
   }
+  return el('section', { class: 'comparativo resumo-assunto' },
+    el('p', { class: 'dica' }, iconeIA(), el('span', {}, 'Resumo, feito por IA, do que cada plano propõe sobre ', el('strong', {}, grupo.nome.toLowerCase()), '. Toque num candidato.')),
+    el('div', { class: 'colunas rostos' }, colunas.map((col) => col.cabeca)),
+    painel);
+}
+
+// Caixa da contagem de palavras: uma coluna por candidato, com o número, a barra e a frequência no plano.
+// Os dois na mesma cor (quem é quem está escrito, não pintado).
+function quadro(grupo, visoes, inicial, aoTrocar) {
+  const palavrasDoAssunto = termosDoGrupo(grupo.id);
+  const listaDoAssunto = palavrasDoAssunto.map((t) => t.termo).join(', ');
+  let vista = inicial;
+  const colunas = ordem.map((c) => ({ c, coluna: el('div', { class: 'coluna' }) }));
 
   // Chave "palavra / assunto todo": a soma de todas as palavras do assunto compara quem fala do
   // mesmo tema com vocabulário diferente ("casa" de um, "moradia" do outro).
@@ -442,10 +449,6 @@ function quadro(grupo, visoes, inicial, aoTrocar) {
     vazio,
     el('div', { class: 'colunas' }, colunas.map((col) => col.coluna)),
     botaoCompartilhar,
-    // Retratos numa linha própria, logo abaixo da chamada para o resumo.
-    temResumo && el('p', { class: 'dica' }, iconeIA(), el('span', {}, 'Veja também um resumo, feito por IA, do que cada plano propõe sobre ', el('strong', {}, grupo.nome.toLowerCase()), '.')),
-    el('div', { class: 'colunas rostos' }, colunas.map((col) => col.cabeca)),
-    temResumo && painel,
     explicacao,
     aviso(),
   );
@@ -531,7 +534,7 @@ async function enviarImagem(botao, vista) {
       link: vista.link,
       lados: ordem.map((c) => ({
         nome: nome(c),
-        imagem: `img/${c}-neutro.webp?v=5.0`,
+        imagem: `img/${c}-neutro.webp?v=5.1`,
         plano: vista.res.plano[c],
       })),
     });
@@ -563,7 +566,7 @@ function rota({ historico = false } = {}) {
 async function iniciar() {
   try {
     const [textos, termos, resumos, propostas] = await Promise.all(
-      ['data/textos.json?v=5.0', 'data/termos.json?v=5.0', 'data/resumos.json?v=5.0', 'data/propostas.json?v=5.0'].map((u) => fetch(u).then((r) => { if (!r.ok) throw new Error(u); return r.json(); })),
+      ['data/textos.json?v=5.1', 'data/termos.json?v=5.1', 'data/resumos.json?v=5.1', 'data/propostas.json?v=5.1'].map((u) => fetch(u).then((r) => { if (!r.ok) throw new Error(u); return r.json(); })),
     );
     dados = { textos, termos: termos.termos, grupos: termos.grupos, resumos, propostas: propostas.propostas, acervos: preparar(textos) };
     dados.indice = montarIndice();
