@@ -88,7 +88,18 @@ for (const arquivo of ['index.html', 'sobre.html', 'js/app.js', 'js/compartilhar
 // Mesma estrutura para os dois, tamanhos parecidos, cada frase ancorada numa página do plano
 // (a citação não aparece na tela; só prova que a página trata daquilo), sem citar o adversário.
 const normalizar = (s) => s.normalize('NFKC').toLowerCase().replace(/[^\p{L}\p{N}]/gu, '');
-const paginasPlano = Object.fromEntries(candidatos.map((c) => [c, ler(`data/fontes/${c}.txt`).split('\f').map(normalizar)]));
+// Páginas já limpas (sem número de página nem cabeçalho repetido): o mesmo texto que o site mostra.
+const paginasPlano = Object.fromEntries(candidatos.map((c) => {
+  const paginas = [];
+  for (const p of textos.acervos.plano.pedacos) if (p.candidato === c) paginas[p.pagina - 1] = (paginas[p.pagina - 1] ?? '') + normalizar(p.texto);
+  return [c, paginas];
+}));
+// O trecho começa na página indicada (pode terminar na seguinte).
+function ancorado(c, numero, trecho) {
+  const alvo = normalizar(trecho ?? '');
+  const pagina = paginasPlano[c][numero - 1] ?? '';
+  return alvo.length >= 10 && pagina.includes(alvo.slice(0, 10)) && (pagina + (paginasPlano[c][numero] ?? '')).includes(alvo);
+}
 const { grupos: resumos } = JSON.parse(ler('data/resumos.json'));
 const NOMES = /(?<!\p{L})(Lula|Bolsonaro|Flávio|PT|PL|PSB|governo anterior|atual governo|atual gestão|esquerda|direita)(?!\p{L})/u;
 const tamanho = (r) => [r.visao, ...r.propostas].reduce((s, x) => s + x.texto.length, 0);
@@ -104,14 +115,32 @@ for (const g of grupos) {
       if (item.texto.length > 130) erros.push(`${onde} ${qual} longa demais (${item.texto.length} caracteres; máx. 130)`);
       const nome = item.texto.match(NOMES) ?? item.texto.match(DISPUTA);
       if (nome) erros.push(`${onde} ${qual} cita "${nome[0]}"`);
-      const alvo = normalizar(item.citacao ?? '');
-      const pagina = paginasPlano[c][item.pagina - 1] ?? '';
-      const comSeguinte = pagina + (paginasPlano[c][item.pagina] ?? '');
-      if (alvo.length < 10 || !pagina.includes(alvo.slice(0, 10)) || !comSeguinte.includes(alvo)) erros.push(`${onde} ${qual}: trecho não encontrado na pág. ${item.pagina}`);
+      if (!ancorado(c, item.pagina, item.citacao)) erros.push(`${onde} ${qual}: trecho não encontrado na pág. ${item.pagina}`);
     }
   }
   const [a, b] = candidatos.map((c) => (porCandidato[c] ? tamanho(porCandidato[c]) : 0));
   if (a && b && Math.max(a, b) / Math.min(a, b) > 1.35) erros.push(`[resumo ${g.id}] tamanhos desiguais (${candidatos[0]} ${a} x ${candidatos[1]} ${b})`);
+}
+
+// ---------- Propostas (classificadas por IA) ----------
+// Cada proposta é um compromisso do plano com o trecho literal e a página, num dos assuntos da lista.
+// Meta, prazo, valor e "diz como" são marcas da IA; o validador só confere o que dá para conferir.
+const { propostas } = JSON.parse(ler('data/propostas.json'));
+const assuntos = new Set(grupos.map((g) => g.id));
+const vistas = new Set();
+for (const [i, p] of propostas.entries()) {
+  const onde = `[proposta ${i + 1} ${p.candidato}]`;
+  if (!candidatos.includes(p.candidato)) erros.push(`${onde} candidato desconhecido`);
+  if (!assuntos.has(p.assunto)) erros.push(`${onde} assunto desconhecido: ${p.assunto}`);
+  if (!p.texto || p.texto.length > 130) erros.push(`${onde} resumo vazio ou longo demais`);
+  const nome = p.texto?.match(NOMES) ?? p.texto?.match(DISPUTA);
+  if (nome) erros.push(`${onde} cita "${nome[0]}"`);
+  if (!ancorado(p.candidato, p.pagina, p.trecho)) erros.push(`${onde} trecho não encontrado na pág. ${p.pagina}: ${p.trecho.slice(0, 60)}`);
+  const chave = `${p.candidato}|${normalizar(p.trecho)}`;
+  if (vistas.has(chave)) erros.push(`${onde} trecho repetido`);
+  vistas.add(chave);
+  if (p.valor && !/R\$|reais/.test(p.trecho)) erros.push(`${onde} marcada com valor, mas o trecho não tem valor em dinheiro`);
+  if (p.meta && !/\d|milhão|milhões|dobrar|zerar|zero|univers|todas|todo o/i.test(p.trecho)) erros.push(`${onde} marcada com meta, mas o trecho não tem número`);
 }
 
 // ---------- Cores: só grafite e roxo ----------
@@ -136,5 +165,5 @@ for (const arquivo of ['css/style.css', 'js/compartilhar.js', 'img/icone.svg']) 
 }
 
 for (const e of erros) console.error(`ERRO: ${e}`);
-console.log(`${termos.length} termos em ${grupos.length} grupos, ${erros.length} erro(s).`);
+console.log(`${termos.length} termos em ${grupos.length} grupos, ${propostas.length} propostas, ${erros.length} erro(s).`);
 process.exit(erros.length ? 1 : 0);

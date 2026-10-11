@@ -1,0 +1,3069 @@
+{
+ "aviso": "Feito por IA a partir do plano de governo.",
+ "propostas": [
+  {
+   "candidato": "flavio",
+   "assunto": "seguranca",
+   "texto": "Classificar PCC, CV, milícias e outras facções como organizações narcoterroristas.",
+   "pagina": 13,
+   "trecho": "PCC, CV, milícias e todas as outras facções serão declaradas como organizações narcoterroristas."
+  },
+  {
+   "candidato": "flavio",
+   "assunto": "seguranca",
+   "texto": "Bloquear bens e desmontar a lavagem de dinheiro das facções.",
+   "pagina": 13,
+   "trecho": "Vamos seguir o dinheiro do crime: bloquearemos ativos e desarticularemos a lavagem de dinheiro que sustenta as facções."
+  },
+  {
+   "candidato": "flavio",
+   "assunto": "seguranca",
+   "texto": "Fazer convênios com estados e municípios para inteligência, armamento e valorização do policial.",
+   "pagina": 13,
+   "trecho": "Vamos fazer consórcios e convênios com estados e municípios para investir em inteligência, retomada de territórios alinhada a políticas públicas estruturantes, tecnologia, armamentos de última geração e valorização do policial.",
+   "como": true
+  },
+  {
+   "candidato": "flavio",
+   "assunto": "seguranca",
+   "texto": "Apoiar e sancionar a redução da maioridade penal de 18 para 16 anos.",
+   "pagina": 13,
+   "trecho": "O crime do menor não é menor O novo governo do Brasil vai apoiar e sancionar a redução da maioridade penal de 18 para 16 anos.",
+   "como": true
+  },
+  {
+   "candidato": "flavio",
+   "assunto": "seguranca",
+   "texto": "Punir também maiores de 14 anos que cometerem crimes graves.",
+   "pagina": 13,
+   "trecho": "Vamos punir também maiores de 14 anos que cometerem crimes graves, como estupro, tráfico, tortura e assassinato."
+  },
+  {
+   "candidato": "flavio",
+   "assunto": "seguranca",
+   "texto": "Criar o Sistema Nacional de Fronteira, tropa de elite das Forças Armadas.",
+   "pagina": 13,
+   "trecho": "Vamos criar o Sistema Nacional de Fronteira, uma tropa de elite do Exército, da Marinha e da Força Aérea Brasileira, equipada com armas de guerra, inteligência e tecnologia, responsável por criar um paredão na fronteira.",
+   "como": true
+  },
+  {
+   "candidato": "flavio",
+   "assunto": "seguranca",
+   "texto": "Abater bandido armado com fuzil.",
+   "pagina": 13,
+   "trecho": "Bandido armado com fuzil na mão vai ser abatido pelas forças de segurança."
+  },
+  {
+   "candidato": "flavio",
+   "assunto": "seguranca",
+   "texto": "Construir 5 presídios de segurança máxima.",
+   "pagina": 14,
+   "trecho": "Mais presídios, menos bandidos soltos O Brasil terá 5 novos presídios de segurança máxima no modelo adotado por El Salvador.",
+   "meta": true,
+   "como": true
+  },
+  {
+   "candidato": "flavio",
+   "assunto": "seguranca",
+   "texto": "Criar meio milhão de vagas em presídios em 4 anos, com os estados, e zerar o déficit.",
+   "pagina": 14,
+   "trecho": "Em parceria com os governos estaduais, vamos criar meio milhão de novas vagas no sistema prisional em 4 anos e zerar o déficit carcerário.",
+   "meta": true,
+   "prazo": true,
+   "como": true
+  },
+  {
+   "candidato": "flavio",
+   "assunto": "seguranca",
+   "texto": "Usar tropas da Marinha e da Aeronáutica para ocupar portos e aeroportos.",
+   "pagina": 15,
+   "trecho": "Nós vamos usar tropas especiais da Marinha e da Aeronáutica para ocupar e monitorar, de forma permanente, os portos e aeroportos brasileiros.",
+   "como": true
+  },
+  {
+   "candidato": "flavio",
+   "assunto": "seguranca",
+   "texto": "Dobrar o investimento federal em segurança pública no mandato.",
+   "pagina": 15,
+   "trecho": "Menos verbo mais verba O novo governo do Brasil vai dobrar os investimentos federais em segurança pública ao longo do mandato.",
+   "meta": true,
+   "prazo": true
+  },
+  {
+   "candidato": "flavio",
+   "assunto": "seguranca",
+   "texto": "Criar o Muralha Brasileira: reconhecimento facial e mais de 1 milhão de câmeras.",
+   "pagina": 15,
+   "trecho": "Luz, câmara, prisão Vamos implantar o Muralha Brasileira - um sistema nacional de reconhecimento facial integrado a bancos de dados criminais, inspirado no Smart Sampa, da Prefeitura de São Paulo, e no Muralha Paulista, do Governo do Estado. Além de localizar foragidos e prevenir crimes, vamos vigiar portos, aeroportos e áreas públicas com mais de 1 milhão de novas câmeras espalhadas por todo o país.",
+   "meta": true,
+   "como": true
+  },
+  {
+   "candidato": "flavio",
+   "assunto": "seguranca",
+   "texto": "Passar para as famílias das vítimas o dinheiro que hoje vai às famílias de presos.",
+   "pagina": 15,
+   "trecho": "Os recursos hoje direcionados às famílias de detentos serão redirecionados às famílias das vítimas, conforme recomendado pela ONU e por tratados internacionais dos quais o Brasil é signatário, embora Lula e o PT nunca os tenham cumprido.",
+   "como": true
+  },
+  {
+   "candidato": "flavio",
+   "assunto": "seguranca",
+   "texto": "Acabar com a progressão de regime para crimes hediondos.",
+   "pagina": 15,
+   "trecho": "Por isso, o novo Governo do Brasil vai usar toda a sua força para acabar com a progressão de regime de quem comete crimes hediondos."
+  },
+  {
+   "candidato": "flavio",
+   "assunto": "seguranca",
+   "texto": "Endurecer contra quem rouba, furta e vende celular roubado.",
+   "pagina": 16,
+   "trecho": "Por isso, o novo Governo do Brasil vai jogar duro com quem rouba, furta e comercializa celulares roubados."
+  },
+  {
+   "candidato": "flavio",
+   "assunto": "seguranca",
+   "texto": "Retomar áreas dominadas por facções.",
+   "pagina": 47,
+   "trecho": "Alinhado ao Brasil sem Medo, vamos retomar as áreas hoje sob domínio de facções, devolvendo aos moradores a liberdade de ir e vir na própria comunidade — ninguém é dono de verdade da sua casa enquanto o tráfico manda na esquina."
+  },
+  {
+   "candidato": "lula",
+   "assunto": "seguranca",
+   "texto": "Manter o corte do dinheiro do crime organizado.",
+   "pagina": 27,
+   "trecho": "Manteremos a estratégia de asfixia financeira do crime organizado por meio de ações articuladas, que já permitiu, desde 2023, causar R$ 35,8 bilhões de prejuízos às organizações criminosas."
+  },
+  {
+   "candidato": "lula",
+   "assunto": "seguranca",
+   "texto": "Com os outros Poderes, punir mais rápido e barrar candidatos ligados ao crime.",
+   "pagina": 27,
+   "trecho": "Em conjunto com os demais poderes, vamos continuar liderando o processo de estabelecimento de procedimentos jurídicos mais ágeis para punir esses crimes, além de medidas rígidas para barrar candidaturas de indivíduos ligados ao crime organizado.",
+   "como": true
+  },
+  {
+   "candidato": "lula",
+   "assunto": "seguranca",
+   "texto": "Fortalecer o Programa Brasil Contra o Crime Organizado, com R$ 10 bilhões do fundo nacional.",
+   "pagina": 27,
+   "trecho": "Fortaleceremos o Programa Brasil Contra o Crime Organizado, lançado em maio de 2026. Em cooperação com estados e municípios, vamos avançar no enfrentamento ao tráfico de armas, munições, acessórios e explosivos; asfixia financeira do crime organizado e das milícias; qualificação da investigação de homicídios; retomada de territórios; e fortalecimento da segurança no sistema prisional. O programa prevê R$ 10 bilhões do Fundo Nacional de Investimento em Infraestrutura Social (FIIS) para estados e municípios realizarem investimentos em equipamentos e infraestrutura.",
+   "valor": true,
+   "como": true
+  },
+  {
+   "candidato": "lula",
+   "assunto": "seguranca",
+   "texto": "Combater o tráfico de armas e explosivos, com estados e municípios.",
+   "pagina": 27,
+   "trecho": "Em cooperação com estados e municípios, vamos avançar no enfrentamento ao tráfico de armas, munições, acessórios e explosivos;",
+   "como": true
+  },
+  {
+   "candidato": "lula",
+   "assunto": "seguranca",
+   "texto": "Urbanizar favelas e periferias para tirar espaço do crime.",
+   "pagina": 28,
+   "trecho": "Com repressão qualificada aos grupos criminosos e participação ativa das comunidades locais, priorizaremos investimentos continuados na urbanização de favelas e periferias, na requalificação de espaços públicos e na ampliação do acesso a serviços públicos essenciais para estimular atividades econômicas lícitas e reduzir mercados explorados pelo crime organizado."
+  },
+  {
+   "candidato": "lula",
+   "assunto": "seguranca",
+   "texto": "Integrar a inteligência policial (SINESP, Infoseg) e ampliar as forças-tarefa (FICCOs).",
+   "pagina": 28,
+   "trecho": "Consolidaremos o Sistema de Inteligência de Segurança Pública e Justiça Criminal, modernizaremos o SINESP e a Infoseg e ampliaremos as Forças Integradas de Combate ao Crime Organizado (FICCOs).",
+   "como": true
+  },
+  {
+   "candidato": "lula",
+   "assunto": "seguranca",
+   "texto": "Manter o controle de armas e munições.",
+   "pagina": 28,
+   "trecho": "Por isso, manteremos uma política de controle de armas e munições, fundamental para reduzir a violência e fortalecer uma política democrática de segurança pública."
+  },
+  {
+   "candidato": "lula",
+   "assunto": "seguranca",
+   "texto": "Rastrear armas e reforçar a fiscalização da PF e do Exército sobre CACs e segurança privada.",
+   "pagina": 28,
+   "trecho": "Aprimoraremos os mecanismos de rastreabilidade de armas e munições e reforçaremos a capacidade de fiscalização da Polícia Federal e do Exército sobre empresas de segurança privada, defesa pessoal e registros de caçadores, atiradores e colecionadores.",
+   "como": true
+  },
+  {
+   "candidato": "lula",
+   "assunto": "seguranca",
+   "texto": "Cumprir o Plano Pena Justa e criar um pacto nacional para os presídios.",
+   "pagina": 28,
+   "trecho": "Cumpriremos as metas do Plano Pena Justa e instituiremos o Pacto Nacional de Execução Penal para o Enfrentamento ao Crime Organizado, fortalecendo a governança do sistema prisional e a cooperação entre União, estados e sistema de justiça.",
+   "como": true
+  },
+  {
+   "candidato": "lula",
+   "assunto": "seguranca",
+   "texto": "Isolar líderes do crime em presídios federais, com protocolo nacional de transferência.",
+   "pagina": 28,
+   "trecho": "Fortaleceremos o sistema penitenciário federal, ampliando sua capacidade operacional e de isolamento de lideranças criminosas, e implantaremos um protocolo nacional de classificação e transferência de presos de alta periculosidade, baseado em critérios objetivos e evidências.",
+   "como": true
+  },
+  {
+   "candidato": "lula",
+   "assunto": "seguranca",
+   "texto": "Reforçar a segurança na Amazônia com as forças-tarefa integradas.",
+   "pagina": 29,
+   "trecho": "Vamos fortalecer ainda mais as ações de segurança na Amazônia Legal, em cooperação federativa e consolidando o modelo das Forças Integradas de Combate ao Crime Organizado (FICCOs) como política de Estado.",
+   "como": true
+  },
+  {
+   "candidato": "lula",
+   "assunto": "seguranca",
+   "texto": "Ampliar o Celular Seguro.",
+   "pagina": 29,
+   "trecho": "Continuaremos expandindo e aprimorando o Programa Celular Seguro, que já conta com mais de 4 milhões de usuários cadastrados.",
+   "como": true
+  },
+  {
+   "candidato": "lula",
+   "assunto": "seguranca",
+   "texto": "Reforçar o combate a crimes financeiros e pela internet.",
+   "pagina": 29,
+   "trecho": "Reforçaremos a prevenção, a inteligência, a investigação e a repressão qualificada aos crimes financeiros e cibernéticos, assegurando a proteção dos direitos no ambiente digital."
+  },
+  {
+   "candidato": "lula",
+   "assunto": "seguranca",
+   "texto": "Prevenir a violência contra a juventude negra, com estados e municípios.",
+   "pagina": 29,
+   "trecho": "Fortaleceremos as políticas de prevenção à violência com foco na proteção da juventude negra e da expansão de programas de mediação comunitária e justiça restaurativa em parceria com estados e municípios.",
+   "como": true
+  },
+  {
+   "candidato": "lula",
+   "assunto": "seguranca",
+   "texto": "Criar o Ministério da Segurança Pública depois de aprovada a PEC.",
+   "pagina": 30,
+   "trecho": "Uma vez aprovada a PEC da Segurança Pública proposta pelo Executivo, criaremos o Ministério da Segurança Pública para coordenar, em articulação com estados e municípios, a execução das políticas nacionais de segurança pública no âmbito do Sistema Único de Segurança Pública (SUSP).",
+   "como": true
+  },
+  {
+   "candidato": "lula",
+   "assunto": "seguranca",
+   "texto": "Criar policiamento de proximidade, junto com os estados.",
+   "pagina": 30,
+   "trecho": "Construiremos, junto com os entes federados, programas no modelo de policiamento de proximidade, fortalecendo a relação entre polícias e comunidades.",
+   "como": true
+  },
+  {
+   "candidato": "lula",
+   "assunto": "seguranca",
+   "texto": "Ampliar o uso de câmeras corporais nas polícias, com padrões nacionais.",
+   "pagina": 30,
+   "trecho": "Ampliaremos o programa de estímulos para uso de câmeras corporais, com padrões nacionais para utilização, gestão e preservação das imagens.",
+   "como": true
+  },
+  {
+   "candidato": "lula",
+   "assunto": "seguranca",
+   "texto": "Fortalecer o controle sobre a atividade policial.",
+   "pagina": 30,
+   "trecho": "Estimularemos o fortalecimento dos mecanismos de controle interno e externo da atividade policial."
+  },
+  {
+   "candidato": "flavio",
+   "assunto": "saude",
+   "texto": "Criar o Saúde para Elas, com prevenção perto de casa e telemedicina.",
+   "pagina": 21,
+   "trecho": "Saúde para Elas mais prevenção, menos filas Vamos cuidar da saúde da mulher de forma preventiva, sem fila longa, com atendimento perto de casa e também pelo celular, por telemedicina ou em postos de saúde que vamos ampliar e construir.",
+   "como": true
+  },
+  {
+   "candidato": "flavio",
+   "assunto": "saude",
+   "texto": "Ampliar os exames preventivos para mulheres.",
+   "pagina": 21,
+   "trecho": "Vamos ampliar o acesso a exames preventivos, cuidando da mulher com câncer, na menopausa, na gestação ou que sofre de endometriose, por exemplo, e dar acesso também à saúde bucal."
+  },
+  {
+   "candidato": "flavio",
+   "assunto": "saude",
+   "texto": "Criar o prontuário eletrônico único, ligado ao CPF e ao Gov.br.",
+   "pagina": 26,
+   "trecho": "Vamos implantar o prontuário eletrônico único, vinculado ao CPF e integrado ao Gov.",
+   "como": true
+  },
+  {
+   "candidato": "flavio",
+   "assunto": "saude",
+   "texto": "Terminar de digitalizar o SUS e usar IA para marcar consultas e exames.",
+   "pagina": 26,
+   "trecho": "Junto disso, vamos completar a digitalização do SUS e usar inteligência artificial para agilizar o agendamento de consultas e exames, ajudando a encaixar o paciente na primeira vaga disponível, para que ninguém mais fique meses aguardando uma marcação que poderia ser resolvida em muito menos tempo."
+  },
+  {
+   "candidato": "flavio",
+   "assunto": "saude",
+   "texto": "Corrigir a tabela do SUS.",
+   "pagina": 37,
+   "trecho": "Vamos garantir as condições para que seja possível a correção efetiva da tabela SUS."
+  },
+  {
+   "candidato": "flavio",
+   "assunto": "saude",
+   "texto": "Ampliar a Saúde da Família e criar um programa de atendimento aos idosos.",
+   "pagina": 37,
+   "trecho": "Vamos ampliar a Estratégia Saúde da Família, levando o cuidado para perto de casa, e criar o Programa de Atendimento aos Idosos, com atendimento facilitado e adequado a quem envelhece, para que o idoso não enfrente o mesmo percurso cansativo de sempre para se cuidar.",
+   "como": true
+  },
+  {
+   "candidato": "flavio",
+   "assunto": "saude",
+   "texto": "Ampliar exames preventivos e manter a vacinação.",
+   "pagina": 37,
+   "trecho": "Vamos ainda ampliar o acesso a exames preventivos e manter a imunização e o incentivo à produção nacional de vacinas, porque prevenir é sempre mais barato e mais humano do que tratar tarde."
+  },
+  {
+   "candidato": "flavio",
+   "assunto": "saude",
+   "texto": "Contratar exames na rede privada nos horários em que os aparelhos ficam parados.",
+   "pagina": 37,
+   "trecho": "Para usar bem o que já existe, vamos contratar serviços e exames na rede privada nos horários ociosos: há aparelho parado enquanto gente espera meses pelo mesmo exame, e aproveitar essa capacidade é atender mais sem construir do zero."
+  },
+  {
+   "candidato": "flavio",
+   "assunto": "saude",
+   "texto": "Fortalecer a rede de hospitais universitários federais (EBSERH).",
+   "pagina": 38,
+   "trecho": "Vamos também fortalecer a Rede Nacional de Hospitais Inteligentes (EBSERH), modernizando os hospitais universitários federais.",
+   "como": true
+  },
+  {
+   "candidato": "flavio",
+   "assunto": "saude",
+   "texto": "Ampliar o atendimento em saúde mental.",
+   "pagina": 39,
+   "trecho": "Vamos fortalecer e ampliar a atenção à saúde mental, chegando às famílias que muitas vezes enfrentam tudo sozinhas: o diagnóstico precoce e o apoio às crianças com TDAH;"
+  },
+  {
+   "candidato": "lula",
+   "assunto": "saude",
+   "texto": "Abrir novos hospitais universitários, ligados ao Agora Tem Especialistas.",
+   "pagina": 34,
+   "trecho": "No próximo mandato, avançaremos na implantação de novos hospitais universitários e na sua articulação com o Agora tem Especialistas.",
+   "como": true
+  },
+  {
+   "candidato": "lula",
+   "assunto": "saude",
+   "texto": "Ampliar as equipes de Saúde da Família.",
+   "pagina": 34,
+   "trecho": "Seguiremos mantendo o apoio à expansão e qualificação das equipes de saúde da família, em especial as equipes multiprofissionais, que serão peça central no cuidado à uma população que envelhece com velocidade.",
+   "como": true
+  },
+  {
+   "candidato": "lula",
+   "assunto": "saude",
+   "texto": "Criar incentivos para melhorar a qualidade do atendimento.",
+   "pagina": 35,
+   "trecho": "Fortaleceremos instrumentos de indução e de financiamento para adoção de parâmetros de qualidade no atendimento, em especial em territórios de maior vulnerabilidade social."
+  },
+  {
+   "candidato": "lula",
+   "assunto": "saude",
+   "texto": "Ampliar teleconsultas na rede básica de saúde.",
+   "pagina": 35,
+   "trecho": "Vamos intensificar o apoio ao uso de ferramentas de saúde digital, como teleconsultas, teleorientação e teleacolhimento na rede básica de saúde."
+  },
+  {
+   "candidato": "lula",
+   "assunto": "saude",
+   "texto": "Oferecer mais exames na rede básica.",
+   "pagina": 35,
+   "trecho": "E vamos continuar investindo no aumento de oferta de exames e recursos diagnósticos, para aumentar a capacidade resolutiva das equipes e evitar encaminhamentos desnecessários à atenção especializada."
+  },
+  {
+   "candidato": "lula",
+   "assunto": "saude",
+   "texto": "Consolidar o prontuário único pela Rede Nacional de Dados em Saúde.",
+   "pagina": 35,
+   "trecho": "Vamos acelerar os esforços na consolidação do prontuário único do cidadão, que já avança por meio da Rede Nacional de Dados em Saúde (RNDS).",
+   "como": true
+  },
+  {
+   "candidato": "lula",
+   "assunto": "saude",
+   "texto": "Usar inteligência artificial na triagem e no diagnóstico.",
+   "pagina": 35,
+   "trecho": "Vamos acelerar a utilização de inteligência artificial para a triagem, a priorização de casos graves, a regulação por risco clínico e o diagnóstico em áreas com escassez de especialistas."
+  },
+  {
+   "candidato": "lula",
+   "assunto": "saude",
+   "texto": "Ajudar os municípios a levar saúde bucal a todos, como manda a lei.",
+   "pagina": 36,
+   "trecho": "Manteremos o apoio aos municípios para que, conforme a lei aprovada em nosso mandato, universalizem a oferta de saúde bucal.",
+   "meta": true,
+   "como": true
+  },
+  {
+   "candidato": "lula",
+   "assunto": "saude",
+   "texto": "Manter o Farmácia Popular 100% gratuito, com fraldas geriátricas.",
+   "pagina": 36,
+   "trecho": "O programa será mantido, 100% gratuito, assegurando contínua revisão dos medicamentos ofertados e a continuidade da distribuição de fraldas geriátricas.",
+   "como": true
+  },
+  {
+   "candidato": "lula",
+   "assunto": "saude",
+   "texto": "Ampliar os locais de retirada de remédios nas periferias.",
+   "pagina": 36,
+   "trecho": "Vamos continuar construindo parcerias para ampliar o número de locais de retirada nas periferias das grandes cidades e alternativas para onde não houver farmácia privada para conveniar."
+  },
+  {
+   "candidato": "lula",
+   "assunto": "saude",
+   "texto": "Incluir exames de hipertensão e diabetes no Farmácia Popular.",
+   "pagina": 36,
+   "trecho": "Uma inovação do programa será incluir exames laboratoriais, de diagnóstico e de monitoramento de condições crônicas de saúde, que afetam parcela significativa da população, tais como hipertensão arterial e diabetes.",
+   "como": true
+  },
+  {
+   "candidato": "lula",
+   "assunto": "saude",
+   "texto": "Ampliar a vacinação, com campanhas nacionais.",
+   "pagina": 36,
+   "trecho": "Vamos manter todos os esforços para continuar ampliando o acesso e a adesão da população à vacinação em todo o território nacional, com campanhas nacionais e ações em locais de fácil acesso e grande visibilidade."
+  },
+  {
+   "candidato": "lula",
+   "assunto": "saude",
+   "texto": "Vacinar contra a dengue e o vírus da bronquiolite.",
+   "pagina": 36,
+   "trecho": "Fortaleceremos a vacinação contra a dengue para toda a população brasileira elegível, bem como a vacinação contra o Vírus Sincicial Respiratório (VSR), principal causador de bronquiolite em crianças pequenas."
+  },
+  {
+   "candidato": "lula",
+   "assunto": "saude",
+   "texto": "Incluir novas vacinas no calendário do SUS.",
+   "pagina": 37,
+   "trecho": "Continuaremos incorporando novas vacinas ao calendário do SUS, como fizemos com a Pneumo 20, para crianças e com a bronquiolite, para gestantes.",
+   "como": true
+  },
+  {
+   "candidato": "lula",
+   "assunto": "saude",
+   "texto": "Impulsionar o Agora Tem Especialistas.",
+   "pagina": 37,
+   "trecho": "As ações do Agora Tem Especialistas serão ainda mais impulsionadas.",
+   "como": true
+  },
+  {
+   "candidato": "lula",
+   "assunto": "saude",
+   "texto": "Investir em equipamentos modernos para a rede pública.",
+   "pagina": 37,
+   "trecho": "Continuaremos investindo para garantir à rede pública equipamentos modernos e em número suficiente para atender a população."
+  },
+  {
+   "candidato": "lula",
+   "assunto": "saude",
+   "texto": "Ampliar tomógrafos, ressonâncias e salas de cirurgia, pelo Novo PAC.",
+   "pagina": 37,
+   "trecho": "Será nossa diretriz continuar ampliando e modernizando equipamentos de hemodinâmica, tomografia, ressonância magnética, radioterapia, PET-CT e salas completas de cirurgias, policlínicas e hospitais, investimentos já iniciados pelo Novo PAC.",
+   "como": true
+  },
+  {
+   "candidato": "lula",
+   "assunto": "saude",
+   "texto": "Ampliar a telessaúde e a cirurgia robótica.",
+   "pagina": 38,
+   "trecho": "A modernização tecnológica iniciada no atual governo terá continuidade, com mais salas telessaúde, telecirurgia, cirurgia robótica e serviços e hospitais inteligentes."
+  },
+  {
+   "candidato": "lula",
+   "assunto": "saude",
+   "texto": "Criar uma fila única digital para especialistas, ordenada pelo risco.",
+   "pagina": 38,
+   "trecho": "Aprimoraremos ainda mais a regulação do acesso à atenção especializada, garantindo maior transparência das filas e utilizando inteligência artificial, com fila única digital e ordenada pelo risco clínico, com transporte sanitário em todas as regiões de saúde."
+  },
+  {
+   "candidato": "lula",
+   "assunto": "saude",
+   "texto": "Consolidar a rede pública de tratamento do câncer.",
+   "pagina": 38,
+   "trecho": "Vamos consolidar, em todo o Brasil, a maior rede pública de cuidado ao câncer do mundo, com prevenção, diagnóstico e tratamento ao câncer com equipamentos e tratamentos modernos e atualização de novos medicamentos quimioterápicos e imunoterápicos."
+  },
+  {
+   "candidato": "lula",
+   "assunto": "saude",
+   "texto": "Consolidar o Supercentro Brasil de diagnóstico do câncer.",
+   "pagina": 38,
+   "trecho": "Consolidaremos o Supercentro Brasil de telediagnóstico do câncer, reduzindo o tempo para realização de diagnóstico das biopsias nas regiões remotas ou com déficit de profissionais.",
+   "como": true
+  },
+  {
+   "candidato": "lula",
+   "assunto": "saude",
+   "texto": "Ampliar os centros de tratamento do câncer (UNACONS e CACONS).",
+   "pagina": 38,
+   "trecho": "Ampliaremos os Centros Especializados de diagnóstico e tratamento do câncer (UNACONS e CACONS), com expansão de centros de radioterapia e cirurgias.",
+   "como": true
+  },
+  {
+   "candidato": "lula",
+   "assunto": "saude",
+   "texto": "Ampliar exames e tratamento de câncer de mama, colo do útero e endometriose.",
+   "pagina": 38,
+   "trecho": "Continuaremos reforçando a cobertura de exames e tratamento, incluindo o diagnóstico precoce dos cânceres de mama e do colo do útero, bem como os cuidados para mulheres que sofrem de endometriose e outras condições ginecológicas crônicas."
+  },
+  {
+   "candidato": "lula",
+   "assunto": "saude",
+   "texto": "Distribuir de graça no SUS contraceptivos de longa duração.",
+   "pagina": 38,
+   "trecho": "Fortaleceremos o planejamento reprodutivo ampliando o acesso a métodos contraceptivos modernos e de longa duração, a serem distribuídos gratuitamente no SUS, como fizemos com o Implanom.",
+   "como": true
+  },
+  {
+   "candidato": "lula",
+   "assunto": "saude",
+   "texto": "Fortalecer o Programa Dignidade Menstrual.",
+   "pagina": 38,
+   "trecho": "Fortaleceremos, também, o Programa Dignidade Menstrual, com acesso aos insumos essenciais para a saúde menstrual – absorventes e medicamentos.",
+   "como": true
+  },
+  {
+   "candidato": "lula",
+   "assunto": "saude",
+   "texto": "Melhorar o acesso ao parto para mulheres do campo e da floresta.",
+   "pagina": 39,
+   "trecho": "O acesso oportuno ao parto, especialmente para mulheres de áreas rurais, do campo, da floresta e das águas também será fortalecido."
+  },
+  {
+   "candidato": "lula",
+   "assunto": "saude",
+   "texto": "Fortalecer o Samu junto com a Rede Alyne, para gestantes.",
+   "pagina": 39,
+   "trecho": "Fortaleceremos o Samu para atuação integrada com a Rede Alyne, as casas de gestantes próximas às maternidades, ambulância perinatal e enfermeiras obstétricas na Amazônia Legal.",
+   "como": true
+  },
+  {
+   "candidato": "lula",
+   "assunto": "saude",
+   "texto": "Investir mais nos CAPS e na rede de saúde mental.",
+   "pagina": 39,
+   "trecho": "Na saúde mental, ampliaremos os investimentos na Rede de Atenção Psicossocial e nos CAPS, ampliando a atenção a crianças, adolescentes e jovens.",
+   "como": true
+  },
+  {
+   "candidato": "lula",
+   "assunto": "saude",
+   "texto": "Melhorar o diagnóstico e o acompanhamento de pessoas com TEA.",
+   "pagina": 39,
+   "trecho": "Também fortaleceremos o diagnóstico e o acompanhamento de pessoas com TEA e outras neurodivergências, bem como o cuidado psicossocial a mulheres em situação de violência."
+  },
+  {
+   "candidato": "lula",
+   "assunto": "saude",
+   "texto": "Ampliar o atendimento a quem tem problema com apostas.",
+   "pagina": 39,
+   "trecho": "Ampliaremos os profissionais e as estratégias voltadas às pessoas com problemas relacionados a jogos de apostas."
+  },
+  {
+   "candidato": "lula",
+   "assunto": "saude",
+   "texto": "Juntar saúde pública, empresas e universidades para inovar.",
+   "pagina": 39,
+   "trecho": "E, no próximo mandato, seguiremos mobilizando instituições públicas de saúde em articulação com empresas nacionais comprometidas com a inovação e com universidades e institutos de pesquisa."
+  },
+  {
+   "candidato": "lula",
+   "assunto": "saude",
+   "texto": "Melhorar as parcerias (PDPs) para produzir remédios no Brasil.",
+   "pagina": 39,
+   "trecho": "Continuaremos aperfeiçoando os instrumentos das PDPs para ampliar a absorção tecnológica, a inovação e o fortalecimento da indústria nacional.",
+   "como": true
+  },
+  {
+   "candidato": "lula",
+   "assunto": "saude",
+   "texto": "Pesquisar remédios a partir da biodiversidade.",
+   "pagina": 39,
+   "trecho": "Fortaleceremos a pesquisa e o desenvolvimento de insumos farmacêuticos ativos (IFAS) a partir da biodiversidade brasileira, com destaque para o potencial da Amazônia, e ampliaremos o sequenciamento genômico voltado ao estudo de variantes associadas à resistência ou à susceptibilidade a doenças infecciosas e crônicas."
+  },
+  {
+   "candidato": "lula",
+   "assunto": "saude",
+   "texto": "Manter regras contra propaganda de produtos que fazem mal à saúde.",
+   "pagina": 59,
+   "trecho": "Vamos também manter regras de publicidade que evitem a indução do consumo de produtos nocivos à saúde."
+  },
+  {
+   "candidato": "lula",
+   "assunto": "saude",
+   "texto": "Usar o Imposto Seletivo contra produtos nocivos à saúde.",
+   "pagina": 59,
+   "trecho": "Ao regulamentar a reforma tributária, vamos, por meio do Imposto Seletivo, desestimular produtos nocivos à saúde.",
+   "como": true
+  },
+  {
+   "candidato": "flavio",
+   "assunto": "corrupcao",
+   "texto": "Escolher dirigentes de estatais por competência, não por indicação política.",
+   "pagina": 70,
+   "trecho": "E vamos além: sempre que possível, o comando das estatais e dos cargos de direção será preenchido por recrutamento com regras de mercado, com busca ativa de profissionais qualificados, como fazem as empresas privadas quando procuram seus executivos, escolhendo pela competência comprovada, e não pela conveniência política."
+  },
+  {
+   "candidato": "flavio",
+   "assunto": "corrupcao",
+   "texto": "Proteger os fundos de pensão das estatais de indicação política.",
+   "pagina": 70,
+   "trecho": "Vamos blindar os fundos de pensão das estatais da indicação política, porque a aposentadoria do trabalhador não pode virar cofre de projeto de poder."
+  },
+  {
+   "candidato": "flavio",
+   "assunto": "corrupcao",
+   "texto": "Reeditar o pacote antifraude na Previdência.",
+   "pagina": 72,
+   "trecho": "Reeditaremos um pacote antifraude na Previdência, nos moldes do que fizemos em 2019, e não pouparemos esforços para coibir qualquer nova tentativa de roubar o dinheiro de quem já deu sua contribuição ao país.",
+   "como": true
+  },
+  {
+   "candidato": "flavio",
+   "assunto": "corrupcao",
+   "texto": "Mudar as regras do consignado, com dupla checagem contra descontos não autorizados.",
+   "pagina": 72,
+   "trecho": "Vamos mudar a governança do consignado para que a fraude não se repita, revendo quem opera esses descontos e como são autorizados, com mais transparência e mais controle, incluindo dupla checagem que impede que tirem do benefício o que não foi autorizado."
+  },
+  {
+   "candidato": "lula",
+   "assunto": "corrupcao",
+   "texto": "Seguir com o controle, a integridade e o combate à corrupção.",
+   "pagina": 18,
+   "trecho": "Vamos dar sequência às medidas de controle e integridade da administração pública e ao combate à corrupção."
+  },
+  {
+   "candidato": "lula",
+   "assunto": "corrupcao",
+   "texto": "Aprofundar o Plano de Integridade e Combate à Corrupção.",
+   "pagina": 18,
+   "trecho": "O Plano de Integridade e Combate à Corrupção 2025–2027 representa um avanço institucional que será aprofundado, fortalecendo a prevenção, a investigação e a responsabilização de corruptos e corruptores, inclusive os do andar de cima, com pleno respeito à independência das instituições.",
+   "como": true
+  },
+  {
+   "candidato": "lula",
+   "assunto": "corrupcao",
+   "texto": "Melhorar as regras de transparência.",
+   "pagina": 18,
+   "trecho": "Persistiremos, como no atual mandato, aprimorando as políticas e medidas de transparência."
+  },
+  {
+   "candidato": "lula",
+   "assunto": "corrupcao",
+   "texto": "Fortalecer a Ouvidoria-Geral da União e as consultas públicas.",
+   "pagina": 18,
+   "trecho": "Fortaleceremos ainda mais organismos como a Ouvidoria-Geral da União e as consultas públicas, em laboratórios de inovação cívica, consultas digitais, uso de inteligência artificial, observatórios temáticos, fortalecendo uma nova cultura democrática baseada na participação da sociedade no combate à corrupção.",
+   "como": true
+  },
+  {
+   "candidato": "flavio",
+   "assunto": "bolso",
+   "texto": "Rever a reforma tributária para reduzir impostos sobre produção e consumo.",
+   "pagina": 30,
+   "trecho": "Vamos promover a revisão e o redimensionamento da reforma tributária em curso e da majoração de impostos efetuada pelo atual governo, com o objetivo de reduzir efetivamente a carga sobre a produção e o consumo.",
+   "como": true
+  },
+  {
+   "candidato": "flavio",
+   "assunto": "bolso",
+   "texto": "Simplificar a conta de luz, reduzindo encargos como a CDE, e manter a tarifa social.",
+   "pagina": 31,
+   "trecho": "Vamos simplificar a conta de luz, racionalizando encargos e subsídios cruzados, e promover a redução gradual da CDE e das fontes incentivadas, mantida a tarifa social para quem mais precisa dela.",
+   "como": true
+  },
+  {
+   "candidato": "flavio",
+   "assunto": "bolso",
+   "texto": "Reduzir impostos sobre energia elétrica e combustíveis.",
+   "pagina": 31,
+   "trecho": "Vamos reduzir impostos sobre energia elétrica e combustíveis, buscar segurança energética ao menor preço possível para o consumidor e regular as diversas fontes com um único norte: o menor preço final para quem paga a conta."
+  },
+  {
+   "candidato": "flavio",
+   "assunto": "bolso",
+   "texto": "Criar condições para baixar os juros e trazer a inflação para a meta.",
+   "pagina": 33,
+   "trecho": "Ao estabilizar e reduzir a dívida pública, nosso governo vai criar as condições para que os juros básicos fiquem em linha com a média internacional e para que a inflação volte ao centro da meta."
+  },
+  {
+   "candidato": "flavio",
+   "assunto": "bolso",
+   "texto": "Proibir o uso do dinheiro de programas sociais em apostas.",
+   "pagina": 33,
+   "trecho": "Vamos proibir o uso dos recursos dos programas sociais para apostas, porque dinheiro destinado a pôr comida na mesa não pode escoar para a casa de apostas, e promover campanhas educativas e de conscientização sobre os riscos do endividamento com jogos."
+  },
+  {
+   "candidato": "flavio",
+   "assunto": "bolso",
+   "texto": "Ampliar a orientação financeira pela rede da CAIXA.",
+   "pagina": 33,
+   "trecho": "E vamos ampliar a orientação financeira, pela rede da CAIXA, para que o brasileiro aprenda a sair do vermelho, organizar o orçamento e começar a poupar.",
+   "como": true
+  },
+  {
+   "candidato": "flavio",
+   "assunto": "bolso",
+   "texto": "Reduzir aos poucos o custo de contratar com carteira assinada.",
+   "pagina": 43,
+   "trecho": "Vamos reduzir gradualmente o custo do trabalho, sem retirar direitos, para que mais brasileiros tenham carteira assinada e a proteção que vem com ela."
+  },
+  {
+   "candidato": "flavio",
+   "assunto": "bolso",
+   "texto": "Criar um contrato de trabalho mais barato para jovens de 18 a 24 anos.",
+   "pagina": 43,
+   "trecho": "Para o jovem, vamos criar um contrato de trabalho para os 18 a 24 anos em busca do primeiro emprego, com menor custo na folha, para que a empresa tenha estímulo a dar a primeira oportunidade e o jovem consiga a experiência que hoje lhe é cobrada e negada ao mesmo tempo."
+  },
+  {
+   "candidato": "flavio",
+   "assunto": "bolso",
+   "texto": "Criar um contrato mais atrativo para quem tem 50 anos ou mais e está desempregado.",
+   "pagina": 44,
+   "trecho": "Para quem tem mais idade, vamos criar um contrato mais atrativo para a contratação de pessoas com 50 anos ou mais desempregadas há pelo menos 12 meses: quem chega à meia-idade com uma vida inteira de trabalho não pode ser tratado como descartável."
+  },
+  {
+   "candidato": "flavio",
+   "assunto": "bolso",
+   "texto": "Permitir jornada flexível para mães, jovens e quem tem dificuldade de emprego.",
+   "pagina": 44,
+   "trecho": "Vamos também dar mais liberdade a quem trabalha, com jornada flexível que caiba na vida de mães, jovens e de quem tem mais dificuldade de entrar no mercado."
+  },
+  {
+   "candidato": "flavio",
+   "assunto": "bolso",
+   "texto": "Criar um banco nacional de vagas ligado ao RH das empresas.",
+   "pagina": 44,
+   "trecho": "Por isso vamos modernizar a intermediação de mão de obra, com um banco nacional de vagas conectado ao RH das empresas, para aproximar de forma rápida e direta quem procura trabalho de quem procura trabalhador, no lugar do sistema lento e desconectado de hoje."
+  },
+  {
+   "candidato": "flavio",
+   "assunto": "bolso",
+   "texto": "Criar o Minha Primeira Empresa, com Sistema S e crédito da CAIXA.",
+   "pagina": 45,
+   "trecho": "Para quem está começando, vamos criar o Minha Primeira Empresa: menos burocracia para abrir e formalizar o negócio, capacitação e orientação pelo Sistema S, para que o empreendedor aprenda a gerir o que criou, e uma esteira de crédito e serviços da CAIXA ao seu alcance, que o acompanhe do primeiro balcão ao primeiro faturamento.",
+   "como": true
+  },
+  {
+   "candidato": "flavio",
+   "assunto": "bolso",
+   "texto": "Dar crédito ao pequeno negócio pela CAIXA e apoio para exportar via BNDES e Apex.",
+   "pagina": 45,
+   "trecho": "Vamos apoiar o pequeno negócio com crédito para empreender e orientação, pela rede da CAIXA, e apoiar a internacionalização de pequenas e médias empresas via BNDES e Apex-Brasil, para que o produto brasileiro chegue mais longe.",
+   "como": true
+  },
+  {
+   "candidato": "flavio",
+   "assunto": "bolso",
+   "texto": "Fazer os gastos caberem no orçamento.",
+   "pagina": 71,
+   "trecho": "Vamos fazer o oposto: faremos nossos gastos caberem no orçamento, o que permitirá cobrar menos impostos e não empurrará dívida para as próximas gerações."
+  },
+  {
+   "candidato": "flavio",
+   "assunto": "bolso",
+   "texto": "Propor novas regras fiscais para reduzir a dívida.",
+   "pagina": 71,
+   "trecho": "Apresentaremos uma reformulação nas atuais regras fiscais, com regras claras focadas na estabilização e na redução da dívida pública conforme determina a Constituição.",
+   "como": true
+  },
+  {
+   "candidato": "flavio",
+   "assunto": "bolso",
+   "texto": "Entregar superávit primário e limitar o crédito subsidiado.",
+   "pagina": 71,
+   "trecho": "Vamos construir o equilíbrio fiscal duradouro, entregando superávits primários e limitando o crédito subsidiado com recursos do Tesouro, mitigando pressões inflacionárias."
+  },
+  {
+   "candidato": "flavio",
+   "assunto": "bolso",
+   "texto": "Criar regra de controle de gastos para os três Poderes.",
+   "pagina": 71,
+   "trecho": "E haverá uma regra clara de controle de gastos discricionários dos três Poderes da União."
+  },
+  {
+   "candidato": "lula",
+   "assunto": "bolso",
+   "texto": "Apoiar jovens que querem empreender e jovens do campo.",
+   "pagina": 25,
+   "trecho": "Persistiremos também criando políticas de fomento ao empreendedorismo entre os jovens e apoiando a juventude rural com crédito e ações específicas para seu perfil."
+  },
+  {
+   "candidato": "lula",
+   "assunto": "bolso",
+   "texto": "Criar condições para baixar os juros, com inflação controlada.",
+   "pagina": 49,
+   "trecho": "Para impulsionar ainda mais os investimentos produtivos e o crescimento econômico de longo prazo, vamos criar as condições para uma redução sustentada das taxas de juros, com inflação controlada e assegurando uma política fiscal responsável."
+  },
+  {
+   "candidato": "lula",
+   "assunto": "bolso",
+   "texto": "Manter o arcabouço fiscal.",
+   "pagina": 49,
+   "trecho": "Para isso, manteremos o novo arcabouço fiscal, que controlou o crescimento das despesas sem prejudicar as políticas sociais e permitiu uma redução significativa do déficit primário.",
+   "como": true
+  },
+  {
+   "candidato": "lula",
+   "assunto": "bolso",
+   "texto": "Manter a inflação sob controle.",
+   "pagina": 49,
+   "trecho": "Manteremos a inflação sob controle de forma duradoura e sustentável, garantindo que a renda real da população cresça acima do custo de vida."
+  },
+  {
+   "candidato": "lula",
+   "assunto": "bolso",
+   "texto": "Manter os fundos garantidores e o controle de gastos com apostas.",
+   "pagina": 49,
+   "trecho": "Além disso, seguiremos monitorando a evolução do endividamento das famílias e das empresas, assegurando a continuidade dos fundos garantidores, mantendo os mecanismos de controle de gastos excessivos em apostas on-line e aprimorando as regras de oferta e responsabilidade na concessão de crédito, conferindo maior proteção aos consumidores.",
+   "como": true
+  },
+  {
+   "candidato": "lula",
+   "assunto": "bolso",
+   "texto": "Fazer das pequenas empresas protagonistas da inovação.",
+   "pagina": 57,
+   "trecho": "Vamos transformar as micro e pequenas empresas em protagonistas da inovação, das exportações e da transição verde, fortalecendo o empreendedorismo feminino."
+  },
+  {
+   "candidato": "lula",
+   "assunto": "bolso",
+   "texto": "Simplificar a vida das pequenas empresas e abrir as compras do governo a elas.",
+   "pagina": 57,
+   "trecho": "No próximo período, vamos simplificar ainda mais o ambiente de negócios, ampliar o acesso das pequenas empresas às compras governamentais, assegurar tratamento tributário justo na implementação da reforma tributária e estimular uma cultura de inovação tecnológica e inserção exportadora."
+  },
+  {
+   "candidato": "lula",
+   "assunto": "bolso",
+   "texto": "Facilitar o crédito para pequenas empresas pelos fundos garantidores.",
+   "pagina": 58,
+   "trecho": "Seguiremos potencializando o acesso a crédito para MPMEs por meio dos fundos garantidores.",
+   "como": true
+  },
+  {
+   "candidato": "lula",
+   "assunto": "bolso",
+   "texto": "Investir em pequenas e médias empresas por fundos dos bancos públicos.",
+   "pagina": 58,
+   "trecho": "Também ampliaremos investimentos para apoiar o crescimento de pequenas e médias empresas em setores dinâmicos e portadores de futuro, por meio de fundos de participação estruturados pelos bancos públicos, em parceria com gestores privados e em conformidade com as diretrizes da política industrial.",
+   "como": true
+  },
+  {
+   "candidato": "lula",
+   "assunto": "bolso",
+   "texto": "Ampliar o Brasil Mais Produtivo para pequenas empresas.",
+   "pagina": 58,
+   "trecho": "O Brasil Mais Produtivo (B+P) será ampliado para alcançar mais micro, pequenas e médias empresas e fortalecer o empreendedorismo, especialmente por meio de linhas de crédito voltadas à digitalização e ao aumento da produtividade dessas empresas.",
+   "como": true
+  },
+  {
+   "candidato": "lula",
+   "assunto": "bolso",
+   "texto": "Fortalecer o Sistema Público de Emprego, Trabalho e Renda.",
+   "pagina": 74,
+   "trecho": "Começamos a reconstruir o Sistema Público de Emprego, Trabalho, Renda, objetivo que será fortalecido.",
+   "como": true
+  },
+  {
+   "candidato": "lula",
+   "assunto": "bolso",
+   "texto": "Integrar e ampliar os cursos de qualificação profissional.",
+   "pagina": 74,
+   "trecho": "Vamos integrar e ampliar as políticas de qualificação profissional, reforçando sua articulação com os objetivos do desenvolvimento econômico, novas competências e demandas do setor produtivo e do serviço público."
+  },
+  {
+   "candidato": "lula",
+   "assunto": "bolso",
+   "texto": "Expandir no SINE a plataforma nacional de empregos com IA.",
+   "pagina": 74,
+   "trecho": "Vamos expandir, na rede SINE, a Plataforma Pública Nacional de Empregabilidade com IA, para integrar vagas, cursos, certificações e serviços de orientação profissional.",
+   "como": true
+  },
+  {
+   "candidato": "lula",
+   "assunto": "bolso",
+   "texto": "Criar vagas em atividades de interesse coletivo.",
+   "pagina": 74,
+   "trecho": "Vamos buscar estimular ocupações sociais, criando oportunidades de trabalho em atividades de interesse coletivo, socialmente úteis como conservação ambiental, cultura, preservação do patrimônio, esporte e economia do cuidado."
+  },
+  {
+   "candidato": "lula",
+   "assunto": "bolso",
+   "texto": "Combater a pejotização fraudulenta.",
+   "pagina": 74,
+   "trecho": "Vamos continuar combatendo a pejotização espúria, com fiscalização, regras que inibam migrações fraudulentas, equiparando responsabilidades administrativas e previdenciárias e fortalecendo a inspeção do trabalho."
+  },
+  {
+   "candidato": "lula",
+   "assunto": "bolso",
+   "texto": "No Senado, aprovar o fim da escala 6x1 e a jornada de 40 horas.",
+   "pagina": 75,
+   "trecho": "Manteremos nossa ação junto ao Senado Federal para assegurar o fim da escala 6x1 e a redução da jornada de trabalho para 40 horas, sem redução salarial, nos termos aprovados na Câmara dos Deputados.",
+   "meta": true,
+   "como": true
+  },
+  {
+   "candidato": "lula",
+   "assunto": "bolso",
+   "texto": "Mudar a legislação trabalhista para combater a precarização.",
+   "pagina": 75,
+   "trecho": "Vamos aprimorar a legislação trabalhista, alterando regras que induzem a precarização das condições de trabalho, os marcos regressivos contidos na legislação, as fraudes presentes em muitas terceirizações, e retomando assistência sindical nas homologações de rescisão do contrato de trabalho.",
+   "como": true
+  },
+  {
+   "candidato": "lula",
+   "assunto": "bolso",
+   "texto": "Fortalecer a economia popular e solidária.",
+   "pagina": 75,
+   "trecho": "Vamos fortalecer a Economia Popular e Solidária com prioridade à inclusão produtiva de empreendedores populares, ocupações informais, catadores, agricultores familiares e da cultura e economia do cuidado de base comunitária e demais segmentos da economia popular."
+  },
+  {
+   "candidato": "lula",
+   "assunto": "bolso",
+   "texto": "Fortalecer cooperativas populares.",
+   "pagina": 76,
+   "trecho": "Vamos seguir com as ações de constituição e fortalecimento de cooperativas populares;"
+  },
+  {
+   "candidato": "lula",
+   "assunto": "bolso",
+   "texto": "Ampliar crédito e qualificação para autônomos e pequenos empreendedores.",
+   "pagina": 76,
+   "trecho": "Vamos ampliar e aprimorar políticas para os trabalhadores autônomos e pequenos empreendedores, com acesso ao crédito produtivo, programas de qualificação e assistência técnica, apoio à inovação na agregação de valor, produção e escala e planos de comercialização, inclusão digital, simplificação tributária, além da cobertura da proteção social, especialmente em relação à previdência, à proteção diante de acidentes, doenças e períodos de interrupção da atividade laboral em garantia da estabilidade, produtividade e segurança econômica."
+  },
+  {
+   "candidato": "lula",
+   "assunto": "bolso",
+   "texto": "Estimular a negociação coletiva entre empresas e trabalhadores.",
+   "pagina": 76,
+   "trecho": "Vamos continuar fomentando o diálogo social e estimular a contratação coletiva em diferentes âmbitos (local, regional, setorial, cadeia produtiva, temático e nacional), desenvolver políticas e ferramentas que apoiem a negociação coletiva (formação, documentação, mediação e arbitragem, entre outros) e regras que favoreçam o processo negocial."
+  },
+  {
+   "candidato": "flavio",
+   "assunto": "educacao",
+   "texto": "Ampliar as creches em período integral.",
+   "pagina": 21,
+   "trecho": "Vamos ampliar a oferta de creches para as crianças desde a primeira infância, em período integral, com alimentação digna e foco no desenvolvimento infantil."
+  },
+  {
+   "candidato": "flavio",
+   "assunto": "educacao",
+   "texto": "Alfabetizar pelo método fônico.",
+   "pagina": 35,
+   "trecho": "Vamos priorizar o método fônico, que é o de melhor resultado comprovado pela ciência, ensinando a criança a ligar cada som à sua letra, em vez das abordagens que fracassaram por décadas."
+  },
+  {
+   "candidato": "flavio",
+   "assunto": "educacao",
+   "texto": "Criar o Programa Acolher, em que alunos bons dão reforço aos colegas.",
+   "pagina": 35,
+   "trecho": "E, para o aluno com dificuldade ao longo do ensino fundamental, vamos criar o Programa Acolher: um aluno com bom desempenho é remunerado para dar reforço aos colegas que precisam, de forma remota ou presencial.",
+   "como": true
+  },
+  {
+   "candidato": "flavio",
+   "assunto": "educacao",
+   "texto": "Dar formação contínua aos professores, com base em evidência científica.",
+   "pagina": 35,
+   "trecho": "Os professores terão qualificação contínua baseada em evidências científicas, e não em modismos pedagógicos, com formação que os prepare para ensinar bem, e não para militar em sala de aula."
+  },
+  {
+   "candidato": "flavio",
+   "assunto": "educacao",
+   "texto": "Manter a escola livre de doutrinação político-partidária.",
+   "pagina": 35,
+   "trecho": "A educação será orientada pelo conhecimento e livre de doutrinação político-partidária, respeitando a liberdade de consciência e o papel das famílias."
+  },
+  {
+   "candidato": "flavio",
+   "assunto": "educacao",
+   "texto": "Ampliar as Escolas Cívico-Militares e tirar do papel a política para alunos com altas habilidades.",
+   "pagina": 35,
+   "trecho": "Vamos ampliar as Escolas Cívico-Militares, que uniram disciplina e bom desempenho onde foram implantadas, e garantir atendimento ao aluno com altas habilidades, que hoje se perde por falta de estímulo: a política nacional que trata do tema é lei mas segue sem implementação, e nós vamos tirá-la do papel.",
+   "como": true
+  },
+  {
+   "candidato": "flavio",
+   "assunto": "educacao",
+   "texto": "Levar robótica, computadores, tablets e internet às escolas.",
+   "pagina": 35,
+   "trecho": "Vamos ainda levar robótica, computadores, tablets e internet às escolas, e incluir no currículo competências para a economia digital, preparando o jovem para lidar com o próprio dinheiro, empreender e usar as novas tecnologias, entre elas a inteligência artificial."
+  },
+  {
+   "candidato": "flavio",
+   "assunto": "educacao",
+   "texto": "Manter o Escola nas Férias, com esporte e arte nas férias.",
+   "pagina": 35,
+   "trecho": "Manteremos as escolas abertas nas férias com o Escola nas Férias, oferecendo esporte, arte, música e literatura em vez de deixar a criança ociosa.",
+   "como": true
+  },
+  {
+   "candidato": "flavio",
+   "assunto": "educacao",
+   "texto": "Ampliar o ensino técnico no ensino médio, em parceria com empresas.",
+   "pagina": 36,
+   "trecho": "Vamos ampliar a oferta de educação técnica para os alunos do ensino médio, para que o jovem saia da escola já com uma profissão na mão, e não apenas com um diploma."
+  },
+  {
+   "candidato": "flavio",
+   "assunto": "educacao",
+   "texto": "Criar a Política Nacional de Formação de Talentos.",
+   "pagina": 36,
+   "trecho": "Vamos tratar a formação como vetor da transformação tecnológica, adequando o que se ensina às profissões do presente e do futuro, e criar a Política Nacional de Formação de Talentos, para identificar e desenvolver as habilidades que o mercado de trabalho vai exigir.",
+   "como": true
+  },
+  {
+   "candidato": "flavio",
+   "assunto": "educacao",
+   "texto": "Passar o ensino superior para o Ministério da Ciência e Tecnologia.",
+   "pagina": 36,
+   "trecho": "No ensino superior, vamos transferir a governança para o Ministério da Ciência, Tecnologia e Inovações, unificando ciência e ensino superior sob o mesmo teto.",
+   "como": true
+  },
+  {
+   "candidato": "flavio",
+   "assunto": "educacao",
+   "texto": "Trocar o financiamento estudantil por um empréstimo pago conforme a renda.",
+   "pagina": 37,
+   "trecho": "Em lugar dele, vamos adotar o Empréstimo Contingente à Renda: o estudante só começa a pagar quando estiver empregado e ganhando, o valor da parcela é proporcional ao que ele recebe e o prazo é bem mais longo.",
+   "como": true
+  },
+  {
+   "candidato": "lula",
+   "assunto": "educacao",
+   "texto": "Implantar a Universidade Indígena.",
+   "pagina": 20,
+   "trecho": "Vamos implantar plenamente a Universidade Indígena, criada em 2026.",
+   "como": true
+  },
+  {
+   "candidato": "lula",
+   "assunto": "educacao",
+   "texto": "Melhorar o Pé-de-Meia.",
+   "pagina": 24,
+   "trecho": "Aprimoraremos o Programa Pé-de-Meia, para continuar apoiando a juventude em seu processo educacional.",
+   "como": true
+  },
+  {
+   "candidato": "lula",
+   "assunto": "educacao",
+   "texto": "Manter os cursinhos populares (CPop) para entrar na faculdade.",
+   "pagina": 24,
+   "trecho": "Manteremos os investimentos na rede nacional de cursinhos populares (CPop), de modo a facilitar o acesso da juventude ao ensino superior.",
+   "como": true
+  },
+  {
+   "candidato": "lula",
+   "assunto": "educacao",
+   "texto": "Ampliar a alimentação e a moradia para estudantes de faculdade.",
+   "pagina": 24,
+   "trecho": "Fortaleceremos ainda mais a assistência estudantil, ampliando o acesso à alimentação e à moradia estudantil para os jovens que estão no ensino superior."
+  },
+  {
+   "candidato": "lula",
+   "assunto": "educacao",
+   "texto": "Cumprir as metas do Plano Nacional de Educação.",
+   "pagina": 31,
+   "trecho": "No novo mandato, a conciliação destes objetivos continuará orientando a ação federal, que será também pautada pelo compromisso em cumprir as metas do Plano Nacional de Educação 2026-2036.",
+   "como": true
+  },
+  {
+   "candidato": "lula",
+   "assunto": "educacao",
+   "texto": "Com estados e municípios, chegar a 80% das crianças alfabetizadas na idade certa.",
+   "pagina": 31,
+   "trecho": "Seguiremos com as ações e políticas já pactuadas com os estados e municípios brasileiros para chegarmos à meta de 80% das nossas crianças alfabetizadas na idade certa.",
+   "meta": true,
+   "como": true
+  },
+  {
+   "candidato": "lula",
+   "assunto": "educacao",
+   "texto": "Criar uma estratégia nacional para recuperar o aprendizado atrasado.",
+   "pagina": 31,
+   "trecho": "Ao mesmo tempo, continuaremos fortalecendo as políticas de enfrentamento do analfabetismo na população adulta e vamos instituir uma estratégia nacional permanente de recomposição e aceleração das aprendizagens, com atenção especial aos anos finais do ensino fundamental e ao ensino médio."
+  },
+  {
+   "candidato": "lula",
+   "assunto": "educacao",
+   "texto": "Pelo Novo PAC, apoiar estados e municípios a cumprir as metas da educação.",
+   "pagina": 31,
+   "trecho": "Na segunda edição do Novo PAC, ampliaremos ainda mais o fomento a estados e municípios para juntos alcançarmos a metas do PNE.",
+   "como": true
+  },
+  {
+   "candidato": "lula",
+   "assunto": "educacao",
+   "texto": "Priorizar a educação em tempo integral.",
+   "pagina": 31,
+   "trecho": "O fomento à expansão da educação em tempo integral terá absoluta prioridade no novo mandato."
+  },
+  {
+   "candidato": "lula",
+   "assunto": "educacao",
+   "texto": "Manter o apoio do Novo PAC a estados e municípios.",
+   "pagina": 32,
+   "trecho": "Na segunda edição do Novo PAC, manteremos o apoio a estados e municípios.",
+   "como": true
+  },
+  {
+   "candidato": "lula",
+   "assunto": "educacao",
+   "texto": "Levar internet de qualidade a todas as escolas no mandato.",
+   "pagina": 32,
+   "trecho": "Vamos universalizar este serviço no próximo mandato, garantindo acesso a essa dimensão cada vez mais central para a qualidade da educação.",
+   "meta": true,
+   "prazo": true
+  },
+  {
+   "candidato": "lula",
+   "assunto": "educacao",
+   "texto": "Ampliar o MEC Livros e o MEC Idiomas.",
+   "pagina": 32,
+   "trecho": "No próximo mandato seguiremos ampliando o acervo do MEC Livros e incluindo novas línguas no MEC Idiomas.",
+   "como": true
+  },
+  {
+   "candidato": "lula",
+   "assunto": "educacao",
+   "texto": "Apoiar tecnicamente estados e municípios na educação.",
+   "pagina": 32,
+   "trecho": "Continuaremos exercendo liderança estratégica, apoiando tecnicamente os estados, o Distrito Federal e os municípios para fortalecer a cooperação entre os entes e contribuir com a formação de gestores e equipes técnicas.",
+   "como": true
+  },
+  {
+   "candidato": "lula",
+   "assunto": "educacao",
+   "texto": "Compartilhar dados para melhorar as políticas de educação.",
+   "pagina": 32,
+   "trecho": "Avançaremos com o compartilhamento de dados para eficiente execução das políticas educacionais."
+  },
+  {
+   "candidato": "lula",
+   "assunto": "educacao",
+   "texto": "Manter o Piso do Magistério, o Pé-de-Meia Licenciatura e o Bolsa Mais Professores.",
+   "pagina": 33,
+   "trecho": "O Piso Nacional do Magistério será mantido e daremos continuidade às medidas de apoio à formação docente, de elevação da atratividade das licenciaturas, por meio do Pé-de-Meia Licenciatura, e de fixação de docentes em regiões do país e áreas do conhecimento, por meio do Bolsa Mais Professores.",
+   "como": true
+  },
+  {
+   "candidato": "lula",
+   "assunto": "educacao",
+   "texto": "Abrir mais 111 Institutos Federais em 106 municípios.",
+   "pagina": 33,
+   "trecho": "Serão mais 111 IFs, com novos campus em 106 municípios de todos os estados.",
+   "meta": true,
+   "como": true
+  },
+  {
+   "candidato": "lula",
+   "assunto": "educacao",
+   "texto": "Concluir a unidade do ITA no Ceará e as universidades Indígena e do Esporte.",
+   "pagina": 33,
+   "trecho": "Além de concluir as obras em curso, inclusive dos novos campi, será concluída a implantação da nova unidade do ITA, no Ceará, e da Universidade Indígena e da Universidade do Esporte.",
+   "como": true
+  },
+  {
+   "candidato": "lula",
+   "assunto": "educacao",
+   "texto": "Expandir o ensino superior público para o interior.",
+   "pagina": 33,
+   "trecho": "Haverá também novo ciclo expansão e interiorização da educação superior pública para superar os vazios educacionais e as assimetrias regionais."
+  },
+  {
+   "candidato": "lula",
+   "assunto": "educacao",
+   "texto": "Melhorar a assistência para os estudantes concluírem o curso.",
+   "pagina": 33,
+   "trecho": "Adotaremos medidas para aperfeiçoar a assistência estudantil, para garantir a permanência e a conclusão dos cursos pelos estudantes nas instituições públicas."
+  },
+  {
+   "candidato": "lula",
+   "assunto": "educacao",
+   "texto": "Ampliar a pós-graduação nas regiões com pouca oferta.",
+   "pagina": 34,
+   "trecho": "Continuaremos a investir na ampliação e na melhoria da qualidade de pósgraduação nas áreas de conhecimento, nas regiões e nas localidades pouco ou não atendidas."
+  },
+  {
+   "candidato": "flavio",
+   "assunto": "fome",
+   "texto": "Manter os programas sociais, com combate às fraudes.",
+   "pagina": 42,
+   "trecho": "Por isso, o compromisso é claro e vem em primeiro lugar: vamos manter os programas sociais existentes, com aperfeiçoamento da gestão, correção de distorções e combate às fraudes."
+  },
+  {
+   "candidato": "flavio",
+   "assunto": "fome",
+   "texto": "Dar a quem recebe programa social prioridade em vagas e cursos.",
+   "pagina": 43,
+   "trecho": "Por isso, o beneficiário de programa social terá prioridade em todas as ações do Estado voltadas ao trabalho: prioridade nos programas de primeiro emprego, nas ações de qualificação profissional e na intermediação de mão de obra."
+  },
+  {
+   "candidato": "flavio",
+   "assunto": "fome",
+   "texto": "Criar uma trilha de cursos e vagas para quem recebe benefício.",
+   "pagina": 43,
+   "trecho": "Criaremos uma trilha de qualificação e intermediação desenhada especialmente para quem recebe o benefício, para que a saída não seja um salto no escuro, mas um caminho com apoio em cada passo."
+  },
+  {
+   "candidato": "flavio",
+   "assunto": "fome",
+   "texto": "Garantir a volta ao benefício, sem fila, depois do seguro-desemprego.",
+   "pagina": 43,
+   "trecho": "E garantiremos o retorno imediato e sem fila ao benefício após o seguro-desemprego, mantidas as condições de elegibilidade, para que ninguém tenha medo de tentar um emprego e acabar desamparado se não der certo.",
+   "como": true
+  },
+  {
+   "candidato": "flavio",
+   "assunto": "fome",
+   "texto": "Criar um programa em que o governo premia quem faz a sua parte.",
+   "pagina": 46,
+   "trecho": "A grande inovação será o Ganha-Ganha, um programa em que o Estado reconhece quem faz a sua parte.",
+   "como": true
+  },
+  {
+   "candidato": "lula",
+   "assunto": "fome",
+   "texto": "Ampliar a rede de assistência social, com mais recursos.",
+   "pagina": 25,
+   "trecho": "No próximo mandato, avançaremos ainda mais no fortalecimento da Proteção Social Básica e da Proteção Social Especial de média e alta complexidade, seja com mais recursos para atendimento às populações, seja por meio da expansão e modernização da rede de atendimento.",
+   "como": true
+  },
+  {
+   "candidato": "lula",
+   "assunto": "fome",
+   "texto": "Ligar a assistência social (SUAS) ao socorro em desastres climáticos.",
+   "pagina": 25,
+   "trecho": "Buscaremos também consolidar uma agenda nacional de proteção social para povos e comunidades tradicionais e integrar o SUAS à agenda de enfrentamento das mudanças climáticas e dos desastres, para amplificar a capacidade de o Estado proteger famílias atingidas por eventos extremos.",
+   "como": true
+  },
+  {
+   "candidato": "lula",
+   "assunto": "fome",
+   "texto": "Fomentar lavanderias públicas, cozinhas solidárias e restaurantes populares.",
+   "pagina": 26,
+   "trecho": "Fomentaremos a construção de infraestruturas que ampliam os cuidados indiretos e comunitários, como as lavanderias públicas, as cozinhas solidárias e os restaurantes populares.",
+   "como": true
+  },
+  {
+   "candidato": "lula",
+   "assunto": "fome",
+   "texto": "Fortalecer os conselhos de segurança alimentar.",
+   "pagina": 58,
+   "trecho": "Para o próximo mandato, vamos continuar fortalecendo as instâncias de participação e governança na área da segurança alimentar e da produção de alimentos."
+  },
+  {
+   "candidato": "lula",
+   "assunto": "fome",
+   "texto": "Apoiar estados e municípios na compra de alimentos, com o Contrata+ Brasil.",
+   "pagina": 59,
+   "trecho": "No próximo mandato, continuaremos apoiando estados e municípios para cumprirem estes percentuais, inclusive por meio de soluções tecnológicas, como a plataforma Contrata+Brasil.",
+   "como": true
+  },
+  {
+   "candidato": "lula",
+   "assunto": "fome",
+   "texto": "Manter a ampliação do PAA, que compra alimentos da agricultura familiar.",
+   "pagina": 59,
+   "trecho": "A ampliação do PAA será mantida, priorizando a compra de alimentos frescos e diversificados da agricultura familiar e da sociobiodiversidade para equipamentos públicos e famílias vulneráveis.",
+   "como": true
+  },
+  {
+   "candidato": "lula",
+   "assunto": "fome",
+   "texto": "Ampliar o Programa Cisternas.",
+   "pagina": 60,
+   "trecho": "Ampliaremos o Programa Cisternas em regiões com estresse hídrico, garantindo água para consumo e produção.",
+   "como": true
+  },
+  {
+   "candidato": "flavio",
+   "assunto": "direitos",
+   "texto": "Aprovar a castração química para quem abusa de mulheres e crianças.",
+   "pagina": 14,
+   "trecho": "Cortar o mal pela raiz Vamos usar a força da Presidência da República e a nossa experiência legislativa para aprovar e implementar a castração química de criminosos que abusam de mulheres e crianças.",
+   "como": true
+  },
+  {
+   "candidato": "flavio",
+   "assunto": "direitos",
+   "texto": "Monitorar com tornozeleira os agressores de mulheres com medida protetiva.",
+   "pagina": 14,
+   "trecho": "Os agressores das mais de meio milhão de mulheres com medida protetiva no Brasil serão monitorados pelas autoridades com o uso de tornozeleiras eletrônicas."
+  },
+  {
+   "candidato": "flavio",
+   "assunto": "direitos",
+   "texto": "Obrigar assassinos e agressores de mulheres a cumprir a pena inteira.",
+   "pagina": 14,
+   "trecho": "Vamos endurecer a lei e obrigar assassinos e agressores de mulheres a cumprir integralmente suas penas."
+  },
+  {
+   "candidato": "flavio",
+   "assunto": "direitos",
+   "texto": "Criar a Central da Mulher, com vários serviços num lugar só.",
+   "pagina": 17,
+   "trecho": "Central da Mulher um único lugar para resolver tudo A Central da Mulher será um espaço físico onde a mulher resolve a vida sem perder tempo nem percorrer a cidade inteira.",
+   "como": true
+  },
+  {
+   "candidato": "flavio",
+   "assunto": "direitos",
+   "texto": "Juntar o Ligue 180, as delegacias online e o botão de emergência numa só plataforma.",
+   "pagina": 18,
+   "trecho": "Vamos modernizar e integrar os canais de denúncia, reunindo o Ligue 180, as delegacias online, o botão de emergência e as centrais de monitoramento em uma plataforma inteligente de resposta rápida.",
+   "como": true
+  },
+  {
+   "candidato": "flavio",
+   "assunto": "direitos",
+   "texto": "Criar a ClarIA, chat para registrar ocorrência e pedir medida protetiva.",
+   "pagina": 19,
+   "trecho": "Pelo chat da ClarIA será possível registrar ocorrência, pedir medida protetiva e receber orientação e acolhimento.",
+   "como": true
+  },
+  {
+   "candidato": "flavio",
+   "assunto": "direitos",
+   "texto": "Criar um sistema nacional que avalia o risco de cada denúncia de violência.",
+   "pagina": 19,
+   "trecho": "Vamos implantar um sistema nacional de avaliação de risco, para que cada denúncia receba atendimento proporcional ao nível da ameaça, priorizando os casos mais graves."
+  },
+  {
+   "candidato": "flavio",
+   "assunto": "direitos",
+   "texto": "Oferecer às mulheres orientação para organizar a vida financeira.",
+   "pagina": 19,
+   "trecho": "Vamos oferecer orientação financeira, do primeiro salário ao primeiro patrimônio, com programas para organizar a vida financeira: cuidar do orçamento doméstico, sair do endividamento, criar poupança e se proteger do impacto das apostas online sobre a família."
+  },
+  {
+   "candidato": "flavio",
+   "assunto": "direitos",
+   "texto": "Ampliar o CAIXA Pra Elas, com o Banco da Amazônia e o Banco do Nordeste.",
+   "pagina": 20,
+   "trecho": "A CAIXA Econômica Federal, o Banco da Amazônia e o Banco do Nordeste serão motores dessa prosperidade, ampliando o programa CAIXA Pra Elas e ajudando milhões de mulheres a construir reputação financeira e formar patrimônio ao longo da vida.",
+   "como": true
+  },
+  {
+   "candidato": "flavio",
+   "assunto": "direitos",
+   "texto": "Ampliar os abrigos para mulheres em situação de violência.",
+   "pagina": 20,
+   "trecho": "Casa Segura a proteção começa pelo lar Vamos ampliar os espaços de acolhimento para mulheres em situação de violência, porque nenhuma mulher deve continuar ao lado do agressor por não ter para onde ir."
+  },
+  {
+   "candidato": "flavio",
+   "assunto": "direitos",
+   "texto": "Ajudar a mulher a tirar a escritura da casa no próprio nome.",
+   "pagina": 20,
+   "trecho": "E vamos assessorar a mulher a obter a escritura da casa própria no seu nome, uma das formas mais sólidas de autonomia e de proteção contra a violência doméstica: um patrimônio que é dela e que um dia passará aos filhos, aconteça o que acontecer."
+  },
+  {
+   "candidato": "flavio",
+   "assunto": "direitos",
+   "texto": "Criar a Escola Brasil por Elas, com cursos gratuitos com o Sistema S.",
+   "pagina": 20,
+   "trecho": "Escola Brasil por Elas mais conhecimento e capacitação às mulheres A Escola Brasil por Elas será o maior programa gratuito de capacitação feminina da América Latina, integrado aos cursos do Sistema S e a parcerias público-privadas.",
+   "como": true
+  },
+  {
+   "candidato": "flavio",
+   "assunto": "direitos",
+   "texto": "Criar o Mais Trabalho para Elas, que junta vagas, cursos e apoio a quem quer abrir negócio.",
+   "pagina": 20,
+   "trecho": "Mais Trabalho para Elas mais emprego, mais renda, mais independência Vamos criar um sistema que integre vagas de emprego, qualificação, abertura simplificada de empresa, apoio ao pequeno negócio e intermediação de mão de obra.",
+   "como": true
+  },
+  {
+   "candidato": "flavio",
+   "assunto": "direitos",
+   "texto": "Criar Centros de Referência em Transtorno do Espectro Autista.",
+   "pagina": 39,
+   "trecho": "Nossas políticas serão transversais, atravessando todas as áreas do governo, voltadas a ações concretas de garantia de direitos, inclusão e integração social, entre elas a implantação de Centros de Referência em Transtorno do Espectro Autista.",
+   "como": true
+  },
+  {
+   "candidato": "flavio",
+   "assunto": "direitos",
+   "texto": "Dar a indígenas e quilombolas autonomia para decidir sobre produção em suas terras.",
+   "pagina": 50,
+   "trecho": "Será conferida autonomia aos povos indígenas e quilombolas para decidir sobre atividades produtivas em suas terras, com respeito ao desenvolvimento sustentável e às regras ambientais, e com indenização de eventuais restrições ao usufruto e mecanismos de compensação, para que quem vive na terra possa dela tirar o próprio sustento."
+  },
+  {
+   "candidato": "lula",
+   "assunto": "direitos",
+   "texto": "Manter o combate ao racismo no centro das políticas.",
+   "pagina": 19,
+   "trecho": "Manteremos o combate ao racismo no centro de nossa estratégia de desenvolvimento, pois não é possível compreender nem superar as desigualdades brasileiras sem enfrentar a questão racial como dimensão estruturante da sociedade."
+  },
+  {
+   "candidato": "lula",
+   "assunto": "direitos",
+   "texto": "Pôr em prática as decisões da Conferência Nacional de Igualdade Racial.",
+   "pagina": 19,
+   "trecho": "Vamos continuar engajados na implementação das deliberações da 5ª Conferência Nacional de Promoção da Igualdade Racial (V CONAPIR), realizada em 2025, após um intervalo de sete anos.",
+   "como": true
+  },
+  {
+   "candidato": "lula",
+   "assunto": "direitos",
+   "texto": "Regulamentar mais pontos do Estatuto da Igualdade Racial.",
+   "pagina": 19,
+   "trecho": "Avançaremos ainda mais na regulamentação do Estatuto da Igualdade Racial para a consolidação da equidade como política de Estado.",
+   "como": true
+  },
+  {
+   "candidato": "lula",
+   "assunto": "direitos",
+   "texto": "Seguir com as cotas para pessoas negras no serviço público.",
+   "pagina": 19,
+   "trecho": "As políticas de fomento à participação da população negra no funcionalismo público, especialmente nos espaços superiores da gestão governamental, terão continuidade, alinhadas à política de cotas no serviço público que aprimoramos no atual mandato.",
+   "como": true
+  },
+  {
+   "candidato": "lula",
+   "assunto": "direitos",
+   "texto": "Acelerar a política de educação para as relações étnico-raciais e quilombola (PNEERQ).",
+   "pagina": 20,
+   "trecho": "Vamos acelerar a implementação da Política Nacional de Equidade, Educação para as Relações Étnico-Raciais e Educação Escolar Quilombola (PNEERQ).",
+   "como": true
+  },
+  {
+   "candidato": "lula",
+   "assunto": "direitos",
+   "texto": "Acelerar os títulos de terra das comunidades quilombolas.",
+   "pagina": 20,
+   "trecho": "Vamos dar continuidade a este processo de reconhecimento do direito ao território, buscando acelerar os procedimentos e garantir que sejam acompanhados de políticas de desenvolvimento territorial."
+  },
+  {
+   "candidato": "lula",
+   "assunto": "direitos",
+   "texto": "Proteger as terras indígenas, com demarcação e retirada de invasores.",
+   "pagina": 20,
+   "trecho": "Persistiremos, garantindo proteção a seus territórios, com ações para demarcação e desintrusão de terras sempre que necessárias."
+  },
+  {
+   "candidato": "lula",
+   "assunto": "direitos",
+   "texto": "Garantir educação indígena com respeito à cultura de cada povo.",
+   "pagina": 20,
+   "trecho": "Persistiremos, assegurando que as políticas de educação escolar indígena estejam fundamentadas no respeito à autonomia dos povos indígenas, na interculturalidade, no multilinguismo e nas formas próprias de produção e difusão de conhecimentos."
+  },
+  {
+   "candidato": "lula",
+   "assunto": "direitos",
+   "texto": "Proteger os direitos dos povos indígenas, com atenção aos yanomamis.",
+   "pagina": 20,
+   "trecho": "Manteremos nossos esforços para a elevação da qualidade de vida e da preservação dos direitos de todos os povos, com atenção especial aos yanomamis, submetidos na gestão anterior a um verdadeiro genocídio, cuja reversão dos impactos ainda está em curso."
+  },
+  {
+   "candidato": "lula",
+   "assunto": "direitos",
+   "texto": "Concluir 30 Casas da Mulher Brasileira e 15 Centros de Referência da Mulher.",
+   "pagina": 21,
+   "trecho": "Vamos dar sequência ao Pacto, ampliando a rede de proteção às mulheres – concluiremos as 30 Casas da Mulher Brasileira e os 15 Centros de Referência da Mulher Brasileira.",
+   "meta": true,
+   "como": true
+  },
+  {
+   "candidato": "lula",
+   "assunto": "direitos",
+   "texto": "Ampliar as Salas Lilás e dar aos estados kits para monitorar agressores.",
+   "pagina": 21,
+   "trecho": "Ampliaremos as Salas Lilás e vamos adquirir e distribuir aos Estados kits para aprimorar o monitoramento de agressores.",
+   "como": true
+  },
+  {
+   "candidato": "lula",
+   "assunto": "direitos",
+   "texto": "Capacitar as polícias para atender mulheres vítimas de violência.",
+   "pagina": 21,
+   "trecho": "Seguiremos fomentando a capacitação das forças de segurança para qualificar o atendimento às mulheres vítimas de violência e a punição aos que infligirem a violência."
+  },
+  {
+   "candidato": "lula",
+   "assunto": "direitos",
+   "texto": "Dar crédito com juros menores a agricultoras pelo Pronaf.",
+   "pagina": 21,
+   "trecho": "Persistiremos buscando assegurar políticas que apoiem as mulheres em sua inserção no mundo do trabalho, com linhas de crédito mais favorecidas para agricultoras e extrativistas no âmbito do Pronaf;",
+   "como": true
+  },
+  {
+   "candidato": "lula",
+   "assunto": "direitos",
+   "texto": "Manter o programa Viver sem Limite, para pessoas com deficiência.",
+   "pagina": 23,
+   "trecho": "Manteremos a implementação do Viver sem Limites.",
+   "como": true
+  },
+  {
+   "candidato": "lula",
+   "assunto": "direitos",
+   "texto": "Aplicar com rigor a lei de acessibilidade.",
+   "pagina": 23,
+   "trecho": "Continuaremos promovendo ambientes inclusivos, com a aplicação rigorosa da legislação de acessibilidade.",
+   "como": true
+  },
+  {
+   "candidato": "lula",
+   "assunto": "direitos",
+   "texto": "Fiscalizar mais as cotas de emprego para pessoas com deficiência.",
+   "pagina": 23,
+   "trecho": "A fiscalização do cumprimento das cotas de contratação de pessoas com deficiência no mercado de trabalho será fortalecida, ampliando a política de inclusão econômica."
+  },
+  {
+   "candidato": "lula",
+   "assunto": "direitos",
+   "texto": "Ampliar os Centros Especializados em Reabilitação e as Oficinas Ortopédicas.",
+   "pagina": 23,
+   "trecho": "Na saúde, ampliaremos ainda mais o número de Centros Especializados em Reabilitação e Oficinas Ortopédicas.",
+   "como": true
+  },
+  {
+   "candidato": "lula",
+   "assunto": "direitos",
+   "texto": "Agilizar a investigação e a punição de crimes contra crianças.",
+   "pagina": 24,
+   "trecho": "Reforçaremos ações de inteligência e justiça para agilizar as investigações e a punição de crimes contra crianças e adolescentes."
+  },
+  {
+   "candidato": "lula",
+   "assunto": "direitos",
+   "texto": "Pôr em prática a Política Nacional de Migrações e Refúgio.",
+   "pagina": 30,
+   "trecho": "Consolidaremos uma política migratória humanista e estratégica, assegurando a plena implementação da Política Nacional de Migrações, Refúgio e Apatridia (PNMRA), o acolhimento digno de migrantes e refugiados, o combate à xenofobia e a ampliação do acesso a direitos e serviços públicos.",
+   "como": true
+  },
+  {
+   "candidato": "lula",
+   "assunto": "direitos",
+   "texto": "Combater a violência no campo e proteger defensores de direitos.",
+   "pagina": 61,
+   "trecho": "Fortaleceremos políticas de prevenção e combate à violência no campo, assegurando a proteção de quem vive no campo e dos defensores dos direitos humanos e ambientais."
+  },
+  {
+   "candidato": "lula",
+   "assunto": "direitos",
+   "texto": "Combater o trabalho escravo e infantil e incluir pessoas com deficiência.",
+   "pagina": 75,
+   "trecho": "Seguiremos com as políticas de inclusão produtiva das pessoas com deficiência, privadas das oportunidades de trabalho em decorrência do capacitismo, e fortalecer as políticas de erradicação do trabalho análogo ao escravo e do trabalho infantil, em todas as suas formas e espaços de ocorrência, incluindo o meio rural, urbano e as plataformas digitais."
+  },
+  {
+   "candidato": "lula",
+   "assunto": "direitos",
+   "texto": "Igualar salários de mulheres e homens, aplicando a Lei de Igualdade Salarial.",
+   "pagina": 75,
+   "trecho": "Vamos avançar na efetiva equivalência remuneratória entre mulheres e homens, fortalecendo a implementação da Lei de Igualdade Salarial, sancionada no atual mandato do Presidente Lula.",
+   "como": true
+  },
+  {
+   "candidato": "lula",
+   "assunto": "direitos",
+   "texto": "Combater a discriminação no acesso ao trabalho.",
+   "pagina": 75,
+   "trecho": "Vamos continuar combatendo a xenofobia, o capacitismo e as discriminações racial, étnica, LGBTQIAP+ e de classe no acesso ao trabalho decente, com atenção especial ao acolhimento de migrantes."
+  },
+  {
+   "candidato": "flavio",
+   "assunto": "servico",
+   "texto": "Fazer o Tesouraço da Burocracia, para cortar exigências que tomam o tempo das pessoas.",
+   "pagina": 24,
+   "trecho": "Agora vamos concluir esse trabalho, com um Tesouraço da Burocracia que corta pela raiz o que faz o cidadão e o empreendedor perderem tempo.",
+   "como": true
+  },
+  {
+   "candidato": "flavio",
+   "assunto": "servico",
+   "texto": "Garantir pacotes de internet para estudar e procurar emprego, com prioridade para mulheres.",
+   "pagina": 24,
+   "trecho": "Vamos garantir pacotes de conexão para que nenhum brasileiro deixe de estudar, se capacitar, buscar emprego, empreender ou pedir ajuda por falta de internet, com prioridade para as mulheres alcançadas pelo Brasil por Elas.",
+   "como": true
+  },
+  {
+   "candidato": "flavio",
+   "assunto": "servico",
+   "texto": "Levar internet a lugares com pouca cobertura, como escolas e áreas rurais.",
+   "pagina": 24,
+   "trecho": "E vamos levar conectividade às localidades de baixa cobertura, priorizando escolas, áreas rurais e regiões de fronteira, dando continuidade ao trabalho que, no governo Bolsonaro, já havia conectado mais de 11 milhões de pessoas, por meio da instalação de mais de 21."
+  },
+  {
+   "candidato": "flavio",
+   "assunto": "servico",
+   "texto": "Digitalizar 100% dos serviços federais que podem ser digitais.",
+   "pagina": 25,
+   "trecho": "Vamos digitalizar 100% dos serviços públicos do Governo Federal passíveis de digitalização, sob o princípio do digital by design, e eliminar a exigência de reapresentar documentos que o Estado já possui.",
+   "meta": true
+  },
+  {
+   "candidato": "flavio",
+   "assunto": "servico",
+   "texto": "Digitalizar o INSS e profissionalizar a gestão do órgão.",
+   "pagina": 26,
+   "trecho": "Vamos investir em tecnologia e digitalizar os processos do INSS, dando continuidade ao caminho do Meu INSS, e profissionalizar a gestão do órgão.",
+   "como": true
+  },
+  {
+   "candidato": "flavio",
+   "assunto": "servico",
+   "texto": "Profissionalizar as agências reguladoras.",
+   "pagina": 69,
+   "trecho": "Vamos também profissionalizar as agências reguladoras, fortalecendo os critérios técnicos na indicação de seus dirigentes, com avaliações periódicas e um amplo revogaço regulatório, preservada a segurança jurídica."
+  },
+  {
+   "candidato": "lula",
+   "assunto": "servico",
+   "texto": "Seguir com as conferências para criar e melhorar políticas públicas.",
+   "pagina": 15,
+   "trecho": "o controle social nas políticas públicas e continuaremos realizando conferências para implantar e aprimorar políticas e programas sob responsabilidade federal."
+  },
+  {
+   "candidato": "lula",
+   "assunto": "servico",
+   "texto": "Avançar nas negociações com os servidores pela Mesa Nacional de Negociação Permanente.",
+   "pagina": 16,
+   "trecho": "Vamos aprofundar este processo, a partir da Mesa Nacional de Negociação Permanente, que foi reaberta em nosso mandato.",
+   "como": true
+  },
+  {
+   "candidato": "lula",
+   "assunto": "servico",
+   "texto": "Seguir investindo em serviços públicos digitais para todos.",
+   "pagina": 17,
+   "trecho": "Vamos continuar investindo na universalização dos serviços públicos digitais de qualidade, e na construção de infraestruturas públicas digitais que deem suporte à personalização dos serviços."
+  },
+  {
+   "candidato": "lula",
+   "assunto": "servico",
+   "texto": "Melhorar plataformas públicas como o Gov.br.",
+   "pagina": 17,
+   "trecho": "Vamos buscar alavancar novas iniciativas que melhorem e facilitem a experiência de uso de plataformas públicas, como o Gov.",
+   "como": true
+  },
+  {
+   "candidato": "lula",
+   "assunto": "servico",
+   "texto": "Criar a Política Nacional de Letramento Digital.",
+   "pagina": 17,
+   "trecho": "Instituiremos uma Política Nacional de Letramento Digital, estruturada para capacitar cidadãos de todas as idades a navegar criticamente na rede, combater a desinformação, proteger sua privacidade e transformar o ecossistema digital em um espaço de geração de renda, educação continuada e pleno exercício da cidadania.",
+   "como": true
+  },
+  {
+   "candidato": "lula",
+   "assunto": "servico",
+   "texto": "Melhorar o compartilhamento de serviços de apoio entre órgãos.",
+   "pagina": 17,
+   "trecho": "Aprimoraremos o modelo de centralização e compartilhamento de serviços de suporte (gestão de pessoas, orçamento, contratações etc."
+  },
+  {
+   "candidato": "lula",
+   "assunto": "servico",
+   "texto": "Usar as compras do governo para desenvolver as regiões, com o Contrata+ Brasil.",
+   "pagina": 17,
+   "trecho": "No próximo mandato, vamos aprimorar os mecanismos de utilização do poder de compra do Estado em todos os níveis da federação, estimulando o desenvolvimento nos territórios e a descentralização das contratações públicas por meio de plataformas como o Contrata+ Brasil.",
+   "como": true
+  },
+  {
+   "candidato": "lula",
+   "assunto": "servico",
+   "texto": "Ajudar estados e municípios a prestar melhores serviços.",
+   "pagina": 18,
+   "trecho": "Para superar a desigualdade na capacidade dos estados e municípios de prestar melhores serviços à população, buscaremos fortalecer ainda mais a cooperação e a governança federativa, por meio de instrumentos como compartilhamento de infraestrutura pública digital, formação de servidores e elaboração de estratégias nacionais.",
+   "como": true
+  },
+  {
+   "candidato": "lula",
+   "assunto": "servico",
+   "texto": "Levar fibra óptica a mais municípios e o 5G ao campo.",
+   "pagina": 55,
+   "trecho": "Vamos reduzir o déficit de fibra óptica que ainda atinge 11% dos municípios e ampliar o 5G no campo, com prioridade para Norte, Nordeste e periferias."
+  },
+  {
+   "candidato": "lula",
+   "assunto": "servico",
+   "texto": "Manter o FUST para financiar a internet.",
+   "pagina": 55,
+   "trecho": "Manteremos o uso do FUST, que voltou a operar depois de mais de duas décadas, como instrumentos de apoio a investimentos em conectividade em todo o país.",
+   "como": true
+  },
+  {
+   "candidato": "lula",
+   "assunto": "servico",
+   "texto": "Regulamentar a negociação coletiva no setor público.",
+   "pagina": 76,
+   "trecho": "Vamos implementar a regulamentação do direito de negociação coletiva no setor público e apoiar um processo de atualização sindical que democratize o sistema de relações de trabalho no setor público e no setor privado, urbano e rural.",
+   "como": true
+  },
+  {
+   "candidato": "lula",
+   "assunto": "servico",
+   "texto": "Concluir a modernização do atendimento da Previdência.",
+   "pagina": 77,
+   "trecho": "Estamos seguros de que, no próximo mandato, concluiremos o processo de modernização e aprimoramento da prestação dos serviços previdenciários."
+  },
+  {
+   "candidato": "lula",
+   "assunto": "servico",
+   "texto": "Rever com a sociedade como a Previdência é financiada.",
+   "pagina": 77,
+   "trecho": "Vamos continuar, em diálogo com a sociedade, a aprimorar a política de acesso e buscar reestruturar a base de financiamento da Previdência, buscando a diversidade das fontes de custeio."
+  },
+  {
+   "candidato": "lula",
+   "assunto": "servico",
+   "texto": "Incluir a Previdência nas regras do trabalho por aplicativo.",
+   "pagina": 77,
+   "trecho": "Buscaremos inserir na regulação do trabalho mediado por plataforma o financiamento da previdência social e a cobertura adequada para aposentadoria, incapacidade temporária, acidentes, maternidade ou demais contingências sociais.",
+   "como": true
+  },
+  {
+   "candidato": "flavio",
+   "assunto": "moradia",
+   "texto": "Voltar com o Casa Verde e Amarela, com meta de 2,5 milhões de moradias.",
+   "pagina": 47,
+   "trecho": "Vamos retomar o Casa Verde e Amarela, com meta de 2,5 milhões de residências e a menor taxa de juros possível no financiamento.",
+   "meta": true,
+   "como": true
+  },
+  {
+   "candidato": "flavio",
+   "assunto": "moradia",
+   "texto": "Urbanizar áreas de risco e regularizar terrenos, com parcerias público-privadas.",
+   "pagina": 47,
+   "trecho": "Vamos promover a urbanização de áreas degradadas, evitando o risco de deslizamentos em encostas, e incentivar a regularização fundiária, priorizando as áreas urbanas já consolidadas e reduzindo os vazios urbanos, com parcerias público-privadas que integrem moradia e infraestrutura no mesmo contrato.",
+   "como": true
+  },
+  {
+   "candidato": "flavio",
+   "assunto": "moradia",
+   "texto": "Acelerar concessões para levar água tratada e esgoto a todos.",
+   "pagina": 47,
+   "trecho": "nós vamos garantir sua plena aplicação e acelerar as concessões e parcerias para universalizar o acesso à água tratada e ao esgoto, com atenção especial ao saneamento rural.",
+   "meta": true,
+   "como": true
+  },
+  {
+   "candidato": "flavio",
+   "assunto": "moradia",
+   "texto": "Planejar as cidades para encurtar o deslocamento, com transporte coletivo.",
+   "pagina": 51,
+   "trecho": "Vamos pensar o desenvolvimento das cidades para reduzir o deslocamento da população, com o transporte coletivo como base da mobilidade e parcerias que diminuam o tempo de viagem do trabalhador, valorizando os contratos que conciliam moradia e infraestrutura no mesmo projeto."
+  },
+  {
+   "candidato": "lula",
+   "assunto": "moradia",
+   "texto": "Seguir com o Imóvel da Gente, usando imóveis da União para moradia e serviços.",
+   "pagina": 17,
+   "trecho": "O Imóvel da Gente terá continuidade para que terrenos e imóveis da União beneficiem famílias com regularização fundiária dos imóveis em que já residem ou sejam convertidos em equipamentos de saúde, educação, assistência social, entre outros.",
+   "como": true
+  },
+  {
+   "candidato": "lula",
+   "assunto": "moradia",
+   "texto": "Manter e ampliar o Minha Casa, Minha Vida para todas as faixas de renda.",
+   "pagina": 45,
+   "trecho": "O MCMV será mantido e ampliado no próximo mandato, para todas as faixas de renda e preservando seu foco nas famílias de mais baixa renda.",
+   "como": true
+  },
+  {
+   "candidato": "lula",
+   "assunto": "moradia",
+   "texto": "Usar o Compra Assistida para comprar imóveis já prontos.",
+   "pagina": 45,
+   "trecho": "Serão mobilizados novos instrumentos para ampliar o acesso à moradia, como o Compra Assistida, que, em situações excepcionais, permite a aquisição de imóveis já prontos.",
+   "como": true
+  },
+  {
+   "candidato": "lula",
+   "assunto": "moradia",
+   "texto": "Ampliar o Reforma Casa Brasil.",
+   "pagina": 45,
+   "trecho": "Aprimoraremos e ampliaremos o Reforma Casa Brasil.",
+   "como": true
+  },
+  {
+   "candidato": "lula",
+   "assunto": "moradia",
+   "texto": "Garantir dinheiro para concluir as obras nas periferias.",
+   "pagina": 46,
+   "trecho": "No próximo mandato, todas estas obras terão recursos assegurados para sua conclusão, para garantir melhores condições de vida às periferias por elas atendidas."
+  },
+  {
+   "candidato": "lula",
+   "assunto": "moradia",
+   "texto": "Apoiar estados e municípios para levar água e esgoto a todos.",
+   "pagina": 46,
+   "trecho": "Continuaremos, no próximo mandato, a perseguir o objetivo de apoiar estados e municípios a universalizar acesso à água tratada e ao esgotamento sanitário, buscando priorizar periferias historicamente negligenciadas.",
+   "meta": true,
+   "como": true
+  },
+  {
+   "candidato": "lula",
+   "assunto": "moradia",
+   "texto": "Eletrificar ônibus e expandir trens e metrô.",
+   "pagina": 64,
+   "trecho": "Assim como, continuaremos fomentando a descarbonização do transporte público coletivo com eletrificação de frotas de ônibus e a expansão de trens e metrô."
+  },
+  {
+   "candidato": "flavio",
+   "assunto": "desenvolvimento",
+   "texto": "Levar a liberdade econômica a todos os estados e municípios.",
+   "pagina": 27,
+   "trecho": "Vamos fazer o bom exemplo da liberdade econômica alcançar todo o país, em cada estado e município, para que a facilidade de empreender não dependa da sorte de onde a pessoa vive."
+  },
+  {
+   "candidato": "flavio",
+   "assunto": "desenvolvimento",
+   "texto": "Fazer um revogaço de normas antigas que atrapalham quem investe.",
+   "pagina": 27,
+   "trecho": "Vamos promover um amplo revogaço regulatório, revisando normas obsoletas e racionalizando procedimentos, com segurança jurídica para investir e crescer."
+  },
+  {
+   "candidato": "flavio",
+   "assunto": "desenvolvimento",
+   "texto": "Garantir regras claras e prazos definidos para licenças.",
+   "pagina": 49,
+   "trecho": "Vamos assegurar regras claras, prazos definidos e critérios técnicos, com a certeza de que agilidade e responsabilidade ambiental caminham juntas."
+  },
+  {
+   "candidato": "flavio",
+   "assunto": "desenvolvimento",
+   "texto": "Criar mecanismos que garantem as regras por até 20 anos em grandes obras.",
+   "pagina": 50,
+   "trecho": "Para os grandes projetos de longa maturação, criaremos mecanismos de estabilidade das regras de até 20 anos, para que o contrato não seja mudado depois que a obra já estiver de pé."
+  },
+  {
+   "candidato": "flavio",
+   "assunto": "desenvolvimento",
+   "texto": "Novo modelo de financiamento da infraestrutura, com fundo, PPPs e BNDES.",
+   "pagina": 50,
+   "trecho": "Vamos modernizar os marcos regulatórios e adotar um novo modelo de financiamento para toda a infraestrutura, com fundo lastreado na securitização de ativos e imóveis da União, uso intensivo de PPPs e concessões e financiamentos do BNDES exclusivamente para obras em território brasileiro.",
+   "como": true
+  },
+  {
+   "candidato": "flavio",
+   "assunto": "desenvolvimento",
+   "texto": "Investir R$ 900 bilhões em quatro anos em rodovias, portos, aeroportos e ferrovias.",
+   "pagina": 51,
+   "trecho": "Vamos investir R$ 900 bilhões em quatro anos em rodovias, hidrovias, portos, aeroportos e ferrovias.",
+   "prazo": true,
+   "valor": true
+  },
+  {
+   "candidato": "flavio",
+   "assunto": "desenvolvimento",
+   "texto": "Criar os Corredores Logísticos Inteligentes para baratear o transporte.",
+   "pagina": 51,
+   "trecho": "Criaremos os Corredores Logísticos Inteligentes de integração nacional, com foco em reduzir o custo da logística, hoje em 15,5% do PIB, muito acima dos 8,8% dos Estados Unidos, desenvolvendo os corredores de escoamento do Centro-Oeste até os portos.",
+   "como": true
+  },
+  {
+   "candidato": "flavio",
+   "assunto": "desenvolvimento",
+   "texto": "Destravar a Ferrogrão.",
+   "pagina": 51,
+   "trecho": "No transporte ferroviário, vamos destravar a Ferrogrão;",
+   "como": true
+  },
+  {
+   "candidato": "flavio",
+   "assunto": "desenvolvimento",
+   "texto": "Destravar hidrovias como a do Tapajós.",
+   "pagina": 51,
+   "trecho": "Vamos trabalhar para destravar, sempre com responsabilidade ambiental, os projetos de infraestrutura fluvial que escoam a produção do país, como a Hidrovia do Tapajós, com planejamento e diálogo prévio com as comunidades locais, cumprindo a lei e levando sempre em consideração o interesse maior da sociedade.",
+   "como": true
+  },
+  {
+   "candidato": "flavio",
+   "assunto": "desenvolvimento",
+   "texto": "Concluir obras hídricas no Nordeste, como o Ramal do Apodi e o Canal do Xingó.",
+   "pagina": 52,
+   "trecho": "Iremos concluir, iniciar, executar estruturas como o Ramal do Apodi, o Ramal do Salgado, a Adutora do Seridó, o Canal do Xingó, o Ramal do Piancó, os Canais do Sertão Baiano, Piauiense e Alagoano, o CAC e a duplicação do Eixão das Águas do Ceará, sem o abandono de obras que marcou gestões anteriores.",
+   "como": true
+  },
+  {
+   "candidato": "flavio",
+   "assunto": "desenvolvimento",
+   "texto": "Apoiar a expansão da rede de gás com regras que atraiam investimento.",
+   "pagina": 53,
+   "trecho": "Vamos apoiar a expansão da rede de escoamento e transporte de gás conforme a demanda, com segurança jurídica e regras estáveis que atraiam o investimento privado, para integrar à malha os estados hoje desconectados e baratear a energia da indústria e da família."
+  },
+  {
+   "candidato": "flavio",
+   "assunto": "desenvolvimento",
+   "texto": "Modernizar o refino e baratear o transporte de combustível.",
+   "pagina": 53,
+   "trecho": "Com o mesmo princípio, vamos estimular a modernização do refino rumo ao aproveitamento do petróleo nacional, incentivar o escoamento de combustível ao Centro-Oeste por modais mais baratos que o caminhão, e favorecer a produção nacional de fertilizantes a partir do gás, para reduzir a dependência externa que fragiliza o agronegócio e a nossa segurança alimentar."
+  },
+  {
+   "candidato": "flavio",
+   "assunto": "desenvolvimento",
+   "texto": "Criar um programa de armazenamento de energia em baterias.",
+   "pagina": 53,
+   "trecho": "Vamos regular as diversas fontes buscando o menor preço ao consumidor final, implantar um programa de armazenamento de energia, com baterias de grande porte e outras tecnologias, e transformar o país em polo global de data centers sustentáveis, aproveitando a matriz elétrica renovável."
+  },
+  {
+   "candidato": "flavio",
+   "assunto": "desenvolvimento",
+   "texto": "Tornar o Brasil potência em biocombustíveis, aplicando a Lei do Combustível do Futuro.",
+   "pagina": 53,
+   "trecho": "E vamos transformar o Brasil em potência de biocombustíveis: etanol, biodiesel, HVO, SAF e biogás, fomentando a aplicação da Lei do Combustível do Futuro e oferecendo linhas especiais de financiamento para empresas de biogás, que transformam resíduos em energia.",
+   "como": true
+  },
+  {
+   "candidato": "flavio",
+   "assunto": "desenvolvimento",
+   "texto": "Agregar valor aos minérios aqui, em vez de exportar a pedra bruta.",
+   "pagina": 55,
+   "trecho": "Em vez de somente exportar a pedra bruta e comprar de volta o produto acabado, vamos agregar valor no Brasil, conectando nossa riqueza mineral, nossa energia e a demanda dos data centers e das novas tecnologias numa estratégia única."
+  },
+  {
+   "candidato": "flavio",
+   "assunto": "desenvolvimento",
+   "texto": "Atrair capital e tecnologia estrangeira para a mineração.",
+   "pagina": 55,
+   "trecho": "Vamos trabalhar para atrair o capital estrangeiro e a tecnologia que já existem no mundo, aplicando aqui o que outros países já dominam e transferindo esse conhecimento ao Brasil."
+  },
+  {
+   "candidato": "flavio",
+   "assunto": "desenvolvimento",
+   "texto": "Acelerar o licenciamento e os direitos de mineração.",
+   "pagina": 56,
+   "trecho": "Vamos equacionar as garantias de crédito ao financiamento dos projetos e acelerar o licenciamento e o processo de direitos minerários."
+  },
+  {
+   "candidato": "flavio",
+   "assunto": "desenvolvimento",
+   "texto": "Usar compras públicas e o GovTech para estimular a tecnologia.",
+   "pagina": 56,
+   "trecho": "Para isso, o Estado atuará como indutor, pelas compras públicas, pelo GovTech e pelo investimento em pesquisa, e vamos elevar a participação brasileira nas patentes de inteligência artificial.",
+   "como": true
+  },
+  {
+   "candidato": "flavio",
+   "assunto": "desenvolvimento",
+   "texto": "Propor uma lei de liberdade para criar e inovar.",
+   "pagina": 56,
+   "trecho": "Proporemos uma legislação voltada à liberdade de criar e inovar, inspirada nas melhores práticas internacionais, para que a tecnologia seja desenvolvida aqui sem entraves, em vez de sufocada por regras que afugentam o investimento.",
+   "como": true
+  },
+  {
+   "candidato": "flavio",
+   "assunto": "desenvolvimento",
+   "texto": "Fortalecer parques tecnológicos, incubadoras e startups.",
+   "pagina": 57,
+   "trecho": "E vamos construir o ambiente onde a inovação nasce: fortalecer os parques tecnológicos, expandir as incubadoras, apoiar as startups de base tecnológica e aproximar universidades e empresas, com a gestão das universidades integrada à ciência e à tecnologia."
+  },
+  {
+   "candidato": "flavio",
+   "assunto": "desenvolvimento",
+   "texto": "Priorizar as obras que levam água a mais regiões do Nordeste.",
+   "pagina": 60,
+   "trecho": "Foi o governo Bolsonaro que fez as águas do São Francisco chegarem ao sertão, concluindo o Eixo Norte da Transposição, e vamos priorizar as obras hídricas que faltam para levar água a mais regiões do Nordeste."
+  },
+  {
+   "candidato": "flavio",
+   "assunto": "desenvolvimento",
+   "texto": "Concluir a expansão do Baixio do Irecê.",
+   "pagina": 60,
+   "trecho": "Foi também no governo Bolsonaro que estruturamos e colocamos para produzir o Baixio do Irecê, o maior perímetro de irrigação da América Latina, que já transforma água e terra fértil em fruticultura, grãos, emprego e renda no campo, e vamos concluir sua expansão para multiplicar essa riqueza pelo sertão.",
+   "como": true
+  },
+  {
+   "candidato": "flavio",
+   "assunto": "desenvolvimento",
+   "texto": "Viabilizar o Trem do Nordeste.",
+   "pagina": 60,
+   "trecho": "Vamos viabilizar o Trem do Nordeste, 1.",
+   "como": true
+  },
+  {
+   "candidato": "flavio",
+   "assunto": "desenvolvimento",
+   "texto": "Retomar o Programa Nacional de Desestatização, caso a caso.",
+   "pagina": 70,
+   "trecho": "E vamos retomar o Programa Nacional de Desestatização com critério, avaliando caso a caso onde a presença do Estado deixou de fazer sentido.",
+   "como": true
+  },
+  {
+   "candidato": "lula",
+   "assunto": "desenvolvimento",
+   "texto": "Aumentar o investimento na economia.",
+   "pagina": 48,
+   "trecho": "Para isso, vamos elevar a taxa de investimento da economia."
+  },
+  {
+   "candidato": "lula",
+   "assunto": "desenvolvimento",
+   "texto": "Incentivar investimentos privados na indústria.",
+   "pagina": 48,
+   "trecho": "Também continuaremos a incentivar os investimentos privados na indústria, com foco em inovação e em setores portadores de futuro, para que o Brasil avance posições na corrida tecnológica global."
+  },
+  {
+   "candidato": "lula",
+   "assunto": "desenvolvimento",
+   "texto": "Fortalecer os órgãos que fiscalizam o sistema financeiro.",
+   "pagina": 49,
+   "trecho": "Vamos também garantir a estabilidade e a saúde do sistema financeiro nacional por meio do fortalecimento dos órgãos de regulação, fiscalização e controle."
+  },
+  {
+   "candidato": "lula",
+   "assunto": "desenvolvimento",
+   "texto": "Ampliar o mercado de capitais, com debêntures e fundos de investimento.",
+   "pagina": 49,
+   "trecho": "E vamos aprofundar o mercado de capitais doméstico – aprimorando o uso das debêntures de infraestrutura, dos fundos de investimento em participações e do mercado secundário de recebíveis – e ampliar a atuação de investidores institucionais como financiadores de longo prazo.",
+   "como": true
+  },
+  {
+   "candidato": "lula",
+   "assunto": "desenvolvimento",
+   "texto": "Fortalecer a neoindustrialização.",
+   "pagina": 50,
+   "trecho": "No próximo ciclo governamental, nosso objetivo central será aprimorar e fortalecer a neoindustrialização, repensando o papel da indústria no Brasil a partir das prioridades da sociedade, de suas contribuições para a melhoria das condições de vida das pessoas, para a geração de empregos decentes e para a prosperidade econômica."
+  },
+  {
+   "candidato": "lula",
+   "assunto": "desenvolvimento",
+   "texto": "Apoiar a indústria com crédito, compras públicas e conteúdo local.",
+   "pagina": 51,
+   "trecho": "Utilizaremos financiamento direcionado, com soluções inovadoras de parceria entre crédito público e privado, compras públicas, concessões, regulações e benefícios condicionados a conteúdo local, valor agregado nacional, margens de preferência com estímulos para empresas brasileiras.",
+   "como": true
+  },
+  {
+   "candidato": "lula",
+   "assunto": "desenvolvimento",
+   "texto": "Seguir usando o FNDCT para financiar inovação.",
+   "pagina": 51,
+   "trecho": "Asseguraremos ainda a continuidade do uso estratégico do FNDCT, que sustentou o maior ciclo de investimentos de sua história e deixou de ter seus recursos contingenciados.",
+   "como": true
+  },
+  {
+   "candidato": "lula",
+   "assunto": "desenvolvimento",
+   "texto": "Usar as Letras de Crédito de Desenvolvimento e debêntures para financiar a indústria.",
+   "pagina": 51,
+   "trecho": "Lançamos as Letras de Crédito de Desenvolvimento (LCD), as Debêntures incentivadas e de infraestrutura Vamos seguir mobilizando instrumentos financeiros, fiscais e regulatórios em torno desse objetivo.",
+   "como": true
+  },
+  {
+   "candidato": "lula",
+   "assunto": "desenvolvimento",
+   "texto": "Ampliar a produção local em cadeias estratégicas.",
+   "pagina": 52,
+   "trecho": "Nosso compromisso será ampliar a produção local em cadeias produtivas estratégicas e fortalecer a inserção do Brasil nas tecnologias da Indústria 4."
+  },
+  {
+   "candidato": "lula",
+   "assunto": "desenvolvimento",
+   "texto": "Criar uma política para minerais críticos e terras raras.",
+   "pagina": 52,
+   "trecho": "Desenvolveremos uma política específica para minerais críticos e terras raras, capaz de organizar suas cadeias produtivas, diferenciar seus usos tecnológicos e evitar a simples exportação de matérias-primas estratégicas."
+  },
+  {
+   "candidato": "lula",
+   "assunto": "desenvolvimento",
+   "texto": "Agregar valor aos minerais críticos no país.",
+   "pagina": 52,
+   "trecho": "promoveremos uma estratégia regional de mapeamento, beneficiamento e agregação de valor, para inserir o país de forma soberana nas cadeias globais de valor desses recursos."
+  },
+  {
+   "candidato": "lula",
+   "assunto": "desenvolvimento",
+   "texto": "Ampliar o Novo PAC na logística.",
+   "pagina": 52,
+   "trecho": "A expansão e o aperfeiçoamento do Novo PAC e a contínua revisão dos planos nacional e setoriais de longo prazo da logística e suas vertentes rodoviária, ferroviária, hidroviária, aérea e marítima serão importantes instrumentos para tornar a infraestrutura mais integrada, priorizando investimentos com maior potencial de redução das desigualdades e descarbonização.",
+   "como": true
+  },
+  {
+   "candidato": "lula",
+   "assunto": "desenvolvimento",
+   "texto": "Fazer novas concessões de rodovias e ferrovias.",
+   "pagina": 53,
+   "trecho": "Manteremos o ritmo nas concessões rodoviárias e intensificaremos as de ferrovias em duas frentes: leilão de novos projetos e repactuação dos contratos existentes.",
+   "como": true
+  },
+  {
+   "candidato": "lula",
+   "assunto": "desenvolvimento",
+   "texto": "Garantir a soberania digital.",
+   "pagina": 54,
+   "trecho": "Economia digital Garantiremos a soberania digital para que o Brasil e os brasileiros tenham capacidade de desenvolver, operar, regular e governar tecnologias estratégicas e as infraestruturas críticas das quais dependem a economia, os serviços públicos, a ciência, a defesa e a democracia."
+  },
+  {
+   "candidato": "lula",
+   "assunto": "desenvolvimento",
+   "texto": "Fomentar data centers e a inteligência artificial brasileira.",
+   "pagina": 54,
+   "trecho": "No próximo ciclo, vamos fomentar o desenvolvimento do ecossistema nacional de tecnologia digital, desde a cadeia de datacenters até os serviços de nuvem, com destaque para o fortalecimento da inteligência artificial desenvolvida por empresas brasileiras."
+  },
+  {
+   "candidato": "lula",
+   "assunto": "desenvolvimento",
+   "texto": "Mobilizar investimentos e compras do governo nas cadeias digitais.",
+   "pagina": 54,
+   "trecho": "Mobilizaremos investimentos, inovação, compras governamentais e sinergias entre empresas públicas e privadas, universidades e centros de pesquisa, fortalecendo a capacidade nacional nas cadeias digitais."
+  },
+  {
+   "candidato": "lula",
+   "assunto": "desenvolvimento",
+   "texto": "Criar supercomputadores operados por instituições nacionais.",
+   "pagina": 54,
+   "trecho": "Vamos avançar numa infraestrutura computacional soberana, com supercomputadores desenvolvidos e operados por instituições nacionais."
+  },
+  {
+   "candidato": "lula",
+   "assunto": "desenvolvimento",
+   "texto": "Exigir salvaguardas ambientais dos data centers.",
+   "pagina": 54,
+   "trecho": "Vamos assegurar que a expansão de data centers e infraestruturas de inteligência artificial seja acompanhada de salvaguardas socioambientais obrigatórias, exigindo eficiência energética, utilização progressiva de fontes 100% renováveis e avaliação de impactos sobre o sistema elétrico, hídrico e populações locais."
+  },
+  {
+   "candidato": "lula",
+   "assunto": "desenvolvimento",
+   "texto": "Desenvolver modelos de IA em português.",
+   "pagina": 55,
+   "trecho": "Vamos desenvolver e sustentar modelos de linguagem em português e outras línguas, voltados aos problemas do País, apoiados numa plataforma nacional de dados para treinamento e avaliação."
+  },
+  {
+   "candidato": "lula",
+   "assunto": "desenvolvimento",
+   "texto": "Criar regras e infraestrutura para a economia de dados.",
+   "pagina": 55,
+   "trecho": "Junto disso, estabeleceremos regras e infraestrutura para uma economia de dados."
+  },
+  {
+   "candidato": "lula",
+   "assunto": "desenvolvimento",
+   "texto": "Levar a inteligência artificial ao agro, à saúde e aos serviços financeiros.",
+   "pagina": 55,
+   "trecho": "Vamos acelerar a difusão da inteligência artificial no setor produtivo, com foco em agro, saúde e serviços financeiros."
+  },
+  {
+   "candidato": "lula",
+   "assunto": "desenvolvimento",
+   "texto": "Investir em pesquisa pública de IA e na indústria de tecnologia.",
+   "pagina": 55,
+   "trecho": "Vamos investir em instituições públicas de pesquisa e desenvolvimento que já desenvolvem IA e na indústria que produz tecnologia de hardware e software de alto desempenho no país."
+  },
+  {
+   "candidato": "lula",
+   "assunto": "desenvolvimento",
+   "texto": "Formar talentos digitais.",
+   "pagina": 55,
+   "trecho": "Também formaremos talentos para consolidar um hub nacional de competências digitais, reforçando a articulação entre polos de inovação, universidades, centros de pesquisa e setor produtivo."
+  },
+  {
+   "candidato": "lula",
+   "assunto": "desenvolvimento",
+   "texto": "Criar regras de transparência dos algoritmos, com um centro nacional.",
+   "pagina": 55,
+   "trecho": "Vamos consolidar a transparência algorítmica e a rastreabilidade de conteúdo sintético, ancoradas no Centro Nacional de Transparência Algorítmica – porque democracia não convive com decisão automatizada que ninguém pode examinar.",
+   "como": true
+  },
+  {
+   "candidato": "lula",
+   "assunto": "desenvolvimento",
+   "texto": "Usar os fundos FNE, FNO e FCO para desenvolver as regiões.",
+   "pagina": 55,
+   "trecho": "Por isso, continuaremos defendendo que a Política Nacional de Desenvolvimento e seus fundos constitucionais de financiamento (FNE, FNO e FCO) atuem como instrumento central da promoção do desenvolvimento regional, articulando financiamento produtivo, planejamento territorial e fortalecimento das capacidades econômicas locais.",
+   "como": true
+  },
+  {
+   "candidato": "lula",
+   "assunto": "desenvolvimento",
+   "texto": "Regulamentar o Fundo Nacional de Desenvolvimento Regional.",
+   "pagina": 56,
+   "trecho": "No âmbito da reforma tributária foi criado o Fundo Nacional de Desenvolvimento Regional que será regulamentado no próximo período.",
+   "como": true
+  },
+  {
+   "candidato": "lula",
+   "assunto": "desenvolvimento",
+   "texto": "Atrair indústrias que usam energia renovável.",
+   "pagina": 56,
+   "trecho": "Vamos transformar a região em um polo de atração de plantas industriais eletrointensivas que buscam energia renovável e previsível para produzir com baixa emissão — siderurgia verde, fertilizantes, química, cimento, alumínio, processamento de minerais críticos, hidrogênio de baixo carbono e seus derivados."
+  },
+  {
+   "candidato": "lula",
+   "assunto": "desenvolvimento",
+   "texto": "Ampliar a produção de biocombustíveis.",
+   "pagina": 63,
+   "trecho": "Continuaremos ampliando e fortalecendo a produção de biocombustíveis, como etanol de milho e cana, biodiesel e combustível sustentável de aviação (SAF)."
+  },
+  {
+   "candidato": "lula",
+   "assunto": "desenvolvimento",
+   "texto": "Gerar energia com sobras da agroindústria.",
+   "pagina": 63,
+   "trecho": "Fomentaremos o aproveitamento de subprodutos da agroindústria para a geração de bioenergia e biogás, fortalecendo a bioeconomia e a integração sustentável entre a produção de alimentos, fibras e energia."
+  },
+  {
+   "candidato": "lula",
+   "assunto": "desenvolvimento",
+   "texto": "Expandir as hidrelétricas e reduzir o uso de carvão.",
+   "pagina": 65,
+   "trecho": "Vamos seguir expandindo a geração hidrelétrica por critérios socioambientais, de segurança energética e flexibilidade do sistema à integração das renováveis e acelerar a redução da produção de carvão."
+  },
+  {
+   "candidato": "lula",
+   "assunto": "desenvolvimento",
+   "texto": "Modernizar as hidrelétricas existentes.",
+   "pagina": 65,
+   "trecho": "No caso das hidrelétricas, seguiremos buscando soluções para a repotenciação do parque existente."
+  },
+  {
+   "candidato": "lula",
+   "assunto": "desenvolvimento",
+   "texto": "Manter os leilões de transmissão e investir em baterias.",
+   "pagina": 65,
+   "trecho": "Daremos continuidade aos leilões de transmissão e vamos abrir uma nova fronteira de investimentos em baterias para melhorar a oferta de energia e a robustez do sistema.",
+   "como": true
+  },
+  {
+   "candidato": "lula",
+   "assunto": "desenvolvimento",
+   "texto": "Adaptar as regras do REPETRO à descarbonização.",
+   "pagina": 67,
+   "trecho": "Vamos readequar o marco legal do REPETRO às necessidades de descarbonização.",
+   "como": true
+  },
+  {
+   "candidato": "lula",
+   "assunto": "desenvolvimento",
+   "texto": "Usar os investimentos da Petrobras para estimular a indústria naval.",
+   "pagina": 67,
+   "trecho": "Asseguraremos que os investimentos da Petrobras continuem estimulando a indústria naval, com reafirmação de regras de conteúdo local.",
+   "como": true
+  },
+  {
+   "candidato": "lula",
+   "assunto": "desenvolvimento",
+   "texto": "Fortalecer a Petrobras em biocombustíveis.",
+   "pagina": 68,
+   "trecho": "A participação da Petrobras em biocombustíveis, de forma integrada à Petrobras Biocombustíveis (Pbio), será fortalecida.",
+   "como": true
+  },
+  {
+   "candidato": "lula",
+   "assunto": "desenvolvimento",
+   "texto": "Expandir combustíveis sustentáveis para aviões e navios.",
+   "pagina": 68,
+   "trecho": "Também daremos sequência aos esforços de desenvolvimento tecnológico e expansão dos combustíveis sustentáveis (SAF, biometano e combustíveis marítimos), acelerando a implementação de políticas de descarbonização Diante do papel crescente da biomassa em nossa matriz energética, será preciso avançar em políticas bioenergéticas integradas para as cadeias produtivas de grãos e proteínas, considerando também seus impactos sobre o uso do solo, da água e dos fertilizantes."
+  },
+  {
+   "candidato": "lula",
+   "assunto": "desenvolvimento",
+   "texto": "Avançar no ciclo do combustível nuclear.",
+   "pagina": 68,
+   "trecho": "Avançaremos na autonomia do ciclo do combustível nuclear e aproveitaremos de forma responsável as reservas nacionais de urânio, sempre condicionado à viabilidade técnica, econômica, ambiental e social."
+  },
+  {
+   "candidato": "flavio",
+   "assunto": "ambiente",
+   "texto": "Ampliar barragens, diques e drenagem contra enchentes e reforçar a Defesa Civil.",
+   "pagina": 52,
+   "trecho": "E vamos ampliar a infraestrutura de prevenção a eventos climáticos extremos, com barragens de usos múltiplos, reservatórios de controle de cheias, diques, canais e obras de drenagem e macrodrenagem, além do fortalecimento do monitoramento, alerta e resposta da Defesa Civil.",
+   "como": true
+  },
+  {
+   "candidato": "flavio",
+   "assunto": "ambiente",
+   "texto": "Ampliar o RenovaBio para vender créditos de carbono ao exterior.",
+   "pagina": 53,
+   "trecho": "Vamos fortalecer e ampliar o Programa Renovabio para o exterior, permitindo que o Brasil venda créditos de carbono ao mundo.",
+   "como": true
+  },
+  {
+   "candidato": "flavio",
+   "assunto": "ambiente",
+   "texto": "Consolidar o Cadastro Ambiental Rural e pagar quem preserva a mata.",
+   "pagina": 55,
+   "trecho": "Vamos consolidar o Cadastro Ambiental Rural e ampliar o pagamento por serviços ambientais para conservação e restauração, de modo que o produtor que preserva a vegetação nativa e recupera áreas degradadas seja reconhecido como parceiro da conservação, e não como suspeito.",
+   "como": true
+  },
+  {
+   "candidato": "flavio",
+   "assunto": "ambiente",
+   "texto": "Consolidar o mercado regulado de carbono.",
+   "pagina": 57,
+   "trecho": "E vamos consolidar o mercado regulado de carbono com segurança jurídica, posicionando o Brasil como fornecedor global de ativos ambientais, e impulsionar a bioeconomia, com biotecnologia, fármacos, cosméticos e novos materiais a partir da biodiversidade.",
+   "como": true
+  },
+  {
+   "candidato": "flavio",
+   "assunto": "ambiente",
+   "texto": "Usar crédito e assistência técnica para transformar conservação em renda.",
+   "pagina": 58,
+   "trecho": "Garantiremos o uso responsável e sustentável dos recursos naturais, com segurança jurídica e respeito às peculiaridades de cada região, e faremos da tecnologia, da assistência técnica, da capacitação e do crédito os instrumentos que transformam conservação em desenvolvimento e renda."
+  },
+  {
+   "candidato": "flavio",
+   "assunto": "ambiente",
+   "texto": "Zerar o desmatamento ilegal até 2029.",
+   "pagina": 58,
+   "trecho": "Teremos a meta de zerar o desmatamento ilegal até 2029, retomando e levando até o fim o compromisso que já assumimos no Governo Bolsonaro perante o mundo, e combateremos as queimadas ilegais, fortalecendo a prevenção, o monitoramento, a fiscalização e o combate aos crimes ambientais, com ferramentas aperfeiçoadas por inteligência artificial, bancos de dados em tempo real, imagens de satélite e ação coordenada das agências do Estado.",
+   "meta": true,
+   "prazo": true
+  },
+  {
+   "candidato": "flavio",
+   "assunto": "ambiente",
+   "texto": "Integrar cadastros e satélite para fiscalizar melhor.",
+   "pagina": 58,
+   "trecho": "Vamos integrar e aprimorar os sistemas e bases de dados já existentes, utilizando informações fundiárias e ambientais e monitoramento por satélite para tornar a fiscalização mais eficiente e direcionada."
+  },
+  {
+   "candidato": "flavio",
+   "assunto": "ambiente",
+   "texto": "Fortalecer a fiscalização nas áreas com mais desmatamento e queimadas.",
+   "pagina": 58,
+   "trecho": "Vamos fortalecer a fiscalização ambiental, com prioridade para as áreas de maior pressão de desmatamento e queimadas, usando inteligência, satélite e atuação coordenada dos órgãos federais para identificar as áreas críticas com mais rapidez."
+  },
+  {
+   "candidato": "flavio",
+   "assunto": "ambiente",
+   "texto": "Cooperar com os países vizinhos contra crimes ambientais.",
+   "pagina": 58,
+   "trecho": "Vamos ampliar a cooperação com os países vizinhos contra os crimes ambientais transfronteiriços e reforçar o combate às organizações criminosas envolvidas em desmatamento, extração ilegal de madeira, garimpo ilegal e ocupação irregular de terras públicas.",
+   "como": true
+  },
+  {
+   "candidato": "flavio",
+   "assunto": "ambiente",
+   "texto": "Trocar a punição do morador da floresta por orientação e regularização.",
+   "pagina": 59,
+   "trecho": "Vamos acabar com a política que criminaliza o morador da floresta, substituindo a punição cega por um caminho de orientação, regularização e oportunidade."
+  },
+  {
+   "candidato": "flavio",
+   "assunto": "ambiente",
+   "texto": "Ampliar a renda vinda da floresta preservada.",
+   "pagina": 59,
+   "trecho": "E, ao mesmo tempo, vamos ampliar as alternativas de renda a partir da floresta preservada, apoiando cadeias produtivas sustentáveis, manejo responsável, bioeconomia e agregação de valor aos produtos da biodiversidade."
+  },
+  {
+   "candidato": "flavio",
+   "assunto": "ambiente",
+   "texto": "Acabar com a sobreposição entre Ibama, Funai e ICMBio e exigir transparência de ONGs.",
+   "pagina": 59,
+   "trecho": "Vamos eliminar superposições entre Ibama, Funai e ICMBio, dando eficiência à fiscalização, e exigir transparência de financiadores e de projetos das ONGs que recebem recursos internacionais e judicializam ações contra a União, porque onde há dinheiro estrangeiro movendo decisões sobre o território brasileiro há riscos ao interesse nacional, sobre os quais o cidadão brasileiro deve estar informado.",
+   "como": true
+  },
+  {
+   "candidato": "lula",
+   "assunto": "ambiente",
+   "texto": "Melhorar a Defesa Civil.",
+   "pagina": 47,
+   "trecho": "Vamos aperfeiçoar nossa capacidade de resposta e seguir aprimorando a Defesa Civil.",
+   "como": true
+  },
+  {
+   "candidato": "lula",
+   "assunto": "ambiente",
+   "texto": "Regulamentar o mercado de carbono (SBCE).",
+   "pagina": 51,
+   "trecho": "Avançaremos em uma regulamentação do Sistema Brasileiro de Comércio de Emissões (SBCE), aprovado neste mandato, articulada com objetivos da Nova Indústria Brasil.",
+   "como": true
+  },
+  {
+   "candidato": "lula",
+   "assunto": "ambiente",
+   "texto": "Seguir com a transição para uma economia de baixo carbono.",
+   "pagina": 52,
+   "trecho": "Continuaremos a transição justa para uma economia de baixo carbono com distribuição de renda e a justiça social, provando que desenvolvimento produtivo e responsabilidade ambiental caminham juntos."
+  },
+  {
+   "candidato": "lula",
+   "assunto": "ambiente",
+   "texto": "Incentivar agricultores familiares a recuperar áreas degradadas.",
+   "pagina": 60,
+   "trecho": "Haverá incentivos para os agricultores familiares recuperarem áreas degradadas e conservar nascentes."
+  },
+  {
+   "candidato": "lula",
+   "assunto": "ambiente",
+   "texto": "Chegar ao desmatamento líquido zero até 2030.",
+   "pagina": 70,
+   "trecho": "No próximo mandato, continuaremos trabalhando para alcançar o desmatamento líquido zero até 2030, meta que reafirmamos.",
+   "meta": true,
+   "prazo": true
+  },
+  {
+   "candidato": "lula",
+   "assunto": "ambiente",
+   "texto": "Fazer cumprir o Código Florestal e a Lei da Mata Atlântica.",
+   "pagina": 70,
+   "trecho": "Continuaremos mobilizando políticas para assegurar a efetividade do Código Florestal e da Lei da Mata Atlântica.",
+   "como": true
+  },
+  {
+   "candidato": "lula",
+   "assunto": "ambiente",
+   "texto": "Destinar terras públicas para conservação, indígenas e quilombolas.",
+   "pagina": 70,
+   "trecho": "Vamos avançar na destinação das terras públicas para unidades de conservação, territórios indígenas e quilombolas ou assentamentos, e reforçar a regularização fundiária."
+  },
+  {
+   "candidato": "lula",
+   "assunto": "ambiente",
+   "texto": "Ajudar a eliminar o desmatamento no mundo.",
+   "pagina": 71,
+   "trecho": "Vamos contribuir, no contexto internacional, para implementar o mapa do caminho para eliminação global do desmatamento, articulando instrumentos nacionais com compromissos internacionais."
+  },
+  {
+   "candidato": "lula",
+   "assunto": "ambiente",
+   "texto": "Cumprir a nova meta climática do Brasil (NDC).",
+   "pagina": 71,
+   "trecho": "Articularemos as políticas e mobilizaremos todos os atores governamentais, privados e da sociedade civil para que cumpramos a nossa nova NDC.",
+   "como": true
+  },
+  {
+   "candidato": "lula",
+   "assunto": "ambiente",
+   "texto": "Ampliar o financiamento para o clima.",
+   "pagina": 71,
+   "trecho": "Seguiremos ampliando os instrumentos necessários para o financiamento climático."
+  },
+  {
+   "candidato": "lula",
+   "assunto": "ambiente",
+   "texto": "Fortalecer a proteção da biodiversidade.",
+   "pagina": 71,
+   "trecho": "Vamos seguir fortalecendo instrumentos e equipamentos que assegurem a preservação de nossa biodiversidade, sem abdicar de seu potencial para o desenvolvimento do país."
+  },
+  {
+   "candidato": "lula",
+   "assunto": "ambiente",
+   "texto": "Incentivar reservas particulares (RPPNs) e valorizar os parques nacionais.",
+   "pagina": 71,
+   "trecho": "Incentivaremos a criação de Reservas Particulares do Patrimônio Natural (RPPNs) e buscaremos avançar em uma política de valorização dos 75 parques nacionais, integrando conservação ambiental, turismo sustentável, desenvolvimento regional e educação ambiental.",
+   "como": true
+  },
+  {
+   "candidato": "lula",
+   "assunto": "ambiente",
+   "texto": "Ampliar o ProPatinhas e manter o SinPatinhas, cadastro de cães e gatos.",
+   "pagina": 71,
+   "trecho": "Vamos ampliar o ProPatinhas, fortalecendo as caravanas de castração, e dar continuidade ao SinPatinhas, cadastro nacional de cães e gatos.",
+   "como": true
+  },
+  {
+   "candidato": "lula",
+   "assunto": "ambiente",
+   "texto": "Combater os maus-tratos a animais.",
+   "pagina": 72,
+   "trecho": "Seguiremos fortalecendo o combate aos maus-tratos, com penas que assegurem que essas práticas não se repitam, avançando nesta agenda com prioridade e participação social."
+  },
+  {
+   "candidato": "lula",
+   "assunto": "ambiente",
+   "texto": "Melhorar o Pagamento por Serviços Ambientais e reconhecer em lei a restauração biocultural.",
+   "pagina": 72,
+   "trecho": "Vamos aprimorar a implementação de programas de Pagamento por Serviços Ambientais (PSA) voltados à biodiversidade e reconhecer legalmente a restauração biocultural como estratégia de Estado, distinta e complementar à restauração florestal convencional.",
+   "como": true
+  },
+  {
+   "candidato": "lula",
+   "assunto": "ambiente",
+   "texto": "Tratar a Caatinga como área estratégica para o clima.",
+   "pagina": 72,
+   "trecho": "No próximo mandato, avançaremos na inclusão da Caatinga como ativo estratégico para a adaptação às mudanças do clima e para a mitigação das emissões de gases de efeito estufa."
+  },
+  {
+   "candidato": "lula",
+   "assunto": "ambiente",
+   "texto": "Fortalecer a fiscalização ambiental.",
+   "pagina": 72,
+   "trecho": "Seguiremos fortalecendo e aprimorando as ações de fiscalização."
+  },
+  {
+   "candidato": "lula",
+   "assunto": "ambiente",
+   "texto": "Criar com as empresas regras de rastreabilidade das cadeias produtivas.",
+   "pagina": 72,
+   "trecho": "Buscaremos dialogar com o setor produtivo nacional para estabelecer mecanismos de rastreabilidade e devida diligência nas cadeias produtivas."
+  },
+  {
+   "candidato": "lula",
+   "assunto": "ambiente",
+   "texto": "Usar satélite e IA contra crimes ambientais.",
+   "pagina": 72,
+   "trecho": "Vamos expandir monitoramento satelital e uso de inteligência artificial no combate a crimes ambientais."
+  },
+  {
+   "candidato": "lula",
+   "assunto": "ambiente",
+   "texto": "Revitalizar bacias e ampliar obras contra seca e enchente.",
+   "pagina": 72,
+   "trecho": "Frente aos riscos associados às mudanças climáticas, vamos avançar nos investimentos para revitalizar as bacias hidrográficas e ampliar as infraestruturas para Segurança hídrica, garantindo água de qualidade para beber e produzir e proteção contra cheias e enchentes Continuaremos a ampliar o investimento em políticas de prevenção e redução de riscos de desastres."
+  },
+  {
+   "candidato": "lula",
+   "assunto": "ambiente",
+   "texto": "Fortalecer o Plano Nacional de Adaptação ao clima e estimular planos estaduais e municipais.",
+   "pagina": 72,
+   "trecho": "Institucionalizaremos a adaptação climática como eixo permanente do planejamento público, assegurando continuidade e fortalecimento do Plano Nacional de Adaptação à Mudança do Clima e estimulando a criação de planos estaduais e municipais de enfrentamento ao calor extremo e fortalecimento da capacidade de prevenção e resposta a eventos climáticos extremos.",
+   "como": true
+  },
+  {
+   "candidato": "flavio",
+   "assunto": "agro",
+   "texto": "Criar um sistema que rastreia toda a cadeia produtiva, do cadastro da terra ao satélite.",
+   "pagina": 28,
+   "trecho": "Vamos instituir a rastreabilidade completa das cadeias produtivas, integrando em um só sistema os cadastros fundiários e ambientais, as guias de trânsito animal, as autorizações de supressão vegetal e o monitoramento por satélite.",
+   "como": true
+  },
+  {
+   "candidato": "flavio",
+   "assunto": "agro",
+   "texto": "Ampliar o Seguro Rural e renegociar as dívidas do produtor.",
+   "pagina": 54,
+   "trecho": "Vamos ampliar o Seguro Rural e trazer ferramentas de securitização e reorganização das dívidas do setor, dando ao produtor o horizonte de mais de um ano que ele precisa para planejar.",
+   "como": true
+  },
+  {
+   "candidato": "flavio",
+   "assunto": "agro",
+   "texto": "Ampliar a capacidade de armazenar as safras.",
+   "pagina": 54,
+   "trecho": "Vamos ampliar a capacidade de armazenamento das safras, para garantir melhores preços ao produtor e oferta contínua à população, e buscar soluções diplomáticas eficazes contra sanções dos Estados Unidos, da China e da Europa aos produtos nacionais."
+  },
+  {
+   "candidato": "flavio",
+   "assunto": "agro",
+   "texto": "Apoiar a produção de fertilizantes no Brasil.",
+   "pagina": 54,
+   "trecho": "Vamos apoiar a produção nacional de fertilizantes, aproveitando as reservas de minerais que o país possui, como o potássio e o fosfato, para que o campo brasileiro produza com mais autonomia e a mesa do brasileiro fique mais protegida."
+  },
+  {
+   "candidato": "flavio",
+   "assunto": "agro",
+   "texto": "Acelerar a entrega de títulos de terra ao pequeno produtor.",
+   "pagina": 54,
+   "trecho": "Vamos retomar esse ritmo e promover ampla regularização e titulação do pequeno proprietário rural, para que quem trabalha a terra tenha o documento que prova que ela é sua, possa acessar crédito e investir com segurança."
+  },
+  {
+   "candidato": "flavio",
+   "assunto": "agro",
+   "texto": "Dar segurança jurídica ao direito de propriedade no campo.",
+   "pagina": 54,
+   "trecho": "E traremos segurança jurídica sólida, irreversível e sem margem para relativizações do direito de propriedade, porque ninguém planta e investe no que teme perder."
+  },
+  {
+   "candidato": "flavio",
+   "assunto": "agro",
+   "texto": "Ligar quem busca trabalho no campo a quem precisa de trabalhador.",
+   "pagina": 54,
+   "trecho": "Vamos aproximar as duas pontas, com qualificação e intermediação que liguem quem busca trabalho a quem precisa de trabalhador no campo."
+  },
+  {
+   "candidato": "flavio",
+   "assunto": "agro",
+   "texto": "Ampliar a área irrigada e simplificar as licenças de irrigação.",
+   "pagina": 54,
+   "trecho": "Na irrigação, vamos ampliar significativamente a área irrigada do país, que hoje aproveita apenas uma fração do seu enorme potencial, simplificar as outorgas, cujo prazo médio hoje é de 24 meses, desenvolver polos de irrigação no Matopiba e no semiárido nordestino e expandir a água de reuso para os períodos de estiagem."
+  },
+  {
+   "candidato": "flavio",
+   "assunto": "agro",
+   "texto": "Cumprir a partir de 2027 as metas de combustível de aviação, com os ministérios da Agricultura e de Minas e Energia.",
+   "pagina": 55,
+   "trecho": "Vamos implementar as metas do combustível sustentável de aviação previstas em lei a partir de 2027, com coordenação permanente entre os ministérios da Agricultura e de Minas e Energia, e articular o Plano Safra com incentivos à produção de biomassa.",
+   "prazo": true,
+   "como": true
+  },
+  {
+   "candidato": "lula",
+   "assunto": "agro",
+   "texto": "Ampliar o Plano Safra da Agricultura Familiar.",
+   "pagina": 59,
+   "trecho": "Vamos continuar expandindo o Plano Safra da Agricultura Familiar, com juros compatíveis com o perfil do agricultor e tipo de produto, com prioridade para produção de alimentos da cesta básica.",
+   "como": true
+  },
+  {
+   "candidato": "lula",
+   "assunto": "agro",
+   "texto": "Reforçar o crédito para agroecologia e orgânicos.",
+   "pagina": 59,
+   "trecho": "Reforçaremos ainda mais as linhas de crédito específicas para agroecologia, produção orgânica e sociobiodiversidade, a inovação e a introdução de tecnologias e máquinas adaptadas."
+  },
+  {
+   "candidato": "lula",
+   "assunto": "agro",
+   "texto": "Manter crédito especial para jovens agricultores.",
+   "pagina": 59,
+   "trecho": "Manteremos linhas de crédito diferenciadas para jovens agricultores, promovendo a sucessão familiar e reduzindo o êxodo rural;"
+  },
+  {
+   "candidato": "lula",
+   "assunto": "agro",
+   "texto": "Simplificar o crédito rural com o aplicativo Meu Imóvel Rural.",
+   "pagina": 59,
+   "trecho": "Simplificaremos o acesso ao crédito, escalando soluções digitais, como o aplicativo Meu Imóvel Rural, e tornando processos menos burocráticos.",
+   "como": true
+  },
+  {
+   "candidato": "lula",
+   "assunto": "agro",
+   "texto": "Ampliar a Assistência Técnica e Extensão Rural (ATER).",
+   "pagina": 60,
+   "trecho": "Continuaremos ampliando a oferta de Assistência Técnica e Extensão Rural (ATER).",
+   "como": true
+  },
+  {
+   "candidato": "lula",
+   "assunto": "agro",
+   "texto": "Facilitar a venda de produtos de agroindústrias familiares entre estados.",
+   "pagina": 60,
+   "trecho": "Avançaremos no aperfeiçoamento da segurança agropecuária para agroindústrias familiares, facilitando a comercialização interestadual."
+  },
+  {
+   "candidato": "lula",
+   "assunto": "agro",
+   "texto": "Fortalecer o Mais Alimentos, para máquinas na pequena propriedade.",
+   "pagina": 60,
+   "trecho": "Retomamos o programa Mais Alimentos e o acesso da agricultura familiar à mecanização adaptada às pequenas propriedades voltou a receber apoio, estratégia fundamental para elevação da produtividade, que será fortalecida.",
+   "como": true
+  },
+  {
+   "candidato": "lula",
+   "assunto": "agro",
+   "texto": "Fortalecer o Garantia-Safra e o seguro rural da agricultura familiar.",
+   "pagina": 60,
+   "trecho": "Frente à maior frequência da ocorrência de eventos climáticos extremos, daremos especial atenção ao fortalecimento do Programa Garantia-Safra e à ampliação do acesso ao seguro rural da agricultura familiar.",
+   "como": true
+  },
+  {
+   "candidato": "lula",
+   "assunto": "agro",
+   "texto": "Ampliar o Programa Nacional de Florestas Produtivas.",
+   "pagina": 60,
+   "trecho": "Vamos ampliar o Programa Nacional de Florestas Produtivas e os sistemas agroflorestais.",
+   "como": true
+  },
+  {
+   "candidato": "lula",
+   "assunto": "agro",
+   "texto": "Fomentar a produção de bioinsumos.",
+   "pagina": 60,
+   "trecho": "Vamos ampliar o fomento à produção nacional de bioinsumos para reduzir a dependência de fertilizantes químicos importados."
+  },
+  {
+   "candidato": "lula",
+   "assunto": "agro",
+   "texto": "Seguir com a reforma agrária, assentando as famílias acampadas.",
+   "pagina": 60,
+   "trecho": "Continuaremos a avançar na política de reforma agrária, assentando as famílias acampadas, estruturando os assentamentos e ampliando o acesso ao crédito fundiário."
+  },
+  {
+   "candidato": "lula",
+   "assunto": "agro",
+   "texto": "Ampliar o PRONERA, de ensino técnico e superior no campo.",
+   "pagina": 60,
+   "trecho": "Ampliaremos o Programa Nacional de Educação na Reforma Agrária (PRONERA), garantindo acesso ao ensino técnico e superior às populações do campo.",
+   "como": true
+  },
+  {
+   "candidato": "lula",
+   "assunto": "agro",
+   "texto": "Levar energia elétrica a todo o campo.",
+   "pagina": 60,
+   "trecho": "Será buscada a universalização do acesso à energia elétrica no campo, priorizando fontes renováveis, como solar e eólica.",
+   "meta": true
+  },
+  {
+   "candidato": "lula",
+   "assunto": "agro",
+   "texto": "Apoiar a pesca artesanal pelo Plano Nacional da Pesca Artesanal.",
+   "pagina": 61,
+   "trecho": "No novo mandato, manteremos nosso compromisso com o fomento à pesca artesanal e à aquicultura familiar, com a implementação das diretrizes e prioridades estabelecidas no Plano Nacional da Pesca Artesanal (PNPA).",
+   "como": true
+  },
+  {
+   "candidato": "lula",
+   "assunto": "agro",
+   "texto": "Proteger os territórios pesqueiros.",
+   "pagina": 61,
+   "trecho": "Fortaleceremos a promoção da proteção dos territórios pesqueiros, da sociobiodiversidade e dos modos de vida das comunidades das águas como dimensão estratégica do desenvolvimento nacional."
+  },
+  {
+   "candidato": "lula",
+   "assunto": "agro",
+   "texto": "Ampliar o crédito rural e os recursos do Plano Safra.",
+   "pagina": 61,
+   "trecho": "Continuaremos fortalecendo o crédito rural, ampliando os recursos do Plano Safra e assegurando juros compatíveis com a rentabilidade da atividade agropecuária.",
+   "como": true
+  },
+  {
+   "candidato": "lula",
+   "assunto": "agro",
+   "texto": "Diversificar o financiamento do agro com o mercado de capitais.",
+   "pagina": 61,
+   "trecho": "Buscaremos também continuar diversificando as fontes de financiamento, estimulando o mercado de capitais e títulos do agronegócio.",
+   "como": true
+  },
+  {
+   "candidato": "lula",
+   "assunto": "agro",
+   "texto": "Criar um programa de resiliência climática no campo.",
+   "pagina": 61,
+   "trecho": "Frente ao crescente risco associado às mudanças climáticas, buscaremos implementar um programa nacional de resiliência climática no campo, ampliando as áreas irrigadas, promovendo a conservação dos solos, incentivando a agricultura de precisão e o plantio direto, além de modernizar ainda mais o monitoramento meteorológico e os sistemas de alerta precoce para os produtores."
+  },
+  {
+   "candidato": "lula",
+   "assunto": "agro",
+   "texto": "Melhorar o fomento à Integração Lavoura-Pecuária-Floresta (ILPF).",
+   "pagina": 61,
+   "trecho": "Aprimoraremos os instrumentos de fomento a sistemas produtivos integrados, como a Integração Lavoura-Pecuária-Floresta (ILPF), para aumentar a retenção de água no solo, reduzir o estresse térmico das culturas e do rebanho e fortalecer a gestão do risco climático como fator de competitividade e continuidade da produção.",
+   "como": true
+  },
+  {
+   "candidato": "lula",
+   "assunto": "agro",
+   "texto": "Criar com o setor um instrumento contra perdas de safra em catástrofes.",
+   "pagina": 62,
+   "trecho": "Estabeleceremos diálogo com o setor produtivo para viabilizar um instrumento de mitigação dos efeitos das catástrofes para cobrir perdas sistêmicas decorrentes de quebras severas de safra e para promover a educação em gestão de riscos, integrando o seguro rural a instrumentos de comercialização e proteção financeira."
+  },
+  {
+   "candidato": "lula",
+   "assunto": "agro",
+   "texto": "Reforçar os adidos agrícolas e as missões comerciais.",
+   "pagina": 62,
+   "trecho": "Vamos continuar neste caminho, fortalecendo a diplomacia comercial, promovendo a imagem do agronegócio e reforçando a atuação dos adidos agrícolas em mercados estratégicos, além de ampliar as missões comerciais.",
+   "como": true
+  },
+  {
+   "candidato": "lula",
+   "assunto": "agro",
+   "texto": "Seguir com a recuperação de pastagens degradadas.",
+   "pagina": 62,
+   "trecho": "Vamos dar sequência ao ousado programa de recuperação de pastagens degradadas, ampliando a eficiência produtiva e a sustentabilidade da pecuária."
+  },
+  {
+   "candidato": "lula",
+   "assunto": "agro",
+   "texto": "Apoiar o melhoramento genético do rebanho.",
+   "pagina": 62,
+   "trecho": "Continuaremos apoiando o melhoramento genético do rebanho e a nutrição animal de precisão para reduzir o ciclo de abate e as emissões de gases de efeito estufa por quilo de carne produzida."
+  },
+  {
+   "candidato": "lula",
+   "assunto": "agro",
+   "texto": "Apoiar a rastreabilidade individual do rebanho.",
+   "pagina": 62,
+   "trecho": "Os produtores serão apoiados na implementação de sistemas de rastreabilidade individual do rebanho, do nascimento ao abate, para atender às exigências dos mercados internacionais."
+  },
+  {
+   "candidato": "lula",
+   "assunto": "agro",
+   "texto": "Fortalecer a Embrapa.",
+   "pagina": 62,
+   "trecho": "A Embrapa será fortalecida para consolidar a liderança do Brasil em tecnologia agropecuária tropical, com investimentos em biotecnologia, edição genômica e cultivares mais resistentes a pragas e secas.",
+   "como": true
+  },
+  {
+   "candidato": "lula",
+   "assunto": "agro",
+   "texto": "Levar internet ao campo.",
+   "pagina": 62,
+   "trecho": "Fomentaremos a expansão da conectividade no mundo rural, para elevar a produtividade e facilitar a gestão das propriedades."
+  },
+  {
+   "candidato": "lula",
+   "assunto": "agro",
+   "texto": "Acelerar a produção de fertilizantes no Brasil.",
+   "pagina": 63,
+   "trecho": "No próximo governo, seguiremos acelerando a produção nacional de fertilizantes."
+  },
+  {
+   "candidato": "flavio",
+   "assunto": "valores",
+   "texto": "Criar a Rede Nacional de Cuidado para idosos e pessoas com deficiência, com estados e municípios.",
+   "pagina": 21,
+   "trecho": "Também estruturaremos uma Rede Nacional de Cuidado, ampliando o apoio a idosos e pessoas com deficiência, com centros-dia e atendimento domiciliar em parcerias público privado com estados, municípios e organizações sociais.",
+   "como": true
+  },
+  {
+   "candidato": "flavio",
+   "assunto": "valores",
+   "texto": "Criar o Casa Segura para Envelhecer, para adaptar a casa de idosos de menor renda.",
+   "pagina": 39,
+   "trecho": "Por isso, para a população idosa, vamos oferecer o programa Casa Segura para Envelhecer, com subsídio à acessibilidade domiciliar para famílias de menor renda.",
+   "como": true
+  },
+  {
+   "candidato": "flavio",
+   "assunto": "valores",
+   "texto": "Criar um aplicativo de alerta para idosos.",
+   "pagina": 39,
+   "trecho": "Desenvolveremos um aplicativo de companhia com alertas de perigo, para que o idoso tenha o amparo da tecnologia e o filho que mora longe tenha tranquilidade."
+  },
+  {
+   "candidato": "flavio",
+   "assunto": "valores",
+   "texto": "Ampliar as casas de longa permanência para idosos.",
+   "pagina": 39,
+   "trecho": "E vamos ampliar as instituições de longa permanência para idosos, para que recebam proteção especial quando o cuidado familiar não for viável ou suficiente."
+  },
+  {
+   "candidato": "lula",
+   "assunto": "valores",
+   "texto": "Ampliar ações de autonomia e cuidado para pessoas idosas.",
+   "pagina": 22,
+   "trecho": "No próximo mandato, intensificaremos tanto as ações de promoção da autonomia das pessoas idosas, voltadas para aquelas pessoas com baixo grau de dependência, quanto medidas centradas na garantia do cuidado para aquelas pessoas com maior dependência."
+  },
+  {
+   "candidato": "lula",
+   "assunto": "valores",
+   "texto": "Ajudar os municípios a ampliar os Centros-Dia para idosos.",
+   "pagina": 22,
+   "trecho": "Vamos ampliar o apoio aos municípios para expandir e qualificar a rede de atendimento dos Centros-Dia e outros equipamentos para promoção do envelhecimento saudável e ativo, como academias públicas, praças, espaços de leitura, entre outros.",
+   "como": true
+  },
+  {
+   "candidato": "lula",
+   "assunto": "valores",
+   "texto": "Ampliar as vagas públicas em casas de longa permanência para idosos.",
+   "pagina": 22,
+   "trecho": "Seguiremos apoiando a ampliação das vagas públicas em Instituições de Longa Permanência - ILPIS e aperfeiçoando os mecanismos de fiscalização desses estabelecimentos para garantir condições adequadas de funcionamento e identificar eventuais casos de violações de direitos humanos e maus tratos."
+  },
+  {
+   "candidato": "lula",
+   "assunto": "valores",
+   "texto": "Levar a todo o país o programa do SUS para idosos.",
+   "pagina": 22,
+   "trecho": "Vamos dar escala a esse programa do SUS para que idosos tenham acesso a esse direito em todo território nacional.",
+   "como": true
+  },
+  {
+   "candidato": "lula",
+   "assunto": "valores",
+   "texto": "Ampliar parcerias com empresas para empregar pessoas com mais de 60 anos.",
+   "pagina": 23,
+   "trecho": "Vamos ampliar as parcerias com iniciativa privada para qualificação e contratação de pessoas com mais de 60 anos, assim como medidas de valorização dos saberes das pessoas idosas no mercado de trabalho."
+  },
+  {
+   "candidato": "lula",
+   "assunto": "valores",
+   "texto": "Ensinar idosos a usar serviços digitais e se proteger de golpes.",
+   "pagina": 23,
+   "trecho": "Seguiremos fortalecendo iniciativas de letramento digital buscando ampliar o acesso dos idosos aos serviços públicos digitais e reduzir sua vulnerabilidade a fraudes e crimes cibernéticos."
+  },
+  {
+   "candidato": "lula",
+   "assunto": "valores",
+   "texto": "Ampliar as políticas para crianças, com combate à pobreza infantil.",
+   "pagina": 24,
+   "trecho": "Continuaremos buscando ampliar e fortalecer as políticas para nossas crianças, por meio do enfrentamento da pobreza infantil, da garantia de acesso às políticas públicas e do direito ao brincar."
+  },
+  {
+   "candidato": "lula",
+   "assunto": "valores",
+   "texto": "Melhorar o ECA Digital e regular o uso de telas por idade.",
+   "pagina": 24,
+   "trecho": "Não recuaremos um passo sequer na proteção digital de crianças e adolescentes, com aprimoramento do ECA Digital, regulamentação do uso de telas por faixa etária, promoção do uso seguro das tecnologias e regulamentação das plataformas de jogos e dos ambientes digitais.",
+   "como": true
+  },
+  {
+   "candidato": "lula",
+   "assunto": "valores",
+   "texto": "Apoiar as Cuidotecas, espaços para crianças de 3 a 12 anos.",
+   "pagina": 26,
+   "trecho": "Apoiaremos as Cuidotecas, espaços de acolhida de crianças de 3 a 12 anos, que liberam o tempo das mulheres responsáveis pelo cuidado das crianças.",
+   "como": true
+  },
+  {
+   "candidato": "lula",
+   "assunto": "valores",
+   "texto": "Criar um programa de formação de cuidadores.",
+   "pagina": 26,
+   "trecho": "Vamos instituir um programa visando a capacitação de cuidadores com currículos inclusivos, para fazer frente à potencialmente forte expansão da demanda por estes trabalhadores."
+  },
+  {
+   "candidato": "flavio",
+   "assunto": "mundo",
+   "texto": "Fazer parcerias com todos os países que queiram cooperar.",
+   "pagina": 55,
+   "trecho": "Estabeleceremos parcerias internacionais com todos os países que queiram a cooperação do Brasil, sem preconceitos ou ranços ideológicos."
+  },
+  {
+   "candidato": "flavio",
+   "assunto": "mundo",
+   "texto": "Negociar com todos os mercados que interessam ao Brasil.",
+   "pagina": 62,
+   "trecho": "Negociaremos com todos os que interessam ao Brasil, da China à União Europeia, dos Estados Unidos aos mercados asiáticos, porque o que orienta a nossa diplomacia é o interesse do produtor e do trabalhador brasileiro, não a simpatia ou a antipatia por este ou aquele governo."
+  },
+  {
+   "candidato": "flavio",
+   "assunto": "mundo",
+   "texto": "Preparar uma abertura comercial para baratear máquinas e insumos.",
+   "pagina": 63,
+   "trecho": "E vamos nos preparar para uma abertura comercial que dê ao setor produtivo acesso a bens de capital, tecnologia e insumos importados, num ambiente de concorrência que reduz preços e melhora a oferta ao consumidor."
+  },
+  {
+   "candidato": "flavio",
+   "assunto": "mundo",
+   "texto": "Plano para integrar o país às cadeias globais, com BNDES e Apex.",
+   "pagina": 63,
+   "trecho": "Vamos executar um plano nacional de integração às cadeias globais de valor, com apoio real para o setor produtivo ganhar produtividade, tendo como prioridade a agroindústria avançada, os minerais críticos, a saúde e a economia digital, e apoiar a internacionalização das pequenas e médias empresas via BNDES e Apex-Brasil, para que o produto brasileiro chegue mais longe.",
+   "como": true
+  },
+  {
+   "candidato": "flavio",
+   "assunto": "mundo",
+   "texto": "Fortalecer multinacionais brasileiras, com adesão às regras da OCDE.",
+   "pagina": 63,
+   "trecho": "E vamos fortalecer as multinacionais brasileiras, ampliando sua presença internacional pela abertura econômica, pela adesão às regras da OCDE e por acordos comerciais de ganho mútuo.",
+   "como": true
+  },
+  {
+   "candidato": "lula",
+   "assunto": "mundo",
+   "texto": "Estimular as exportações da indústria.",
+   "pagina": 52,
+   "trecho": "Para isso, vamos estimular as exportações industriais, ampliar a presença em novos mercados e tornar a pauta exportadora mais concentrada em produtos com maior valor agregado, e aprimorando continuamente os instrumentos de defesa comercial."
+  },
+  {
+   "candidato": "lula",
+   "assunto": "mundo",
+   "texto": "Fortalecer a indústria nacional de defesa.",
+   "pagina": 78,
+   "trecho": "Por isso, fortaleceremos a Base Industrial e Tecnológica de Defesa, de modo a assegurar maior autonomia nacional nesse campo e estimular inovações com impactos positivos sobre o conjunto da economia.",
+   "como": true
+  },
+  {
+   "candidato": "lula",
+   "assunto": "mundo",
+   "texto": "Proteger as fronteiras, a Amazônia e o mar brasileiro.",
+   "pagina": 79,
+   "trecho": "Protegeremos as fronteiras, a Amazônia e a Amazônia Azul."
+  },
+  {
+   "candidato": "lula",
+   "assunto": "mundo",
+   "texto": "Aprofundar o Mercosul e a integração regional.",
+   "pagina": 80,
+   "trecho": "Seguiremos aprofundando o Mercosul e os espaços de integração regional, especialmente nas áreas de infraestrutura, defesa, segurança pública, energia e saúde.",
+   "como": true
+  },
+  {
+   "candidato": "lula",
+   "assunto": "mundo",
+   "texto": "Integrar a infraestrutura com os vizinhos, rumo ao Pacífico e ao Caribe.",
+   "pagina": 80,
+   "trecho": "Aprofundaremos a integração em infraestrutura, priorizando redes multimodais, com destaque para as conexões com o Pacífico e o Caribe."
+  },
+  {
+   "candidato": "lula",
+   "assunto": "mundo",
+   "texto": "Criar um mercado comum de energia na América do Sul.",
+   "pagina": 80,
+   "trecho": "Promoveremos um mercado comum sul-americano de energia, com interconexões e coordenação regulatória."
+  },
+  {
+   "candidato": "lula",
+   "assunto": "mundo",
+   "texto": "Fortalecer a OTCA, organização dos países amazônicos.",
+   "pagina": 80,
+   "trecho": "Consolidaremos a Amazônia como eixo estratégico da integração regional fortalecendo a Organização do Tratado de Cooperação Amazônica (OTCA) na bioeconomia, na ciência, no financiamento verde e no combate coordenado aos ilícitos transnacionais.",
+   "como": true
+  },
+  {
+   "candidato": "lula",
+   "assunto": "mundo",
+   "texto": "Ampliar a cooperação com todas as regiões do mundo.",
+   "pagina": 80,
+   "trecho": "Manteremos uma política externa universalista e ampliaremos os esforços de cooperação e negociação com todas as regiões do mundo, diversificando nossas parcerias estratégicas."
+  },
+  {
+   "candidato": "lula",
+   "assunto": "mundo",
+   "texto": "Fazer novos acordos comerciais e abrir mercados.",
+   "pagina": 80,
+   "trecho": "Investiremos em novos acordos comerciais e na abertura de novos mercados para nossos bens e serviços, de modo a continuar enfrentando agressões comerciais e a defender os interesses do país com base nas normas internacionais e no multilateralismo."
+  },
+  {
+   "candidato": "lula",
+   "assunto": "mundo",
+   "texto": "Aproximar o Brasil da África.",
+   "pagina": 80,
+   "trecho": "Aprofundaremos as relações com a África, reconhecendo sua crescente importância na ordem internacional e os laços históricos e culturais que unem o Brasil ao continente africano."
+  },
+  {
+   "candidato": "lula",
+   "assunto": "mundo",
+   "texto": "Fortalecer a CPLP, comunidade dos países de língua portuguesa.",
+   "pagina": 80,
+   "trecho": "Consolidaremos o Atlântico Sul como região de paz, cooperação e desenvolvimento e fortaleceremos a Comunidade dos Países de Língua Portuguesa (CPLP).",
+   "como": true
+  },
+  {
+   "candidato": "lula",
+   "assunto": "mundo",
+   "texto": "Criar cooperação permanente com a União Africana e a ASEAN.",
+   "pagina": 80,
+   "trecho": "Promoveremos mecanismos permanentes de cooperação com a União Africana e a Associação de Nações do Sudeste Asiático (ASEAN).",
+   "como": true
+  },
+  {
+   "candidato": "lula",
+   "assunto": "mundo",
+   "texto": "Reaproximar o Brasil da Ásia, do Oriente Médio e da Europa.",
+   "pagina": 81,
+   "trecho": "Persistiremos na reaproximação com a Ásia, o Oriente Médio e a Europa regiões com grande potencial para ampliar a cooperação política, econômica, tecnológica e cultural."
+  },
+  {
+   "candidato": "lula",
+   "assunto": "mundo",
+   "texto": "Defender a reforma da ONU e do Conselho de Segurança.",
+   "pagina": 81,
+   "trecho": "Continuaremos engajados na reforma das Nações Unidas, especialmente do Conselho de Segurança, para torná-lo mais democrático e representativo, com maior participação dos países em desenvolvimento entre os membros permanentes Seguiremos advogando a reforma e fortalecimento da Organização Mundial do Comércio, defendendo a retomada do mecanismo de solução de controvérsias, o tratamento diferenciado para os países em desenvolvimento e a articulação entre comércio, sustentabilidade e acesso a tecnologias verdes.",
+   "como": true
+  },
+  {
+   "candidato": "lula",
+   "assunto": "mundo",
+   "texto": "Defender a reforma do FMI e do Banco Mundial e fortalecer os bancos dos BRICS.",
+   "pagina": 81,
+   "trecho": "Defenderemos a reforma da arquitetura financeira internacional, com a democratização do FMI, do Banco Mundial e dos bancos multilaterais e o fortalecimento do CAF, do Novo Banco de Desenvolvimento (NDB) e dos mecanismos financeiros dos BRICS.",
+   "como": true
+  },
+  {
+   "candidato": "lula",
+   "assunto": "mundo",
+   "texto": "Aproximar o Brasil do BRICS, do Sul Global e do G20.",
+   "pagina": 81,
+   "trecho": "Aprofundaremos a aproximação geopolítica com o BRICS e com o Sul Global, bem como com o G20, espaços fundamentais para a afirmação dos interesses da maioria da humanidade.",
+   "como": true
+  },
+  {
+   "candidato": "lula",
+   "assunto": "mundo",
+   "texto": "Ampliar a cooperação Sul-Sul.",
+   "pagina": 81,
+   "trecho": "Ampliaremos a Cooperação Sul-Sul em áreas nas quais o Brasil é referência contribuindo para a redução das desigualdades globais."
+  },
+  {
+   "candidato": "lula",
+   "assunto": "mundo",
+   "texto": "Priorizar a Aliança Global contra a Fome e o fundo de florestas tropicais (TFFF).",
+   "pagina": 81,
+   "trecho": "Serão prioridades de nossa ação externa a implementação da Aliança Global contra a Fome e a Pobreza e o enfrentamento da emergência climática, inclusive o Fundo Florestas Tropicais para Sempre (TFFF).",
+   "como": true
+  },
+  {
+   "candidato": "lula",
+   "assunto": "mundo",
+   "texto": "Proteger os brasileiros no exterior.",
+   "pagina": 82,
+   "trecho": "Valorizaremos e protegeremos as brasileiras e os brasileiros no exterior, fortalecendo a assistência e a proteção consular, ampliando os mecanismos de participação da diáspora e reconhecendo seu papel como elo cultural, econômico e afetivo entre o Brasil e o mundo."
+  }
+ ]
+}

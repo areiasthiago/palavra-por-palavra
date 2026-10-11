@@ -9,3 +9,4 @@ CLAUDE.md
 data/falas/
 # Cache e credenciais locais do Wrangler (Cloudflare): nunca vão para o repositório
 .wrangler/
+data/propostas-brutas.json
