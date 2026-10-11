@@ -1,13 +1,13 @@
-import { preparar, familia, familiaDoGrupo, formasDoTermo, contar, trecho, semAcento } from './busca.js?v=4.4';
-import * as medir from './contagem.js?v=4.4';
-import { compartilhar } from './compartilhar.js?v=4.4';
-import { numero, vezes, frequencia, maiorTaxa, LEMBRETE, PERGUNTA } from './formato.js?v=4.4';
+import { preparar, familia, familiaDoGrupo, formasDoTermo, contar, trecho, semAcento } from './busca.js?v=5.0';
+import * as medir from './contagem.js?v=5.0';
+import { compartilhar } from './compartilhar.js?v=5.0';
+import { numero, vezes, frequencia, maiorTaxa, LEMBRETE, PERGUNTA } from './formato.js?v=5.0';
 
 const ORDEM = 'palavra:ordem';
 const POR_VEZ = 5; // trechos mostrados de cada vez
 const app = document.getElementById('app');
 
-let dados; // { textos, termos, grupos, resumos, acervos, indice }
+let dados; // { textos, termos, grupos, resumos, propostas, acervos, indice }
 let ordem; // os dois candidatos na ordem sorteada para este aparelho
 
 const el = (tag, attrs = {}, ...filhos) => {
@@ -173,13 +173,16 @@ function inicio() {
     el('span', { class: 'selo' }, 'Eleições 2026 · 2º turno'),
     el('h1', {}, 'Quanto cada candidato ', el('span', { class: 'destaque' }, 'se importa com o que é importante'), ' pra você?'),
     el('p', { class: 'chamada' }, 'Conferimos ', el('em', {}, 'palavra por palavra'), '.'),
-    campoDeBusca(),
     compromisso(),
+    quadroDosPlanos(),
+    el('div', { class: 'bloco' },
+      el('h2', { class: 'subtitulo' }, 'Ou busque uma palavra'),
+      campoDeBusca()),
     el('div', { class: 'bloco' },
       el('h2', { class: 'subtitulo' }, 'Mais buscados aqui'),
       quentes),
     el('div', { class: 'bloco' },
-      el('h2', { class: 'subtitulo' }, 'Ou escolha por assunto'),
+      el('h2', { class: 'subtitulo' }, 'Palavras por assunto'),
       el('div', { class: 'assuntos' }, dados.grupos.map((g) => el('details', { class: 'assunto' },
         // Aberto, o título ganha à direita a pílula que leva ao assunto todo (chave ligada).
         el('summary', {}, el('span', {}, g.nome),
@@ -194,6 +197,76 @@ function inicio() {
 const compromisso = () => el('aside', { class: 'compromisso' },
   el('strong', {}, 'Se não está no plano, fica difícil cobrar depois.'),
   el('span', {}, 'O plano de governo é o compromisso que cada candidato registrou por escrito na Justiça Eleitoral. Vote agora pra cobrar depois.'));
+
+// ---------- Propostas (separadas e classificadas por IA) ----------
+
+const pct = (parte, total) => (total ? Math.round((100 * parte) / total) : 0);
+
+// Propostas de um candidato num assunto e quantas têm cada marca.
+function indicadores(grupoId, c) {
+  const lista = dados.propostas.filter((p) => p.assunto === grupoId && p.candidato === c);
+  const conta = (marca) => lista.filter((p) => p[marca]).length;
+  return { c, lista, n: lista.length, como: conta('como'), meta: conta('meta'), prazo: conta('prazo'), valor: conta('valor') };
+}
+
+// Início: os 14 assuntos, com quantas propostas cada plano faz e quantas dizem como, lado a lado.
+function quadroDosPlanos() {
+  return el('section', { class: 'planos' },
+    el('h2', { class: 'subtitulo' }, 'Os planos, assunto por assunto'),
+    el('p', { class: 'legenda' }, 'Quantas propostas cada plano faz e quantas dizem como vão ser feitas. Toque num assunto para ver as propostas.'),
+    el('p', { class: 'linha-plano cabecalho', 'aria-hidden': 'true' }, el('span', {}), el('span', {}, 'Propostas'), el('span', {}, 'Dizem como')),
+    el('ul', { class: 'lista-planos' }, dados.grupos.map((g) => el('li', {},
+      el('a', { href: `?a=${g.id}`, onclick: (e) => { e.preventDefault(); buscarAssunto(g.id, 'planos'); } },
+        el('strong', { class: 'assunto-nome' }, g.nome, el('span', { 'aria-hidden': 'true' }, ' →')),
+        ordem.map((c) => {
+          const i = indicadores(g.id, c);
+          return el('span', { class: 'linha-plano' },
+            el('span', { class: 'quem' }, nome(c)),
+            el('span', { 'aria-label': `${i.n} ${i.n === 1 ? 'proposta' : 'propostas'}` }, el('b', {}, numero(i.n))),
+            el('span', { 'aria-label': `${pct(i.como, i.n)}% dizem como` }, el('b', {}, `${pct(i.como, i.n)}%`)));
+        }))))),
+    el('p', { class: 'nota-ia' }, iconeIA(), el('span', {}, 'Propostas separadas e classificadas por IA a partir dos planos de governo.')));
+}
+
+// Uma medida da coluna: rótulo, número grande, barra e detalhe (mesmo desenho da contagem de palavras).
+const medida = (rotulo, valor, fracao, detalhe) => el('div', { class: 'conta' },
+  el('span', { class: 'rotulo' }, rotulo),
+  el('strong', {}, valor),
+  el('span', { class: 'trilha', 'aria-hidden': 'true' }, el('span', { class: 'preenche', style: `width:${fracao * 100}%` })),
+  detalhe && el('small', {}, detalhe));
+
+// Página do assunto: quantidade de propostas e quantas dizem como, com o mesmo peso, e a lista.
+function propostasDoAssunto(grupo) {
+  const porCandidato = ordem.map((c) => indicadores(grupo.id, c));
+  const maior = Math.max(...porCandidato.map((x) => x.n)) || 1;
+  return el('section', { class: 'comparativo propostas-assunto' },
+    el('span', { class: 'selo-ia' }, iconeIA(), 'Feito por IA'),
+    el('h2', {}, `O que cada plano propõe sobre ${grupo.nome.toLowerCase()}`),
+    el('div', { class: 'colunas quatro' }, porCandidato.map((x) => el('div', { class: 'coluna' },
+      el('h3', { class: 'nome' }, nome(x.c)),
+      medida('Propostas', numero(x.n), x.n / maior),
+      medida('Dizem como fazer', `${pct(x.como, x.n)}%`, x.n ? x.como / x.n : 0, `${x.como} de ${x.n}`),
+      el('small', { class: 'outras-marcas' }, `Com meta em número: ${x.meta}. Com prazo: ${x.prazo}. Com valor em R$: ${x.valor}.`)))),
+    el('p', { class: 'legenda' }, el('strong', {}, 'Diz como'), ' quando a proposta nomeia a lei, o programa, de onde sai o dinheiro ou com quem vai ser feita (estados, municípios, um órgão).',
+      porCandidato.some((x) => x.n < 8) ? ' Com poucas propostas, uma a mais ou a menos muda bastante o percentual.' : ''),
+    porCandidato.map((x) => listaDePropostas(x, grupo)));
+}
+
+const MARCAS = [['como', 'Diz como'], ['meta', 'Meta em número'], ['prazo', 'Prazo'], ['valor', 'Valor em R$']];
+
+// Lista de um candidato, aberta sob demanda; cada proposta mostra as marcas e o trecho do plano.
+function listaDePropostas({ c, lista }, grupo) {
+  if (!lista.length) return el('p', { class: 'onde-nada' }, `O plano de ${nome(c)} não tem propostas sobre este assunto.`);
+  const caixa = el('details', { class: 'onde' },
+    el('summary', {}, `Ver ${lista.length === 1 ? 'a proposta' : `as ${lista.length} propostas`} de ${nome(c)}`),
+    el('ol', { class: 'trechos lista-propostas' }, lista.map((p) => el('li', {},
+      el('p', {}, p.texto),
+      el('p', { class: 'marcas' }, MARCAS.filter(([k]) => p[k]).map(([, rotulo]) => el('span', { class: 'marca' }, rotulo))),
+      el('details', { class: 'no-plano' }, el('summary', {}, 'Ler no plano'),
+        el('blockquote', {}, p.trecho), linkFonte(paginaDoPlano(c, p.pagina), `Plano, pág. ${p.pagina}`))))));
+  caixa.addEventListener('toggle', () => { if (caixa.open) medir.viuPropostas(`${grupo.id}:${c}`); });
+  return caixa;
+}
 
 const aviso = () => el('p', { class: 'aviso-fixo' }, el('strong', {}, 'Lembre: '), LEMBRETE);
 
@@ -255,23 +328,31 @@ function buscar(consulta, origem, { historico = true, modo = 'palavra' } = {}) {
     fam.excluir.length ? ` Não contamos expressões em que a palavra não fala do assunto: ${fam.excluir.join(', ')}.` : '',
     ` Assunto: ${grupo.nome}.`);
   const onde = el('div', { class: 'onde-slot' });
+  // As propostas do assunto vêm antes da contagem na página do assunto e depois dela na de uma palavra.
+  const blocoPropostas = propostasDoAssunto(grupo);
+  const antes = el('div', { class: 'slot' });
+  const depois = el('div', { class: 'slot' });
   // Título, "o que contamos" e trechos acompanham a chave.
   const desenhar = () => {
     h1.textContent = vista.cabecalho;
     document.title = `${vista.cabecalho} · Palavra por Palavra`;
     contamos.hidden = vista.modo === 'assunto';
     onde.replaceChildren(...(somar(vista.res) > 0 ? [ondeUsou(vista)] : []));
+    (vista.modo === 'assunto' ? antes : depois).replaceChildren(blocoPropostas);
+    (vista.modo === 'assunto' ? depois : antes).replaceChildren();
   };
   desenhar();
 
   const vizinhos = termosDoGrupo(grupo.id).filter((t) => t !== fam.termo);
   const tela = el('section', { class: 'tela resultado' },
-    el('button', { class: 'botao voltar', type: 'button', onclick: () => voltarAoInicio() }, '← Todas as palavras'),
+    el('button', { class: 'botao voltar', type: 'button', onclick: () => voltarAoInicio() }, '← Início'),
     campoDeBusca(fam.rotulo),
     h1,
     contamos,
+    antes,
     quadro(grupo, visoes, vista, (nova) => { vista = nova; desenhar(); history.replaceState({}, '', naUrl()); }),
     onde,
+    depois,
     convite(),
     el('div', { class: 'par' },
       el('button', { class: 'botao discreto', type: 'button', onclick: () => { const i = app.querySelector('.busca input'); i.value = ''; i.focus(); } }, 'Buscar outra palavra')),
@@ -302,13 +383,13 @@ function quadro(grupo, visoes, inicial, aoTrocar) {
   let aberto = null;
 
   const colunas = ordem.map((c) => {
-    const foto = el('img', { src: `img/${c}-serio.webp?v=4.4`, alt: '', width: '96', height: '96' });
+    const foto = el('img', { src: `img/${c}-serio.webp?v=5.0`, alt: '', width: '96', height: '96' });
     const rotulo = el('span', { class: 'ver-resumo' }, 'Ver resumo');
     // Retrato embaixo das contagens; com resumo, retrato e botão formam um único botão.
     const cabeca = temResumo
       ? el('button', { class: 'rosto', type: 'button', 'aria-pressed': 'false', 'aria-controls': painel.id, 'aria-label': `Ver resumo do plano de ${nome(c)}`, onclick: () => abrirResumo(c) }, foto, rotulo)
       : el('div', { class: 'rosto' }, foto);
-    if (temResumo) new Image().src = `img/${c}-alegre.webp?v=4.4`; // sem piscar na troca
+    if (temResumo) new Image().src = `img/${c}-alegre.webp?v=5.0`; // sem piscar na troca
     return { c, cabeca, foto, rotulo, coluna: el('div', { class: 'coluna' }) };
   });
   function abrirResumo(c) {
@@ -316,7 +397,7 @@ function quadro(grupo, visoes, inicial, aoTrocar) {
     for (const col of colunas) {
       const ativo = col.c === aberto;
       col.cabeca.setAttribute('aria-pressed', String(ativo));
-      col.foto.src = `img/${col.c}-${ativo ? 'alegre' : 'serio'}.webp?v=4.4`;
+      col.foto.src = `img/${col.c}-${ativo ? 'alegre' : 'serio'}.webp?v=5.0`;
       col.rotulo.textContent = ativo ? 'Fechar' : 'Ver resumo';
     }
     painel.hidden = !aberto;
@@ -450,7 +531,7 @@ async function enviarImagem(botao, vista) {
       link: vista.link,
       lados: ordem.map((c) => ({
         nome: nome(c),
-        imagem: `img/${c}-neutro.webp?v=4.4`,
+        imagem: `img/${c}-neutro.webp?v=5.0`,
         plano: vista.res.plano[c],
       })),
     });
@@ -481,10 +562,10 @@ function rota({ historico = false } = {}) {
 
 async function iniciar() {
   try {
-    const [textos, termos, resumos] = await Promise.all(
-      ['data/textos.json?v=4.4', 'data/termos.json?v=4.4', 'data/resumos.json?v=4.4'].map((u) => fetch(u).then((r) => { if (!r.ok) throw new Error(u); return r.json(); })),
+    const [textos, termos, resumos, propostas] = await Promise.all(
+      ['data/textos.json?v=5.0', 'data/termos.json?v=5.0', 'data/resumos.json?v=5.0', 'data/propostas.json?v=5.0'].map((u) => fetch(u).then((r) => { if (!r.ok) throw new Error(u); return r.json(); })),
     );
-    dados = { textos, termos: termos.termos, grupos: termos.grupos, resumos, acervos: preparar(textos) };
+    dados = { textos, termos: termos.termos, grupos: termos.grupos, resumos, propostas: propostas.propostas, acervos: preparar(textos) };
     dados.indice = montarIndice();
   } catch {
     medir.erroCarga();
@@ -495,7 +576,7 @@ async function iniciar() {
   // Nota de método no rodapé (o lugar já existe no HTML), em todas as telas.
   const metodo = document.querySelector('.rodape .metodo');
   if (metodo) {
-    metodo.textContent = `A barra compara a frequência (a cada 10 mil palavras), porque os planos têm tamanhos diferentes. ${tamanhos()}`;
+    metodo.textContent = `Na contagem de palavras, a barra compara a frequência (a cada 10 mil palavras), porque os planos têm tamanhos diferentes. ${tamanhos()}`;
     metodo.hidden = false;
   }
   medir.abriu();

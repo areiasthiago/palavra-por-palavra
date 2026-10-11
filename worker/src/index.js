@@ -3,7 +3,7 @@
 import { termos, grupos } from '../../data/termos.json';
 
 const CANAIS = new Set(['wa', 'wam', 'was', 'tw', 'ig', 'fb', 'tt', 'li', 'tg', 'th', 'bs', 'yt', 'em', 'busca', 'c', 'tc', 'direto', 'outro']);
-const ORIGENS_BUSCA = new Set(['digitou', 'sugestao', 'quentes', 'assunto', 'link']);
+const ORIGENS_BUSCA = new Set(['digitou', 'sugestao', 'quentes', 'assunto', 'planos', 'link']);
 const PALAVRAS = new Set(termos.map((t) => t.termo.toLowerCase()));
 const ASSUNTOS = new Set(grupos.map((g) => g.id));
 const CANDIDATOS = ['lula', 'flavio'];
@@ -25,11 +25,12 @@ const TERMO_ACEITO = {
   ligou_assunto: (t) => ASSUNTOS.has(t),
   viu_trechos: (t) => PALAVRAS.has(t) || ASSUNTOS.has(t),
   viu_resumo: (t) => { const [g, c] = t.split(':'); return ASSUNTOS.has(g) && CANDIDATOS.includes(c); },
+  viu_propostas: (t) => { const [g, c] = t.split(':'); return ASSUNTOS.has(g) && CANDIDATOS.includes(c); },
   compartilhou: (t) => TIPOS_COMPARTILHAMENTO.has(t),
 };
 
 // Quantas vezes por hora cada evento (por palavra) pode subir. Acima disso, não conta.
-const TETO_POR_HORA = { termo: 300, grupo: 300, viu_trechos: 300, viu_resumo: 300, ligou_assunto: 300 };
+const TETO_POR_HORA = { termo: 300, grupo: 300, viu_trechos: 300, viu_resumo: 300, viu_propostas: 300, ligou_assunto: 300 };
 const TETO_PADRAO = 5000;
 
 // Dia em Brasília, para os totais diários baterem com o calendário do público.

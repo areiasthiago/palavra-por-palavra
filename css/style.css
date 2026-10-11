@@ -390,3 +390,30 @@ div.rosto { cursor: default; }
 @media (prefers-reduced-motion: reduce) {
   *, *::before, *::after { animation: none !important; transition: none !important; }
 }
+
+/* Propostas: os planos assunto por assunto (início) e a lista de um assunto */
+.planos { display: flex; flex-direction: column; gap: 10px; }
+.lista-planos { margin: 0; padding: 0; list-style: none; display: grid; gap: 10px; }
+.lista-planos a { display: grid; gap: 6px; padding: 12px 14px; border: 2.5px solid var(--traco); border-radius: 14px; background: var(--papel); color: var(--tinta); text-decoration: none; }
+.lista-planos a:hover { background: var(--realce-claro); }
+.assunto-nome { font-family: var(--titulo); font-size: 1.05rem; }
+/* Mesmo peso para os dois números: quantidade e "dizem como" */
+.linha-plano { display: grid; grid-template-columns: minmax(0, 1.6fr) 1fr 1fr; gap: 8px; align-items: baseline; font-size: 0.9rem; color: var(--suave); font-variant-numeric: tabular-nums; }
+.linha-plano > span:not(.quem) { text-align: right; }
+.linha-plano.cabecalho { margin: 4px 0 -4px; padding: 0 16.5px; font-size: 0.75rem; font-weight: 700; text-transform: uppercase; letter-spacing: 0.03em; }
+.linha-plano.cabecalho > span:not(:first-child) { text-align: right; }
+.linha-plano .quem { color: var(--tinta); font-weight: 700; overflow-wrap: anywhere; }
+.linha-plano b { color: var(--tinta); font-family: var(--titulo); font-size: 1.15rem; }
+.planos .nota-ia { display: flex; gap: 6px; align-items: flex-start; }
+.planos .nota-ia svg { width: 16px; height: 16px; flex: none; margin-top: 2px; color: var(--realce); }
+.colunas.quatro { grid-template-rows: auto auto auto auto; }
+.colunas.quatro .coluna { grid-row: span 4; }
+.outras-marcas { color: var(--suave); font-size: 0.8rem; line-height: 1.3; }
+.lista-propostas li { display: grid; gap: 4px; }
+.lista-propostas p { margin: 0; }
+.marcas:empty { display: none; }
+.marcas { display: flex; flex-wrap: wrap; gap: 6px; }
+.marca { padding: 1px 8px; border: 1.5px solid var(--realce); border-radius: 999px; color: var(--tinta); background: var(--realce-claro); font-size: 0.75rem; font-weight: 700; }
+.no-plano summary { color: var(--link); font-size: 0.85rem; font-weight: 700; cursor: pointer; }
+.no-plano blockquote { margin: 6px 0; padding-left: 10px; border-left: 3px solid var(--linha); color: var(--suave); font-size: 0.88rem; }
+.slot:empty { display: none; }
