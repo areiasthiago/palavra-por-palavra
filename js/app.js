@@ -1,7 +1,7 @@
-import { preparar, familia, familiaDoGrupo, formasDoTermo, contar, trecho, semAcento } from './busca.js?v=4.0';
-import * as medir from './contagem.js?v=4.0';
-import { compartilhar } from './compartilhar.js?v=4.0';
-import { numero, vezes, frequencia, maiorTaxa, LEMBRETE, PERGUNTA } from './formato.js?v=4.0';
+import { preparar, familia, familiaDoGrupo, formasDoTermo, contar, trecho, semAcento } from './busca.js?v=4.1';
+import * as medir from './contagem.js?v=4.1';
+import { compartilhar } from './compartilhar.js?v=4.1';
+import { numero, vezes, frequencia, maiorTaxa, LEMBRETE, PERGUNTA } from './formato.js?v=4.1';
 
 const ORDEM = 'palavra:ordem';
 const POR_VEZ = 5; // trechos mostrados de cada vez
@@ -28,7 +28,7 @@ const grupoPorId = (id) => dados.grupos.find((g) => g.id === id);
 const grupoDe = (termo) => grupoPorId(termo.grupo);
 const termosDoGrupo = (id) => dados.termos.filter((t) => t.grupo === id);
 
-// Link para o plano ou para a entrevista, sempre em outra aba e contado na medição.
+// Link para a página do plano, sempre em outra aba e contado na medição.
 const linkFonte = (href, texto) => el('a', { href, target: '_blank', rel: 'noopener', onclick: medir.abriuFonte }, texto);
 const paginaDoPlano = (c, n) => `${dados.textos.candidatos[c].plano}#page=${n}`;
 
@@ -173,7 +173,7 @@ function inicio() {
   app.replaceChildren(el('section', { class: 'tela inicio' },
     el('span', { class: 'selo' }, 'Eleições 2026 · 2º turno'),
     el('h1', {}, 'Quanto cada candidato ', el('span', { class: 'destaque' }, 'fala do que importa'), ' pra você?'),
-    el('p', { class: 'chamada' }, `Escolha uma palavra e veja quantas vezes ${nomes[0]} e ${nomes[1]} usaram essa palavra no plano de governo e em entrevistas.`),
+    el('p', { class: 'chamada' }, `Escolha uma palavra e veja quantas vezes ${nomes[0]} e ${nomes[1]} usaram essa palavra no plano de governo.`),
     campoDeBusca(),
     el('div', { class: 'bloco' },
       el('h2', { class: 'subtitulo' }, 'Mais buscados aqui'),
@@ -200,7 +200,7 @@ function buscarAssunto(id, origem, opcoes = {}) {
   if (destaque) buscar(destaque.termo, origem, { ...opcoes, modo: 'assunto' });
 }
 
-// Total de ocorrências dos dois candidatos em todos os acervos.
+// Total de ocorrências dos dois candidatos no plano.
 function somar(res) {
   return Object.values(res).reduce((s, porCandidato) => s + ordem.reduce((t, c) => t + porCandidato[c].vezes, 0), 0);
 }
@@ -216,13 +216,13 @@ function vistas(fam, grupo) {
     palavra: preguicosa({
       modo: 'palavra', fam, aspas: true, rotulo: fam.rotulo, cabecalho: `“${fam.rotulo}”`,
       titulo: PERGUNTA.palavra, link: `?p=${encodeURIComponent(fam.rotulo)}`, metrica: fam.rotulo.toLowerCase(),
-      vazio: `Nenhum dos dois usou “${fam.rotulo}” no plano de governo nem nas entrevistas.`,
+      vazio: `Nenhum dos dois usou “${fam.rotulo}” no plano de governo.`,
       onde: 'Onde cada candidato usou a palavra', nada: 'essa palavra',
     }, () => fam),
     assunto: preguicosa({
       modo: 'assunto', aspas: false, rotulo: grupo.nome, cabecalho: grupo.nome,
       titulo: `${PERGUNTA.assunto} ${grupo.nome.toLowerCase()}`, link: `?a=${grupo.id}`, metrica: grupo.id,
-      vazio: 'Nenhum dos dois usou as palavras deste assunto no plano de governo nem nas entrevistas.',
+      vazio: 'Nenhum dos dois usou as palavras deste assunto no plano de governo.',
       onde: `Onde cada candidato falou sobre ${grupo.nome.toLowerCase()}`, nada: 'essas palavras',
     }, () => familiaDoGrupo(grupo, dados.termos)),
   };
@@ -286,9 +286,8 @@ const convite = () => el('a', { class: 'convite', href: 'https://testecego.onlin
   el('span', {}, 'Compare propostas dos dois candidatos sem saber de quem é cada uma. No fim, veja com quem você concorda mais.'),
   el('span', { class: 'convite-acao' }, 'Fazer o teste →'));
 
-// Caixa única da contagem: uma coluna por candidato, com plano e entrevistas em linhas próprias.
-// Os dois na mesma cor (quem é quem está escrito, não pintado); plano e entrevistas se distinguem
-// pelo desenho da barra, com rótulo em cada linha. O retrato abre o resumo da IA na mesma caixa.
+// Caixa única da contagem: uma coluna por candidato, com o número, a barra e a frequência no plano.
+// Os dois na mesma cor (quem é quem está escrito, não pintado). O retrato abre o resumo da IA na mesma caixa.
 function quadro(grupo, visoes, inicial, aoTrocar) {
   const temResumo = ordem.every((c) => dados.resumos.grupos[grupo.id]?.[c]);
   const painel = el('div', { class: 'painel', id: 'resumo-ia', hidden: true });
@@ -298,13 +297,13 @@ function quadro(grupo, visoes, inicial, aoTrocar) {
   let aberto = null;
 
   const colunas = ordem.map((c) => {
-    const foto = el('img', { src: `img/${c}-serio.webp?v=4.0`, alt: '', width: '96', height: '96' });
+    const foto = el('img', { src: `img/${c}-serio.webp?v=4.1`, alt: '', width: '96', height: '96' });
     const rotulo = el('span', { class: 'ver-resumo' }, 'Ver resumo');
     // Retrato embaixo das contagens; com resumo, retrato e botão formam um único botão.
     const cabeca = temResumo
       ? el('button', { class: 'rosto', type: 'button', 'aria-pressed': 'false', 'aria-controls': painel.id, 'aria-label': `Ver resumo do plano de ${nome(c)}`, onclick: () => abrirResumo(c) }, foto, rotulo)
       : el('div', { class: 'rosto' }, foto);
-    if (temResumo) new Image().src = `img/${c}-alegre.webp?v=4.0`; // sem piscar na troca
+    if (temResumo) new Image().src = `img/${c}-alegre.webp?v=4.1`; // sem piscar na troca
     return { c, cabeca, foto, rotulo, coluna: el('div', { class: 'coluna' }) };
   });
   function abrirResumo(c) {
@@ -312,7 +311,7 @@ function quadro(grupo, visoes, inicial, aoTrocar) {
     for (const col of colunas) {
       const ativo = col.c === aberto;
       col.cabeca.setAttribute('aria-pressed', String(ativo));
-      col.foto.src = `img/${col.c}-${ativo ? 'alegre' : 'serio'}.webp?v=4.0`;
+      col.foto.src = `img/${col.c}-${ativo ? 'alegre' : 'serio'}.webp?v=4.1`;
       col.rotulo.textContent = ativo ? 'Fechar' : 'Ver resumo';
     }
     painel.hidden = !aberto;
@@ -354,9 +353,6 @@ function quadro(grupo, visoes, inicial, aoTrocar) {
   return el('section', { class: 'comparativo' },
     titulo,
     chave,
-    el('p', { class: 'legenda-barras' },
-      el('span', {}, el('i', { class: 'amostra plano', 'aria-hidden': 'true' }), 'Plano de governo'),
-      el('span', {}, el('i', { class: 'amostra falas', 'aria-hidden': 'true' }), 'Entrevistas')),
     vazio,
     el('div', { class: 'colunas' }, colunas.map((col) => col.coluna)),
     botaoCompartilhar,
@@ -369,12 +365,12 @@ function quadro(grupo, visoes, inicial, aoTrocar) {
   );
 }
 
-// Plano e entrevistas de um candidato: número, barra (comparada ao outro candidato) e frequência.
+// Contagem de um candidato no plano: número, barra (comparada ao outro candidato) e frequência.
 function contas(res, c) {
   return Object.keys(dados.acervos).map((id) => {
     const r = res[id][c];
     return el('div', { class: `conta ${id}` },
-      el('span', { class: 'rotulo' }, id === 'plano' ? 'No plano' : 'Nas entrevistas'),
+      el('span', { class: 'rotulo' }, 'No plano de governo'),
       el('strong', {}, vezes(r.vezes)),
       el('span', { class: 'trilha', 'aria-hidden': 'true' }, el('span', { class: `preenche ${id}`, style: `width:${(r.taxa / maiorTaxa(res[id])) * 100}%` })),
       el('small', {}, frequencia(r.taxa)));
@@ -382,9 +378,8 @@ function contas(res, c) {
 }
 
 function tamanhos() {
-  const { plano, falas } = dados.acervos;
-  const lista = (a) => ordem.map((c) => `${nome(c)} ${mil(a.total[c])}`).join(', ');
-  return `Tamanho dos textos, em palavras: no plano, ${lista(plano)}; nas entrevistas (${eventosDoAcervo(falas)}), ${lista(falas)}.`;
+  const { plano } = dados.acervos;
+  return `Tamanho dos planos, em palavras: ${ordem.map((c) => `${nome(c)} ${mil(plano.total[c])}`).join(', ')}.`;
 }
 
 // Brilho de quatro pontas, o símbolo mais comum de conteúdo feito por IA.
@@ -408,12 +403,7 @@ function resumo(grupo, c) {
   ];
 }
 
-function eventosDoAcervo(acervo) {
-  const pares = [...new Set(acervo.eventos.map((e) => e.evento))];
-  return `${pares.join('; ')}, de ${dataCurta(acervo.eventos[0].data)} a ${dataCurta(acervo.eventos.at(-1).data)}`;
-}
-
-// Abaixo da caixa: onde cada um usou a palavra (ou o assunto), plano e entrevistas juntos, cada trecho com a fonte.
+// Abaixo da caixa: onde cada um usou a palavra (ou o assunto) no plano, cada trecho com a página.
 function ondeUsou(vista) {
   return el('section', { class: 'onde-usou' },
     el('h2', { class: 'subtitulo' }, vista.onde),
@@ -439,11 +429,9 @@ function trechos(c, achados, vista) {
   return caixa;
 }
 
-function itemDeTrecho(c, { id, pedaco, i, n }) {
+function itemDeTrecho(c, { pedaco, i, n }) {
   const t = trecho(pedaco.texto, pedaco.lista, { i, n });
-  const fonte = id === 'plano'
-    ? linkFonte(paginaDoPlano(c, pedaco.pagina), `Plano, pág. ${pedaco.pagina}`)
-    : linkFonte(pedaco.url, `Entrevista: ${pedaco.evento}, ${dataCurta(pedaco.data)}`);
+  const fonte = linkFonte(paginaDoPlano(c, pedaco.pagina), `Plano, pág. ${pedaco.pagina}`);
   return el('li', {}, el('p', {}, t.antes, el('mark', {}, t.achado), t.depois), fonte);
 }
 
@@ -456,9 +444,8 @@ async function enviarImagem(botao, vista) {
       link: vista.link,
       lados: ordem.map((c) => ({
         nome: nome(c),
-        imagem: `img/${c}-neutro.webp?v=4.0`,
+        imagem: `img/${c}-neutro.webp?v=4.1`,
         plano: vista.res.plano[c],
-        falas: vista.res.falas[c],
       })),
     });
     if (tipo) medir.compartilhou(tipo);
@@ -489,7 +476,7 @@ function rota({ historico = false } = {}) {
 async function iniciar() {
   try {
     const [textos, termos, resumos] = await Promise.all(
-      ['data/textos.json?v=4.0', 'data/termos.json?v=4.0', 'data/resumos.json?v=4.0'].map((u) => fetch(u).then((r) => { if (!r.ok) throw new Error(u); return r.json(); })),
+      ['data/textos.json?v=4.1', 'data/termos.json?v=4.1', 'data/resumos.json?v=4.1'].map((u) => fetch(u).then((r) => { if (!r.ok) throw new Error(u); return r.json(); })),
     );
     dados = { textos, termos: termos.termos, grupos: termos.grupos, resumos, acervos: preparar(textos) };
     dados.indice = montarIndice();
@@ -502,7 +489,7 @@ async function iniciar() {
   // Nota de método no rodapé (o lugar já existe no HTML), em todas as telas.
   const metodo = document.querySelector('.rodape .metodo');
   if (metodo) {
-    metodo.textContent = `A barra compara a frequência (a cada 10 mil palavras), porque os textos têm tamanhos diferentes. ${tamanhos()}`;
+    metodo.textContent = `A barra compara a frequência (a cada 10 mil palavras), porque os planos têm tamanhos diferentes. ${tamanhos()}`;
     metodo.hidden = false;
   }
   medir.abriu();

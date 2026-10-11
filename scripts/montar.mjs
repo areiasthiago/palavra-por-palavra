@@ -1,4 +1,4 @@
-// Gera data/textos.json a partir dos planos (data/fontes/*.txt) e das falas (data/falas/).
+// Gera data/textos.json a partir dos planos de governo (data/fontes/*.txt).
 // Uso: node scripts/montar.mjs
 import { readFileSync, writeFileSync } from 'node:fs';
 import { palavras } from '../js/busca.js';
@@ -48,29 +48,11 @@ for (const [c, info] of Object.entries(candidatos)) {
 
 const { eventos, inicio, protocolo } = JSON.parse(ler('data/falas/eventos.json'));
 const falas = [];
-// Na íntegra, cada fala começa com "Nome:". Parágrafo que abre só com aspas continua a fala anterior.
-const FALANTE = /^([\p{Lu}][\p{L} ]{1,40}):\s/u;
-for (const e of eventos) {
-  const respostas = [];
-  let falando = null;
-  for (const linha of ler(`data/falas/${e.arquivo}`).split('\n').map((l) => l.trim())) {
-    const quem = linha.match(FALANTE);
-    if (quem) falando = `${quem[1]}:`;
-    else if (!/^[“"]/.test(linha)) { falando = null; continue; }
-    if (falando !== e.rotulo) continue;
-    // Tira o nome de quem fala e as aspas de abertura e fechamento.
-    respostas.push((quem ? linha.slice(quem[0].length) : linha).trim().replace(/^[“"]/, '').replace(/[”"]\.?$/, ''));
-  }
-  if (!respostas.length) throw new Error(`${e.arquivo}: nenhuma resposta com "${e.rotulo}"`);
-  respostas.forEach((texto) => falas.push({ candidato: e.candidato, evento: e.evento, data: e.data, veiculo: e.veiculo, url: e.url, texto }));
-}
-
 const textos = {
   gerado: new Date().toISOString().slice(0, 10),
   candidatos,
   acervos: {
     plano: { nome: 'Plano de governo', pedacos: plano },
-    falas: { nome: 'Entrevistas', inicio, protocolo, eventos: eventos.map(({ par, candidato, evento, data, veiculo, url }) => ({ par, candidato, evento, data, veiculo, url })), pedacos: falas },
   },
 };
 writeFileSync(new URL('data/textos.json', raiz), JSON.stringify(textos));

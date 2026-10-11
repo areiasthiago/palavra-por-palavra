@@ -4,11 +4,11 @@
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <title>Como funciona · Palavra por Palavra</title>
-  <meta name="description" content="Como a contagem de palavras é feita, de onde vêm os textos e o que o site guarda.">
+  <meta name="description" content="Como a contagem de palavras é feita, de onde vêm os textos (os planos de governo) e o que o site guarda.">
   <meta property="og:type" content="website">
   <meta property="og:title" content="Como funciona · Palavra por Palavra">
-  <meta property="og:description" content="Como a contagem de palavras é feita, de onde vêm os textos e o que o site guarda.">
-  <meta property="og:image" content="https://palavraporpalavra.online/img/og.png?v=4.0">
+  <meta property="og:description" content="Como a contagem de palavras é feita, de onde vêm os textos (os planos de governo) e o que o site guarda.">
+  <meta property="og:image" content="https://palavraporpalavra.online/img/og.png?v=4.1">
   <meta property="og:image:width" content="1200">
   <meta property="og:image:height" content="630">
   <meta property="og:url" content="https://palavraporpalavra.online/sobre.html">
@@ -23,14 +23,14 @@
       document.documentElement.dataset.theme = tema;
     })();
   </script>
-  <link rel="icon" href="img/icone.svg?v=4.0" type="image/svg+xml">
+  <link rel="icon" href="img/icone.svg?v=4.1" type="image/svg+xml">
   <link rel="preload" href="fonts/bricolage-grotesque.woff2" as="font" type="font/woff2" crossorigin>
-  <link rel="stylesheet" href="css/style.css?v=4.0">
+  <link rel="stylesheet" href="css/style.css?v=4.1">
 </head>
 <body>
   <header class="topo">
     <a class="marca" href="./">
-      <img src="img/icone.svg?v=4.0" width="30" height="30" alt="">
+      <img src="img/icone.svg?v=4.1" width="30" height="30" alt="">
       Palavra por Palavra
     </a>
     <button class="tema" type="button" aria-label="Mudar para o tema escuro">
@@ -41,7 +41,7 @@
   <main class="texto">
     <p><a href="./">← Voltar para a busca</a></p>
     <h1>Como funciona</h1>
-    <p>Você escolhe uma palavra e o site mostra quantas vezes cada candidato do segundo turno de 2026, Lula e Flávio Bolsonaro, usou essa palavra em dois tipos de texto: o plano de governo e entrevistas dadas na campanha. Junto com o número aparecem os trechos, para você ver como a palavra foi usada.</p>
+    <p>Você escolhe uma palavra e o site mostra quantas vezes cada candidato do segundo turno de 2026, Lula e Flávio Bolsonaro, usou essa palavra no plano de governo oficial. Junto com o número aparecem os trechos, para você ver como a palavra foi usada.</p>
 
     <h2>O que a contagem mostra, e o que não mostra</h2>
     <ul>
@@ -60,15 +60,14 @@
       <li><strong>Nomes de programas não entram na lista.</strong> Palavras como “casa” contam mesmo dentro do nome de um programa, mas o nome do programa não vira um termo à parte.</li>
       <li><strong>Siglas contam junto.</strong> “EUA” conta como “Estados Unidos”.</li>
       <li><strong>Acento.</strong> Se você digitar sem acento, vale qualquer grafia. Se digitar com acento, contamos só aquela grafia, porque “país” e “pais” são palavras diferentes.</li>
-      <li><strong>Número e frequência.</strong> Os textos têm tamanhos diferentes, então além do número de vezes mostramos a frequência: quantas vezes a cada 10 mil palavras. A barra compara a frequência. Os dois candidatos aparecem na mesma cor, e a ordem em que aparecem é sorteada para cada aparelho.</li>
+      <li><strong>Número e frequência.</strong> Os dois planos têm tamanhos diferentes, então além do número de vezes mostramos a frequência: quantas vezes a cada 10 mil palavras. A barra compara a frequência. Os dois candidatos aparecem na mesma cor, e a ordem em que aparecem é sorteada para cada aparelho.</li>
       <li><strong>Sumário, cabeçalho e número de página não contam.</strong> O sumário repete os títulos do plano e faria a mesma palavra contar duas vezes; ele ocupa 1 página no plano de Lula e 5 no de Flávio Bolsonaro, e sai dos dois. As linhas que se repetem em toda página (como “Programa de governo”) também são retiradas.</li>
     </ul>
 
     <h2>De onde vêm os textos</h2>
     <ul>
-      <li><strong>Planos de governo</strong> registrados pelos candidatos: <a href="refs/32ce89_programa_governo_lula_2026.pdf">plano de Lula</a> e <a href="refs/FLAVIO-BOLSONARO-PARA-O-BRASIL-VENCER-O-ATRASO-1-1.pdf">plano de Flávio Bolsonaro</a>.</li>
-      <li><strong>Entrevistas</strong> dadas desde o início da campanha (16 de agosto de 2026). Só entram entrevistas em que os dois falaram no mesmo formato e no mesmo veículo, e conta-se apenas a fala do candidato, nunca a pergunta. Por enquanto: as sabatinas do Jornal Nacional (TV Globo), de 27 e 28 de agosto, com a íntegra publicada pelo <a href="https://www.poder360.com.br/poder-eleicoes-2026/leia-a-integra-das-perguntas-da-globo-e-as-respostas-de-lula/">Poder360 (Lula)</a> e <a href="https://www.poder360.com.br/poder-eleicoes-2026/leia-a-integra-das-perguntas-da-globo-e-as-respostas-de-flavio/">(Flávio)</a>. As duas íntegras têm poucos cortes feitos pelo jornal, marcados com “[…]”.</li>
-      <li>Novas entrevistas e debates com os dois entram à medida que acontecerem.</li>
+      <li>Só dos <strong>planos de governo</strong> registrados pelos candidatos na Justiça Eleitoral: <a href="refs/32ce89_programa_governo_lula_2026.pdf">plano de Lula</a> e <a href="refs/FLAVIO-BOLSONARO-PARA-O-BRASIL-VENCER-O-ATRASO-1-1.pdf">plano de Flávio Bolsonaro</a>.</li>
+      <li>Entrevistas, debates e discursos ficam de fora. Eles dependem de quais perguntas cada um recebeu e de quanto tempo teve para falar, o que tornaria a comparação desigual. O plano é o documento em que cada candidato escolheu, sozinho, o que dizer.</li>
     </ul>
 
     <h2>Lista de palavras</h2>
@@ -102,6 +101,6 @@
     <p>Projeto independente de Thiago Areias, o mesmo do <a href="https://testecego.online/?o=pp">Teste Cego</a>, sem vínculo com candidatos, partidos ou campanhas, sem financiamento e sem impulsionamento pago. O código e os dados são abertos no <a href="https://github.com/areiasthiago/palavra-por-palavra">GitHub</a>; correções são bem-vindas por lá.</p>
   </main>
   <footer class="rodape"><a href="./">Voltar para a busca</a></footer>
-  <script type="module" src="js/tema.js?v=4.0"></script>
+  <script type="module" src="js/tema.js?v=4.1"></script>
 </body>
 </html>

@@ -1,7 +1,7 @@
-// Confere as regras de isenção: banco de termos, equilíbrio da lista inicial, protocolo das
-// entrevistas, palavras de disputa no texto do site e cores sem associação com os candidatos.
+// Confere as regras de isenção: banco de termos, equilíbrio da lista inicial, resumos, palavras de
+// disputa no texto do site e cores sem associação com os candidatos.
 // Uso: node scripts/validar.mjs
-import { readFileSync, existsSync } from 'node:fs';
+import { readFileSync } from 'node:fs';
 import { preparar, familia, contar, semAcento, formasPermitidas, formasDoTermo } from '../js/busca.js';
 
 const raiz = new URL('..', import.meta.url);
@@ -50,30 +50,11 @@ for (const g of grupos) {
   else if (!semAcento(g.nome).includes(semAcento(destaques[0].termo))) erros.push(`[${g.id}] o destaque "${destaques[0].termo}" não está no nome do grupo`);
 }
 
-// ---------- Textos e protocolo das entrevistas ----------
+// ---------- Textos ----------
 const textos = JSON.parse(ler('data/textos.json'));
-const { eventos, inicio } = JSON.parse(ler('data/falas/eventos.json'));
 const candidatos = Object.keys(textos.candidatos);
-const hoje = new Date().toISOString().slice(0, 10);
-const pares = new Map();
-for (const e of eventos) {
-  const onde = `[${e.arquivo}]`;
-  if (!candidatos.includes(e.candidato)) erros.push(`${onde} candidato desconhecido`);
-  if (!existsSync(new URL(`data/falas/${e.arquivo}`, raiz))) erros.push(`${onde} arquivo não existe`);
-  if (!aceito(e.url)) erros.push(`${onde} veículo fora da lista (${e.url})`);
-  if (!(e.data >= inicio && e.data <= hoje)) erros.push(`${onde} data fora da campanha (${e.data})`);
-  pares.set(e.par, [...(pares.get(e.par) ?? []), e.candidato]);
-}
-for (const [par, quem] of pares) {
-  if (quem.sort().join() !== [...candidatos].sort().join()) erros.push(`[${par}] o par precisa de um evento de cada candidato (tem: ${quem.join(', ')})`);
-}
-if (JSON.stringify(textos.acervos.falas.eventos.map((e) => e.url)) !== JSON.stringify(eventos.map((e) => e.url))) {
-  erros.push('data/textos.json desatualizado: rode node scripts/montar.mjs');
-}
 for (const c of candidatos) {
-  for (const [id, a] of Object.entries(textos.acervos)) {
-    if (!a.pedacos.some((p) => p.candidato === c)) erros.push(`[${id}] sem texto de ${c}`);
-  }
+  if (!textos.acervos.plano.pedacos.some((p) => p.candidato === c)) erros.push(`[plano] sem texto de ${c}`);
 }
 
 // ---------- Equilíbrio da lista inicial de mais buscados ----------
@@ -155,5 +136,5 @@ for (const arquivo of ['css/style.css', 'js/compartilhar.js', 'img/icone.svg']) 
 }
 
 for (const e of erros) console.error(`ERRO: ${e}`);
-console.log(`${termos.length} termos em ${grupos.length} grupos, ${eventos.length} entrevistas, ${erros.length} erro(s).`);
+console.log(`${termos.length} termos em ${grupos.length} grupos, ${erros.length} erro(s).`);
 process.exit(erros.length ? 1 : 0);

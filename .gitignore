@@ -5,7 +5,7 @@ node_modules/
 supabase/.temp/
 .local/
 CLAUDE.md
-# Íntegras brutas dos jornais: ficam só na máquina; no repositório vão só as falas dos candidatos (data/textos.json)
-data/falas/*.txt
+# Íntegras de entrevistas (não usadas desde 11/10/2026): ficam só na máquina
+data/falas/
 # Cache e credenciais locais do Wrangler (Cloudflare): nunca vão para o repositório
 .wrangler/

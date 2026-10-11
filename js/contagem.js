@@ -1,4 +1,4 @@
-import { CONTAGEM, ENVIAR_CONTAGEM } from './config.js?v=4.0';
+import { CONTAGEM, ENVIAR_CONTAGEM } from './config.js?v=4.1';
 
 // Medição anônima: só totais por dia. Nada de nome, identificador, IP guardado ou cookie.
 // Cada aparelho conta no máximo uma vez por evento (e por palavra, por dia), controlado aqui no aparelho.
@@ -73,7 +73,7 @@ export function abriu() {
 }
 
 // Cada busca feita. O texto só vai junto se a palavra existe no vocabulário público
-// (planos, entrevistas ou banco de termos); fora disso, conta só "sem resultado".
+// (banco de termos); fora disso, conta só "sem resultado".
 export function buscou({ termo, publico, origem, grupo }) {
   const feitas = ler(`${MEDIDO}:buscas`, 0) + 1;
   gravar(`${MEDIDO}:buscas`, feitas);

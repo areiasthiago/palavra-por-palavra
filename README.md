@@ -1,6 +1,6 @@
 # Palavra por Palavra · Eleições 2026
 
-Escolha uma palavra e veja quantas vezes cada candidato do 2º turno presidencial usou essa palavra no plano de governo e em entrevistas, com os trechos para conferir. Site estático, sem build e sem dependências: HTML, CSS e JS puros, servidos pelo GitHub Pages.
+Escolha uma palavra e veja quantas vezes cada candidato do 2º turno presidencial usou essa palavra no plano de governo oficial, com os trechos para conferir. Site estático, sem build e sem dependências: HTML, CSS e JS puros, servidos pelo GitHub Pages.
 
 ## Rodar localmente
 
@@ -11,7 +11,6 @@ python -m http.server 8000
 ## Dados
 
 - Planos: `refs/*.pdf` → `data/fontes/*.txt` (`bash scripts/extrair.sh`, precisa de pdftotext).
-- Entrevistas: íntegras salvas localmente em `data/falas/*.txt` (fora do git, por serem texto dos jornais), descritas em `data/falas/eventos.json`. Só entram pares: o mesmo formato e veículo para os dois candidatos. Conta-se só a fala do candidato.
 - Banco de termos: `data/termos.json` (grupos com peso vindo das pesquisas, variantes da mesma família).
 
 ```
