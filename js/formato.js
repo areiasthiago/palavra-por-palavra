@@ -8,4 +8,4 @@ export const frequencia = (taxa) => `${numero(taxa, 1)} a cada 10 mil palavras`;
 export const maiorTaxa = (porCandidato) => Math.max(...Object.values(porCandidato).map((r) => r.taxa)) || 1;
 
 export const LEMBRETE = 'falar mais de um assunto não quer dizer ter proposta melhor. Confira os planos de governo e o contexto das falas.';
-export const PERGUNTA = { palavra: 'Quantas vezes cada um usou', assunto: 'Quanto cada um falou sobre' };
+export const PERGUNTA = { palavra: 'Quantas vezes cada candidato usou', assunto: 'Quanto cada candidato falou sobre' };

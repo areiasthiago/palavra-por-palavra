@@ -1,7 +1,7 @@
-import { preparar, familia, familiaDoGrupo, formasDoTermo, contar, trecho, semAcento } from './busca.js?v=3.7';
-import * as medir from './contagem.js?v=3.7';
-import { compartilhar } from './compartilhar.js?v=3.7';
-import { numero, vezes, frequencia, maiorTaxa, LEMBRETE, PERGUNTA } from './formato.js?v=3.7';
+import { preparar, familia, familiaDoGrupo, formasDoTermo, contar, trecho, semAcento } from './busca.js?v=3.8';
+import * as medir from './contagem.js?v=3.8';
+import { compartilhar } from './compartilhar.js?v=3.8';
+import { numero, vezes, frequencia, maiorTaxa, LEMBRETE, PERGUNTA } from './formato.js?v=3.8';
 
 const ORDEM = 'palavra:ordem';
 const POR_VEZ = 5; // trechos mostrados de cada vez
@@ -217,13 +217,13 @@ function vistas(fam, grupo) {
       modo: 'palavra', fam, aspas: true, rotulo: fam.rotulo, cabecalho: `“${fam.rotulo}”`,
       titulo: PERGUNTA.palavra, link: `?p=${encodeURIComponent(fam.rotulo)}`, metrica: fam.rotulo.toLowerCase(),
       vazio: `Nenhum dos dois usou “${fam.rotulo}” no plano de governo nem nas entrevistas.`,
-      onde: 'Onde cada um usou a palavra', nada: 'essa palavra',
+      onde: 'Onde cada candidato usou a palavra', nada: 'essa palavra',
     }, () => fam),
     assunto: preguicosa({
       modo: 'assunto', aspas: false, rotulo: grupo.nome, cabecalho: grupo.nome,
       titulo: `${PERGUNTA.assunto} ${grupo.nome.toLowerCase()}`, link: `?a=${grupo.id}`, metrica: grupo.id,
       vazio: 'Nenhum dos dois usou as palavras deste assunto no plano de governo nem nas entrevistas.',
-      onde: `Onde cada um falou sobre ${grupo.nome.toLowerCase()}`, nada: 'essas palavras',
+      onde: `Onde cada candidato falou sobre ${grupo.nome.toLowerCase()}`, nada: 'essas palavras',
     }, () => familiaDoGrupo(grupo, dados.termos)),
   };
 }
@@ -298,13 +298,13 @@ function quadro(grupo, visoes, inicial, aoTrocar) {
   let aberto = null;
 
   const colunas = ordem.map((c) => {
-    const foto = el('img', { src: `img/${c}-serio.webp?v=3.7`, alt: '', width: '96', height: '96' });
+    const foto = el('img', { src: `img/${c}-serio.webp?v=3.8`, alt: '', width: '96', height: '96' });
     const rotulo = el('span', { class: 'ver-resumo' }, 'Ver resumo');
     // Retrato embaixo das contagens; com resumo, retrato e botão formam um único botão.
     const cabeca = temResumo
       ? el('button', { class: 'rosto', type: 'button', 'aria-pressed': 'false', 'aria-controls': painel.id, 'aria-label': `Ver resumo do plano de ${nome(c)}`, onclick: () => abrirResumo(c) }, foto, rotulo)
       : el('div', { class: 'rosto' }, foto);
-    if (temResumo) new Image().src = `img/${c}-alegre.webp?v=3.7`; // sem piscar na troca
+    if (temResumo) new Image().src = `img/${c}-alegre.webp?v=3.8`; // sem piscar na troca
     return { c, cabeca, foto, rotulo, coluna: el('div', { class: 'coluna' }) };
   });
   function abrirResumo(c) {
@@ -312,7 +312,7 @@ function quadro(grupo, visoes, inicial, aoTrocar) {
     for (const col of colunas) {
       const ativo = col.c === aberto;
       col.cabeca.setAttribute('aria-pressed', String(ativo));
-      col.foto.src = `img/${col.c}-${ativo ? 'alegre' : 'serio'}.webp?v=3.7`;
+      col.foto.src = `img/${col.c}-${ativo ? 'alegre' : 'serio'}.webp?v=3.8`;
       col.rotulo.textContent = ativo ? 'Fechar' : 'Ver resumo';
     }
     painel.hidden = !aberto;
@@ -456,7 +456,7 @@ async function enviarImagem(botao, vista) {
       link: vista.link,
       lados: ordem.map((c) => ({
         nome: nome(c),
-        imagem: `img/${c}-neutro.webp?v=3.7`,
+        imagem: `img/${c}-neutro.webp?v=3.8`,
         plano: vista.res.plano[c],
         falas: vista.res.falas[c],
       })),
@@ -489,7 +489,7 @@ function rota({ historico = false } = {}) {
 async function iniciar() {
   try {
     const [textos, termos, resumos] = await Promise.all(
-      ['data/textos.json?v=3.7', 'data/termos.json?v=3.7', 'data/resumos.json?v=3.7'].map((u) => fetch(u).then((r) => { if (!r.ok) throw new Error(u); return r.json(); })),
+      ['data/textos.json?v=3.8', 'data/termos.json?v=3.8', 'data/resumos.json?v=3.8'].map((u) => fetch(u).then((r) => { if (!r.ok) throw new Error(u); return r.json(); })),
     );
     dados = { textos, termos: termos.termos, grupos: termos.grupos, resumos, acervos: preparar(textos) };
     dados.indice = montarIndice();
