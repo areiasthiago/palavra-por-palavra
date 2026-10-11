@@ -1,5 +1,5 @@
-import { SITE } from './config.js?v=3.1';
-import { vezes, frequencia, maiorTaxa, LEMBRETE, PERGUNTA } from './formato.js?v=3.1';
+import { SITE } from './config.js?v=3.4';
+import { vezes, frequencia, maiorTaxa, LEMBRETE, PERGUNTA } from './formato.js?v=3.4';
 
 // Imagem 4:5 (aparece inteira no WhatsApp e no feed) com a cara da tela de resultado: um cartão com uma coluna por candidato
 // (retrato, nome, plano com barra cheia, entrevistas com barra listrada), na mesma ordem da tela.

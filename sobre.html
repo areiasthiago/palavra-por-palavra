@@ -8,7 +8,7 @@
   <meta property="og:type" content="website">
   <meta property="og:title" content="Como funciona · Palavra por Palavra">
   <meta property="og:description" content="Como a contagem de palavras é feita, de onde vêm os textos e o que o site guarda.">
-  <meta property="og:image" content="https://palavraporpalavra.online/img/og.png?v=3.1">
+  <meta property="og:image" content="https://palavraporpalavra.online/img/og.png?v=3.4">
   <meta property="og:image:width" content="1200">
   <meta property="og:image:height" content="630">
   <meta property="og:url" content="https://palavraporpalavra.online/sobre.html">
@@ -23,16 +23,16 @@
       document.documentElement.dataset.theme = tema;
     })();
   </script>
-  <link rel="icon" href="img/icone.svg?v=3.1" type="image/svg+xml">
+  <link rel="icon" href="img/icone.svg?v=3.4" type="image/svg+xml">
   <link rel="preload" href="fonts/bricolage-grotesque.woff2" as="font" type="font/woff2" crossorigin>
-  <link rel="stylesheet" href="css/style.css?v=3.1">
+  <link rel="stylesheet" href="css/style.css?v=3.4">
 </head>
 <body>
   <header class="topo">
     <a class="marca" href="./">
-      <img src="img/icone.svg?v=3.1" width="30" height="30" alt="">
+      <img src="img/icone.svg?v=3.4" width="30" height="30" alt="">
       Palavra por Palavra
-      <span class="versao">v3.1</span>
+      <span class="versao">v3.4</span>
     </a>
     <button class="tema" type="button" aria-label="Mudar para o tema escuro">
       <svg class="sol" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.200" stroke-linecap="round" aria-hidden="true"><circle cx="12" cy="12" r="4.200"/><path d="M12 2.500v2.200M12 19.300v2.200M2.500 12h2.200M19.300 12h2.200M5.300 5.300l1.600 1.600M17.100 17.100l1.600 1.600M5.300 18.700l1.600-1.600M17.100 6.900l1.600-1.600"/></svg>
@@ -75,7 +75,7 @@
     <h2>Lista de palavras</h2>
     <ul>
       <li>A lista de assuntos parte do que os brasileiros apontam como principal problema do país nas pesquisas <a href="https://www.cnnbrasil.com.br/nacional/brasil/violencia-e-principal-problema-para-28-dos-brasileiros-diz-quaest-pax/">Quaest/Pax (setembro de 2026)</a> e <a href="https://www.brasildefato.com.br/2026/03/10/datafolha-saude-e-seguranca-lideram-lista-de-principais-problemas-do-pais/">Datafolha (março de 2026)</a>: violência, saúde, corrupção, economia e educação. Completamos com outros temas da campanha.</li>
-      <li>Cada assunto tem palavras ligadas aos dois lados do debate. Em “Mais buscados aqui” entra uma palavra por assunto: a que dá nome ao assunto. Com o uso do site, essa lista passa a misturar a pesquisa com o que as pessoas buscam aqui.</li>
+      <li>Cada assunto tem palavras ligadas aos dois lados do debate. Em “Mais buscados aqui” entra uma palavra por assunto: a que dá nome ao assunto. Com o uso do site, essa lista passa a misturar a pesquisa com o que as pessoas buscaram aqui nos últimos 7 dias: quanto mais buscas, mais pesam as buscas. Cada aparelho conta uma vez por palavra por dia, e há um limite por hora para ninguém inflar a lista.</li>
       <li>A busca aceita as palavras da lista. Enquanto você digita, o campo sugere as que combinam.</li>
     </ul>
 
@@ -90,15 +90,19 @@
 
     <h2 id="privacidade">Privacidade</h2>
     <ul>
-      <li>O site não usa cookies, não tem anúncios nem rastreadores, e não pede nenhum dado seu.</li>
+      <li>O site não usa cookies, não tem anúncios nem rastreadores de terceiros, e não pede nenhum dado seu.</li>
       <li>A busca acontece no seu aparelho: o que você digita não é enviado para fazer a conta.</li>
-      <li>O site guarda no seu aparelho só a ordem sorteada dos candidatos e o tema claro ou escuro.</li>
+      <li>O site conta, somando com todo mundo, quantas vezes foi aberto, quais palavras e assuntos da lista foram buscados, quantas pessoas abriram os trechos e os resumos e quantas compartilharam. Conta também por qual canal a visita chegou, como WhatsApp ou Instagram, a partir do link usado. São só totais por dia: não existe um registro por pessoa, e não guardamos nome, endereço IP, identificador nem horário.</li>
+      <li>Só palavras da nossa lista entram na contagem. Qualquer outro texto digitado não sai do seu aparelho.</li>
+      <li>Para não contar a mesma pessoa várias vezes, o site guarda no seu aparelho uma marca de quais desses eventos já foram contados, além da ordem sorteada dos candidatos e do tema claro ou escuro.</li>
+      <li>O site fica no GitHub Pages e a contagem na Cloudflare. Como qualquer servidor, eles recebem dados técnicos da conexão, como o endereço IP, que não são guardados junto com a contagem.</li>
+      <li>Os números não serão divulgados antes do fim da votação, em 25 de outubro de 2026.</li>
     </ul>
 
     <h2>Quem faz</h2>
     <p>Projeto independente de Thiago Areias, o mesmo do <a href="https://testecego.online/?o=pp">Teste Cego</a>, sem vínculo com candidatos, partidos ou campanhas, sem financiamento e sem impulsionamento pago. O código e os dados são abertos no <a href="https://github.com/areiasthiago/palavra-por-palavra">GitHub</a>; correções são bem-vindas por lá.</p>
   </main>
   <footer class="rodape"><a href="./">Voltar para a busca</a></footer>
-  <script type="module" src="js/tema.js?v=3.1"></script>
+  <script type="module" src="js/tema.js?v=3.4"></script>
 </body>
 </html>
