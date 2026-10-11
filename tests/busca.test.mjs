@@ -56,7 +56,7 @@ test('soma do assunto junta as palavras do grupo sem contar nada duas vezes', ()
     { termo: 'moradia', grupo: 'm', variantes: [] },
   ];
   const lista = palavras('A casa própria. O Minha Casa Minha Vida e o MCMV. Moradia digna. Fiquei em casa.');
-  assert.equal(ocorrencias(lista, familiaDoGrupo('m', termos)).length, 4);
+  assert.equal(ocorrencias(lista, familiaDoGrupo({ id: 'm', nome: 'Moradia' }, termos)).length, 4);
 });
 
 test('banco aceita só flexões, nunca palavra derivada', () => {

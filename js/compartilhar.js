@@ -1,4 +1,5 @@
-import { SITE } from './config.js?v=3.0';
+import { SITE } from './config.js?v=3.1';
+import { vezes, frequencia, maiorTaxa, LEMBRETE, PERGUNTA } from './formato.js?v=3.1';
 
 // Imagem 4:5 (aparece inteira no WhatsApp e no feed) com a cara da tela de resultado: um cartão com uma coluna por candidato
 // (retrato, nome, plano com barra cheia, entrevistas com barra listrada), na mesma ordem da tela.
@@ -16,12 +17,9 @@ const COR = {
   trilha: '#e6e4ea',
 };
 const TRACO = 6;
-const LEMBRETE = 'Falar mais de um assunto não quer dizer ter proposta melhor. Confira os planos de governo e o contexto das falas.';
 
 const fonte = (peso, tamanho, familia = '"Bricolage Grotesque"') => `${peso} ${tamanho}px ${familia}, system-ui, -apple-system, "Segoe UI", Roboto, sans-serif`;
 const texto = (peso, tamanho) => fonte(peso, tamanho, 'system-ui');
-const numero = (n, casas = 0) => n.toLocaleString('pt-BR', { minimumFractionDigits: casas, maximumFractionDigits: casas });
-const vezes = (n) => (n === 1 ? '1 vez' : `${numero(n)} vezes`);
 
 function carregar(src) {
   return new Promise((ok, erro) => {
@@ -131,7 +129,7 @@ function conta(ctx, x, y, w, rotulo, r, maior, listrada) {
   barra(ctx, x, y + 78, w, 36, r.taxa / maior, listrada);
   ctx.fillStyle = COR.suave;
   ctx.font = texto(400, 25);
-  ctx.fillText(`${numero(r.taxa, 1)} a cada 10 mil palavras`, x, y + 150);
+  ctx.fillText(frequencia(r.taxa), x, y + 150);
 }
 
 // Nome ao lado do retrato; quebra em duas linhas se não couber.
@@ -174,7 +172,7 @@ export async function gerarImagem({ palavra, aspas = true, lados }) {
   // Pergunta e palavra, com marca-texto
   ctx.fillStyle = COR.tinta;
   ctx.font = fonte(700, 42);
-  ctx.fillText(aspas ? 'Quantas vezes cada um usou' : 'Quanto cada um falou sobre', L / 2, 188);
+  ctx.fillText(aspas ? PERGUNTA.palavra : PERGUNTA.assunto, L / 2, 188);
   const titulo = aspas ? `“${palavra}”` : palavra;
   let t = 96;
   ctx.font = fonte(800, t);
@@ -188,7 +186,6 @@ export async function gerarImagem({ palavra, aspas = true, lados }) {
   // Cartão com as duas colunas
   const topo = 330;
   bloco(ctx, 50, topo, L - 100, 675, 40, COR.papel, 12);
-  ctx.font = texto(400, 26);
   let lx = 100;
   for (const [nomeLegenda, listrada] of [['Plano de governo', false], ['Entrevistas', true]]) {
     barra(ctx, lx, topo + 40, 52, 24, 1, listrada);
@@ -199,8 +196,8 @@ export async function gerarImagem({ palavra, aspas = true, lados }) {
     lx += 66 + ctx.measureText(nomeLegenda).width + 44;
   }
   const maior = {
-    plano: Math.max(...lados.map((l) => l.plano.taxa)) || 1,
-    falas: Math.max(...lados.map((l) => l.falas.taxa)) || 1,
+    plano: maiorTaxa(lados.map((l) => l.plano)),
+    falas: maiorTaxa(lados.map((l) => l.falas)),
   };
   const largCol = 400;
   lados.forEach((lado, i) => {
@@ -213,7 +210,7 @@ export async function gerarImagem({ palavra, aspas = true, lados }) {
 
   // Lembrete, o mesmo da tela
   ctx.font = texto(400, 30);
-  const linhas = quebrar(ctx, LEMBRETE, L - 210);
+  const linhas = quebrar(ctx, LEMBRETE[0].toUpperCase() + LEMBRETE.slice(1), L - 210);
   const topoLembrete = topo + 705;
   const alturaLembrete = 40 + linhas.length * 42;
   bloco(ctx, 50, topoLembrete, L - 100, alturaLembrete, 26, COR.roxoClaro);

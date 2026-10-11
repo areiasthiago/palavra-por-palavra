@@ -1,6 +1,7 @@
 // Gera data/textos.json a partir dos planos (data/fontes/*.txt) e das falas (data/falas/).
 // Uso: node scripts/montar.mjs
 import { readFileSync, writeFileSync } from 'node:fs';
+import { palavras } from '../js/busca.js';
 
 const raiz = new URL('..', import.meta.url);
 const ler = (caminho) => readFileSync(new URL(caminho, raiz), 'utf8');
@@ -75,6 +76,6 @@ const textos = {
 writeFileSync(new URL('data/textos.json', raiz), JSON.stringify(textos));
 for (const [id, a] of Object.entries(textos.acervos)) {
   const total = {};
-  for (const p of a.pedacos) total[p.candidato] = (total[p.candidato] ?? 0) + p.texto.split(/\s+/).length;
-  console.log(`${id}: ${a.pedacos.length} pedaços, palavras ≈ ${JSON.stringify(total)}`);
+  for (const p of a.pedacos) total[p.candidato] = (total[p.candidato] ?? 0) + palavras(p.texto).length;
+  console.log(`${id}: ${a.pedacos.length} pedaços, palavras: ${JSON.stringify(total)}`);
 }

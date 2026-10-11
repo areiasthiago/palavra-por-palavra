@@ -69,15 +69,15 @@ body {
   body::after { width: 150px; height: 150px; left: 5vw; bottom: 80px; border-radius: 28px; background: var(--principal); transform: rotate(18deg); }
 }
 
-h1, h2, h3, h4 { font-family: var(--titulo); line-height: 1.1; margin: 0; text-wrap: balance; }
+h1, h2, h3 { font-family: var(--titulo); line-height: 1.1; margin: 0; text-wrap: balance; }
 h1 { font-size: clamp(2.3rem, 10vw, 3.6rem); font-weight: 800; letter-spacing: -0.03em; }
 h2 { font-size: clamp(1.5rem, 6.2vw, 2.1rem); font-weight: 800; letter-spacing: -0.02em; }
 h3 { font-size: 1.3rem; font-weight: 800; margin-bottom: 12px; }
-h4 { font-size: 1.05rem; font-weight: 700; }
 h1:focus, h2:focus { outline: none; }
 p { margin: 0; }
 a { color: var(--link); text-underline-offset: 3px; }
 
+[hidden] { display: none !important; }
 :focus-visible { outline: 3px solid var(--realce); outline-offset: 3px; border-radius: 6px; }
 
 /* Topo */
@@ -203,7 +203,6 @@ main { flex: 1; width: 100%; max-width: 760px; margin: 0 auto; padding: 8px 16px
 /* Busca */
 .busca { display: grid; grid-template-columns: 1fr auto; gap: 10px; }
 .busca input {
-  box-sizing: border-box;
   min-width: 0;
   min-height: 56px;
   padding: 12px 16px;
@@ -248,7 +247,7 @@ main { flex: 1; width: 100%; max-width: 760px; margin: 0 auto; padding: 8px 16px
 /* Resultado */
 .resultado { gap: 24px; }
 .resultado h1 { font-size: clamp(2rem, 9vw, 3rem); overflow-wrap: anywhere; }
-.contamos, .tamanho, .legenda { color: var(--suave); font-size: 0.9rem; }
+.contamos, .legenda { color: var(--suave); font-size: 0.9rem; }
 .vazio { font-size: 1.1rem; }
 
 .comparativo {
@@ -274,8 +273,7 @@ main { flex: 1; width: 100%; max-width: 760px; margin: 0 auto; padding: 8px 16px
    a outra acompanha e as barras ficam alinhadas. */
 .colunas:not(.rostos) { grid-template-rows: auto auto auto; row-gap: 20px; }
 .coluna { display: grid; grid-template-rows: subgrid; grid-row: span 3; align-content: start; min-width: 0; }
-.conta { align-self: start; }
-.conta { display: grid; gap: 6px; }
+.conta { display: grid; gap: 6px; align-self: start; }
 .conta .rotulo { color: var(--suave); font-size: 0.8rem; font-weight: 700; text-transform: uppercase; letter-spacing: 0.03em; }
 .conta strong { font-family: var(--titulo); font-size: 1.3rem; line-height: 1.1; font-variant-numeric: tabular-nums; }
 .conta small { color: var(--suave); font-size: 0.78rem; line-height: 1.25; }
@@ -305,14 +303,12 @@ main { flex: 1; width: 100%; max-width: 760px; margin: 0 auto; padding: 8px 16px
 .chave .bolinha { position: absolute; top: 2px; left: 2px; width: 19px; height: 19px; border-radius: 50%; background: var(--tinta); transition: transform 0.2s; }
 .chave[aria-checked="true"] .trilho { background: var(--realce); }
 .chave[aria-checked="true"] .bolinha { transform: translateX(20px); background: var(--realce-tinta); }
-.chave:focus-visible { outline: 3px solid var(--realce); outline-offset: 3px; }
 
 /* Sugestões de busca */
 .busca-caixa { display: flex; flex-direction: column; gap: 6px; }
 .campo { position: relative; min-width: 0; }
 .campo input { width: 100%; }
 .sugestoes { position: absolute; z-index: 10; left: 0; right: 0; top: calc(100% + 6px); margin: 0; padding: 6px; list-style: none; border: 2.5px solid var(--traco); border-radius: 14px; background: var(--papel); box-shadow: 4px 4px 0 var(--sombra); max-height: 60vh; overflow-y: auto; }
-.sugestoes[hidden] { display: none; }
 .sugestoes li { display: flex; justify-content: space-between; align-items: baseline; gap: 10px; min-height: 44px; padding: 10px 10px; border-radius: 10px; cursor: pointer; }
 .sugestoes li span { font-weight: 700; }
 .sugestoes li small { color: var(--suave); font-size: 0.78rem; text-align: right; white-space: nowrap; }
@@ -321,7 +317,6 @@ main { flex: 1; width: 100%; max-width: 760px; margin: 0 auto; padding: 8px 16px
 .sugestoes li.secao:not(:first-child) { margin-top: 6px; border-top: 2px solid var(--linha); padding-top: 12px; }
 .sugestoes li.opcao-assunto span::after { content: " →"; color: var(--realce); }
 .erro-busca { padding: 8px 12px; border: 2px solid var(--traco); border-radius: 10px; background: var(--principal-claro); font-size: 0.92rem; font-weight: 600; }
-.erro-busca[hidden] { display: none; }
 .busca input[aria-invalid="true"] { border-style: dashed; }
 
 .rodape .metodo { max-width: 728px; margin: 0 auto 10px; font-size: 0.82rem; line-height: 1.45; text-align: left; }
@@ -337,7 +332,6 @@ main { flex: 1; width: 100%; max-width: 760px; margin: 0 auto; padding: 8px 16px
 .trechos a { font-size: 0.85rem; }
 mark { background: var(--marca-texto); color: inherit; border-radius: 3px; padding: 0 2px; font-weight: 700; }
 .mais { width: 100%; min-height: 44px; margin: 10px 0 6px; padding: 8px; border-color: var(--traco); }
-.mais[hidden] { display: none; }
 
 /* Colunas por candidato; o retrato abre o resumo da IA e fica sorridente */
 .rosto {
@@ -356,9 +350,8 @@ mark { background: var(--marca-texto); color: inherit; border-radius: 3px; paddi
   transition: transform 0.15s, box-shadow 0.15s, background-color 0.2s;
 }
 .rosto img { width: min(100%, 96px); height: auto; border: 2.5px solid var(--traco); border-radius: 50%; background: #fff; }
-.rosto:hover { background: var(--principal-claro); }
-.rosto.estatico { cursor: default; }
-.rosto.estatico:hover { background: var(--papel); }
+button.rosto:hover { background: var(--principal-claro); }
+div.rosto { cursor: default; }
 .rosto[aria-pressed="true"] { background: var(--realce-claro); }
 .rosto:active .ver-resumo { transform: translate(3px, 3px); box-shadow: none; }
 .painel {
@@ -371,7 +364,6 @@ mark { background: var(--marca-texto); color: inherit; border-radius: 3px; paddi
   background: var(--papel);
   animation: entra 0.25s ease-out both;
 }
-.painel[hidden] { display: none; }
 .painel h3 { margin: 0; }
 .selo-ia { display: inline-flex; align-items: center; gap: 6px; align-self: flex-start; padding: 3px 10px; border: 2px solid var(--traco); border-radius: 999px; background: var(--realce); color: var(--realce-tinta); font: 800 0.75rem var(--titulo); letter-spacing: 0.04em; text-transform: uppercase; }
 .selo-ia svg { width: 16px; height: 16px; flex: none; }

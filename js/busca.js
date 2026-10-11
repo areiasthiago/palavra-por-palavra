@@ -4,14 +4,16 @@
 const LETRA = /[\p{L}\p{N}]+/gu;
 
 export const minusculo = (s) => s.normalize('NFC').toLowerCase();
-export const semAcento = (s) => minusculo(s).normalize('NFD').replace(/\p{M}/gu, '');
+const tirarAcento = (minusc) => (/[^\x00-\x7f]/.test(minusc) ? minusc.normalize('NFD').replace(/\p{M}/gu, '') : minusc);
+export const semAcento = (s) => tirarAcento(minusculo(s));
 const temAcento = (s) => semAcento(s) !== minusculo(s);
 
 // Quebra um texto em palavras, guardando onde cada uma começa e termina (para os trechos).
 export function palavras(texto) {
   const lista = [];
   for (const m of texto.matchAll(LETRA)) {
-    lista.push({ forma: minusculo(m[0]), dobrada: semAcento(m[0]), inicio: m.index, fim: m.index + m[0].length });
+    const forma = minusculo(m[0]);
+    lista.push({ forma, dobrada: tirarAcento(forma), inicio: m.index, fim: m.index + m[0].length });
   }
   return lista;
 }
@@ -54,14 +56,16 @@ export function formasPermitidas(termo, variante) {
   return a.length === b.length && a.every((p, i) => genero(p).has(b[i]));
 }
 
+// Todas as grafias que um termo do banco conta: o termo, as variantes e as siglas.
+export const formasDoTermo = (t) => [t.termo, ...t.variantes, ...(t.siglas ?? [])];
+
 // O que vai ser contado para uma busca. Termos do banco usam as variantes declaradas;
 // qualquer outra palavra conta singular e plural; expressões contam só a sequência exata.
 export function familia(consulta, termos = []) {
   const alvo = semAcento(consulta.trim().replace(/\s+/g, ' '));
   if (!alvo) return null;
-  const todas = (t) => [t.termo, ...t.variantes, ...(t.siglas ?? [])];
-  const curado = termos.find((t) => todas(t).some((v) => semAcento(v) === alvo));
-  if (curado) return { rotulo: curado.termo, termo: curado, formas: todas(curado), exato: true, excluir: curado.excluir ?? [] };
+  const curado = termos.find((t) => formasDoTermo(t).some((v) => semAcento(v) === alvo));
+  if (curado) return { rotulo: curado.termo, termo: curado, formas: formasDoTermo(curado), exato: true, excluir: curado.excluir ?? [] };
   const partes = [...consulta.matchAll(LETRA)].map((m) => m[0]);
   if (!partes.length) return null;
   const formas = partes.length === 1 ? flexoes(partes[0]) : [partes.join(' ')];
@@ -69,13 +73,32 @@ export function familia(consulta, termos = []) {
   return { rotulo: partes.join(' '), termo: null, formas, exato: temAcento(consulta), excluir: [] };
 }
 
+// Formas já quebradas em palavras e agrupadas pela 1ª palavra (as mais longas primeiro), preparadas
+// uma vez por lista de formas: cada palavra do texto custa só uma consulta ao mapa.
+const preparadas = new WeakMap();
+function indice(formas, exato) {
+  const chave = exato ? 'forma' : 'dobrada';
+  let porLista = preparadas.get(formas);
+  if (!porLista) preparadas.set(formas, (porLista = {}));
+  if (!porLista[chave]) {
+    const mapa = new Map();
+    for (const f of formas) {
+      const alvo = palavras(f).map((p) => p[chave]);
+      if (alvo.length) mapa.set(alvo[0], [...(mapa.get(alvo[0]) ?? []), alvo]);
+    }
+    for (const alvos of mapa.values()) alvos.sort((a, b) => b.length - a.length);
+    porLista[chave] = mapa;
+  }
+  return { mapa: porLista[chave], chave };
+}
+
 // Posições onde alguma das sequências aparece. Devolve o índice da 1ª palavra e o tamanho.
 // A expressão mais longa vence e nada conta duas vezes: "Minha Casa Minha Vida" é uma ocorrência, não três.
 function sequencias(lista, formas, exato) {
-  const alvos = formas.map((f) => palavras(f).map((p) => (exato ? p.forma : p.dobrada))).sort((a, b) => b.length - a.length);
+  const { mapa, chave } = indice(formas, exato);
   const achados = [];
   for (let i = 0; i < lista.length; i += 1) {
-    const alvo = alvos.find((x) => x.every((a, k) => (exato ? lista[i + k]?.forma : lista[i + k]?.dobrada) === a));
+    const alvo = mapa.get(lista[i][chave])?.find((x) => x.every((a, k) => lista[i + k]?.[chave] === a));
     if (alvo) {
       achados.push({ i, n: alvo.length });
       i += alvo.length - 1;
@@ -87,10 +110,10 @@ function sequencias(lista, formas, exato) {
 // Família do assunto inteiro: todas as palavras do grupo somadas, para comparar quem fala do tema
 // com vocabulário diferente ("casa própria" de um, "moradia" e "MCMV" do outro).
 export function familiaDoGrupo(grupo, termos) {
-  const doGrupo = termos.filter((t) => t.grupo === grupo);
+  const doGrupo = termos.filter((t) => t.grupo === grupo.id);
   return {
-    rotulo: grupo,
-    formas: doGrupo.flatMap((t) => [t.termo, ...t.variantes, ...(t.siglas ?? [])]),
+    rotulo: grupo.nome,
+    formas: doGrupo.flatMap(formasDoTermo),
     exato: true,
     excluir: doGrupo.flatMap((t) => t.excluir ?? []),
   };
@@ -99,9 +122,11 @@ export function familiaDoGrupo(grupo, termos) {
 // Encontra as ocorrências de uma família numa lista de palavras. Ocorrência que cai dentro de uma
 // expressão excluída do termo ("em casa", "santas casas") não conta: ali a palavra não fala do assunto.
 export function ocorrencias(lista, fam) {
+  const achados = sequencias(lista, fam.formas, fam.exato);
+  if (!fam.excluir?.length || !achados.length) return achados;
   const fora = new Set();
-  for (const { i, n } of sequencias(lista, fam.excluir ?? [], false)) for (let k = i; k < i + n; k += 1) fora.add(k);
-  return sequencias(lista, fam.formas, fam.exato).filter(({ i, n }) => ![...Array(n).keys()].some((k) => fora.has(i + k)));
+  for (const { i, n } of sequencias(lista, fam.excluir, false)) for (let k = i; k < i + n; k += 1) fora.add(k);
+  return achados.filter(({ i, n }) => ![...Array(n).keys()].some((k) => fora.has(i + k)));
 }
 
 // Taxa justa para comparar textos de tamanhos diferentes.

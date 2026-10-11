@@ -2,7 +2,7 @@
 // entrevistas, palavras de disputa no texto do site e cores sem associação com os candidatos.
 // Uso: node scripts/validar.mjs
 import { readFileSync, existsSync } from 'node:fs';
-import { preparar, familia, contar, semAcento, formasPermitidas } from '../js/busca.js';
+import { preparar, familia, contar, semAcento, formasPermitidas, formasDoTermo } from '../js/busca.js';
 
 const raiz = new URL('..', import.meta.url);
 const ler = (caminho) => readFileSync(new URL(caminho, raiz), 'utf8');
@@ -21,7 +21,6 @@ const aceito = (url) => {
 };
 
 const erros = [];
-const avisos = [];
 
 // ---------- Banco de termos ----------
 const { grupos, termos } = JSON.parse(ler('data/termos.json'));
@@ -37,7 +36,7 @@ for (const t of termos) {
   for (const v of t.variantes) {
     if (!formasPermitidas(t.termo, v)) erros.push(`${onde} "${v}" não é flexão de "${t.termo}" (se importa, vire termo próprio)`);
   }
-  for (const f of [t.termo, ...t.variantes, ...(t.siglas ?? [])]) {
+  for (const f of formasDoTermo(t)) {
     const chave = semAcento(f);
     if (formaDe.has(chave)) erros.push(`${onde} "${f}" já é contado em [${formaDe.get(chave)}]`);
     formaDe.set(chave, t.termo);
@@ -155,7 +154,6 @@ for (const arquivo of ['css/style.css', 'js/compartilhar.js', 'img/icone.svg']) 
   }
 }
 
-for (const a of avisos) console.warn(`aviso: ${a}`);
 for (const e of erros) console.error(`ERRO: ${e}`);
-console.log(`${termos.length} termos em ${grupos.length} grupos, ${eventos.length} entrevistas, ${erros.length} erro(s), ${avisos.length} aviso(s).`);
+console.log(`${termos.length} termos em ${grupos.length} grupos, ${eventos.length} entrevistas, ${erros.length} erro(s).`);
 process.exit(erros.length ? 1 : 0);

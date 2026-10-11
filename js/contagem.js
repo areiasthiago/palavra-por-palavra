@@ -1,4 +1,4 @@
-import { CONTAGEM, ENVIAR_CONTAGEM } from './config.js?v=3.0';
+import { CONTAGEM, ENVIAR_CONTAGEM } from './config.js?v=3.1';
 
 // Medição anônima: só totais por dia. Nada de nome, identificador, IP guardado ou cookie.
 // Cada aparelho conta no máximo uma vez por evento (e por palavra, por dia), controlado aqui no aparelho.
@@ -27,10 +27,11 @@ function canalDeChegada() {
   return (mapa.find(([padrao]) => padrao.test(de)) || [null, 'outro'])[1];
 }
 
-function ler(chave, padrao) {
+// Leitura e escrita no aparelho que nunca quebram a página (aba anônima, armazenamento cheio).
+export function ler(chave, padrao) {
   try { return JSON.parse(localStorage.getItem(chave)) ?? padrao; } catch { return padrao; }
 }
-function gravar(chave, valor) {
+export function gravar(chave, valor) {
   try { localStorage.setItem(chave, JSON.stringify(valor)); return true; } catch { return false; }
 }
 
@@ -76,9 +77,9 @@ export function abriu() {
 export function buscou({ termo, publico, origem, grupo }) {
   const feitas = ler(`${MEDIDO}:buscas`, 0) + 1;
   gravar(`${MEDIDO}:buscas`, feitas);
-  if (feitas === 1) umaVez('buscou', { evento: 'buscou' });
-  if (feitas === 2) umaVez('buscou_2', { evento: 'buscou_2' });
-  if (feitas === 5) umaVez('buscou_5', { evento: 'buscou_5' });
+  // Profundidade: 1ª, 2ª e 5ª busca do aparelho.
+  const marco = { 1: 'buscou', 2: 'buscou_2', 5: 'buscou_5' }[feitas];
+  if (marco) umaVez(marco, { evento: marco });
   if (!publico) { umaVez(`sem:${hoje()}:${feitas}`, { evento: 'sem_resultado' }); return; }
   umaVez(`termo:${hoje()}:${termo}`, { evento: 'termo', termo, origem });
   if (grupo) umaVez(`grupo:${hoje()}:${grupo}`, { evento: 'grupo', termo: grupo });

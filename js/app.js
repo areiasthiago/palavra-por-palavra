@@ -1,12 +1,13 @@
-import { preparar, familia, familiaDoGrupo, contar, trecho, semAcento } from './busca.js?v=3.0';
-import * as medir from './contagem.js?v=3.0';
-import { compartilhar } from './compartilhar.js?v=3.0';
+import { preparar, familia, familiaDoGrupo, formasDoTermo, contar, trecho, semAcento } from './busca.js?v=3.1';
+import * as medir from './contagem.js?v=3.1';
+import { compartilhar } from './compartilhar.js?v=3.1';
+import { numero, vezes, frequencia, maiorTaxa, LEMBRETE, PERGUNTA } from './formato.js?v=3.1';
 
 const ORDEM = 'palavra:ordem';
 const POR_VEZ = 5; // trechos mostrados de cada vez
 const app = document.getElementById('app');
 
-let dados; // { textos, termos, grupos, acervos }
+let dados; // { textos, termos, grupos, resumos, acervos, indice }
 let ordem; // os dois candidatos na ordem sorteada para este aparelho
 
 const el = (tag, attrs = {}, ...filhos) => {
@@ -20,25 +21,24 @@ const el = (tag, attrs = {}, ...filhos) => {
   return no;
 };
 
-const numero = (n, casas = 0) => n.toLocaleString('pt-BR', { minimumFractionDigits: casas, maximumFractionDigits: casas });
 const mil = (n) => `${numero(n / 1000, 1)} mil`;
-const vezes = (n) => (n === 1 ? '1 vez' : `${numero(n)} vezes`);
 const nome = (c) => dados.textos.candidatos[c].nome;
 const dataCurta = (iso) => iso.split('-').reverse().slice(0, 2).join('/');
+const grupoPorId = (id) => dados.grupos.find((g) => g.id === id);
+const grupoDe = (termo) => grupoPorId(termo.grupo);
+const termosDoGrupo = (id) => dados.termos.filter((t) => t.grupo === id);
+
+// Link para o plano ou para a entrevista, sempre em outra aba e contado na medição.
+const linkFonte = (href, texto) => el('a', { href, target: '_blank', rel: 'noopener', onclick: medir.abriuFonte }, texto);
+const paginaDoPlano = (c, n) => `${dados.textos.candidatos[c].plano}#page=${n}`;
 
 // Ordem sorteada uma vez por aparelho, para nenhum dos dois aparecer sempre primeiro.
 function sortearOrdem() {
-  try {
-    const salva = JSON.parse(localStorage.getItem(ORDEM));
-    if (Array.isArray(salva) && salva.length === 2) return salva;
-  } catch { /* segue para o sorteio */ }
+  const salva = medir.ler(ORDEM, null);
+  if (Array.isArray(salva) && salva.length === 2) return salva;
   const nova = Math.random() < 0.5 ? ['lula', 'flavio'] : ['flavio', 'lula'];
-  try { localStorage.setItem(ORDEM, JSON.stringify(nova)); } catch { /* vale só nesta visita */ }
+  medir.gravar(ORDEM, nova);
   return nova;
-}
-
-function grupoDe(termo) {
-  return termo ? dados.grupos.find((g) => g.id === termo.grupo) : null;
 }
 
 // Termo curado clicável (lista de mais buscados ou de assuntos).
@@ -89,13 +89,11 @@ function campoDeBusca(valor = '') {
       onmousedown: (e) => e.preventDefault(), // não tira o foco do campo antes do clique
       onclick: () => escolher(o),
     }, el('span', {}, o.valor), el('small', {}, o.detalhe));
-    const titulo = (texto) => el('li', { class: 'secao', role: 'presentation' }, texto);
-    const palavras = itens.filter((o) => o.tipo === 'palavra');
-    const assuntos = itens.filter((o) => o.tipo === 'assunto');
-    lista.replaceChildren(
-      ...(palavras.length ? [titulo('Palavras'), ...palavras.map((o) => opcao(o, itens.indexOf(o)))] : []),
-      ...(assuntos.length ? [titulo('Assuntos'), ...assuntos.map((o) => opcao(o, itens.indexOf(o)))] : []),
-    );
+    const secao = (titulo, tipo) => {
+      const daSecao = itens.filter((o) => o.tipo === tipo);
+      return daSecao.length ? [el('li', { class: 'secao', role: 'presentation' }, titulo), ...daSecao.map((o) => opcao(o, itens.indexOf(o)))] : [];
+    };
+    lista.replaceChildren(...secao('Palavras', 'palavra'), ...secao('Assuntos', 'assunto'));
     if (itens.length) { lista.hidden = false; entrada.setAttribute('aria-expanded', 'true'); marcar(-1); } else fechar();
   };
 
@@ -130,24 +128,30 @@ function campoDeBusca(valor = '') {
   return el('div', { class: 'busca-caixa' }, form, erro);
 }
 
+// Formas de cada termo e nome de cada assunto já sem acento, preparados uma vez para as sugestões.
+function montarIndice() {
+  return {
+    termos: dados.termos.map((t) => ({ t, formas: formasDoTermo(t).map(semAcento) })),
+    grupos: dados.grupos.map((g) => ({ g, palavras: semAcento(g.nome).split(/\s+/) })),
+  };
+}
+
 // Sugestões só da nossa lista de palavras. semNada: 3 letras ou mais e nenhuma palavra da lista
 // começa assim. exata: o termo da lista que corresponde ao que foi digitado, se houver.
 function sugerir(texto) {
   const q = semAcento(texto.trim().replace(/\s+/g, ' '));
-  if (!q) return { itens: [], semNada: false, exata: null };
-  const formas = (t) => [t.termo, ...t.variantes, ...(t.siglas ?? [])].map(semAcento);
-  const achados = dados.termos
-    .filter((t) => formas(t).some((v) => v.startsWith(q)))
+  if (!q) return { itens: [], palavras: [], semNada: false, exata: null };
+  const achados = dados.indice.termos.filter(({ formas }) => formas.some((v) => v.startsWith(q)))
+    .map(({ t }) => t)
     .sort((a, b) => a.termo.length - b.termo.length);
-  const exata = dados.termos.find((t) => formas(t).includes(q)) ?? null;
+  const exata = dados.indice.termos.find(({ formas }) => formas.includes(q))?.t ?? null;
   // Assuntos: os das palavras achadas e os que têm alguma palavra no nome começando assim.
-  const nomeCombina = (g) => semAcento(g.nome).split(/\s+/).some((w) => w.startsWith(q));
-  const grupos = [...new Set([...achados.map((t) => t.grupo), ...dados.grupos.filter(nomeCombina).map((g) => g.id)])];
+  const grupos = [...new Set([
+    ...achados.map((t) => t.grupo),
+    ...dados.indice.grupos.filter(({ palavras }) => palavras.some((w) => w.startsWith(q))).map(({ g }) => g.id),
+  ])];
   const palavras = achados.slice(0, 6).map((t) => ({ tipo: 'palavra', valor: t.termo, detalhe: grupoDe(t).nome }));
-  const assuntos = grupos.slice(0, 3).map((id) => {
-    const g = dados.grupos.find((x) => x.id === id);
-    return { tipo: 'assunto', grupo: id, valor: g.nome, detalhe: `${dados.termos.filter((t) => t.grupo === id).length} palavras` };
-  });
+  const assuntos = grupos.slice(0, 3).map((id) => ({ tipo: 'assunto', grupo: id, valor: grupoPorId(id).nome, detalhe: `${termosDoGrupo(id).length} palavras` }));
   return {
     itens: [...palavras, ...assuntos],
     palavras,
@@ -175,12 +179,12 @@ function inicio() {
         el('summary', {}, el('span', {}, g.nome),
           el('button', { class: 'pilula-assunto', type: 'button', 'aria-label': `${g.nome}: todas as palavras`,
             onclick: (e) => { e.preventDefault(); e.stopPropagation(); buscarAssunto(g.id, 'assunto'); } }, 'todas as palavras')),
-        el('div', { class: 'chips' }, dados.termos.filter((t) => t.grupo === g.id).map((t) => chip(t, 'assunto'))))))),
+        el('div', { class: 'chips' }, termosDoGrupo(g.id).map((t) => chip(t, 'assunto'))))))),
     aviso(),
   ));
 }
 
-const aviso = () => el('p', { class: 'aviso-fixo' }, el('strong', {}, 'Lembre: '), 'falar mais de um assunto não quer dizer ter proposta melhor. Confira os planos de governo e o contexto das falas.');
+const aviso = () => el('p', { class: 'aviso-fixo' }, el('strong', {}, 'Lembre: '), LEMBRETE);
 
 // ---------- Resultado ----------
 
@@ -190,56 +194,72 @@ function buscarAssunto(id, origem, opcoes = {}) {
   if (destaque) buscar(destaque.termo, origem, { ...opcoes, modo: 'assunto' });
 }
 
-function buscar(consulta, origem, { historico = true, modo: modoInicial = 'palavra' } = {}) {
+// Total de ocorrências dos dois candidatos em todos os acervos.
+function somar(res) {
+  return Object.values(res).reduce((s, porCandidato) => s + ordem.reduce((t, c) => t + porCandidato[c].vezes, 0), 0);
+}
+
+// As duas formas de ver uma busca: a palavra e o assunto todo. Cada uma traz o que a tela, o link,
+// a imagem e a medição precisam; a do assunto só é contada quando alguém liga a chave.
+function vistas(fam, grupo) {
+  const preguicosa = (vista, contarFam) => {
+    let res;
+    return Object.defineProperty(vista, 'res', { get: () => (res ??= contar(dados.acervos, contarFam(), ordem)) });
+  };
+  return {
+    palavra: preguicosa({
+      modo: 'palavra', fam, aspas: true, rotulo: fam.rotulo, cabecalho: `“${fam.rotulo}”`,
+      titulo: PERGUNTA.palavra, link: `?p=${encodeURIComponent(fam.rotulo)}`, metrica: fam.rotulo.toLowerCase(),
+      vazio: `Nenhum dos dois usou “${fam.rotulo}” no plano de governo nem nas entrevistas.`,
+      onde: 'Onde cada um usou a palavra', nada: 'essa palavra',
+    }, () => fam),
+    assunto: preguicosa({
+      modo: 'assunto', aspas: false, rotulo: grupo.nome, cabecalho: grupo.nome,
+      titulo: `${PERGUNTA.assunto} ${grupo.nome.toLowerCase()}`, link: `?a=${grupo.id}`, metrica: grupo.id,
+      vazio: 'Nenhum dos dois usou as palavras deste assunto no plano de governo nem nas entrevistas.',
+      onde: `Onde cada um falou sobre ${grupo.nome.toLowerCase()}`, nada: 'essas palavras',
+    }, () => familiaDoGrupo(grupo, dados.termos)),
+  };
+}
+
+// Só chega aqui palavra da lista (busca, sugestões, chips e links filtram antes), então sempre há um assunto.
+function buscar(consulta, origem, { historico = true, modo = 'palavra' } = {}) {
   const fam = familia(consulta, dados.termos);
-  if (!fam) return;
-  const res = contar(dados.acervos, fam, ordem);
-  const total = somar(res);
+  if (!fam?.termo) return;
   const grupo = grupoDe(fam.termo);
-  medir.buscou({ termo: fam.rotulo.toLowerCase(), publico: Boolean(fam.termo) || total > 0, origem, grupo: grupo?.id });
+  const visoes = vistas(fam, grupo);
+  let vista = visoes[modo];
+  medir.buscou({ termo: fam.rotulo.toLowerCase(), publico: true, origem, grupo: grupo.id });
 
   // O link guarda a escolha: ?p=palavra ou ?a=assunto (chave ligada).
-  const naUrl = (m) => {
+  const naUrl = () => {
     const url = new URL(location.href);
-    url.search = '';
-    if (m === 'assunto') url.searchParams.set('a', grupo.id);
-    else url.searchParams.set('p', fam.rotulo);
+    url.search = vista.link;
     return url;
   };
-  if (historico) history.pushState({}, '', naUrl(grupo ? modoInicial : 'palavra'));
+  if (historico) history.pushState({}, '', naUrl());
 
-  const vizinhos = fam.termo ? dados.termos.filter((t) => t.grupo === fam.termo.grupo && t !== fam.termo) : [];
-  // A chave troca entre a palavra e o assunto todo: contagens, trechos, link e imagem seguem a escolha.
-  const famAssunto = grupo ? { ...familiaDoGrupo(grupo.id, dados.termos), rotulo: grupo.nome } : null;
-  const resAssunto = famAssunto ? contar(dados.acervos, famAssunto, ordem) : null;
-  let modo = grupo ? modoInicial : 'palavra';
-  const onde = el('div', { class: 'onde-slot' });
-  const desenharOnde = () => {
-    const [f, r] = modo === 'assunto' ? [famAssunto, resAssunto] : [fam, res];
-    onde.replaceChildren(...(somar(r) > 0 ? [ondeUsou(f, r, modo === 'assunto')] : []));
-  };
-  // Título e "o que contamos" acompanham a chave.
   const h1 = el('h1', { tabindex: '-1' });
   const contamos = el('p', { class: 'contamos' }, fam.formas.length > 1 ? `Contamos: ${fam.formas.join(', ')}.` : 'Contamos só a palavra inteira.',
     fam.excluir.length ? ` Não contamos expressões em que a palavra não fala do assunto: ${fam.excluir.join(', ')}.` : '',
-    grupo ? ` Assunto: ${grupo.nome}.` : '');
-  const cabecalho = () => {
-    h1.textContent = modo === 'assunto' ? grupo.nome : `“${fam.rotulo}”`;
-    contamos.hidden = modo === 'assunto';
-    document.title = `${modo === 'assunto' ? grupo.nome : `“${fam.rotulo}”`} · Palavra por Palavra`;
+    ` Assunto: ${grupo.nome}.`);
+  const onde = el('div', { class: 'onde-slot' });
+  // Título, "o que contamos" e trechos acompanham a chave.
+  const desenhar = () => {
+    h1.textContent = vista.cabecalho;
+    document.title = `${vista.cabecalho} · Palavra por Palavra`;
+    contamos.hidden = vista.modo === 'assunto';
+    onde.replaceChildren(...(somar(vista.res) > 0 ? [ondeUsou(vista)] : []));
   };
-  desenharOnde();
-  cabecalho();
+  desenhar();
+
+  const vizinhos = termosDoGrupo(grupo.id).filter((t) => t !== fam.termo);
   const tela = el('section', { class: 'tela resultado' },
     el('button', { class: 'botao voltar', type: 'button', onclick: () => voltarAoInicio() }, '← Todas as palavras'),
     campoDeBusca(fam.rotulo),
     h1,
     contamos,
-    quadro(fam, res, grupo, {
-      resAssunto, modo,
-      compartilhar: (total > 0 || (resAssunto && somar(resAssunto) > 0)) && el('button', { class: 'botao principal compartilhar', type: 'button', onclick: (e) => enviarImagem(e.currentTarget, modo === 'assunto' ? { rotulo: grupo.nome, aspas: false, res: resAssunto } : { rotulo: fam.rotulo, aspas: true, res }) }, 'Compartilhar'),
-      aoTrocar: (m) => { modo = m; desenharOnde(); cabecalho(); history.replaceState({}, '', naUrl(m)); },
-    }),
+    quadro(grupo, visoes, vista, (nova) => { vista = nova; desenhar(); history.replaceState({}, '', naUrl()); }),
     onde,
     el('div', { class: 'par' },
       el('button', { class: 'botao discreto', type: 'button', onclick: () => { const i = app.querySelector('.busca input'); i.value = ''; i.focus(); } }, 'Buscar outra palavra')),
@@ -249,81 +269,74 @@ function buscar(consulta, origem, { historico = true, modo: modoInicial = 'palav
   );
   app.replaceChildren(tela);
   window.scrollTo(0, 0);
-  tela.querySelector('h1').focus({ preventScroll: true });
+  h1.focus({ preventScroll: true });
 }
 
 // Caixa única da contagem: uma coluna por candidato, com plano e entrevistas em linhas próprias.
 // Os dois na mesma cor (quem é quem está escrito, não pintado); plano e entrevistas se distinguem
 // pelo desenho da barra, com rótulo em cada linha. O retrato abre o resumo da IA na mesma caixa.
-// Total de ocorrências dos dois candidatos em todos os acervos.
-function somar(res) {
-  return Object.values(res).reduce((s, porCandidato) => s + ordem.reduce((t, c) => t + porCandidato[c].vezes, 0), 0);
-}
-
-function quadro(fam, res, grupo, { resAssunto, modo: modoInicial, aoTrocar, compartilhar: botaoCompartilhar }) {
-  const temResumo = grupo && ordem.every((c) => dados.resumos.grupos[grupo.id]?.[c]);
+function quadro(grupo, visoes, inicial, aoTrocar) {
+  const temResumo = ordem.every((c) => dados.resumos.grupos[grupo.id]?.[c]);
   const painel = el('div', { class: 'painel', id: 'resumo-ia', hidden: true });
-  const palavrasDoAssunto = grupo ? dados.termos.filter((t) => t.grupo === grupo.id) : [];
+  const palavrasDoAssunto = termosDoGrupo(grupo.id);
+  const listaDoAssunto = palavrasDoAssunto.map((t) => t.termo).join(', ');
+  let vista = inicial;
   let aberto = null;
+
   const colunas = ordem.map((c) => {
-    const foto = el('img', { src: `img/${c}-serio.webp?v=3.0`, alt: '', width: '96', height: '96' });
-    const rotulo = el('span', { class: 'ver-resumo' }, el('span', {}, 'Ver resumo'));
+    const foto = el('img', { src: `img/${c}-serio.webp?v=3.1`, alt: '', width: '96', height: '96' });
+    const rotulo = el('span', { class: 'ver-resumo' }, 'Ver resumo');
     // Retrato embaixo das contagens; com resumo, retrato e botão formam um único botão.
     const cabeca = temResumo
-      ? el('button', { class: 'rosto', type: 'button', 'aria-pressed': 'false', 'aria-controls': painel.id, 'aria-label': `Ver resumo do plano de ${nome(c)}` }, foto, rotulo)
-      : el('div', { class: 'rosto estatico' }, foto);
-    if (temResumo) new Image().src = `img/${c}-alegre.webp?v=3.0`; // sem piscar na troca
-    return {
-      c, cabeca, foto, rotulo,
-      coluna: el('div', { class: 'coluna' }),
-    };
+      ? el('button', { class: 'rosto', type: 'button', 'aria-pressed': 'false', 'aria-controls': painel.id, 'aria-label': `Ver resumo do plano de ${nome(c)}`, onclick: () => abrirResumo(c) }, foto, rotulo)
+      : el('div', { class: 'rosto' }, foto);
+    if (temResumo) new Image().src = `img/${c}-alegre.webp?v=3.1`; // sem piscar na troca
+    return { c, cabeca, foto, rotulo, coluna: el('div', { class: 'coluna' }) };
   });
-  if (temResumo) {
-    for (const { c, cabeca } of colunas) {
-      cabeca.addEventListener('click', () => {
-        aberto = aberto === c ? null : c;
-        for (const col of colunas) {
-          const ativo = col.c === aberto;
-          col.cabeca.setAttribute('aria-pressed', String(ativo));
-          col.foto.src = `img/${col.c}-${ativo ? 'alegre' : 'serio'}.webp?v=3.0`;
-          col.rotulo.lastChild.textContent = ativo ? 'Fechar' : 'Ver resumo';
-        }
-        painel.hidden = !aberto;
-        if (aberto) { painel.replaceChildren(...resumo(grupo, aberto)); medir.viuResumo(`${grupo.id}:${aberto}`); }
-      });
+  function abrirResumo(c) {
+    aberto = aberto === c ? null : c;
+    for (const col of colunas) {
+      const ativo = col.c === aberto;
+      col.cabeca.setAttribute('aria-pressed', String(ativo));
+      col.foto.src = `img/${col.c}-${ativo ? 'alegre' : 'serio'}.webp?v=3.1`;
+      col.rotulo.textContent = ativo ? 'Fechar' : 'Ver resumo';
     }
+    painel.hidden = !aberto;
+    if (aberto) { painel.replaceChildren(...resumo(grupo, aberto)); medir.viuResumo(`${grupo.id}:${aberto}`); }
   }
+
   // Chave "palavra / assunto todo": a soma de todas as palavras do assunto compara quem fala do
   // mesmo tema com vocabulário diferente ("casa" de um, "moradia" do outro).
   const titulo = el('h2', {});
   const vazio = el('p', { class: 'vazio' });
-  // Quais palavras formam o assunto, sempre visível perto do lembrete.
-  const lista = palavrasDoAssunto.map((t) => t.termo).join(', ');
   const explicacao = el('p', { class: 'legenda' });
-  const mostrar = (m) => {
-    const r = m === 'assunto' ? resAssunto : res;
-    titulo.textContent = m === 'assunto' ? `Quanto cada um falou sobre ${grupo.nome.toLowerCase()}` : 'Quantas vezes cada um usou';
-    vazio.hidden = somar(r) > 0;
-    vazio.textContent = m === 'assunto'
-      ? 'Nenhum dos dois usou as palavras deste assunto no plano de governo nem nas entrevistas.'
-      : `Nenhum dos dois usou “${fam.rotulo}” no plano de governo nem nas entrevistas.`;
-    explicacao.textContent = m === 'assunto'
-      ? `Somando as ${palavrasDoAssunto.length} palavras do assunto: ${lista}. Nada conta duas vezes.`
-      : `Palavras do assunto ${grupo?.nome.toLowerCase()}: ${lista}. Ligue a chave para somar todas.`;
-    explicacao.hidden = !grupo;
-    colunas.forEach((col) => col.coluna.replaceChildren(el('h3', { class: 'nome' }, nome(col.c)), ...contas(r, col.c)));
+  const botaoCompartilhar = el('button', { class: 'botao principal compartilhar', type: 'button', onclick: (e) => enviarImagem(e.currentTarget, vista) }, 'Compartilhar');
+  const mostrar = () => {
+    const temAlgo = somar(vista.res) > 0;
+    titulo.textContent = vista.titulo;
+    vazio.hidden = temAlgo;
+    vazio.textContent = vista.vazio;
+    botaoCompartilhar.hidden = !temAlgo;
+    explicacao.textContent = vista.modo === 'assunto'
+      ? `Somando as ${palavrasDoAssunto.length} palavras do assunto: ${listaDoAssunto}. Nada conta duas vezes.`
+      : `Palavras do assunto ${grupo.nome.toLowerCase()}: ${listaDoAssunto}. Ligue a chave para somar todas.`;
+    colunas.forEach((col) => col.coluna.replaceChildren(el('h3', { class: 'nome' }, nome(col.c)), ...contas(vista.res, col.c)));
   };
-  const chave = resAssunto && el('button', { class: 'chave', type: 'button', role: 'switch', 'aria-checked': String(modoInicial === 'assunto') },
-    el('span', { class: 'trilho', 'aria-hidden': 'true' }, el('span', { class: 'bolinha' })),
-    el('span', {}, `Contar o assunto todo: ${grupo.nome.toLowerCase()} (${palavrasDoAssunto.length} palavras)`));
-  chave?.addEventListener('click', () => {
-    const ligada = chave.getAttribute('aria-checked') !== 'true';
-    chave.setAttribute('aria-checked', String(ligada));
-    mostrar(ligada ? 'assunto' : 'palavra');
-    aoTrocar(ligada ? 'assunto' : 'palavra');
-    if (ligada) medir.ligouAssunto(grupo.id);
-  });
-  mostrar(resAssunto ? modoInicial : 'palavra');
+  const chave = el('button', {
+    class: 'chave', type: 'button', role: 'switch', 'aria-checked': String(vista.modo === 'assunto'),
+    onclick: () => {
+      const ligada = chave.getAttribute('aria-checked') !== 'true';
+      chave.setAttribute('aria-checked', String(ligada));
+      vista = ligada ? visoes.assunto : visoes.palavra;
+      mostrar();
+      aoTrocar(vista);
+      if (ligada) medir.ligouAssunto(grupo.id);
+    },
+  },
+  el('span', { class: 'trilho', 'aria-hidden': 'true' }, el('span', { class: 'bolinha' })),
+  el('span', {}, `Contar o assunto todo: ${grupo.nome.toLowerCase()} (${palavrasDoAssunto.length} palavras)`));
+  mostrar();
+
   return el('section', { class: 'comparativo' },
     titulo,
     chave,
@@ -337,7 +350,7 @@ function quadro(fam, res, grupo, { resAssunto, modo: modoInicial, aoTrocar, comp
     temResumo && el('p', { class: 'dica' }, iconeIA(), el('span', {}, 'Veja também um resumo, feito por IA, do que cada plano propõe sobre ', el('strong', {}, grupo.nome.toLowerCase()), '.')),
     el('div', { class: 'colunas rostos' }, colunas.map((col) => col.cabeca)),
     temResumo && painel,
-    grupo && explicacao,
+    explicacao,
     aviso(),
   );
 }
@@ -346,12 +359,11 @@ function quadro(fam, res, grupo, { resAssunto, modo: modoInicial, aoTrocar, comp
 function contas(res, c) {
   return Object.keys(dados.acervos).map((id) => {
     const r = res[id][c];
-    const maior = Math.max(...ordem.map((x) => res[id][x].taxa)) || 1;
     return el('div', { class: `conta ${id}` },
       el('span', { class: 'rotulo' }, id === 'plano' ? 'No plano' : 'Nas entrevistas'),
       el('strong', {}, vezes(r.vezes)),
-      el('span', { class: 'trilha', 'aria-hidden': 'true' }, el('span', { class: `preenche ${id}`, style: `width:${(r.taxa / maior) * 100}%` })),
-      el('small', {}, `${numero(r.taxa, 1)} a cada 10 mil palavras`));
+      el('span', { class: 'trilha', 'aria-hidden': 'true' }, el('span', { class: `preenche ${id}`, style: `width:${(r.taxa / maiorTaxa(res[id])) * 100}%` })),
+      el('small', {}, frequencia(r.taxa)));
   });
 }
 
@@ -372,15 +384,13 @@ function iconeIA() {
 
 function resumo(grupo, c) {
   const r = dados.resumos.grupos[grupo.id][c];
-  const plano = dados.textos.candidatos[c].plano;
-  const pagina = (n) => el('a', { href: `${plano}#page=${n}`, target: '_blank', rel: 'noopener', onclick: medir.abriuFonte }, `pág. ${n}`);
+  const pagina = (n) => linkFonte(paginaDoPlano(c, n), `pág. ${n}`);
   return [
     el('span', { class: 'selo-ia' }, iconeIA(), 'Resumo feito por IA'),
     el('h3', {}, nome(c)),
     el('p', { class: 'visao' }, r.visao.texto, ' ', pagina(r.visao.pagina)),
     el('ul', { class: 'propostas' }, r.propostas.map((p) => el('li', {}, p.texto, ' ', pagina(p.pagina)))),
-    el('p', { class: 'nota-ia' }, dados.resumos.aviso, ' ',
-      el('a', { href: plano, target: '_blank', rel: 'noopener', onclick: medir.abriuFonte }, `Ler o plano completo de ${nome(c)}`), '.'),
+    el('p', { class: 'nota-ia' }, dados.resumos.aviso, ' ', linkFonte(dados.textos.candidatos[c].plano, `Ler o plano completo de ${nome(c)}`), '.'),
   ];
 }
 
@@ -389,29 +399,28 @@ function eventosDoAcervo(acervo) {
   return `${pares.join('; ')}, de ${dataCurta(acervo.eventos[0].data)} a ${dataCurta(acervo.eventos.at(-1).data)}`;
 }
 
-// Abaixo da caixa: onde cada um usou a palavra, plano e entrevistas juntos, cada trecho com a fonte.
-function ondeUsou(fam, res, assunto = false) {
+// Abaixo da caixa: onde cada um usou a palavra (ou o assunto), plano e entrevistas juntos, cada trecho com a fonte.
+function ondeUsou(vista) {
   return el('section', { class: 'onde-usou' },
-    el('h2', { class: 'subtitulo' }, assunto ? `Onde cada um falou sobre ${fam.rotulo.toLowerCase()}` : 'Onde cada um usou a palavra'),
-    ordem.map((c) => trechos(c, Object.keys(dados.acervos).flatMap((id) => res[id][c].achados.map((a) => ({ id, ...a }))), fam, assunto)));
+    el('h2', { class: 'subtitulo' }, vista.onde),
+    ordem.map((c) => trechos(c, Object.keys(dados.acervos).flatMap((id) => vista.res[id][c].achados.map((a) => ({ id, ...a }))), vista)));
 }
 
 // Lista de trechos, aberta sob demanda e mostrada aos poucos.
-function trechos(c, achados, fam, assunto) {
-  if (!achados.length) return el('p', { class: 'onde-nada' }, `${nome(c)} não usou ${assunto ? 'essas palavras' : 'essa palavra'}.`);
+function trechos(c, achados, vista) {
+  if (!achados.length) return el('p', { class: 'onde-nada' }, `${nome(c)} não usou ${vista.nada}.`);
   const lista = el('ol', { class: 'trechos' });
-  const mais = el('button', { class: 'botao discreto mais', type: 'button' }, 'Mostrar mais');
   let mostrados = 0;
   const mostrarMais = () => {
     for (const achado of achados.slice(mostrados, mostrados + POR_VEZ)) lista.append(itemDeTrecho(c, achado));
     mostrados = Math.min(achados.length, mostrados + POR_VEZ);
     mais.hidden = mostrados >= achados.length;
   };
-  mais.addEventListener('click', mostrarMais);
+  const mais = el('button', { class: 'botao discreto mais', type: 'button', onclick: mostrarMais }, 'Mostrar mais');
   const caixa = el('details', { class: 'onde' },
     el('summary', {}, `Ver onde ${nome(c)} usou (${vezes(achados.length)})`), lista, mais);
   caixa.addEventListener('toggle', () => {
-    if (caixa.open && !mostrados) { mostrarMais(); medir.viuTrechos(fam.rotulo.toLowerCase()); }
+    if (caixa.open && !mostrados) { mostrarMais(); medir.viuTrechos(vista.metrica); }
   });
   return caixa;
 }
@@ -419,23 +428,23 @@ function trechos(c, achados, fam, assunto) {
 function itemDeTrecho(c, { id, pedaco, i, n }) {
   const t = trecho(pedaco.texto, pedaco.lista, { i, n });
   const fonte = id === 'plano'
-    ? el('a', { href: `${dados.textos.candidatos[c].plano}#page=${pedaco.pagina}`, target: '_blank', rel: 'noopener', onclick: medir.abriuFonte }, `Plano, pág. ${pedaco.pagina}`)
-    : el('a', { href: pedaco.url, target: '_blank', rel: 'noopener', onclick: medir.abriuFonte }, `Entrevista: ${pedaco.evento}, ${dataCurta(pedaco.data)}`);
+    ? linkFonte(paginaDoPlano(c, pedaco.pagina), `Plano, pág. ${pedaco.pagina}`)
+    : linkFonte(pedaco.url, `Entrevista: ${pedaco.evento}, ${dataCurta(pedaco.data)}`);
   return el('li', {}, el('p', {}, t.antes, el('mark', {}, t.achado), t.depois), fonte);
 }
 
-async function enviarImagem(botao, { rotulo, aspas, res }) {
+async function enviarImagem(botao, vista) {
   botao.disabled = true;
   try {
     const tipo = await compartilhar({
-      palavra: rotulo,
-      aspas,
-      link: aspas ? `?p=${encodeURIComponent(rotulo)}` : `?a=${encodeURIComponent(dados.grupos.find((g) => g.nome === rotulo).id)}`,
+      palavra: vista.rotulo,
+      aspas: vista.aspas,
+      link: vista.link,
       lados: ordem.map((c) => ({
         nome: nome(c),
-        imagem: `img/${c}-neutro.webp?v=3.0`,
-        plano: res.plano[c],
-        falas: res.falas[c],
+        imagem: `img/${c}-neutro.webp?v=3.1`,
+        plano: vista.res.plano[c],
+        falas: vista.res.falas[c],
       })),
     });
     if (tipo) medir.compartilhou(tipo);
@@ -454,7 +463,7 @@ function voltarAoInicio({ historico = true } = {}) {
 function rota({ historico = false } = {}) {
   const params = new URLSearchParams(location.search);
   const assunto = params.get('a');
-  if (assunto && dados.grupos.some((g) => g.id === assunto)) buscarAssunto(assunto, 'link', { historico });
+  if (assunto && grupoPorId(assunto)) buscarAssunto(assunto, 'link', { historico });
   // Só abre palavra da lista; link com outra palavra volta para o início.
   else if (params.get('p') && familia(params.get('p'), dados.termos)?.termo) buscar(params.get('p'), 'link', { historico });
   else {
@@ -466,18 +475,22 @@ function rota({ historico = false } = {}) {
 async function iniciar() {
   try {
     const [textos, termos, resumos] = await Promise.all(
-      ['data/textos.json?v=3.0', 'data/termos.json?v=3.0', 'data/resumos.json?v=3.0'].map((u) => fetch(u).then((r) => { if (!r.ok) throw new Error(u); return r.json(); })),
+      ['data/textos.json?v=3.1', 'data/termos.json?v=3.1', 'data/resumos.json?v=3.1'].map((u) => fetch(u).then((r) => { if (!r.ok) throw new Error(u); return r.json(); })),
     );
     dados = { textos, termos: termos.termos, grupos: termos.grupos, resumos, acervos: preparar(textos) };
+    dados.indice = montarIndice();
   } catch {
     medir.erroCarga();
     app.replaceChildren(el('section', { class: 'tela' }, el('h1', {}, 'Não deu para carregar'), el('p', {}, 'Confira sua conexão e recarregue a página.')));
     return;
   }
   ordem = sortearOrdem();
-  // Nota de método no rodapé, em todas as telas.
-  document.querySelector('.rodape')?.prepend(el('p', { class: 'metodo' },
-    'A barra compara a frequência (a cada 10 mil palavras), porque os textos têm tamanhos diferentes. ', tamanhos()));
+  // Nota de método no rodapé (o lugar já existe no HTML), em todas as telas.
+  const metodo = document.querySelector('.rodape .metodo');
+  if (metodo) {
+    metodo.textContent = `A barra compara a frequência (a cada 10 mil palavras), porque os textos têm tamanhos diferentes. ${tamanhos()}`;
+    metodo.hidden = false;
+  }
   medir.abriu();
   rota();
   addEventListener('popstate', () => rota());
