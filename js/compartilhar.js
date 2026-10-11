@@ -1,11 +1,14 @@
-import { SITE } from './config.js?v=3.8';
-import { vezes, frequencia, maiorTaxa, LEMBRETE, PERGUNTA } from './formato.js?v=3.8';
+import { SITE } from './config.js?v=3.9';
+import { vezes, frequencia, maiorTaxa, LEMBRETE, PERGUNTA } from './formato.js?v=3.9';
 
-// Imagem 4:5 (aparece inteira no WhatsApp e no feed) com a cara da tela de resultado: um cartão com uma coluna por candidato
+// Imagem de story (9:16) com a cara da tela de resultado: um cartão com uma coluna por candidato
 // (retrato, nome, plano com barra cheia, entrevistas com barra listrada), na mesma ordem da tela.
 // Leva sempre os dois, o número, a frequência e o lembrete: a imagem não pode virar "placar".
 const L = 1080;
-const A = 1350;
+const A = 1920;
+// O conteúdo (1350 de altura) fica centralizado, com sangria em cima e embaixo: o WhatsApp mostra só
+// a faixa do meio na conversa e o story cobre topo e base com a interface do aplicativo.
+const CONTEUDO = 1350;
 const COR = {
   fundo: '#f5f5f6',
   papel: '#ffffff',
@@ -159,6 +162,7 @@ export async function gerarImagem({ palavra, aspas = true, lados }) {
   ctx.fillStyle = COR.fundo;
   ctx.fillRect(0, 0, L, A);
   ctx.textBaseline = 'alphabetic';
+  ctx.translate(0, (A - CONTEUDO) / 2);
 
   // Selo
   ctx.textAlign = 'center';
