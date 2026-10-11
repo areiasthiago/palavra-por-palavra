@@ -303,6 +303,57 @@
       }
     },
     "direitos": {
+      "revisado": false,
+      "flavio": {
+        "visao": {
+          "texto": "Quer proteger as mulheres e dar a elas renda e autonomia, além de incluir as pessoas com deficiência.",
+          "pagina": 17,
+          "citacao": "Quando ela é protegida, capacitada e tem renda própria"
+        },
+        "propostas": [
+          {
+            "texto": "Criar a Central da Mulher, com proteção, saúde, emprego e crédito num lugar só.",
+            "pagina": 17,
+            "citacao": "A Central da Mulher será um espaço físico"
+          },
+          {
+            "texto": "Monitorar com tornozeleira os agressores de mulheres que têm medida protetiva.",
+            "pagina": 19,
+            "citacao": "monitorar por tornozeleira eletrônica os agressores sob medida protetiva"
+          },
+          {
+            "texto": "Criar Centros de Referência em Transtorno do Espectro Autista.",
+            "pagina": 39,
+            "citacao": "Centros de Referência em Transtorno do Espectro Autista"
+          }
+        ]
+      },
+      "lula": {
+        "visao": {
+          "texto": "Quer combater o racismo e toda forma de discriminação e ampliar a proteção às mulheres.",
+          "pagina": 19,
+          "citacao": "Manteremos o combate ao racismo no centro de nossa estratégia de desenvolvimento"
+        },
+        "propostas": [
+          {
+            "texto": "Terminar 30 Casas da Mulher Brasileira e ampliar a rede de proteção às mulheres.",
+            "pagina": 21,
+            "citacao": "concluiremos as 30 Casas da Mulher Brasileira"
+          },
+          {
+            "texto": "Seguir com a entrega de títulos de terra às comunidades quilombolas.",
+            "pagina": 20,
+            "citacao": "Vamos dar continuidade a este processo de reconhecimento do direito ao território"
+          },
+          {
+            "texto": "Fiscalizar mais as cotas de emprego para pessoas com deficiência.",
+            "pagina": 23,
+            "citacao": "A fiscalização do cumprimento das cotas de contratação de pessoas com deficiência"
+          }
+        ]
+      }
+    },
+    "servico": {
       "flavio": {
         "visao": {
           "texto": "Quer um governo digital, que resolva a vida do cidadão sem fila e sem papelada.",
@@ -329,9 +380,9 @@
       },
       "lula": {
         "visao": {
-          "texto": "Quer garantir a todos o acesso a saúde, educação, renda e outros direitos básicos.",
-          "pagina": 26,
-          "citacao": "universalização do acesso à educação, à saúde, à renda e aos demais direitos fundamentais"
+          "texto": "Quer serviços públicos digitais e pensados para cada pessoa, com o governo mais perto de quem precisa.",
+          "pagina": 16,
+          "citacao": "Estamos construindo “um governo para cada pessoa”"
         },
         "propostas": [
           {
@@ -350,7 +401,8 @@
             "citacao": "avançaremos ainda mais no fortalecimento da Proteção Social Básica"
           }
         ]
-      }
+      },
+      "revisado": false
     },
     "moradia": {
       "flavio": {
@@ -452,10 +504,11 @@
         ]
       }
     },
-    "campo": {
+    "ambiente": {
+      "revisado": false,
       "flavio": {
         "visao": {
-          "texto": "Quer segurança para quem produz no campo e diz que preservar a natureza tem que compensar para quem preserva.",
+          "texto": "Trata a natureza como riqueza do país e diz que preservar tem que compensar para quem preserva.",
           "pagina": 58,
           "citacao": "Preservar tem que compensar para quem preserva"
         },
@@ -466,22 +519,22 @@
             "citacao": "zerar o desmatamento ilegal até 2029"
           },
           {
-            "texto": "Acelerar a entrega de títulos de terra ao pequeno produtor rural.",
-            "pagina": 54,
-            "citacao": "promover ampla regularização e titulação do pequeno proprietário rural"
-          },
-          {
             "texto": "Pagar quem conserva a mata nativa e recupera áreas degradadas.",
             "pagina": 57,
             "citacao": "ampliando o pagamento por serviços ambientais"
+          },
+          {
+            "texto": "Combater as quadrilhas do desmatamento, da madeira ilegal e do garimpo ilegal.",
+            "pagina": 58,
+            "citacao": "reforçar o combate às organizações criminosas envolvidas"
           }
         ]
       },
       "lula": {
         "visao": {
-          "texto": "Quer juntar produção e proteção do meio ambiente, com apoio forte à agricultura familiar.",
-          "pagina": 52,
-          "citacao": "provando que desenvolvimento produtivo e responsabilidade ambiental caminham juntos"
+          "texto": "Trata o cuidado com o clima e a natureza como oportunidade de desenvolver o país.",
+          "pagina": 70,
+          "citacao": "A transformação ecológica é uma oportunidade histórica do Brasil"
         },
         "propostas": [
           {
@@ -490,9 +543,60 @@
             "citacao": "alcançar o desmatamento líquido zero até 2030"
           },
           {
+            "texto": "Usar satélite e inteligência artificial contra crimes ambientais.",
+            "pagina": 72,
+            "citacao": "Vamos expandir monitoramento satelital e uso de inteligência artificial no combate a crimes ambientais"
+          },
+          {
+            "texto": "Preparar as cidades e o campo para enchentes, secas e calor extremo.",
+            "pagina": 72,
+            "citacao": "Institucionalizaremos a adaptação climática como eixo"
+          }
+        ]
+      }
+    },
+    "agro": {
+      "revisado": false,
+      "flavio": {
+        "visao": {
+          "texto": "Quer dar a quem produz no campo previsibilidade e segurança de que a terra é sua.",
+          "pagina": 54,
+          "citacao": "previsibilidade para produzir"
+        },
+        "propostas": [
+          {
+            "texto": "Acelerar a entrega de títulos de terra ao pequeno produtor rural.",
+            "pagina": 54,
+            "citacao": "promover ampla regularização e titulação do pequeno proprietário rural"
+          },
+          {
+            "texto": "Ampliar o Seguro Rural e renegociar as dívidas do setor.",
+            "pagina": 54,
+            "citacao": "Vamos ampliar o Seguro Rural e trazer ferramentas de securitização"
+          },
+          {
+            "texto": "Dar garantia firme ao direito de propriedade no campo.",
+            "pagina": 54,
+            "citacao": "segurança jurídica sólida, irreversível e sem margem para relativizações do direito de propriedade"
+          }
+        ]
+      },
+      "lula": {
+        "visao": {
+          "texto": "Quer crédito e apoio para todo o campo, com prioridade para a agricultura familiar.",
+          "pagina": 59,
+          "citacao": "assegurar que quem alimenta o Brasil continue a ter condições adequadas para produzir"
+        },
+        "propostas": [
+          {
             "texto": "Ampliar o Plano Safra da Agricultura Familiar, com juros adequados a quem produz comida.",
             "pagina": 59,
             "citacao": "Vamos continuar expandindo o Plano Safra da Agricultura Familiar"
+          },
+          {
+            "texto": "Ampliar o crédito rural e os recursos do Plano Safra para todo o agro.",
+            "pagina": 61,
+            "citacao": "ampliando os recursos do Plano Safra"
           },
           {
             "texto": "Seguir com a reforma agrária, assentando as famílias acampadas.",
@@ -511,9 +615,9 @@
         },
         "propostas": [
           {
-            "texto": "Criar a Central da Mulher, com proteção, saúde, emprego e crédito num lugar só.",
-            "pagina": 17,
-            "citacao": "A Central da Mulher será um espaço físico"
+            "texto": "Ajudar famílias de menor renda a adaptar a casa para os idosos.",
+            "pagina": 39,
+            "citacao": "Casa Segura para Envelhecer"
           },
           {
             "texto": "Ampliar creches e dar voucher-creche onde faltar vaga pública.",
@@ -529,15 +633,15 @@
       },
       "lula": {
         "visao": {
-          "texto": "Quer combater todo tipo de discriminação e proteger mulheres, crianças, idosos e pessoas com deficiência.",
-          "pagina": 26,
-          "citacao": "combata todas as formas de discriminação"
+          "texto": "Quer dividir com as famílias o cuidado de crianças, idosos e pessoas com deficiência.",
+          "pagina": 25,
+          "citacao": "Os investimentos em cuidados são fundamentais"
         },
         "propostas": [
           {
-            "texto": "Terminar 30 Casas da Mulher Brasileira e ampliar a rede de proteção às mulheres.",
-            "pagina": 21,
-            "citacao": "concluiremos as 30 Casas da Mulher Brasileira"
+            "texto": "Apoiar as Cuidotecas, espaços que acolhem crianças de 3 a 12 anos.",
+            "pagina": 26,
+            "citacao": "Apoiaremos as Cuidotecas"
           },
           {
             "texto": "Atender em casa os idosos que têm dificuldade de sair.",
@@ -550,7 +654,8 @@
             "citacao": "regulamentação do uso de telas por faixa etária"
           }
         ]
-      }
+      },
+      "revisado": false
     },
     "mundo": {
       "flavio": {
@@ -602,5 +707,6 @@
         ]
       }
     }
-  }
+  },
+  "aviso_sem_revisao": "Resumo feito por inteligência artificial a partir do plano de governo."
 }

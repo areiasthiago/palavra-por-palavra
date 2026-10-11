@@ -398,14 +398,15 @@ function iconeIA() {
 }
 
 function resumo(grupo, c) {
-  const r = dados.resumos.grupos[grupo.id][c];
+  const g = dados.resumos.grupos[grupo.id];
+  const r = g[c];
   const pagina = (n) => linkFonte(paginaDoPlano(c, n), `pág. ${n}`);
   return [
     el('span', { class: 'selo-ia' }, iconeIA(), 'Resumo feito por IA'),
     el('h3', {}, nome(c)),
     el('p', { class: 'visao' }, r.visao.texto, ' ', pagina(r.visao.pagina)),
     el('ul', { class: 'propostas' }, r.propostas.map((p) => el('li', {}, p.texto, ' ', pagina(p.pagina)))),
-    el('p', { class: 'nota-ia' }, dados.resumos.aviso, ' ', linkFonte(dados.textos.candidatos[c].plano, `Ler o plano completo de ${nome(c)}`), '.'),
+    el('p', { class: 'nota-ia' }, g.revisado === false ? dados.resumos.aviso_sem_revisao : dados.resumos.aviso, ' ', linkFonte(dados.textos.candidatos[c].plano, `Ler o plano completo de ${nome(c)}`), '.'),
   ];
 }
 
