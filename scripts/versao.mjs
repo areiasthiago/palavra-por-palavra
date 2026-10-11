@@ -15,10 +15,6 @@ if (/(^|\D)(13|22)(\D|$)/.test(versao)) {
 const raiz = new URL('..', import.meta.url);
 for (const arquivo of ['index.html', 'sobre.html', 'js/app.js', 'js/contagem.js', 'js/compartilhar.js']) {
   const caminho = new URL(arquivo, raiz);
-  // Também o selo ao lado da logo, usado na fase de testes.
-  const texto = readFileSync(caminho, 'utf8')
-    .replace(/\?v=\d+\.\d+/g, `?v=${versao}`)
-    .replace(/(<span class="versao">)v\d+\.\d+/, `$1v${versao}`);
-  writeFileSync(caminho, texto);
+  writeFileSync(caminho, readFileSync(caminho, 'utf8').replace(/\?v=\d+\.\d+/g, `?v=${versao}`));
 }
 console.log(`versão ${versao}`);
