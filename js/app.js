@@ -171,7 +171,7 @@ function inicio() {
   });
   app.replaceChildren(el('section', { class: 'tela inicio' },
     el('span', { class: 'selo' }, 'Eleições 2026 · 2º turno'),
-    el('h1', {}, 'Quanto cada candidato ', el('span', { class: 'destaque' }, 'se importa'), ' com o que é importante pra você?'),
+    el('h1', {}, 'Quanto cada candidato ', el('span', { class: 'destaque' }, 'se importa com o que é importante'), ' pra você?'),
     el('p', { class: 'chamada' }, 'Conferimos ', el('em', {}, 'palavra por palavra'), '.'),
     campoDeBusca(),
     compromisso(),
