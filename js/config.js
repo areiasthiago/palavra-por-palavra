@@ -1,5 +1,5 @@
 // Endereço que aparece na imagem e no texto de compartilhamento.
-export const SITE = 'areiasthiago.github.io/palavra-por-palavra';
+export const SITE = 'palavraporpalavra.online';
 
 // Contador anônimo agregado (Cloudflare Worker + D1). Rodando localmente, usa o banco de teste,
 // para nada de teste se misturar aos números reais.

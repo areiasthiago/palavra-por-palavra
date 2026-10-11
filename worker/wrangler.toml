@@ -10,7 +10,7 @@ workers_dev = true
 enabled = false
 
 [vars]
-ORIGENS = "https://areiasthiago.github.io"
+ORIGENS = "https://palavraporpalavra.online,https://areiasthiago.github.io"
 
 [[d1_databases]]
 binding = "DB"
@@ -25,7 +25,7 @@ workers_dev = true
 enabled = false
 
 [env.teste.vars]
-ORIGENS = "https://areiasthiago.github.io,http://127.0.0.1:8765"
+ORIGENS = "https://palavraporpalavra.online,https://areiasthiago.github.io,http://127.0.0.1:8765"
 
 [[env.teste.d1_databases]]
 binding = "DB"
