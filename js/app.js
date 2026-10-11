@@ -1,7 +1,7 @@
-import { preparar, familia, familiaDoGrupo, formasDoTermo, contar, trecho, semAcento } from './busca.js?v=4.1';
-import * as medir from './contagem.js?v=4.1';
-import { compartilhar } from './compartilhar.js?v=4.1';
-import { numero, vezes, frequencia, maiorTaxa, LEMBRETE, PERGUNTA } from './formato.js?v=4.1';
+import { preparar, familia, familiaDoGrupo, formasDoTermo, contar, trecho, semAcento } from './busca.js?v=4.2';
+import * as medir from './contagem.js?v=4.2';
+import { compartilhar } from './compartilhar.js?v=4.2';
+import { numero, vezes, frequencia, maiorTaxa, LEMBRETE, PERGUNTA } from './formato.js?v=4.2';
 
 const ORDEM = 'palavra:ordem';
 const POR_VEZ = 5; // trechos mostrados de cada vez
@@ -175,6 +175,7 @@ function inicio() {
     el('h1', {}, 'Quanto cada candidato ', el('span', { class: 'destaque' }, 'fala do que importa'), ' pra você?'),
     el('p', { class: 'chamada' }, `Escolha uma palavra e veja quantas vezes ${nomes[0]} e ${nomes[1]} usaram essa palavra no plano de governo.`),
     campoDeBusca(),
+    compromisso(),
     el('div', { class: 'bloco' },
       el('h2', { class: 'subtitulo' }, 'Mais buscados aqui'),
       quentes),
@@ -189,6 +190,11 @@ function inicio() {
     aviso(),
   ));
 }
+
+// Por que só o plano: é o que cada candidato assumiu por escrito.
+const compromisso = () => el('aside', { class: 'compromisso' },
+  el('strong', {}, 'Se não está no plano, fica difícil cobrar depois.'),
+  el('span', {}, 'O plano de governo é o compromisso que cada candidato registrou por escrito na Justiça Eleitoral. Por isso este site conta só o que está nele.'));
 
 const aviso = () => el('p', { class: 'aviso-fixo' }, el('strong', {}, 'Lembre: '), LEMBRETE);
 
@@ -297,13 +303,13 @@ function quadro(grupo, visoes, inicial, aoTrocar) {
   let aberto = null;
 
   const colunas = ordem.map((c) => {
-    const foto = el('img', { src: `img/${c}-serio.webp?v=4.1`, alt: '', width: '96', height: '96' });
+    const foto = el('img', { src: `img/${c}-serio.webp?v=4.2`, alt: '', width: '96', height: '96' });
     const rotulo = el('span', { class: 'ver-resumo' }, 'Ver resumo');
     // Retrato embaixo das contagens; com resumo, retrato e botão formam um único botão.
     const cabeca = temResumo
       ? el('button', { class: 'rosto', type: 'button', 'aria-pressed': 'false', 'aria-controls': painel.id, 'aria-label': `Ver resumo do plano de ${nome(c)}`, onclick: () => abrirResumo(c) }, foto, rotulo)
       : el('div', { class: 'rosto' }, foto);
-    if (temResumo) new Image().src = `img/${c}-alegre.webp?v=4.1`; // sem piscar na troca
+    if (temResumo) new Image().src = `img/${c}-alegre.webp?v=4.2`; // sem piscar na troca
     return { c, cabeca, foto, rotulo, coluna: el('div', { class: 'coluna' }) };
   });
   function abrirResumo(c) {
@@ -311,7 +317,7 @@ function quadro(grupo, visoes, inicial, aoTrocar) {
     for (const col of colunas) {
       const ativo = col.c === aberto;
       col.cabeca.setAttribute('aria-pressed', String(ativo));
-      col.foto.src = `img/${col.c}-${ativo ? 'alegre' : 'serio'}.webp?v=4.1`;
+      col.foto.src = `img/${col.c}-${ativo ? 'alegre' : 'serio'}.webp?v=4.2`;
       col.rotulo.textContent = ativo ? 'Fechar' : 'Ver resumo';
     }
     painel.hidden = !aberto;
@@ -444,7 +450,7 @@ async function enviarImagem(botao, vista) {
       link: vista.link,
       lados: ordem.map((c) => ({
         nome: nome(c),
-        imagem: `img/${c}-neutro.webp?v=4.1`,
+        imagem: `img/${c}-neutro.webp?v=4.2`,
         plano: vista.res.plano[c],
       })),
     });
@@ -476,7 +482,7 @@ function rota({ historico = false } = {}) {
 async function iniciar() {
   try {
     const [textos, termos, resumos] = await Promise.all(
-      ['data/textos.json?v=4.1', 'data/termos.json?v=4.1', 'data/resumos.json?v=4.1'].map((u) => fetch(u).then((r) => { if (!r.ok) throw new Error(u); return r.json(); })),
+      ['data/textos.json?v=4.2', 'data/termos.json?v=4.2', 'data/resumos.json?v=4.2'].map((u) => fetch(u).then((r) => { if (!r.ok) throw new Error(u); return r.json(); })),
     );
     dados = { textos, termos: termos.termos, grupos: termos.grupos, resumos, acervos: preparar(textos) };
     dados.indice = montarIndice();
