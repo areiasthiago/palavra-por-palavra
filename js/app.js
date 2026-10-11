@@ -163,7 +163,6 @@ function sugerir(texto) {
 function inicio() {
   const destaques = dados.termos.filter((t) => t.destaque)
     .sort((a, b) => grupoDe(b).peso - grupoDe(a).peso);
-  const nomes = ordem.map(nome);
   // Começa com os destaques das pesquisas; se o contador responder, troca pela lista viva.
   const quentes = el('div', { class: 'chips' }, destaques.map((t) => chip(t, 'quentes')));
   medir.quentes().then((lista) => {
@@ -172,8 +171,8 @@ function inicio() {
   });
   app.replaceChildren(el('section', { class: 'tela inicio' },
     el('span', { class: 'selo' }, 'Eleições 2026 · 2º turno'),
-    el('h1', {}, 'Quanto cada candidato ', el('span', { class: 'destaque' }, 'fala do que importa'), ' pra você?'),
-    el('p', { class: 'chamada' }, `Escolha uma palavra e veja quantas vezes ${nomes[0]} e ${nomes[1]} usaram essa palavra no plano de governo.`),
+    el('h1', {}, 'Quanto cada candidato ', el('span', { class: 'destaque' }, 'se importa'), ' com o que é importante pra você?'),
+    el('p', { class: 'chamada' }, 'Conferimos ', el('em', {}, 'palavra por palavra'), '.'),
     campoDeBusca(),
     compromisso(),
     el('div', { class: 'bloco' },
