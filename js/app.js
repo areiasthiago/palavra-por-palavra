@@ -1,7 +1,7 @@
-import { preparar, familia, familiaDoGrupo, formasDoTermo, contar, trecho, semAcento } from './busca.js?v=5.5';
-import * as medir from './contagem.js?v=5.5';
-import { compartilhar } from './compartilhar.js?v=5.5';
-import { numero, vezes, frequencia, maiorTaxa, LEMBRETE, PERGUNTA } from './formato.js?v=5.5';
+import { preparar, familia, familiaDoGrupo, formasDoTermo, contar, trecho, semAcento } from './busca.js?v=5.6';
+import * as medir from './contagem.js?v=5.6';
+import { compartilhar } from './compartilhar.js?v=5.6';
+import { numero, vezes, frequencia, maiorTaxa, LEMBRETE, PERGUNTA } from './formato.js?v=5.6';
 
 const ORDEM = 'palavra:ordem';
 const POR_VEZ = 5; // trechos mostrados de cada vez
@@ -209,22 +209,30 @@ function indicadores(grupoId, c) {
   return { c, lista, n: lista.length, como: conta('como'), meta: conta('meta'), prazo: conta('prazo'), valor: conta('valor') };
 }
 
-// Início: os 14 assuntos, com quantas propostas cada plano faz e quantas dizem como, lado a lado.
+// Início: os 14 assuntos num carrossel, com quantas propostas cada plano faz e quantas dizem como,
+// lado a lado. O cartão seguinte aparece pela metade, para mostrar que dá para arrastar.
 function quadroDosPlanos() {
-  return el('section', { class: 'planos' },
-    el('h2', { class: 'subtitulo' }, 'Os planos, assunto por assunto'),
-    el('p', { class: 'legenda' }, 'Quantas propostas cada plano faz e quantas dizem como vão ser feitas. Toque num assunto para ver as propostas.'),
-    el('p', { class: 'linha-plano cabecalho', 'aria-hidden': 'true' }, el('span', {}), el('span', {}, 'Propostas'), el('span', {}, 'Diz como vai fazer')),
-    el('ul', { class: 'lista-planos' }, dados.grupos.map((g) => el('li', {},
+  const lista = el('ul', { class: 'lista-planos' }, dados.grupos.map((g) => el('li', {},
       el('a', { href: `?a=${g.id}`, onclick: (e) => { e.preventDefault(); buscarAssunto(g.id, 'planos'); } },
         el('strong', { class: 'assunto-nome' }, g.nome, el('span', { 'aria-hidden': 'true' }, ' →')),
+        el('span', { class: 'linha-plano cabecalho', 'aria-hidden': 'true' }, el('span', {}), el('span', {}, 'Propostas'), el('span', {}, 'Diz como vai fazer')),
         ordem.map((c) => {
           const i = indicadores(g.id, c);
           return el('span', { class: 'linha-plano' },
             el('span', { class: 'quem' }, nome(c)),
             el('span', { 'aria-label': `${i.n} ${i.n === 1 ? 'proposta' : 'propostas'}` }, el('b', {}, numero(i.n))),
             el('span', { 'aria-label': `${pct(i.como, i.n)}% diz como vai fazer` }, el('b', {}, `${pct(i.como, i.n)}%`)));
-        }))))),
+        })))));
+  // Setas para quem usa mouse; no celular, arrasta.
+  const passo = (sentido) => () => lista.scrollBy({ left: sentido * (lista.firstElementChild.offsetWidth + 12), behavior: 'smooth' });
+  return el('section', { class: 'planos' },
+    el('div', { class: 'planos-topo' },
+      el('h2', { class: 'subtitulo' }, 'Os planos, assunto por assunto'),
+      el('div', { class: 'setas' },
+        el('button', { class: 'seta', type: 'button', 'aria-label': 'Assunto anterior', onclick: passo(-1) }, '←'),
+        el('button', { class: 'seta', type: 'button', 'aria-label': 'Próximo assunto', onclick: passo(1) }, '→'))),
+    el('p', { class: 'legenda' }, 'Quantas propostas cada plano faz e quantas dizem como vão ser feitas. Arraste para o lado e toque num assunto para ver as propostas.'),
+    lista,
     el('p', { class: 'nota-ia' }, iconeIA(), el('span', {}, 'Propostas separadas e classificadas por IA a partir dos planos de governo.')));
 }
 
@@ -389,11 +397,11 @@ function blocoResumo(grupo) {
   const painel = el('div', { class: 'painel', id: 'resumo-ia', hidden: true });
   let aberto = null;
   const colunas = ordem.map((c) => {
-    const foto = el('img', { src: `img/${c}-serio.webp?v=5.5`, alt: '', width: '96', height: '96' });
+    const foto = el('img', { src: `img/${c}-serio.webp?v=5.6`, alt: '', width: '96', height: '96' });
     const rotulo = el('span', { class: 'ver-resumo' }, 'Ver resumo');
     // Retrato e rótulo formam um único botão.
     const cabeca = el('button', { class: 'rosto', type: 'button', 'aria-pressed': 'false', 'aria-controls': painel.id, 'aria-label': `Ver resumo do plano de ${nome(c)}`, onclick: () => abrirResumo(c) }, foto, rotulo);
-    new Image().src = `img/${c}-alegre.webp?v=5.5`; // sem piscar na troca
+    new Image().src = `img/${c}-alegre.webp?v=5.6`; // sem piscar na troca
     return { c, cabeca, foto, rotulo };
   });
   function abrirResumo(c) {
@@ -401,7 +409,7 @@ function blocoResumo(grupo) {
     for (const col of colunas) {
       const ativo = col.c === aberto;
       col.cabeca.setAttribute('aria-pressed', String(ativo));
-      col.foto.src = `img/${col.c}-${ativo ? 'alegre' : 'serio'}.webp?v=5.5`;
+      col.foto.src = `img/${col.c}-${ativo ? 'alegre' : 'serio'}.webp?v=5.6`;
       col.rotulo.textContent = ativo ? 'Fechar' : 'Ver resumo';
     }
     painel.hidden = !aberto;
@@ -539,7 +547,7 @@ async function enviarPropostas(botao, grupo, porCandidato) {
       tipo: 'propostas',
       palavra: grupo.nome,
       link: `?a=${grupo.id}`,
-      lados: porCandidato.map((x) => ({ nome: nome(x.c), imagem: `img/${x.c}-neutro.webp?v=5.5`, n: x.n, como: x.como })),
+      lados: porCandidato.map((x) => ({ nome: nome(x.c), imagem: `img/${x.c}-neutro.webp?v=5.6`, n: x.n, como: x.como })),
     });
     if (tipo) medir.compartilhou(tipo);
   } finally {
@@ -556,7 +564,7 @@ async function enviarImagem(botao, vista) {
       link: vista.link,
       lados: ordem.map((c) => ({
         nome: nome(c),
-        imagem: `img/${c}-neutro.webp?v=5.5`,
+        imagem: `img/${c}-neutro.webp?v=5.6`,
         plano: vista.res.plano[c],
       })),
     });
@@ -588,7 +596,7 @@ function rota({ historico = false } = {}) {
 async function iniciar() {
   try {
     const [textos, termos, resumos, propostas] = await Promise.all(
-      ['data/textos.json?v=5.5', 'data/termos.json?v=5.5', 'data/resumos.json?v=5.5', 'data/propostas.json?v=5.5'].map((u) => fetch(u).then((r) => { if (!r.ok) throw new Error(u); return r.json(); })),
+      ['data/textos.json?v=5.6', 'data/termos.json?v=5.6', 'data/resumos.json?v=5.6', 'data/propostas.json?v=5.6'].map((u) => fetch(u).then((r) => { if (!r.ok) throw new Error(u); return r.json(); })),
     );
     dados = { textos, termos: termos.termos, grupos: termos.grupos, resumos, propostas: propostas.propostas, acervos: preparar(textos) };
     dados.indice = montarIndice();

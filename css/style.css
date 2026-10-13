@@ -393,14 +393,20 @@ div.rosto { cursor: default; }
 
 /* Propostas: os planos assunto por assunto (início) e a lista de um assunto */
 .planos { display: flex; flex-direction: column; gap: 10px; }
-.lista-planos { margin: 0; padding: 0; list-style: none; display: grid; gap: 10px; }
-.lista-planos a { display: grid; gap: 6px; padding: 12px 14px; border: 2.5px solid var(--traco); border-radius: 14px; background: var(--papel); color: var(--tinta); text-decoration: none; }
+/* Carrossel: vai até a borda da tela e encaixa um cartão por vez */
+.planos-topo { display: flex; align-items: center; justify-content: space-between; gap: 12px; }
+.setas { display: flex; gap: 8px; flex: none; }
+.seta { width: 44px; height: 44px; border: 2.5px solid var(--traco); border-radius: 50%; background: var(--papel); color: var(--tinta); font: 800 1.1rem var(--titulo); cursor: pointer; }
+.seta:hover { background: var(--realce-claro); }
+.lista-planos { margin: 0 -16px; padding: 4px 16px 14px; list-style: none; display: flex; gap: 12px; overflow-x: auto; scroll-snap-type: x mandatory; scroll-padding: 0 16px; overscroll-behavior-x: contain; scrollbar-width: thin; }
+.lista-planos li { flex: 0 0 min(82%, 340px); scroll-snap-align: start; display: flex; }
+.lista-planos a { flex: 1; display: grid; align-content: start; gap: 8px; padding: 12px 14px; border: 2.5px solid var(--traco); border-radius: 14px; background: var(--papel); color: var(--tinta); text-decoration: none; }
 .lista-planos a:hover { background: var(--realce-claro); }
 .assunto-nome { font-family: var(--titulo); font-size: 1.05rem; }
 /* Mesmo peso para os dois números: quantidade e "dizem como" */
 .linha-plano { display: grid; grid-template-columns: minmax(0, 1.6fr) 1fr 1fr; gap: 8px; align-items: baseline; font-size: 0.9rem; color: var(--suave); font-variant-numeric: tabular-nums; }
 .linha-plano > span:not(.quem) { text-align: right; }
-.linha-plano.cabecalho { margin: 4px 0 -4px; padding: 0 16.5px; font-size: 0.75rem; font-weight: 700; text-transform: uppercase; letter-spacing: 0.03em; }
+.linha-plano.cabecalho { font-size: 0.72rem; font-weight: 700; text-transform: uppercase; letter-spacing: 0.03em; }
 .linha-plano.cabecalho > span:not(:first-child) { text-align: right; }
 .linha-plano .quem { color: var(--tinta); font-weight: 700; overflow-wrap: anywhere; }
 .linha-plano b { color: var(--tinta); font-family: var(--titulo); font-size: 1.15rem; }
