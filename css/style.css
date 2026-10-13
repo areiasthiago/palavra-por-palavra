@@ -397,7 +397,9 @@ div.rosto { cursor: default; }
 /* Carrossel: vai até a borda da tela e encaixa um cartão por vez */
 .setas { display: flex; gap: 8px; flex: none; margin-left: auto; }
 .seta:disabled { opacity: 0.35; cursor: default; }
-.seta { width: 44px; height: 44px; border: 2.5px solid var(--traco); border-radius: 50%; background: var(--papel); color: var(--tinta); font: 800 1.1rem var(--titulo); cursor: pointer; }
+.seta { display: grid; place-items: center; width: 44px; height: 44px; padding: 0; border: 2.5px solid var(--traco); border-radius: 50%; background: var(--papel); color: var(--tinta); cursor: pointer; }
+.seta svg { width: 20px; height: 20px; }
+.seta.voltar svg { transform: scaleX(-1); }
 .seta:not(:disabled):hover { background: var(--realce-claro); }
 
 /* Faixa (carrossel): vai até a borda da tela; as pontas se apagam para mostrar que continua */
