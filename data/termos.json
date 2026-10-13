@@ -40,6 +40,7 @@
     { "termo": "hospital", "grupo": "saude", "variantes": [ "hospitais" ] },
     { "termo": "médico", "grupo": "saude", "variantes": [ "médicos", "médica", "médicas" ] },
     { "termo": "remédio", "grupo": "saude", "variantes": [ "remédios" ] },
+    { "termo": "farmácia", "grupo": "saude", "variantes": [ "farmácias" ] },
     { "termo": "fila", "grupo": "saude", "variantes": [ "filas" ] },
     { "termo": "vacina", "grupo": "saude", "variantes": [ "vacinas" ] },
     { "termo": "corrupção", "grupo": "corrupcao", "variantes": [], "destaque": true },
