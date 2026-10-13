@@ -1,10 +1,10 @@
-import { SITE } from './config.js?v=5.4';
-import { vezes, frequencia, maiorTaxa, LEMBRETE, PERGUNTA } from './formato.js?v=5.4';
+import { SITE } from './config.js?v=5.5';
+import { vezes, frequencia, maiorTaxa, PERGUNTA } from './formato.js?v=5.5';
 
 // Imagem de story (9:16) com a cara da tela de resultado: um cartão com uma coluna por candidato,
 // na mesma ordem da tela. Dois tipos: a contagem de uma palavra (número, barra e frequência) e as
 // propostas de um assunto (quantas e quantas dizem como vão fazer, com o mesmo peso).
-// Leva sempre os dois e o lembrete: a imagem não pode virar disputa.
+// Leva sempre os dois: a imagem não pode virar disputa.
 const L = 1080;
 const A = 1920;
 // Faixa segura: o WhatsApp mostra na conversa só o meio da imagem (altura ≈ 1,4 × largura) e o story
@@ -59,17 +59,6 @@ function textoAjustado(ctx, conteudo, x, y, peso, tamanho, largura, fam = fonte)
     ctx.font = fam(peso, t);
   }
   ctx.fillText(conteudo, x, y);
-}
-
-// Quebra o texto em linhas que caibam na largura, com a fonte já definida no contexto.
-function quebrar(ctx, conteudo, largura) {
-  const linhas = [''];
-  for (const palavra of conteudo.split(' ')) {
-    const tentativa = linhas.at(-1) ? `${linhas.at(-1)} ${palavra}` : palavra;
-    if (ctx.measureText(tentativa).width > largura && linhas.at(-1)) linhas.push(palavra);
-    else linhas[linhas.length - 1] = tentativa;
-  }
-  return linhas;
 }
 
 // Barra como na tela: trilha clara, preenchimento roxo.
@@ -191,21 +180,6 @@ function cabecalho(ctx, y0, pergunta, titulo) {
   return y0 + 340;
 }
 
-// Lembrete (o mesmo da tela) e chamada com o endereço, a partir de y.
-function rodape(ctx, y, chamada) {
-  ctx.font = texto(400, 30);
-  const linhas = quebrar(ctx, LEMBRETE[0].toUpperCase() + LEMBRETE.slice(1), L - 176);
-  const altura = 44 + linhas.length * 44;
-  bloco(ctx, 40, y, L - 80, altura, 26, COR.roxoClaro);
-  ctx.fillStyle = COR.roxo;
-  ctx.fillRect(40 + TRACO / 2, y + TRACO / 2, 12, altura - TRACO);
-  ctx.fillStyle = COR.tinta;
-  ctx.textAlign = 'left';
-  ctx.font = texto(400, 30);
-  linhas.forEach((linha, i) => ctx.fillText(linha, 88, y + 54 + i * 44));
-  return y + altura;
-}
-
 // tipo 'palavra': palavra é o termo (ou o assunto, sem aspas); lados: [{ nome, imagem, plano }].
 // tipo 'propostas': palavra é o assunto; lados: [{ nome, imagem, n, como }]. Sempre na ordem da tela.
 export async function gerarImagem({ tipo = 'palavra', palavra, aspas = true, lados }) {
@@ -220,8 +194,9 @@ export async function gerarImagem({ tipo = 'palavra', palavra, aspas = true, lad
   ctx.fillStyle = COR.fundo;
   ctx.fillRect(0, 0, L, A);
   ctx.textBaseline = 'alphabetic';
-  const y0 = SEGURO.topo + 78;
-  if (tipo === 'propostas') return propostas(ctx, canvas, y0, palavra, lados, imagens);
+  // Conteúdo centralizado na faixa segura (o cartão das propostas é mais alto que o da palavra).
+  if (tipo === 'propostas') return propostas(ctx, canvas, SEGURO.topo + 138, palavra, lados, imagens);
+  const y0 = SEGURO.topo + 158;
 
   const topo = cabecalho(ctx, y0, aspas ? PERGUNTA.palavra : PERGUNTA.assunto, aspas ? `“${palavra}”` : palavra);
 
@@ -238,8 +213,8 @@ export async function gerarImagem({ tipo = 'palavra', palavra, aspas = true, lad
     conta(ctx, x, topo + 425, largCol, 'NO PLANO DE GOVERNO', lado.plano, maior, false);
   });
 
-  // Lembrete e chamada com o endereço
-  const fim = rodape(ctx, topo + 742);
+  // Chamada com o endereço
+  const fim = topo + 712;
   ctx.textAlign = 'center';
   ctx.fillStyle = COR.tinta;
   ctx.font = fonte(800, 46);
@@ -270,11 +245,10 @@ function propostas(ctx, canvas, y0, assunto, lados, imagens) {
   ctx.font = texto(400, 28);
   ctx.fillText('✦ Propostas separadas e classificadas por IA a partir dos planos', L / 2, topo + 792);
 
-  // Lembrete e chamada numa linha só, para caber na faixa segura.
-  const fim = rodape(ctx, topo + 860);
+  // Chamada com o endereço
   ctx.fillStyle = COR.tinta;
   ctx.textAlign = 'center';
-  textoAjustado(ctx, `Veja em ${SITE}`, L / 2, fim + 76, 800, 46, L - 120);
+  textoAjustado(ctx, `Veja em ${SITE}`, L / 2, topo + 830 + 100, 800, 46, L - 120);
   return new Promise((ok) => canvas.toBlob(ok, 'image/png'));
 }
 

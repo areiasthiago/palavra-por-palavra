@@ -317,7 +317,7 @@ main { flex: 1; width: 100%; max-width: 760px; margin: 0 auto; padding: 8px 16px
 .busca input[aria-invalid="true"] { border-style: dashed; }
 
 .rodape .metodo { max-width: 728px; margin: 0 auto 10px; font-size: 0.82rem; line-height: 1.45; text-align: left; }
-.comparativo .compartilhar { width: 100%; margin-top: 4px; }
+.resultado > .compartilhar { align-self: flex-start; min-width: 200px; }
 .convite {
   display: flex;
   flex-direction: column;

@@ -7,5 +7,5 @@ export const frequencia = (taxa) => `${numero(taxa, 1)} a cada 10 mil palavras`;
 // A maior frequência entre os candidatos, para a barra de cada um ser comparada à do outro.
 export const maiorTaxa = (porCandidato) => Math.max(...Object.values(porCandidato).map((r) => r.taxa)) || 1;
 
-export const LEMBRETE = 'mais palavras, mais propostas ou mais detalhe não querem dizer proposta melhor. Confira os planos de governo.';
+export const LEMBRETE = 'mais palavras ou mais propostas não querem dizer ser melhor. Apesar de um bom indicativo, o ideal é conferir os detalhes dos planos de governo.';
 export const PERGUNTA = { palavra: 'Quantas vezes cada candidato usou', assunto: 'Quanto cada candidato falou sobre' };
