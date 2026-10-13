@@ -233,16 +233,7 @@ main { flex: 1; width: 100%; max-width: 760px; margin: 0 auto; padding: 8px 16px
 .chip:hover { background: var(--realce-claro); }
 .chip:active { transform: scale(0.97); }
 
-.assunto { border: 2.5px solid var(--traco); border-radius: 14px; background: var(--papel); }
-.pilula-assunto { padding: 5px 12px; border: 2px solid var(--traco); border-radius: 999px; background: var(--realce); color: var(--realce-tinta); font: 800 0.82rem var(--titulo); white-space: nowrap; cursor: pointer; }
-.assunto summary { display: flex; flex-direction: column; justify-content: center; gap: 2px; min-height: 64px; padding: 6px 14px; font-family: var(--titulo); font-weight: 800; cursor: pointer; }
-.assunto[open] summary { border-bottom: 2px solid var(--linha); }
-.assunto summary small { color: var(--suave); font: 400 0.8rem system-ui, sans-serif; }
-.assunto .chips { padding: 12px; }
-/* No carrossel, cada cartão cresce sozinho ao abrir (os outros continuam baixos). */
-.lista-palavras { align-items: flex-start; }
-.lista-palavras > li { flex-basis: min(62%, 260px); }
-.lista-palavras .assunto { flex: 1; }
+.pilula-assunto { justify-self: start; padding: 7px 14px; border: 2px solid var(--traco); border-radius: 999px; background: var(--realce); color: var(--realce-tinta); font: 800 0.82rem var(--titulo); white-space: nowrap; cursor: pointer; }
 
 .compromisso { display: flex; flex-direction: column; gap: 6px; padding: 18px 18px 20px; border: 2.5px solid var(--traco); border-radius: var(--raio); background: var(--principal); color: var(--fundo); box-shadow: 5px 5px 0 var(--realce); }
 .compromisso strong { font-family: var(--titulo); font-size: 1.35rem; font-weight: 800; line-height: 1.15; text-wrap: balance; }
@@ -320,8 +311,14 @@ main { flex: 1; width: 100%; max-width: 760px; margin: 0 auto; padding: 8px 16px
 .busca input[aria-invalid="true"] { border-style: dashed; }
 
 .rodape .metodo { max-width: 728px; margin: 0 auto 10px; font-size: 0.82rem; line-height: 1.45; text-align: left; }
-.resultado > .compartilhar { position: sticky; top: 10px; z-index: 5; align-self: flex-start; min-width: 200px; }
-@media (max-width: 600px) { .resultado > .compartilhar { align-self: stretch; width: 100%; } }
+/* Faixa de compartilhar: gruda no topo com o fundo da página; o conteúdo passa por baixo */
+.barra-compartilhar {
+  position: sticky; top: -1px; z-index: 5; margin: -10px -16px; padding: 11px 16px 10px;
+  background: var(--fundo); transition: box-shadow 0.15s;
+}
+.barra-compartilhar.presa { box-shadow: 0 2px 0 var(--linha); }
+.barra-compartilhar .compartilhar { min-width: 200px; }
+@media (max-width: 600px) { .barra-compartilhar .compartilhar { width: 100%; } }
 .convite {
   display: flex;
   flex-direction: column;
@@ -398,22 +395,56 @@ div.rosto { cursor: default; }
 /* Propostas: os planos assunto por assunto (início) e a lista de um assunto */
 .planos { display: flex; flex-direction: column; gap: 10px; }
 /* Carrossel: vai até a borda da tela e encaixa um cartão por vez */
-.carrossel-topo { display: flex; align-items: center; justify-content: space-between; gap: 12px; }
-.setas { display: flex; gap: 8px; flex: none; }
+.setas { display: flex; gap: 8px; flex: none; margin-left: auto; }
+.seta:disabled { opacity: 0.35; cursor: default; }
 .seta { width: 44px; height: 44px; border: 2.5px solid var(--traco); border-radius: 50%; background: var(--papel); color: var(--tinta); font: 800 1.1rem var(--titulo); cursor: pointer; }
-.seta:hover { background: var(--realce-claro); }
-.carrossel { margin: 0 -16px; padding: 4px 16px 14px; list-style: none; display: flex; gap: 12px; overflow-x: auto; scroll-snap-type: x mandatory; scroll-padding: 0 16px; overscroll-behavior-x: contain; scrollbar-width: thin; }
-.carrossel > li { flex: 0 0 min(82%, 340px); scroll-snap-align: start; display: flex; }
-.lista-planos a { flex: 1; display: grid; align-content: start; gap: 8px; padding: 12px 14px; border: 2.5px solid var(--traco); border-radius: 14px; background: var(--papel); color: var(--tinta); text-decoration: none; }
-.lista-planos a:hover { background: var(--realce-claro); }
-.assunto-nome { font-family: var(--titulo); font-size: 1.05rem; }
+.seta:not(:disabled):hover { background: var(--realce-claro); }
+
+/* Faixa (carrossel): vai até a borda da tela; as pontas se apagam para mostrar que continua */
+.faixa-trilha {
+  display: flex; gap: 12px; margin-inline: -16px; padding: 4px 16px 10px;
+  overflow-x: auto; scroll-snap-type: x mandatory; scroll-padding-inline: 16px; overscroll-behavior-x: contain;
+  scrollbar-width: none;
+  -webkit-mask-image: linear-gradient(to right, transparent 0, #000 14px, #000 calc(100% - 28px), transparent);
+          mask-image: linear-gradient(to right, transparent 0, #000 14px, #000 calc(100% - 28px), transparent);
+}
+.faixa-trilha::-webkit-scrollbar { display: none; }
+.faixa-trilha > * { flex: none; scroll-snap-align: start; }
+.faixa-controles { display: flex; align-items: center; gap: 12px; }
+.faixa-conta { min-width: 4.6em; color: var(--suave); font-size: 0.85rem; font-weight: 700; font-variant-numeric: tabular-nums; }
+.faixa-progresso { flex: 1; height: 4px; border-radius: 999px; background: var(--linha); overflow: hidden; }
+.faixa-progresso i { display: block; height: 100%; background: var(--tinta); transition: width 0.25s ease-out; }
+
+/* Slide de um assunto: título, um bloco por candidato com as duas medidas, e a ação no pé */
+.slide-plano {
+  width: min(86%, 380px); display: flex; flex-direction: column; gap: 14px; padding: 16px 16px 14px;
+  border: 2.5px solid var(--traco); border-radius: 16px; background: var(--papel); color: var(--tinta);
+  text-decoration: none; box-shadow: 4px 4px 0 var(--sombra);
+}
+.slide-plano:hover .slide-acao { text-decoration: underline; }
+.slide-titulo { font: 800 1.3rem/1.15 var(--titulo); text-wrap: balance; }
+.slide-candidato { display: grid; gap: 8px; padding-top: 12px; border-top: 2px solid var(--linha); }
+.slide-candidato .quem { font-weight: 800; }
+.medidas { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; }
+.metrica { display: grid; gap: 4px; align-content: start; min-width: 0; }
+.metrica b { font: 800 1.7rem/1 var(--titulo); font-variant-numeric: tabular-nums; }
+.metrica small { color: var(--suave); font-size: 0.78rem; line-height: 1.2; }
+.mini-trilha { display: block; height: 10px; border: 2px solid var(--traco); border-radius: 999px; background: var(--principal-claro); overflow: hidden; }
+.mini-trilha i { display: block; height: 100%; background: var(--realce); }
+.slide-acao { margin-top: auto; color: var(--link); font-weight: 800; }
+
+/* Assuntos fechados (escolha um) e o painel com as palavras do escolhido */
+.cartao-assunto {
+  display: grid; gap: 2px; min-width: 132px; padding: 10px 14px; text-align: left; cursor: pointer;
+  border: 2.5px solid var(--traco); border-radius: 12px; background: var(--papel); color: var(--tinta); font: inherit;
+}
+.cartao-assunto strong { font: 800 1rem/1.15 var(--titulo); white-space: nowrap; }
+.cartao-assunto small { color: var(--suave); font-size: 0.78rem; }
+.cartao-assunto:hover { background: var(--realce-claro); }
+.cartao-assunto[aria-expanded="true"] { background: var(--realce); color: var(--realce-tinta); box-shadow: 3px 3px 0 var(--sombra); }
+.cartao-assunto[aria-expanded="true"] small { color: inherit; opacity: 0.85; }
+.painel-palavras { display: grid; gap: 14px; padding: 14px; border: 2.5px solid var(--traco); border-radius: 16px; background: var(--papel); }
 /* Mesmo peso para os dois números: quantidade e "dizem como" */
-.linha-plano { display: grid; grid-template-columns: minmax(0, 1.6fr) 1fr 1fr; gap: 8px; align-items: baseline; font-size: 0.9rem; color: var(--suave); font-variant-numeric: tabular-nums; }
-.linha-plano > span:not(.quem) { text-align: right; }
-.linha-plano.cabecalho { font-size: 0.72rem; font-weight: 700; text-transform: uppercase; letter-spacing: 0.03em; }
-.linha-plano.cabecalho > span:not(:first-child) { text-align: right; }
-.linha-plano .quem { color: var(--tinta); font-weight: 700; overflow-wrap: anywhere; }
-.linha-plano b { color: var(--tinta); font-family: var(--titulo); font-size: 1.15rem; }
 .planos .nota-ia { display: flex; gap: 6px; align-items: flex-start; }
 .planos .nota-ia svg { width: 16px; height: 16px; flex: none; margin-top: 2px; color: var(--realce); }
 .colunas.quatro { grid-template-rows: auto auto auto auto; }
@@ -427,3 +458,5 @@ div.rosto { cursor: default; }
 .no-plano summary { color: var(--link); font-size: 0.85rem; font-weight: 700; cursor: pointer; }
 .no-plano blockquote { margin: 6px 0; padding-left: 10px; border-left: 3px solid var(--linha); color: var(--suave); font-size: 0.88rem; }
 .slot:empty { display: none; }
+/* No toque, a faixa de assuntos se arrasta; as setas são para quem usa mouse */
+@media (pointer: coarse) { .faixa-assuntos + .faixa-controles { display: none; } }
