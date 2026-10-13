@@ -1,7 +1,7 @@
-import { preparar, familia, familiaDoGrupo, formasDoTermo, contar, trecho, semAcento } from './busca.js?v=5.8';
-import * as medir from './contagem.js?v=5.8';
-import { compartilhar } from './compartilhar.js?v=5.8';
-import { numero, vezes, frequencia, maiorTaxa, LEMBRETE, PERGUNTA } from './formato.js?v=5.8';
+import { preparar, familia, familiaDoGrupo, formasDoTermo, contar, trecho, semAcento } from './busca.js?v=5.9';
+import * as medir from './contagem.js?v=5.9';
+import { compartilhar } from './compartilhar.js?v=5.9';
+import { numero, vezes, frequencia, maiorTaxa, LEMBRETE, PERGUNTA } from './formato.js?v=5.9';
 
 const ORDEM = 'palavra:ordem';
 const POR_VEZ = 5; // trechos mostrados de cada vez
@@ -177,12 +177,13 @@ function inicio() {
     el('div', { class: 'bloco' },
       el('h2', { class: 'subtitulo' }, 'Ou busque uma palavra'),
       campoDeBusca()),
+    // Carrossel de cartões fechados: só o nome do assunto; ao tocar, abre com as palavras.
     el('div', { class: 'bloco' },
-      ...carrossel('lista-palavras', 'Palavras por assunto', 'Toque numa palavra para ver quantas vezes cada um a usou.',
-        dados.grupos.map((g) => el('div', { class: 'cartao-palavras' },
-          el('strong', { class: 'assunto-nome' }, g.nome),
-          el('div', { class: 'chips' }, termosDoGrupo(g.id).map((t) => chip(t, 'assunto'))),
-          el('button', { class: 'pilula-assunto', type: 'button', onclick: () => buscarAssunto(g.id, 'assunto') }, 'Ver o assunto todo →'))))),
+      ...carrossel('lista-palavras', 'Palavras por assunto', 'Toque num assunto para ver as palavras.',
+        dados.grupos.map((g) => el('details', { class: 'assunto' },
+          el('summary', {}, el('span', {}, g.nome), el('small', {}, `${termosDoGrupo(g.id).length} palavras`)),
+          el('div', { class: 'chips' }, termosDoGrupo(g.id).map((t) => chip(t, 'assunto')),
+            el('button', { class: 'pilula-assunto', type: 'button', onclick: () => buscarAssunto(g.id, 'assunto') }, 'Ver o assunto todo →')))))),
     el('div', { class: 'bloco' },
       el('h2', { class: 'subtitulo' }, 'Mais buscados aqui'),
       quentes),
@@ -403,11 +404,11 @@ function blocoResumo(grupo) {
   const painel = el('div', { class: 'painel', id: 'resumo-ia', hidden: true });
   let aberto = null;
   const colunas = ordem.map((c) => {
-    const foto = el('img', { src: `img/${c}-serio.webp?v=5.8`, alt: '', width: '96', height: '96' });
+    const foto = el('img', { src: `img/${c}-serio.webp?v=5.9`, alt: '', width: '96', height: '96' });
     const rotulo = el('span', { class: 'ver-resumo' }, 'Ver resumo');
     // Retrato e rótulo formam um único botão.
     const cabeca = el('button', { class: 'rosto', type: 'button', 'aria-pressed': 'false', 'aria-controls': painel.id, 'aria-label': `Ver resumo do plano de ${nome(c)}`, onclick: () => abrirResumo(c) }, foto, rotulo);
-    new Image().src = `img/${c}-alegre.webp?v=5.8`; // sem piscar na troca
+    new Image().src = `img/${c}-alegre.webp?v=5.9`; // sem piscar na troca
     return { c, cabeca, foto, rotulo };
   });
   function abrirResumo(c) {
@@ -415,7 +416,7 @@ function blocoResumo(grupo) {
     for (const col of colunas) {
       const ativo = col.c === aberto;
       col.cabeca.setAttribute('aria-pressed', String(ativo));
-      col.foto.src = `img/${col.c}-${ativo ? 'alegre' : 'serio'}.webp?v=5.8`;
+      col.foto.src = `img/${col.c}-${ativo ? 'alegre' : 'serio'}.webp?v=5.9`;
       col.rotulo.textContent = ativo ? 'Fechar' : 'Ver resumo';
     }
     painel.hidden = !aberto;
@@ -553,7 +554,7 @@ async function enviarPropostas(botao, grupo, porCandidato) {
       tipo: 'propostas',
       palavra: grupo.nome,
       link: `?a=${grupo.id}`,
-      lados: porCandidato.map((x) => ({ nome: nome(x.c), imagem: `img/${x.c}-neutro.webp?v=5.8`, n: x.n, como: x.como })),
+      lados: porCandidato.map((x) => ({ nome: nome(x.c), imagem: `img/${x.c}-neutro.webp?v=5.9`, n: x.n, como: x.como })),
     });
     if (tipo) medir.compartilhou(tipo);
   } finally {
@@ -570,7 +571,7 @@ async function enviarImagem(botao, vista) {
       link: vista.link,
       lados: ordem.map((c) => ({
         nome: nome(c),
-        imagem: `img/${c}-neutro.webp?v=5.8`,
+        imagem: `img/${c}-neutro.webp?v=5.9`,
         plano: vista.res.plano[c],
       })),
     });
@@ -602,7 +603,7 @@ function rota({ historico = false } = {}) {
 async function iniciar() {
   try {
     const [textos, termos, resumos, propostas] = await Promise.all(
-      ['data/textos.json?v=5.8', 'data/termos.json?v=5.8', 'data/resumos.json?v=5.8', 'data/propostas.json?v=5.8'].map((u) => fetch(u).then((r) => { if (!r.ok) throw new Error(u); return r.json(); })),
+      ['data/textos.json?v=5.9', 'data/termos.json?v=5.9', 'data/resumos.json?v=5.9', 'data/propostas.json?v=5.9'].map((u) => fetch(u).then((r) => { if (!r.ok) throw new Error(u); return r.json(); })),
     );
     dados = { textos, termos: termos.termos, grupos: termos.grupos, resumos, propostas: propostas.propostas, acervos: preparar(textos) };
     dados.indice = montarIndice();

@@ -1,5 +1,5 @@
-import { SITE } from './config.js?v=5.8';
-import { vezes, frequencia, maiorTaxa, PERGUNTA } from './formato.js?v=5.8';
+import { SITE } from './config.js?v=5.9';
+import { vezes, frequencia, maiorTaxa, PERGUNTA } from './formato.js?v=5.9';
 
 // Imagem de story (9:16) com a cara da tela de resultado: um cartão com uma coluna por candidato,
 // na mesma ordem da tela. Dois tipos: a contagem de uma palavra (número, barra e frequência) e as

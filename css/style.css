@@ -233,7 +233,16 @@ main { flex: 1; width: 100%; max-width: 760px; margin: 0 auto; padding: 8px 16px
 .chip:hover { background: var(--realce-claro); }
 .chip:active { transform: scale(0.97); }
 
+.assunto { border: 2.5px solid var(--traco); border-radius: 14px; background: var(--papel); }
 .pilula-assunto { padding: 5px 12px; border: 2px solid var(--traco); border-radius: 999px; background: var(--realce); color: var(--realce-tinta); font: 800 0.82rem var(--titulo); white-space: nowrap; cursor: pointer; }
+.assunto summary { display: flex; flex-direction: column; justify-content: center; gap: 2px; min-height: 64px; padding: 6px 14px; font-family: var(--titulo); font-weight: 800; cursor: pointer; }
+.assunto[open] summary { border-bottom: 2px solid var(--linha); }
+.assunto summary small { color: var(--suave); font: 400 0.8rem system-ui, sans-serif; }
+.assunto .chips { padding: 12px; }
+/* No carrossel, cada cartão cresce sozinho ao abrir (os outros continuam baixos). */
+.lista-palavras { align-items: flex-start; }
+.lista-palavras > li { flex-basis: min(62%, 260px); }
+.lista-palavras .assunto { flex: 1; }
 
 .compromisso { display: flex; flex-direction: column; gap: 6px; padding: 18px 18px 20px; border: 2.5px solid var(--traco); border-radius: var(--raio); background: var(--principal); color: var(--fundo); box-shadow: 5px 5px 0 var(--realce); }
 .compromisso strong { font-family: var(--titulo); font-size: 1.35rem; font-weight: 800; line-height: 1.15; text-wrap: balance; }
@@ -397,9 +406,6 @@ div.rosto { cursor: default; }
 .carrossel > li { flex: 0 0 min(82%, 340px); scroll-snap-align: start; display: flex; }
 .lista-planos a { flex: 1; display: grid; align-content: start; gap: 8px; padding: 12px 14px; border: 2.5px solid var(--traco); border-radius: 14px; background: var(--papel); color: var(--tinta); text-decoration: none; }
 .lista-planos a:hover { background: var(--realce-claro); }
-.cartao-palavras { flex: 1; display: flex; flex-direction: column; gap: 12px; padding: 12px 14px; border: 2.5px solid var(--traco); border-radius: 14px; background: var(--papel); }
-.cartao-palavras .chips { flex: 1; align-content: flex-start; }
-.cartao-palavras .pilula-assunto { align-self: flex-start; }
 .assunto-nome { font-family: var(--titulo); font-size: 1.05rem; }
 /* Mesmo peso para os dois números: quantidade e "dizem como" */
 .linha-plano { display: grid; grid-template-columns: minmax(0, 1.6fr) 1fr 1fr; gap: 8px; align-items: baseline; font-size: 0.9rem; color: var(--suave); font-variant-numeric: tabular-nums; }
