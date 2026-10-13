@@ -1,7 +1,7 @@
-import { preparar, familia, familiaDoGrupo, formasDoTermo, contar, trecho, semAcento } from './busca.js?v=5.7';
-import * as medir from './contagem.js?v=5.7';
-import { compartilhar } from './compartilhar.js?v=5.7';
-import { numero, vezes, frequencia, maiorTaxa, LEMBRETE, PERGUNTA } from './formato.js?v=5.7';
+import { preparar, familia, familiaDoGrupo, formasDoTermo, contar, trecho, semAcento } from './busca.js?v=5.8';
+import * as medir from './contagem.js?v=5.8';
+import { compartilhar } from './compartilhar.js?v=5.8';
+import { numero, vezes, frequencia, maiorTaxa, LEMBRETE, PERGUNTA } from './formato.js?v=5.8';
 
 const ORDEM = 'palavra:ordem';
 const POR_VEZ = 5; // trechos mostrados de cada vez
@@ -173,22 +173,20 @@ function inicio() {
     el('span', { class: 'selo' }, 'Eleições 2026 · 2º turno'),
     el('h1', {}, 'Quanto cada candidato ', el('span', { class: 'destaque' }, 'se importa com o que é importante'), ' pra você?'),
     el('p', { class: 'chamada' }, 'Conferimos ', el('em', {}, 'palavra por palavra'), '.'),
-    compromisso(),
     quadroDosPlanos(),
     el('div', { class: 'bloco' },
       el('h2', { class: 'subtitulo' }, 'Ou busque uma palavra'),
       campoDeBusca()),
     el('div', { class: 'bloco' },
+      ...carrossel('lista-palavras', 'Palavras por assunto', 'Toque numa palavra para ver quantas vezes cada um a usou.',
+        dados.grupos.map((g) => el('div', { class: 'cartao-palavras' },
+          el('strong', { class: 'assunto-nome' }, g.nome),
+          el('div', { class: 'chips' }, termosDoGrupo(g.id).map((t) => chip(t, 'assunto'))),
+          el('button', { class: 'pilula-assunto', type: 'button', onclick: () => buscarAssunto(g.id, 'assunto') }, 'Ver o assunto todo →'))))),
+    el('div', { class: 'bloco' },
       el('h2', { class: 'subtitulo' }, 'Mais buscados aqui'),
       quentes),
-    el('div', { class: 'bloco' },
-      el('h2', { class: 'subtitulo' }, 'Palavras por assunto'),
-      el('div', { class: 'assuntos' }, dados.grupos.map((g) => el('details', { class: 'assunto' },
-        // Aberto, o título ganha à direita a pílula que leva ao assunto todo (chave ligada).
-        el('summary', {}, el('span', {}, g.nome),
-          el('button', { class: 'pilula-assunto', type: 'button', 'aria-label': `${g.nome}: todas as palavras`,
-            onclick: (e) => { e.preventDefault(); e.stopPropagation(); buscarAssunto(g.id, 'assunto'); } }, 'todas as palavras')),
-        el('div', { class: 'chips' }, termosDoGrupo(g.id).map((t) => chip(t, 'assunto'))))))),
+    compromisso(),
     aviso(),
   ));
 }
@@ -209,10 +207,25 @@ function indicadores(grupoId, c) {
   return { c, lista, n: lista.length, como: conta('como'), meta: conta('meta'), prazo: conta('prazo'), valor: conta('valor') };
 }
 
-// Início: os 14 assuntos num carrossel, com quantas propostas cada plano faz e quantas dizem como,
-// lado a lado. O cartão seguinte aparece pela metade, para mostrar que dá para arrastar.
+// Carrossel de cartões: o seguinte aparece pela metade, para mostrar que dá para arrastar.
+// Setas para quem usa mouse; no celular, arrasta.
+function carrossel(classe, titulo, legenda, itens) {
+  const lista = el('ul', { class: `carrossel ${classe}` }, itens.map((item) => el('li', {}, item)));
+  const passo = (sentido) => () => lista.scrollBy({ left: sentido * (lista.firstElementChild.offsetWidth + 12), behavior: 'smooth' });
+  return [
+    el('div', { class: 'carrossel-topo' },
+      el('h2', { class: 'subtitulo' }, titulo),
+      el('div', { class: 'setas' },
+        el('button', { class: 'seta', type: 'button', 'aria-label': 'Anterior', onclick: passo(-1) }, '←'),
+        el('button', { class: 'seta', type: 'button', 'aria-label': 'Próximo', onclick: passo(1) }, '→'))),
+    legenda && el('p', { class: 'legenda' }, legenda),
+    lista,
+  ];
+}
+
+// Início: os 14 assuntos, com quantas propostas cada plano faz e quantas dizem como, lado a lado.
 function quadroDosPlanos() {
-  const lista = el('ul', { class: 'lista-planos' }, dados.grupos.map((g) => el('li', {},
+  const cartoes = dados.grupos.map((g) =>
       el('a', { href: `?a=${g.id}`, onclick: (e) => { e.preventDefault(); buscarAssunto(g.id, 'planos'); } },
         el('strong', { class: 'assunto-nome' }, g.nome, el('span', { 'aria-hidden': 'true' }, ' →')),
         el('span', { class: 'linha-plano cabecalho', 'aria-hidden': 'true' }, el('span', {}), el('span', {}, 'Propostas'), el('span', {}, 'Diz como vai fazer')),
@@ -222,17 +235,10 @@ function quadroDosPlanos() {
             el('span', { class: 'quem' }, nome(c)),
             el('span', { 'aria-label': `${i.n} ${i.n === 1 ? 'proposta' : 'propostas'}` }, el('b', {}, numero(i.n))),
             el('span', { 'aria-label': `${pct(i.como, i.n)}% diz como vai fazer` }, el('b', {}, `${pct(i.como, i.n)}%`)));
-        })))));
-  // Setas para quem usa mouse; no celular, arrasta.
-  const passo = (sentido) => () => lista.scrollBy({ left: sentido * (lista.firstElementChild.offsetWidth + 12), behavior: 'smooth' });
+        })));
   return el('section', { class: 'planos' },
-    el('div', { class: 'planos-topo' },
-      el('h2', { class: 'subtitulo' }, 'Os planos, assunto por assunto'),
-      el('div', { class: 'setas' },
-        el('button', { class: 'seta', type: 'button', 'aria-label': 'Assunto anterior', onclick: passo(-1) }, '←'),
-        el('button', { class: 'seta', type: 'button', 'aria-label': 'Próximo assunto', onclick: passo(1) }, '→'))),
-    el('p', { class: 'legenda' }, 'Quantas propostas cada plano faz e quantas dizem como vão ser feitas. Arraste para o lado e toque num assunto para ver as propostas.'),
-    lista,
+    ...carrossel('lista-planos', 'Os planos, assunto por assunto',
+      'Quantas propostas cada plano faz e quantas dizem como vão ser feitas. Arraste para o lado e toque num assunto para ver as propostas.', cartoes),
     el('p', { class: 'nota-ia' }, iconeIA(), el('span', {}, 'Propostas separadas e classificadas por IA a partir dos planos de governo.')));
 }
 
@@ -397,11 +403,11 @@ function blocoResumo(grupo) {
   const painel = el('div', { class: 'painel', id: 'resumo-ia', hidden: true });
   let aberto = null;
   const colunas = ordem.map((c) => {
-    const foto = el('img', { src: `img/${c}-serio.webp?v=5.7`, alt: '', width: '96', height: '96' });
+    const foto = el('img', { src: `img/${c}-serio.webp?v=5.8`, alt: '', width: '96', height: '96' });
     const rotulo = el('span', { class: 'ver-resumo' }, 'Ver resumo');
     // Retrato e rótulo formam um único botão.
     const cabeca = el('button', { class: 'rosto', type: 'button', 'aria-pressed': 'false', 'aria-controls': painel.id, 'aria-label': `Ver resumo do plano de ${nome(c)}`, onclick: () => abrirResumo(c) }, foto, rotulo);
-    new Image().src = `img/${c}-alegre.webp?v=5.7`; // sem piscar na troca
+    new Image().src = `img/${c}-alegre.webp?v=5.8`; // sem piscar na troca
     return { c, cabeca, foto, rotulo };
   });
   function abrirResumo(c) {
@@ -409,7 +415,7 @@ function blocoResumo(grupo) {
     for (const col of colunas) {
       const ativo = col.c === aberto;
       col.cabeca.setAttribute('aria-pressed', String(ativo));
-      col.foto.src = `img/${col.c}-${ativo ? 'alegre' : 'serio'}.webp?v=5.7`;
+      col.foto.src = `img/${col.c}-${ativo ? 'alegre' : 'serio'}.webp?v=5.8`;
       col.rotulo.textContent = ativo ? 'Fechar' : 'Ver resumo';
     }
     painel.hidden = !aberto;
@@ -547,7 +553,7 @@ async function enviarPropostas(botao, grupo, porCandidato) {
       tipo: 'propostas',
       palavra: grupo.nome,
       link: `?a=${grupo.id}`,
-      lados: porCandidato.map((x) => ({ nome: nome(x.c), imagem: `img/${x.c}-neutro.webp?v=5.7`, n: x.n, como: x.como })),
+      lados: porCandidato.map((x) => ({ nome: nome(x.c), imagem: `img/${x.c}-neutro.webp?v=5.8`, n: x.n, como: x.como })),
     });
     if (tipo) medir.compartilhou(tipo);
   } finally {
@@ -564,7 +570,7 @@ async function enviarImagem(botao, vista) {
       link: vista.link,
       lados: ordem.map((c) => ({
         nome: nome(c),
-        imagem: `img/${c}-neutro.webp?v=5.7`,
+        imagem: `img/${c}-neutro.webp?v=5.8`,
         plano: vista.res.plano[c],
       })),
     });
@@ -596,7 +602,7 @@ function rota({ historico = false } = {}) {
 async function iniciar() {
   try {
     const [textos, termos, resumos, propostas] = await Promise.all(
-      ['data/textos.json?v=5.7', 'data/termos.json?v=5.7', 'data/resumos.json?v=5.7', 'data/propostas.json?v=5.7'].map((u) => fetch(u).then((r) => { if (!r.ok) throw new Error(u); return r.json(); })),
+      ['data/textos.json?v=5.8', 'data/termos.json?v=5.8', 'data/resumos.json?v=5.8', 'data/propostas.json?v=5.8'].map((u) => fetch(u).then((r) => { if (!r.ok) throw new Error(u); return r.json(); })),
     );
     dados = { textos, termos: termos.termos, grupos: termos.grupos, resumos, propostas: propostas.propostas, acervos: preparar(textos) };
     dados.indice = montarIndice();

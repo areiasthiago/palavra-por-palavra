@@ -233,13 +233,7 @@ main { flex: 1; width: 100%; max-width: 760px; margin: 0 auto; padding: 8px 16px
 .chip:hover { background: var(--realce-claro); }
 .chip:active { transform: scale(0.97); }
 
-.assuntos { display: grid; gap: 10px; }
-.assunto { border: 2.5px solid var(--traco); border-radius: 14px; background: var(--papel); }
-.pilula-assunto { display: none; margin-left: auto; padding: 5px 12px; border: 2px solid var(--traco); border-radius: 999px; background: var(--realce); color: var(--realce-tinta); font: 800 0.82rem var(--titulo); white-space: nowrap; cursor: pointer; }
-.assunto[open] .pilula-assunto { display: inline-flex; }
-.assunto summary { display: flex; align-items: center; gap: 10px; min-height: 48px; padding: 6px 14px; font-family: var(--titulo); font-weight: 800; cursor: pointer; }
-.assunto[open] summary { border-bottom: 2px solid var(--linha); }
-.assunto .chips { padding: 12px; }
+.pilula-assunto { padding: 5px 12px; border: 2px solid var(--traco); border-radius: 999px; background: var(--realce); color: var(--realce-tinta); font: 800 0.82rem var(--titulo); white-space: nowrap; cursor: pointer; }
 
 .compromisso { display: flex; flex-direction: column; gap: 6px; padding: 18px 18px 20px; border: 2.5px solid var(--traco); border-radius: var(--raio); background: var(--principal); color: var(--fundo); box-shadow: 5px 5px 0 var(--realce); }
 .compromisso strong { font-family: var(--titulo); font-size: 1.35rem; font-weight: 800; line-height: 1.15; text-wrap: balance; }
@@ -395,14 +389,17 @@ div.rosto { cursor: default; }
 /* Propostas: os planos assunto por assunto (início) e a lista de um assunto */
 .planos { display: flex; flex-direction: column; gap: 10px; }
 /* Carrossel: vai até a borda da tela e encaixa um cartão por vez */
-.planos-topo { display: flex; align-items: center; justify-content: space-between; gap: 12px; }
+.carrossel-topo { display: flex; align-items: center; justify-content: space-between; gap: 12px; }
 .setas { display: flex; gap: 8px; flex: none; }
 .seta { width: 44px; height: 44px; border: 2.5px solid var(--traco); border-radius: 50%; background: var(--papel); color: var(--tinta); font: 800 1.1rem var(--titulo); cursor: pointer; }
 .seta:hover { background: var(--realce-claro); }
-.lista-planos { margin: 0 -16px; padding: 4px 16px 14px; list-style: none; display: flex; gap: 12px; overflow-x: auto; scroll-snap-type: x mandatory; scroll-padding: 0 16px; overscroll-behavior-x: contain; scrollbar-width: thin; }
-.lista-planos li { flex: 0 0 min(82%, 340px); scroll-snap-align: start; display: flex; }
+.carrossel { margin: 0 -16px; padding: 4px 16px 14px; list-style: none; display: flex; gap: 12px; overflow-x: auto; scroll-snap-type: x mandatory; scroll-padding: 0 16px; overscroll-behavior-x: contain; scrollbar-width: thin; }
+.carrossel > li { flex: 0 0 min(82%, 340px); scroll-snap-align: start; display: flex; }
 .lista-planos a { flex: 1; display: grid; align-content: start; gap: 8px; padding: 12px 14px; border: 2.5px solid var(--traco); border-radius: 14px; background: var(--papel); color: var(--tinta); text-decoration: none; }
 .lista-planos a:hover { background: var(--realce-claro); }
+.cartao-palavras { flex: 1; display: flex; flex-direction: column; gap: 12px; padding: 12px 14px; border: 2.5px solid var(--traco); border-radius: 14px; background: var(--papel); }
+.cartao-palavras .chips { flex: 1; align-content: flex-start; }
+.cartao-palavras .pilula-assunto { align-self: flex-start; }
 .assunto-nome { font-family: var(--titulo); font-size: 1.05rem; }
 /* Mesmo peso para os dois números: quantidade e "dizem como" */
 .linha-plano { display: grid; grid-template-columns: minmax(0, 1.6fr) 1fr 1fr; gap: 8px; align-items: baseline; font-size: 0.9rem; color: var(--suave); font-variant-numeric: tabular-nums; }
